@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="DCS.Alternative.Launcher.Controls.NewsArticleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:DCS.Alternative.Launcher.Views"
+             xmlns:views1="clr-namespace:DCS.Alternative.Launcher.Plugins.Game.Views"
+             Margin="0,0,20,0"
+             HorizontalAlignment="Left"
+             VerticalAlignment="Bottom"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <Border BorderBrush="#FF2F2F2F" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.RowSpan="4"
+                   Source="{Binding ImageSource.Value}"
+                   Stretch="UniformToFill" />
+            <Border Grid.Row="0" Grid.RowSpan="4">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Transparent" />
+                        <GradientStop Offset="0.35" Color="Transparent" />
+                        <GradientStop Offset="0.4" Color="#CF141819" />
+                        <GradientStop Offset="1" Color="#CF141819" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Grid.Row="0"
+                    Margin="10"
+                    Padding="5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#FFFCB941"
+                    CornerRadius="4">
+                <StackPanel>
+                    <TextBlock Text="{Binding Day.Value}" />
+                    <TextBlock Text="{Binding Year.Value}" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1" Padding="10,0">
+                <TextBlock Margin="0,0,0,10"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding Title.Value}">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Border>
+            <Border Grid.Row="2" Padding="10,0,30,0">
+                <TextBlock Text="{Binding Summary.Value}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="Wrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Border>
+            <Button Grid.Row="2"
+                    Height="23"
+                    Margin="10,3"
+                    Padding="3,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    Command="{Binding DataContext.ShowNewsArticleCommand, RelativeSource={RelativeSource AncestorType={x:Type views1:GameView}}}"
+                    CommandParameter="{Binding}"
+                    Cursor="Hand"
+                    Foreground="White"
+                    Style="{StaticResource ButtonRevealStyle}">
+                <TextBlock Margin="0,-6,0,0"
+                           FontSize="20"
+                           Text="»">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

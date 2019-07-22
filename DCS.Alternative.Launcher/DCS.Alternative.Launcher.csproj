@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props')" />
+  <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25844062-39A5-434C-B089-8A0588D5E8BA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DCS.Alternative.Launcher</RootNamespace>
+    <AssemblyName>DCS Alternative Launcher</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentWPF, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentWPF.0.7.0\lib\net45\FluentWPF.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LoadingIndicators.WPF, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LoadingIndicators.WPF.0.0.1\lib\LoadingIndicators.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty, Version=5.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.NET46, Version=5.5.0.0, Culture=neutral, PublicKeyToken=3d1fed915120cbde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.NET46.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.4.1.5\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ComponentModel\NavigationAwareBase.cs" />
+    <Compile Include="Controls\NewsArticleControl.xaml.cs">
+      <DependentUpon>NewsArticleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VisibilityConverter.cs" />
+    <Compile Include="Plugins\Game\GamePlugin.cs" />
+    <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
+    <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\SettingsViewModel.cs" />
+    <Compile Include="ServiceModel\Container.cs" />
+    <Compile Include="ServiceModel\IContainer.cs" />
+    <Compile Include="ServiceModel\IoCAutoRegistrationException.cs" />
+    <Compile Include="ServiceModel\IoCConstructorResolutionException.cs" />
+    <Compile Include="ServiceModel\IoCRegistrationException.cs" />
+    <Compile Include="ServiceModel\IoCRegistrationTypeException.cs" />
+    <Compile Include="ServiceModel\IoCResolutionException.cs" />
+    <Compile Include="ServiceModel\IoCWeakReferenceException.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="ServiceModel\NamedParameterOverloads.cs" />
+    <Compile Include="ServiceModel\NamedResolutionFailureActions.cs" />
+    <Compile Include="Plugins\PluginBase.cs" />
+    <Compile Include="ServiceModel\ResolveOptions.cs" />
+    <Compile Include="Collections\SafeDictionary.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="ServiceModel\UnregisteredResolutionActions.cs" />
+    <Compile Include="ComponentModel\IActivate.cs" />
+    <Compile Include="ComponentModel\IDeactivate.cs" />
+    <Compile Include="Services\IPluginNavigationSite.cs" />
+    <Compile Include="Services\Navigation\INavigationAware.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\Navigation\NavigatedEventArgs.cs" />
+    <Compile Include="Services\Navigation\NavigatingEventArgs.cs" />
+    <Compile Include="Services\Navigation\NavigationService.cs" />
+    <Compile Include="Services\PluginNavigationSite.cs" />
+    <Compile Include="Services\PluginRegisteredEventArgs.cs" />
+    <Compile Include="Services\Settings\SettingsService.cs" />
+    <Compile Include="Threading\EventAsync.cs" />
+    <Compile Include="Modules\A10Module.cs" />
+    <Compile Include="Modules\DcsModuleBase.cs" />
+    <Compile Include="ExportFile.cs" />
+    <Compile Include="Modules\FA18CModule.cs" />
+    <Compile Include="Modules\KA50Module.cs" />
+    <Compile Include="Modules\M2000CModule.cs" />
+    <Compile Include="Threading\HandlerTaskSourceBase.cs" />
+    <Compile Include="Models\NewsArticle.cs" />
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsViewModel.cs" />
+    <Compile Include="Windows\MainWindowViewModel.cs" />
+    <Compile Include="ServiceModel\Syndication\SyndicationHelper.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
+    <Page Include="Controls\NewsArticleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\GlassBehavior.cs" />
+    <Compile Include="Behaviors\WebBrowserBehavior.cs" />
+    <Compile Include="ConsoleManager.cs" />
+    <Compile Include="Diagnostics\Trace\ConcreteTracer.cs" />
+    <Compile Include="Diagnostics\Trace\ITracer.cs" />
+    <Compile Include="Diagnostics\Trace\Listeners\ConsoleTraceListener.cs" />
+    <Compile Include="Diagnostics\Trace\Listeners\DebugOutputEventListener.cs" />
+    <Compile Include="Diagnostics\Trace\Listeners\FileLogEventListener.cs" />
+    <Compile Include="Diagnostics\Trace\Listeners\StreamOuputEventListener.cs" />
+    <Compile Include="Diagnostics\Trace\TraceEventId.cs" />
+    <Compile Include="Diagnostics\Trace\Tracer.cs" />
+    <Compile Include="Diagnostics\Trace\TracerEventSource.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="InstallationLocator.cs" />
+    <Compile Include="InstallLocation.cs" />
+    <Compile Include="ComponentModel\InstallLocationTypeConverter.cs" />
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Plugins\Game\Views\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Plugins\Game\Views\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resources\Fonts\orbitron-black.otf" />
+    <Resource Include="Resources\Fonts\orbitron-bold.otf" />
+    <Resource Include="Resources\Fonts\orbitron-light.otf" />
+    <Resource Include="Resources\Fonts\orbitron-medium.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jabbers-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.jpg" />
+    <Resource Include="Images\2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dcs-world-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\background %281%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2810%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2811%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2812%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2813%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2814%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2815%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2816%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2817%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2818%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2819%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %282%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %2820%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %283%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %284%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %285%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %286%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %287%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %288%29.jpg" />
+    <Resource Include="Images\Backgrounds\background %289%29.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" />
+</Project>
