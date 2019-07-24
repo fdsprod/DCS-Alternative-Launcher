@@ -18,10 +18,7 @@ namespace DCS.Alternative.Launcher
                 };
         }
 
-        public static List<string> KnownInstallationRegistryKeys
-        {
-            get;
-        }
+        public static List<string> KnownInstallationRegistryKeys { get; }
 
         public static IEnumerable<InstallLocation> Locate()
         {
@@ -31,7 +28,10 @@ namespace DCS.Alternative.Launcher
             {
                 var exePath = GetExePath(KnownInstallationRegistryKeys[i]);
 
-                if (!string.IsNullOrEmpty(exePath) && !installations.Contains(exePath)) installations.Add(exePath);
+                if (!string.IsNullOrEmpty(exePath) && !installations.Contains(exePath))
+                {
+                    installations.Add(exePath);
+                }
             }
 
             return installations;
@@ -47,12 +47,18 @@ namespace DCS.Alternative.Launcher
                 {
                     key = Registry.CurrentUser.OpenSubKey(string.Format(@"SOFTWARE\{0}", subName));
 
-                    if (key == null) return null;
+                    if (key == null)
+                    {
+                        return null;
+                    }
                 }
 
                 var path = key.GetValue("Path") as string;
 
-                if (string.IsNullOrEmpty(path) || !Directory.Exists(path)) return null;
+                if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
+                {
+                    return null;
+                }
 
                 return path;
             }

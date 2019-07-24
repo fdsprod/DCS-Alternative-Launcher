@@ -10,14 +10,8 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             NavigatedFrom = from;
         }
 
-        public Type NavigatedTo
-        {
-            get;
-        }
+        public Type NavigatedTo { get; }
 
-        public Type NavigatedFrom
-        {
-            get;
-        }
+        public Type NavigatedFrom { get; }
     }
 }

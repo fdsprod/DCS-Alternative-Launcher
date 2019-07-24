@@ -26,7 +26,8 @@ namespace DCS.Alternative.Launcher.Extensions
         /// <exception cref="System.Reflection.AmbiguousMatchException" />
         /// <exception cref="System.ArgumentException" />
         public static MethodInfo GetGenericMethod(
-            this Type sourceType, BindingFlags bindingFlags, string methodName, Type[] genericTypes, Type[] parameterTypes)
+            this Type sourceType, BindingFlags bindingFlags, string methodName, Type[] genericTypes,
+            Type[] parameterTypes)
         {
             MethodInfo method;
             var cacheKey = new GenericMethodCacheKey(sourceType, methodName, genericTypes, parameterTypes);
@@ -43,7 +44,8 @@ namespace DCS.Alternative.Launcher.Extensions
             return method;
         }
 
-        private static MethodInfo GetMethod(Type sourceType, BindingFlags bindingFlags, string methodName, Type[] genericTypes, Type[] parameterTypes)
+        private static MethodInfo GetMethod(Type sourceType, BindingFlags bindingFlags, string methodName,
+            Type[] genericTypes, Type[] parameterTypes)
         {
 #if GETPARAMETERS_OPEN_GENERICS
             var methods =
@@ -64,7 +66,10 @@ namespace DCS.Alternative.Launcher.Extensions
 
             var methods = validMethods.ToList();
 #endif
-            if (methods.Count > 1) throw new AmbiguousMatchException();
+            if (methods.Count > 1)
+            {
+                throw new AmbiguousMatchException();
+            }
 
             return methods.FirstOrDefault();
         }
@@ -89,23 +94,46 @@ namespace DCS.Alternative.Launcher.Extensions
             public override bool Equals(object obj)
             {
                 var cacheKey = obj as GenericMethodCacheKey;
-                if (cacheKey == null) return false;
+                if (cacheKey == null)
+                {
+                    return false;
+                }
 
-                if (_sourceType != cacheKey._sourceType) return false;
+                if (_sourceType != cacheKey._sourceType)
+                {
+                    return false;
+                }
 
-                if (!string.Equals(_methodName, cacheKey._methodName, StringComparison.InvariantCulture)) return false;
+                if (!string.Equals(_methodName, cacheKey._methodName, StringComparison.InvariantCulture))
+                {
+                    return false;
+                }
 
-                if (_genericTypes.Length != cacheKey._genericTypes.Length) return false;
+                if (_genericTypes.Length != cacheKey._genericTypes.Length)
+                {
+                    return false;
+                }
 
-                if (_parameterTypes.Length != cacheKey._parameterTypes.Length) return false;
+                if (_parameterTypes.Length != cacheKey._parameterTypes.Length)
+                {
+                    return false;
+                }
 
                 for (var i = 0; i < _genericTypes.Length; ++i)
+                {
                     if (_genericTypes[i] != cacheKey._genericTypes[i])
+                    {
                         return false;
+                    }
+                }
 
                 for (var i = 0; i < _parameterTypes.Length; ++i)
+                {
                     if (_parameterTypes[i] != cacheKey._parameterTypes[i])
+                    {
                         return false;
+                    }
+                }
 
                 return true;
             }
@@ -123,9 +151,15 @@ namespace DCS.Alternative.Launcher.Extensions
 
                     result = (result * 397) ^ _methodName.GetHashCode();
 
-                    for (var i = 0; i < _genericTypes.Length; ++i) result = (result * 397) ^ _genericTypes[i].GetHashCode();
+                    for (var i = 0; i < _genericTypes.Length; ++i)
+                    {
+                        result = (result * 397) ^ _genericTypes[i].GetHashCode();
+                    }
 
-                    for (var i = 0; i < _parameterTypes.Length; ++i) result = (result * 397) ^ _parameterTypes[i].GetHashCode();
+                    for (var i = 0; i < _parameterTypes.Length; ++i)
+                    {
+                        result = (result * 397) ^ _parameterTypes[i].GetHashCode();
+                    }
 
                     return result;
                 }

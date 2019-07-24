@@ -15,22 +15,17 @@
              VerticalAlignment="Stretch"
              HorizontalContentAlignment="Stretch"
              VerticalContentAlignment="Stretch"
-             d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignHeight="600"
+             d:DesignWidth="1024"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingWave.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingThreeDots.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingFlipPlane.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingPulse.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingDoubleBounce.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingWave.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingThreeDots.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingFlipPlane.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingPulse.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingDoubleBounce.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="#FFFFFFFF" />
@@ -38,22 +33,29 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid
-            Visibility="{Binding IsLoading.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
-            <StackPanel Height="225"
-                        Margin="30,50,0,0"
-                        VerticalAlignment="Top"
-                        Orientation="Horizontal">
+        <Grid Visibility="{Binding IsLoading.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
+            <Grid Height="225"
+                  Margin="30,50,30,50"
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <controls:NewsArticleControl Width="270"
                                              Height="175"
                                              Margin="0,0,20,0"
                                              DataContext="{Binding LatestNewsArticle.Value}" />
-                <controls:NewsArticleControl Width="270"
+                <controls:NewsArticleControl Grid.Column="2"
+                                             Width="270"
                                              Height="175"
                                              Margin="0,0,20,0"
                                              DataContext="{Binding PreviousNewsArticle.Value}" />
 
-                <Border Width="375"
+                <Border Grid.Column="4"
+                        Width="375"
                         Height="200"
                         Margin="0,0,20,0"
                         HorizontalAlignment="Left"
@@ -70,48 +72,75 @@
                         <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                     </Border.Effect>
                 </Border>
-            </StackPanel>
+            </Grid>
             <StackPanel Margin="30"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                <Button Margin="0,0,25,0"
-                        Padding="20"
-                        Background="#6F1CC600"
-                        Command="{Binding LaunchDcsCommand}"
-                        Foreground="White"
-                        Style="{StaticResource ButtonRevealStyle}">
-                    <TextBlock FontFamily="{StaticResource Orbitron}"
+                <StackPanel.Resources>
+                    <Style BasedOn="{StaticResource ButtonRevealStyle}" TargetType="Button">
+                        <Setter Property="Margin" Value="0,0,25,0" />
+                        <Setter Property="Padding" Value="20" />
+                        <Setter Property="MinWidth" Value="110" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Visibility" Value="{Binding IsCheckingLatestVersion.Value, Converter={x:Static data:InvertBooleanConverter.Instance}, ConverterParameter=reverse}" />
+                        <Setter Property="Foreground" Value="#FFFFFFFF" />
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Background="#6F1CC600" Command="{Binding LaunchDcsCommand}">
+                    <TextBlock FontFamily="{StaticResource Prototype}"
                                FontSize="18"
-                               Text="LAUNCH DCS">
+                               Text="PLAY">
                         <TextBlock.Effect>
                             <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                         </TextBlock.Effect>
                     </TextBlock>
-                    <Button.Effect>
-                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                    </Button.Effect>
                 </Button>
-                <Button Margin="0,0,25,0"
+                <Button MinWidth="0"
                         Padding="15"
-                        HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Background="#6F1C00C6"
-                        Command="{Binding RepairDcsCommand}"
-                        Foreground="White"
-                        Style="{StaticResource ButtonRevealStyle}">
-                    <TextBlock FontFamily="{StaticResource Orbitron}"
+                        Command="{Binding RepairDcsCommand}">
+                    <TextBlock FontFamily="{StaticResource Prototype}"
                                FontSize="16"
-                               Text="REPAIR DCS">
+                               Text="REPAIR">
                         <TextBlock.Effect>
                             <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                         </TextBlock.Effect>
                     </TextBlock>
-                    <Button.Effect>
-                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                    </Button.Effect>
                 </Button>
             </StackPanel>
+            <Grid Margin="30,10">
+                <TextBlock Margin="0,0,0,0"
+                           VerticalAlignment="Bottom"
+                           FontSize="10"
+                           Text="CHECKING LATEST VERSION..."
+                           Visibility="{Binding IsCheckingLatestVersion.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
+                <TextBlock Margin="0,0,0,0"
+                           VerticalAlignment="Bottom"
+                           FontSize="10"
+                           Foreground="#FF11AF11"
+                           Opacity="0.75"
+                           Text="{Binding DcsVersion.Value}"
+                           Visibility="{Binding IsDcsUpToDate.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
+                <TextBlock Margin="0,0,0,0"
+                           VerticalAlignment="Bottom"
+                           FontSize="10"
+                           Foreground="#FFFF3434"
+                           Text="DCS WORLD IS OUT OF DATE"
+                           Visibility="{Binding IsDcsOutOfDate.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
+                <TextBlock Margin="0,0,0,0"
+                           VerticalAlignment="Bottom"
+                           FontSize="10"
+                           Foreground="#FFFF3434"
+                           Text="ERROR: UNABLE TO CHECK DCS VERSION"
+                           Visibility="{Binding FailedVersionCheck.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
+            </Grid>
         </Grid>
         <wpf:LoadingIndicator IsActive="{Binding IsLoading.Value}" Style="{DynamicResource LoadingIndicatorArcsStyle}" />
     </Grid>

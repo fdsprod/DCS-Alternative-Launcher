@@ -43,10 +43,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <summary>
         ///     Lazy created Singleton instance of the container for simple scenarios
         /// </summary>
-        public static Container Current
-        {
-            get;
-        } = new Container();
+        public static Container Current { get; } = new Container();
 
         public Container GetChildContainer()
         {
@@ -77,7 +74,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         public void AutoRegister(Func<Type, bool> registrationPredicate)
         {
 #if APPDOMAIN_GETASSEMBLIES
-            AutoRegisterInternal(AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)), true, registrationPredicate);
+            AutoRegisterInternal(AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)), true,
+                registrationPredicate);
 #else
             AutoRegisterInternal(new Assembly[] {this.GetType().Assembly}, true, registrationPredicate);
 #endif
@@ -94,7 +92,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         public void AutoRegister(bool ignoreDuplicateImplementations)
         {
 #if APPDOMAIN_GETASSEMBLIES
-            AutoRegisterInternal(AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)), ignoreDuplicateImplementations, null);
+            AutoRegisterInternal(AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)),
+                ignoreDuplicateImplementations, null);
 #else
             AutoRegisterInternal(new Assembly[] { this.GetType().Assembly }, ignoreDuplicateImplementations, null);
 #endif
@@ -114,7 +113,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         {
 #if APPDOMAIN_GETASSEMBLIES
             AutoRegisterInternal(
-                AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)), ignoreDuplicateImplementations, registrationPredicate);
+                AppDomain.CurrentDomain.GetAssemblies().Where(a => !IsIgnoredAssembly(a)),
+                ignoreDuplicateImplementations, registrationPredicate);
 #else
             AutoRegisterInternal(new Assembly[] { this.GetType().Assembly }, ignoreDuplicateImplementations, registrationPredicate);
 #endif
@@ -169,7 +169,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// </param>
         /// <param name="registrationPredicate">Predicate to determine if a particular type should be registered</param>
         /// <exception cref="IoCAutoRegistrationException" />
-        public void AutoRegister(IEnumerable<Assembly> assemblies, bool ignoreDuplicateImplementations, Func<Type, bool> registrationPredicate)
+        public void AutoRegister(IEnumerable<Assembly> assemblies, bool ignoreDuplicateImplementations,
+            Func<Type, bool> registrationPredicate)
         {
             AutoRegisterInternal(assemblies, ignoreDuplicateImplementations, registrationPredicate);
         }
@@ -203,7 +204,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation)
         {
-            return RegisterInternal(registerType, string.Empty, GetDefaultObjectFactory(registerType, registerImplementation));
+            return RegisterInternal(registerType, string.Empty,
+                GetDefaultObjectFactory(registerType, registerImplementation));
         }
 
         /// <summary>
@@ -226,7 +228,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, object instance)
         {
-            return RegisterInternal(registerType, string.Empty, new InstanceFactory(registerType, registerType, instance));
+            return RegisterInternal(registerType, string.Empty,
+                new InstanceFactory(registerType, registerType, instance));
         }
 
         /// <summary>
@@ -250,7 +253,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation, object instance)
         {
-            return RegisterInternal(registerType, string.Empty, new InstanceFactory(registerType, registerImplementation, instance));
+            return RegisterInternal(registerType, string.Empty,
+                new InstanceFactory(registerType, registerImplementation, instance));
         }
 
         /// <summary>
@@ -263,7 +267,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation, object instance, string name)
         {
-            return RegisterInternal(registerType, name, new InstanceFactory(registerType, registerImplementation, instance));
+            return RegisterInternal(registerType, name,
+                new InstanceFactory(registerType, registerImplementation, instance));
         }
 
         /// <summary>
@@ -284,7 +289,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <param name="name">Name of registation</param>
         /// <returns>RegisterOptions for fluent API</returns>
-        public RegisterOptions Register(Type registerType, Func<Container, NamedParameterOverloads, object> factory, string name)
+        public RegisterOptions Register(Type registerType, Func<Container, NamedParameterOverloads, object> factory,
+            string name)
         {
             return RegisterInternal(registerType, name, new DelegateFactory(registerType, factory));
         }
@@ -386,7 +392,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="instance">Instance of RegisterImplementation to register</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
-        public RegisterOptions Register<RegisterType, RegisterImplementation>(RegisterImplementation instance, string name)
+        public RegisterOptions Register<RegisterType, RegisterImplementation>(RegisterImplementation instance,
+            string name)
             where RegisterType : class
             where RegisterImplementation : class, RegisterType
         {
@@ -402,7 +409,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
         public RegisterOptions Register<RegisterType>(Func<Container, NamedParameterOverloads, RegisterType> factory)
             where RegisterType : class
         {
-            if (factory == null) throw new ArgumentNullException("factory");
+            if (factory == null)
+            {
+                throw new ArgumentNullException("factory");
+            }
 
             return Register(typeof(RegisterType), (c, o) => factory(c, o));
         }
@@ -414,10 +424,14 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <param name="name">Name of registation</param>
         /// <returns>RegisterOptions for fluent API</returns>
-        public RegisterOptions Register<RegisterType>(Func<Container, NamedParameterOverloads, RegisterType> factory, string name)
+        public RegisterOptions Register<RegisterType>(Func<Container, NamedParameterOverloads, RegisterType> factory,
+            string name)
             where RegisterType : class
         {
-            if (factory == null) throw new ArgumentNullException("factory");
+            if (factory == null)
+            {
+                throw new ArgumentNullException("factory");
+            }
 
             return Register(typeof(RegisterType), (c, o) => factory(c, o), name);
         }
@@ -443,18 +457,32 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>MultiRegisterOptions for the fluent API</returns>
         public MultiRegisterOptions RegisterMultiple(Type registrationType, IEnumerable<Type> implementationTypes)
         {
-            if (implementationTypes == null) throw new ArgumentNullException("types", "types is null.");
+            if (implementationTypes == null)
+            {
+                throw new ArgumentNullException("types", "types is null.");
+            }
 
             foreach (var type in implementationTypes)
+            {
                 if (!registrationType.IsAssignableFrom(type))
+                {
                     throw new ArgumentException(
-                        string.Format("types: The type {0} is not assignable from {1}", registrationType.FullName, type.FullName));
+                        string.Format("types: The type {0} is not assignable from {1}", registrationType.FullName,
+                            type.FullName));
+                }
+            }
 
-            if (implementationTypes.Count() != implementationTypes.Distinct().Count()) throw new ArgumentException("types: The same implementation type cannot be specificed multiple times");
+            if (implementationTypes.Count() != implementationTypes.Distinct().Count())
+            {
+                throw new ArgumentException("types: The same implementation type cannot be specificed multiple times");
+            }
 
             var registerOptions = new List<RegisterOptions>();
 
-            foreach (var type in implementationTypes) registerOptions.Add(Register(registrationType, type, type.FullName));
+            foreach (var type in implementationTypes)
+            {
+                registerOptions.Add(Register(registrationType, type, type.FullName));
+            }
 
             return new MultiRegisterOptions(registerOptions);
         }
@@ -467,7 +495,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <exception cref="IoCResolutionException">Unable to resolve the type.</exception>
         public object Resolve(Type resolveType)
         {
-            return ResolveInternal(new TypeRegistration(resolveType), NamedParameterOverloads.Default, ResolveOptions.Default);
+            return ResolveInternal(new TypeRegistration(resolveType), NamedParameterOverloads.Default,
+                ResolveOptions.Default);
         }
 
         /// <summary>
@@ -495,7 +524,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <exception cref="IoCResolutionException">Unable to resolve the type.</exception>
         public object Resolve(Type resolveType, string name)
         {
-            return ResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default, ResolveOptions.Default);
+            return ResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default,
+                ResolveOptions.Default);
         }
 
         /// <summary>
@@ -724,7 +754,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve(Type resolveType)
         {
-            return CanResolveInternal(new TypeRegistration(resolveType), NamedParameterOverloads.Default, ResolveOptions.Default);
+            return CanResolveInternal(new TypeRegistration(resolveType), NamedParameterOverloads.Default,
+                ResolveOptions.Default);
         }
 
         /// <summary>
@@ -750,7 +781,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve(Type resolveType, string name, ResolveOptions options)
         {
-            return CanResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default, options);
+            return CanResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default,
+                options);
         }
 
         /// <summary>
@@ -818,7 +850,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="parameters">User supplied named parameter overloads</param>
         /// <param name="options">Resolution options</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
-        public bool CanResolve(Type resolveType, string name, NamedParameterOverloads parameters, ResolveOptions options)
+        public bool CanResolve(Type resolveType, string name, NamedParameterOverloads parameters,
+            ResolveOptions options)
         {
             return CanResolveInternal(new TypeRegistration(resolveType, name), parameters, options);
         }
@@ -1063,7 +1096,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve(Type resolveType, string name, NamedParameterOverloads parameters, out object resolvedType)
+        public bool TryResolve(Type resolveType, string name, NamedParameterOverloads parameters,
+            out object resolvedType)
         {
             try
             {
@@ -1086,7 +1120,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve(Type resolveType, NamedParameterOverloads parameters, ResolveOptions options, out object resolvedType)
+        public bool TryResolve(Type resolveType, NamedParameterOverloads parameters, ResolveOptions options,
+            out object resolvedType)
         {
             try
             {
@@ -1109,7 +1144,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve(Type resolveType, string name, NamedParameterOverloads parameters, ResolveOptions options, out object resolvedType)
+        public bool TryResolve(Type resolveType, string name, NamedParameterOverloads parameters,
+            ResolveOptions options, out object resolvedType)
         {
             try
             {
@@ -1241,7 +1277,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve<ResolveType>(string name, NamedParameterOverloads parameters, out ResolveType resolvedType)
+        public bool TryResolve<ResolveType>(string name, NamedParameterOverloads parameters,
+            out ResolveType resolvedType)
             where ResolveType : class
         {
             try
@@ -1265,7 +1302,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve<ResolveType>(NamedParameterOverloads parameters, ResolveOptions options, out ResolveType resolvedType)
+        public bool TryResolve<ResolveType>(NamedParameterOverloads parameters, ResolveOptions options,
+            out ResolveType resolvedType)
             where ResolveType : class
         {
             try
@@ -1289,7 +1327,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
-        public bool TryResolve<ResolveType>(string name, NamedParameterOverloads parameters, ResolveOptions options, out ResolveType resolvedType)
+        public bool TryResolve<ResolveType>(string name, NamedParameterOverloads parameters, ResolveOptions options,
+            out ResolveType resolvedType)
             where ResolveType : class
         {
             try
@@ -1383,7 +1422,11 @@ namespace DCS.Alternative.Launcher.ServiceModel
         public void RegisterPlugin<TPlugin>()
             where TPlugin : class, IPlugin
         {
-            if (_plugins.ContainsKey(typeof(TPlugin))) throw new Exception("Unable to load plugin " + typeof(TPlugin).Name + " because it is already registered.");
+            if (_plugins.ContainsKey(typeof(TPlugin)))
+            {
+                throw new Exception("Unable to load plugin " + typeof(TPlugin).Name +
+                                    " because it is already registered.");
+            }
 
             Register<TPlugin>();
             var module = Resolve<TPlugin>();
@@ -1401,22 +1444,27 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <returns>Bool indicating whether the type can be resolved</returns>
         private bool CanResolve(Type resolveType, string name)
         {
-            return CanResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default, ResolveOptions.Default);
+            return CanResolveInternal(new TypeRegistration(resolveType, name), NamedParameterOverloads.Default,
+                ResolveOptions.Default);
         }
 
         private void AutoRegisterInternal(
-            IEnumerable<Assembly> assemblies, bool ignoreDuplicateImplementations, Func<Type, bool> registrationPredicate)
+            IEnumerable<Assembly> assemblies, bool ignoreDuplicateImplementations,
+            Func<Type, bool> registrationPredicate)
         {
             lock (_autoRegisterLock)
             {
-                var types = assemblies.SelectMany(a => a.SafeGetTypes()).Where(t => !IsIgnoredType(t, registrationPredicate)).ToList();
+                var types = assemblies.SelectMany(a => a.SafeGetTypes())
+                    .Where(t => !IsIgnoredType(t, registrationPredicate)).ToList();
 
                 var concreteTypes = from type in types
                     where
-                        type.IsClass && type.IsAbstract == false && type != GetType() && type.DeclaringType != GetType() && !type.IsGenericTypeDefinition
+                        type.IsClass && type.IsAbstract == false && type != GetType() &&
+                        type.DeclaringType != GetType() && !type.IsGenericTypeDefinition
                     select type;
 
                 foreach (var type in concreteTypes)
+                {
                     try
                     {
                         RegisterInternal(type, string.Empty, GetDefaultObjectFactory(type, type));
@@ -1425,6 +1473,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     {
                         // Ignore methods we can't access - added for Silverlight
                     }
+                }
 
                 var abstractInterfaceTypes = from type in types
                     where
@@ -1438,10 +1487,14 @@ namespace DCS.Alternative.Launcher.ServiceModel
                         where implementationType.GetInterfaces().Contains(type) || implementationType.BaseType == type
                         select implementationType;
 
-                    if (!ignoreDuplicateImplementations && implementations.Count() > 1) throw new IoCAutoRegistrationException(type, implementations);
+                    if (!ignoreDuplicateImplementations && implementations.Count() > 1)
+                    {
+                        throw new IoCAutoRegistrationException(type, implementations);
+                    }
 
                     var firstImplementation = implementations.FirstOrDefault();
                     if (firstImplementation != null)
+                    {
                         try
                         {
                             RegisterInternal(type, string.Empty, GetDefaultObjectFactory(type, firstImplementation));
@@ -1450,6 +1503,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
                         {
                             // Ignore methods we can't access - added for Silverlight
                         }
+                    }
                 }
             }
         }
@@ -1471,8 +1525,12 @@ namespace DCS.Alternative.Launcher.ServiceModel
             };
 
             foreach (var check in ignoreChecks)
+            {
                 if (check(assembly))
+                {
                     return true;
+                }
+            }
 
             return false;
         }
@@ -1488,14 +1546,22 @@ namespace DCS.Alternative.Launcher.ServiceModel
 #if !UNBOUND_GENERICS_GETCONSTRUCTORS
                 t => t.IsGenericTypeDefinition,
 #endif
-                t => t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length == 0 && !(t.IsInterface || t.IsAbstract)
+                t => t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length == 0 &&
+                     !(t.IsInterface || t.IsAbstract)
             };
 
-            if (registrationPredicate != null) ignoreChecks.Add(t => !registrationPredicate(t));
+            if (registrationPredicate != null)
+            {
+                ignoreChecks.Add(t => !registrationPredicate(t));
+            }
 
             foreach (var check in ignoreChecks)
+            {
                 if (check(type))
+                {
                     return true;
+                }
+            }
 
             return false;
         }
@@ -1541,14 +1607,21 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
         private ObjectFactoryBase GetDefaultObjectFactory(Type registerType, Type registerImplementation)
         {
-            if (registerType.IsInterface || registerType.IsAbstract) return new SingletonFactory(registerType, registerImplementation);
+            if (registerType.IsInterface || registerType.IsAbstract)
+            {
+                return new SingletonFactory(registerType, registerImplementation);
+            }
 
             return new MultiInstanceFactory(registerType, registerImplementation);
         }
 
-        private bool CanResolveInternal(TypeRegistration registration, NamedParameterOverloads parameters, ResolveOptions options)
+        private bool CanResolveInternal(TypeRegistration registration, NamedParameterOverloads parameters,
+            ResolveOptions options)
         {
-            if (parameters == null) throw new ArgumentNullException("parameters");
+            if (parameters == null)
+            {
+                throw new ArgumentNullException("parameters");
+            }
 
             var checkType = registration.Type;
             var name = registration.Name;
@@ -1556,94 +1629,148 @@ namespace DCS.Alternative.Launcher.ServiceModel
             ObjectFactoryBase factory;
             if (_RegisteredTypes.TryGetValue(new TypeRegistration(checkType, name), out factory))
             {
-                if (factory.AssumeConstruction) return true;
+                if (factory.AssumeConstruction)
+                {
+                    return true;
+                }
 
-                if (factory.Constructor == null) return GetBestConstructor(factory.CreatesType, parameters, options) != null ? true : false;
+                if (factory.Constructor == null)
+                {
+                    return GetBestConstructor(factory.CreatesType, parameters, options) != null ? true : false;
+                }
+
                 return CanConstruct(factory.Constructor, parameters, options);
             }
 
             // Fail if requesting named resolution and settings set to fail if unresolved
             // Or bubble up if we have a parent
-            if (!string.IsNullOrEmpty(name) && options.NamedResolutionFailureAction == NamedResolutionFailureActions.Fail) return _Parent != null ? _Parent.CanResolveInternal(registration, parameters, options) : false;
+            if (!string.IsNullOrEmpty(name) &&
+                options.NamedResolutionFailureAction == NamedResolutionFailureActions.Fail)
+            {
+                return _Parent != null ? _Parent.CanResolveInternal(registration, parameters, options) : false;
+            }
 
             // Attemped unnamed fallback container resolution if relevant and requested
-            if (!string.IsNullOrEmpty(name) && options.NamedResolutionFailureAction == NamedResolutionFailureActions.AttemptUnnamedResolution)
+            if (!string.IsNullOrEmpty(name) && options.NamedResolutionFailureAction ==
+                NamedResolutionFailureActions.AttemptUnnamedResolution)
+            {
                 if (_RegisteredTypes.TryGetValue(new TypeRegistration(checkType), out factory))
                 {
-                    if (factory.AssumeConstruction) return true;
+                    if (factory.AssumeConstruction)
+                    {
+                        return true;
+                    }
 
                     return GetBestConstructor(factory.CreatesType, parameters, options) != null ? true : false;
                 }
+            }
 
             // Check if type is an automatic lazy factory request
-            if (IsAutomaticLazyFactoryRequest(checkType)) return true;
+            if (IsAutomaticLazyFactoryRequest(checkType))
+            {
+                return true;
+            }
 
             // Check if type is an IEnumerable<ResolveType>
-            if (IsIEnumerableRequest(registration.Type)) return true;
+            if (IsIEnumerableRequest(registration.Type))
+            {
+                return true;
+            }
 
             // Attempt unregistered construction if possible and requested
             // If we cant', bubble if we have a parent
             if (options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve ||
-                checkType.IsGenericType && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly)
+                checkType.IsGenericType &&
+                options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly)
+            {
                 return GetBestConstructor(checkType, parameters, options) != null
                     ? true
                     : _Parent != null
                         ? _Parent.CanResolveInternal(registration, parameters, options)
                         : false;
+            }
 
             // Bubble resolution up the container tree if we have a parent
-            if (_Parent != null) return _Parent.CanResolveInternal(registration, parameters, options);
+            if (_Parent != null)
+            {
+                return _Parent.CanResolveInternal(registration, parameters, options);
+            }
 
             return false;
         }
 
         private bool IsIEnumerableRequest(Type type)
         {
-            if (!type.IsGenericType) return false;
+            if (!type.IsGenericType)
+            {
+                return false;
+            }
 
             var genericType = type.GetGenericTypeDefinition();
 
-            if (genericType == typeof(IEnumerable<>)) return true;
+            if (genericType == typeof(IEnumerable<>))
+            {
+                return true;
+            }
 
             return false;
         }
 
         private bool IsAutomaticLazyFactoryRequest(Type type)
         {
-            if (!type.IsGenericType) return false;
+            if (!type.IsGenericType)
+            {
+                return false;
+            }
 
             var genericType = type.GetGenericTypeDefinition();
 
             // Just a func
-            if (genericType == typeof(Func<>)) return true;
+            if (genericType == typeof(Func<>))
+            {
+                return true;
+            }
 
             // 2 parameter func with string as first parameter (name)
-            if (genericType == typeof(Func<,>) && type.GetGenericArguments()[0] == typeof(string)) return true;
+            if (genericType == typeof(Func<,>) && type.GetGenericArguments()[0] == typeof(string))
+            {
+                return true;
+            }
 
             // 3 parameter func with string as first parameter (name) and IDictionary<string, object> as second (parameters)
             if (genericType == typeof(Func<,,>) && type.GetGenericArguments()[0] == typeof(string) &&
                 type.GetGenericArguments()[1] == typeof(IDictionary<string, object>))
+            {
                 return true;
+            }
 
             return false;
         }
 
         private ObjectFactoryBase GetParentObjectFactory(TypeRegistration registration)
         {
-            if (_Parent == null) return null;
+            if (_Parent == null)
+            {
+                return null;
+            }
 
             ObjectFactoryBase factory;
-            if (_Parent._RegisteredTypes.TryGetValue(registration, out factory)) return factory.GetFactoryForChildContainer(registration.Type, _Parent, this);
+            if (_Parent._RegisteredTypes.TryGetValue(registration, out factory))
+            {
+                return factory.GetFactoryForChildContainer(registration.Type, _Parent, this);
+            }
 
             return _Parent.GetParentObjectFactory(registration);
         }
 
-        private object ResolveInternal(TypeRegistration registration, NamedParameterOverloads parameters, ResolveOptions options)
+        private object ResolveInternal(TypeRegistration registration, NamedParameterOverloads parameters,
+            ResolveOptions options)
         {
             ObjectFactoryBase factory;
 
             // Attempt container resolution
             if (_RegisteredTypes.TryGetValue(registration, out factory))
+            {
                 try
                 {
                     return factory.GetObject(registration.Type, this, parameters, options);
@@ -1656,6 +1783,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 {
                     throw new IoCResolutionException(registration.Type, ex);
                 }
+            }
 
 #if RESOLVE_OPEN_GENERICS
 
@@ -1667,6 +1795,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     registration.Name);
 
                 if (_RegisteredTypes.TryGetValue(openTypeRegistration, out factory))
+                {
                     try
                     {
                         return factory.GetObject(registration.Type, this, parameters, options);
@@ -1679,12 +1808,14 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     {
                         throw new IoCResolutionException(registration.Type, ex);
                     }
+                }
             }
 #endif
 
             // Attempt to get a factory from parent if we can
             var bubbledObjectFactory = GetParentObjectFactory(registration);
             if (bubbledObjectFactory != null)
+            {
                 try
                 {
                     return bubbledObjectFactory.GetObject(registration.Type, this, parameters, options);
@@ -1697,14 +1828,21 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 {
                     throw new IoCResolutionException(registration.Type, ex);
                 }
+            }
 
             // Fail if requesting named resolution and settings set to fail if unresolved
-            if (!string.IsNullOrEmpty(registration.Name) && options.NamedResolutionFailureAction == NamedResolutionFailureActions.Fail) throw new IoCResolutionException(registration.Type);
+            if (!string.IsNullOrEmpty(registration.Name) &&
+                options.NamedResolutionFailureAction == NamedResolutionFailureActions.Fail)
+            {
+                throw new IoCResolutionException(registration.Type);
+            }
 
             // Attemped unnamed fallback container resolution if relevant and requested
             if (!string.IsNullOrEmpty(registration.Name) &&
                 options.NamedResolutionFailureAction == NamedResolutionFailureActions.AttemptUnnamedResolution)
+            {
                 if (_RegisteredTypes.TryGetValue(new TypeRegistration(registration.Type, string.Empty), out factory))
+                {
                     try
                     {
                         return factory.GetObject(registration.Type, this, parameters, options);
@@ -1717,19 +1855,32 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     {
                         throw new IoCResolutionException(registration.Type, ex);
                     }
+                }
+            }
 
 #if EXPRESSIONS
 
             // Attempt to construct an automatic lazy factory if possible
-            if (IsAutomaticLazyFactoryRequest(registration.Type)) return GetLazyAutomaticFactoryRequest(registration.Type);
+            if (IsAutomaticLazyFactoryRequest(registration.Type))
+            {
+                return GetLazyAutomaticFactoryRequest(registration.Type);
+            }
 #endif
-            if (IsIEnumerableRequest(registration.Type)) return GetIEnumerableRequest(registration.Type);
+            if (IsIEnumerableRequest(registration.Type))
+            {
+                return GetIEnumerableRequest(registration.Type);
+            }
 
             // Attempt unregistered construction if possible and requested
             if (options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve ||
-                registration.Type.IsGenericType && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly)
+                registration.Type.IsGenericType &&
+                options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly)
+            {
                 if (!registration.Type.IsAbstract && !registration.Type.IsInterface)
+                {
                     return ConstructType(null, registration.Type, parameters, options);
+                }
+            }
 
             // Unable to resolve - throw
             throw new IoCResolutionException(registration.Type);
@@ -1738,7 +1889,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
 #if EXPRESSIONS
         private object GetLazyAutomaticFactoryRequest(Type type)
         {
-            if (!type.IsGenericType) return null;
+            if (!type.IsGenericType)
+            {
+                return null;
+            }
 
             var genericType = type.GetGenericTypeDefinition();
             var genericArguments = type.GetGenericArguments();
@@ -1815,10 +1969,11 @@ namespace DCS.Alternative.Launcher.ServiceModel
         private object GetIEnumerableRequest(Type type)
         {
             var genericResolveAllMethod = GetType()
-                .GetGenericMethod(BindingFlags.Public | BindingFlags.Instance, "ResolveAll", type.GetGenericArguments(), new[]
-                {
-                    typeof(bool)
-                });
+                .GetGenericMethod(BindingFlags.Public | BindingFlags.Instance, "ResolveAll", type.GetGenericArguments(),
+                    new[]
+                    {
+                        typeof(bool)
+                    });
 
             return genericResolveAllMethod.Invoke(this, new object[]
             {
@@ -1828,29 +1983,48 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
         private bool CanConstruct(ConstructorInfo ctor, NamedParameterOverloads parameters, ResolveOptions options)
         {
-            if (parameters == null) throw new ArgumentNullException("parameters");
+            if (parameters == null)
+            {
+                throw new ArgumentNullException("parameters");
+            }
 
             foreach (var parameter in ctor.GetParameters())
             {
-                if (string.IsNullOrEmpty(parameter.Name)) return false;
+                if (string.IsNullOrEmpty(parameter.Name))
+                {
+                    return false;
+                }
 
                 var isParameterOverload = parameters.ContainsKey(parameter.Name);
 
-                if (parameter.ParameterType.IsPrimitive && !isParameterOverload) return false;
+                if (parameter.ParameterType.IsPrimitive && !isParameterOverload)
+                {
+                    return false;
+                }
 
                 if (!isParameterOverload &&
-                    !CanResolveInternal(new TypeRegistration(parameter.ParameterType), NamedParameterOverloads.Default, options))
+                    !CanResolveInternal(new TypeRegistration(parameter.ParameterType), NamedParameterOverloads.Default,
+                        options))
+                {
                     return false;
+                }
             }
 
             return true;
         }
 
-        private ConstructorInfo GetBestConstructor(Type type, NamedParameterOverloads parameters, ResolveOptions options)
+        private ConstructorInfo GetBestConstructor(Type type, NamedParameterOverloads parameters,
+            ResolveOptions options)
         {
-            if (parameters == null) throw new ArgumentNullException("parameters");
+            if (parameters == null)
+            {
+                throw new ArgumentNullException("parameters");
+            }
 
-            if (type.IsValueType) return null;
+            if (type.IsValueType)
+            {
+                return null;
+            }
 
             // Get constructors in reverse order based on the number of parameters
             // i.e. be as "greedy" as possible so we satify the most amount of dependencies possible
@@ -1869,25 +2043,32 @@ namespace DCS.Alternative.Launcher.ServiceModel
             return ConstructType(requestedType, implementationType, null, NamedParameterOverloads.Default, options);
         }
 
-        private object ConstructType(Type requestedType, Type implementationType, ConstructorInfo constructor, ResolveOptions options)
+        private object ConstructType(Type requestedType, Type implementationType, ConstructorInfo constructor,
+            ResolveOptions options)
         {
-            return ConstructType(requestedType, implementationType, constructor, NamedParameterOverloads.Default, options);
+            return ConstructType(requestedType, implementationType, constructor, NamedParameterOverloads.Default,
+                options);
         }
 
-        private object ConstructType(Type requestedType, Type implementationType, NamedParameterOverloads parameters, ResolveOptions options)
+        private object ConstructType(Type requestedType, Type implementationType, NamedParameterOverloads parameters,
+            ResolveOptions options)
         {
             return ConstructType(requestedType, implementationType, null, parameters, options);
         }
 
         private object ConstructType(
-            Type requestedType, Type implementationType, ConstructorInfo constructor, NamedParameterOverloads parameters, ResolveOptions options)
+            Type requestedType, Type implementationType, ConstructorInfo constructor,
+            NamedParameterOverloads parameters, ResolveOptions options)
         {
             var typeToConstruct = implementationType;
 
 #if RESOLVE_OPEN_GENERICS
             if (implementationType.IsGenericTypeDefinition)
             {
-                if (requestedType == null || !requestedType.IsGenericType || !requestedType.GetGenericArguments().Any()) throw new IoCResolutionException(typeToConstruct);
+                if (requestedType == null || !requestedType.IsGenericType || !requestedType.GetGenericArguments().Any())
+                {
+                    throw new IoCResolutionException(typeToConstruct);
+                }
 
                 typeToConstruct = typeToConstruct.MakeGenericType(requestedType.GetGenericArguments());
             }
@@ -1898,9 +2079,15 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 // if we can't construct any then get the constructor
                 // with the least number of parameters so we can throw a meaningful
                 // resolve exception
-                constructor = GetBestConstructor(typeToConstruct, parameters, options) ?? GetTypeConstructors(typeToConstruct).LastOrDefault();
+            {
+                constructor = GetBestConstructor(typeToConstruct, parameters, options) ??
+                              GetTypeConstructors(typeToConstruct).LastOrDefault();
+            }
 
-            if (constructor == null) throw new IoCResolutionException(typeToConstruct);
+            if (constructor == null)
+            {
+                throw new IoCResolutionException(typeToConstruct);
+            }
 
             var ctorParams = constructor.GetParameters();
             var args = new object[ctorParams.Count()];
@@ -1950,24 +2137,32 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 select property;
 
             foreach (var property in properties)
+            {
                 if (property.GetValue(input, null) == null)
+                {
                     try
                     {
                         property.SetValue(
-                            input, ResolveInternal(new TypeRegistration(property.PropertyType), NamedParameterOverloads.Default, resolveOptions), null);
+                            input,
+                            ResolveInternal(new TypeRegistration(property.PropertyType),
+                                NamedParameterOverloads.Default, resolveOptions), null);
                     }
                     catch (IoCResolutionException)
                     {
                         // Catch any resolution errors and ignore them
                     }
+                }
+            }
         }
 
         private IEnumerable<TypeRegistration> GetParentRegistrationsForType(Type resolveType)
         {
             if (_Parent == null)
+            {
                 return new TypeRegistration[]
                 {
                 };
+            }
 
             var registrations = _Parent._RegisteredTypes.Keys.Where(tr => tr.Type == resolveType);
 
@@ -1977,24 +2172,35 @@ namespace DCS.Alternative.Launcher.ServiceModel
         private IEnumerable<object> ResolveAllInternal(Type resolveType, bool includeUnnamed)
         {
             var registrations =
-                _RegisteredTypes.Keys.Where(tr => tr.Type == resolveType).Concat(GetParentRegistrationsForType(resolveType));
+                _RegisteredTypes.Keys.Where(tr => tr.Type == resolveType)
+                    .Concat(GetParentRegistrationsForType(resolveType));
 
-            if (!includeUnnamed) registrations = registrations.Where(tr => tr.Name != string.Empty);
+            if (!includeUnnamed)
+            {
+                registrations = registrations.Where(tr => tr.Name != string.Empty);
+            }
 
-            return registrations.Select(registration => ResolveInternal(registration, NamedParameterOverloads.Default, ResolveOptions.Default));
+            return registrations.Select(registration =>
+                ResolveInternal(registration, NamedParameterOverloads.Default, ResolveOptions.Default));
         }
 
         private static bool IsValidAssignment(Type registerType, Type registerImplementation)
         {
             if (!registerType.IsGenericTypeDefinition)
             {
-                if (!registerType.IsAssignableFrom(registerImplementation)) return false;
+                if (!registerType.IsAssignableFrom(registerImplementation))
+                {
+                    return false;
+                }
             }
             else
             {
                 if (registerType.IsInterface)
                 {
-                    if (!registerImplementation.FindInterfaces((t, o) => t.Name == registerType.Name, null).Any()) return false;
+                    if (!registerImplementation.FindInterfaces((t, o) => t.Name == registerType.Name, null).Any())
+                    {
+                        return false;
+                    }
                 }
                 else if (registerType.IsAbstract && registerImplementation.BaseType != registerType)
                 {
@@ -2028,7 +2234,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
 
-                if (currentFactory == null) throw new IoCRegistrationException(_Registration.Type, "singleton");
+                if (currentFactory == null)
+                {
+                    throw new IoCRegistrationException(_Registration.Type, "singleton");
+                }
 
                 return _Container.AddUpdateRegistration(_Registration, currentFactory.SingletonVariant);
             }
@@ -2042,7 +2251,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
 
-                if (currentFactory == null) throw new IoCRegistrationException(_Registration.Type, "multi-instance");
+                if (currentFactory == null)
+                {
+                    throw new IoCRegistrationException(_Registration.Type, "multi-instance");
+                }
 
                 return _Container.AddUpdateRegistration(_Registration, currentFactory.MultiInstanceVariant);
             }
@@ -2056,7 +2268,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
 
-                if (currentFactory == null) throw new IoCRegistrationException(_Registration.Type, "weak reference");
+                if (currentFactory == null)
+                {
+                    throw new IoCRegistrationException(_Registration.Type, "weak reference");
+                }
 
                 return _Container.AddUpdateRegistration(_Registration, currentFactory.WeakReferenceVariant);
             }
@@ -2070,7 +2285,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
 
-                if (currentFactory == null) throw new IoCRegistrationException(_Registration.Type, "strong reference");
+                if (currentFactory == null)
+                {
+                    throw new IoCRegistrationException(_Registration.Type, "strong reference");
+                }
 
                 return _Container.AddUpdateRegistration(_Registration, currentFactory.StrongReferenceVariant);
             }
@@ -2079,16 +2297,28 @@ namespace DCS.Alternative.Launcher.ServiceModel
             public RegisterOptions UsingConstructor<RegisterType>(Expression<Func<RegisterType>> constructor)
             {
                 LambdaExpression lambda = constructor;
-                if (lambda == null) throw new IoCConstructorResolutionException(typeof(RegisterType));
+                if (lambda == null)
+                {
+                    throw new IoCConstructorResolutionException(typeof(RegisterType));
+                }
 
                 var newExpression = lambda.Body as NewExpression;
-                if (newExpression == null) throw new IoCConstructorResolutionException(typeof(RegisterType));
+                if (newExpression == null)
+                {
+                    throw new IoCConstructorResolutionException(typeof(RegisterType));
+                }
 
                 var constructorInfo = newExpression.Constructor;
-                if (constructorInfo == null) throw new IoCConstructorResolutionException(typeof(RegisterType));
+                if (constructorInfo == null)
+                {
+                    throw new IoCConstructorResolutionException(typeof(RegisterType));
+                }
 
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
-                if (currentFactory == null) throw new IoCConstructorResolutionException(typeof(RegisterType));
+                if (currentFactory == null)
+                {
+                    throw new IoCConstructorResolutionException(typeof(RegisterType));
+                }
 
                 currentFactory.SetConstructor(constructorInfo);
 
@@ -2107,18 +2337,31 @@ namespace DCS.Alternative.Launcher.ServiceModel
             public static RegisterOptions ToCustomLifetimeManager(
                 RegisterOptions instance, IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
             {
-                if (instance == null) throw new ArgumentNullException("instance", "instance is null.");
+                if (instance == null)
+                {
+                    throw new ArgumentNullException("instance", "instance is null.");
+                }
 
-                if (lifetimeProvider == null) throw new ArgumentNullException("lifetimeProvider", "lifetimeProvider is null.");
+                if (lifetimeProvider == null)
+                {
+                    throw new ArgumentNullException("lifetimeProvider", "lifetimeProvider is null.");
+                }
 
-                if (string.IsNullOrEmpty(errorString)) throw new ArgumentException("errorString is null or empty.", "errorString");
+                if (string.IsNullOrEmpty(errorString))
+                {
+                    throw new ArgumentException("errorString is null or empty.", "errorString");
+                }
 
                 var currentFactory = instance._Container.GetCurrentFactory(instance._Registration);
 
-                if (currentFactory == null) throw new IoCRegistrationException(instance._Registration.Type, errorString);
+                if (currentFactory == null)
+                {
+                    throw new IoCRegistrationException(instance._Registration.Type, errorString);
+                }
 
                 return instance._Container.AddUpdateRegistration(
-                    instance._Registration, currentFactory.GetCustomObjectLifetimeVariant(lifetimeProvider, errorString));
+                    instance._Registration,
+                    currentFactory.GetCustomObjectLifetimeVariant(lifetimeProvider, errorString));
             }
         }
 
@@ -2160,11 +2403,15 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 return this;
             }
 
-            private IEnumerable<RegisterOptions> ExecuteOnAllRegisterOptions(Func<RegisterOptions, RegisterOptions> action)
+            private IEnumerable<RegisterOptions> ExecuteOnAllRegisterOptions(
+                Func<RegisterOptions, RegisterOptions> action)
             {
                 var newRegisterOptions = new List<RegisterOptions>();
 
-                foreach (var registerOption in _RegisterOptions) newRegisterOptions.Add(action(registerOption));
+                foreach (var registerOption in _RegisterOptions)
+                {
+                    newRegisterOptions.Add(action(registerOption));
+                }
 
                 return newRegisterOptions;
             }
@@ -2200,47 +2447,29 @@ namespace DCS.Alternative.Launcher.ServiceModel
             ///     Generally set to true for delegate style factories as CanResolve cannot delve
             ///     into the delegates they contain.
             /// </summary>
-            public virtual bool AssumeConstruction
-            {
-                get { return false; }
-            }
+            public virtual bool AssumeConstruction => false;
 
             /// <summary>
             ///     The type the factory instantiates
             /// </summary>
-            public abstract Type CreatesType
-            {
-                get;
-            }
+            public abstract Type CreatesType { get; }
 
             /// <summary>
             ///     Constructor to use, if specified
             /// </summary>
-            public ConstructorInfo Constructor
-            {
-                get;
-                protected set;
-            }
+            public ConstructorInfo Constructor { get; protected set; }
 
-            public virtual ObjectFactoryBase SingletonVariant
-            {
-                get { throw new IoCRegistrationException(GetType(), "singleton"); }
-            }
+            public virtual ObjectFactoryBase SingletonVariant =>
+                throw new IoCRegistrationException(GetType(), "singleton");
 
-            public virtual ObjectFactoryBase MultiInstanceVariant
-            {
-                get { throw new IoCRegistrationException(GetType(), "multi-instance"); }
-            }
+            public virtual ObjectFactoryBase MultiInstanceVariant =>
+                throw new IoCRegistrationException(GetType(), "multi-instance");
 
-            public virtual ObjectFactoryBase StrongReferenceVariant
-            {
-                get { throw new IoCRegistrationException(GetType(), "strong reference"); }
-            }
+            public virtual ObjectFactoryBase StrongReferenceVariant =>
+                throw new IoCRegistrationException(GetType(), "strong reference");
 
-            public virtual ObjectFactoryBase WeakReferenceVariant
-            {
-                get { throw new IoCRegistrationException(GetType(), "weak reference"); }
-            }
+            public virtual ObjectFactoryBase WeakReferenceVariant =>
+                throw new IoCRegistrationException(GetType(), "weak reference");
 
             /// <summary>
             ///     Create the type
@@ -2250,9 +2479,11 @@ namespace DCS.Alternative.Launcher.ServiceModel
             /// <param name="parameters">Any user parameters passed</param>
             /// <param name="options"></param>
             /// <returns></returns>
-            public abstract object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options);
+            public abstract object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options);
 
-            public virtual ObjectFactoryBase GetCustomObjectLifetimeVariant(IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
+            public virtual ObjectFactoryBase GetCustomObjectLifetimeVariant(IIoCObjectLifetimeProvider lifetimeProvider,
+                string errorString)
             {
                 throw new IoCRegistrationException(GetType(), errorString);
             }
@@ -2278,34 +2509,34 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public MultiInstanceFactory(Type registerType, Type registerImplementation)
             {
-                if (registerImplementation.IsAbstract || registerImplementation.IsInterface) throw new IoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
+                }
 
-                if (!IsValidAssignment(registerType, registerImplementation)) throw new IoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
+                if (!IsValidAssignment(registerType, registerImplementation))
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
+                }
 
                 this.registerType = registerType;
                 this.registerImplementation = registerImplementation;
             }
 
-            public override Type CreatesType
-            {
-                get { return registerImplementation; }
-            }
+            public override Type CreatesType => registerImplementation;
 
-            public override ObjectFactoryBase SingletonVariant
-            {
-                get { return new SingletonFactory(registerType, registerImplementation); }
-            }
+            public override ObjectFactoryBase SingletonVariant =>
+                new SingletonFactory(registerType, registerImplementation);
 
-            public override ObjectFactoryBase MultiInstanceVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase MultiInstanceVariant => this;
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 try
                 {
-                    return container.ConstructType(requestedType, registerImplementation, Constructor, parameters, options);
+                    return container.ConstructType(requestedType, registerImplementation, Constructor, parameters,
+                        options);
                 }
                 catch (IoCResolutionException ex)
                 {
@@ -2313,9 +2544,11 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 }
             }
 
-            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
+            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(
+                IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
             {
-                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider, errorString);
+                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider,
+                    errorString);
             }
         }
 
@@ -2329,34 +2562,26 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public DelegateFactory(Type registerType, Func<Container, NamedParameterOverloads, object> factory)
             {
-                if (factory == null) throw new ArgumentNullException("factory");
+                if (factory == null)
+                {
+                    throw new ArgumentNullException("factory");
+                }
 
                 _factory = factory;
 
                 this.registerType = registerType;
             }
 
-            public override bool AssumeConstruction
-            {
-                get { return true; }
-            }
+            public override bool AssumeConstruction => true;
 
-            public override Type CreatesType
-            {
-                get { return registerType; }
-            }
+            public override Type CreatesType => registerType;
 
-            public override ObjectFactoryBase WeakReferenceVariant
-            {
-                get { return new WeakDelegateFactory(registerType, _factory); }
-            }
+            public override ObjectFactoryBase WeakReferenceVariant => new WeakDelegateFactory(registerType, _factory);
 
-            public override ObjectFactoryBase StrongReferenceVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase StrongReferenceVariant => this;
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 try
                 {
@@ -2370,7 +2595,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override void SetConstructor(ConstructorInfo constructor)
             {
-                throw new IoCConstructorResolutionException("Constructor selection is not possible for delegate factory registrations");
+                throw new IoCConstructorResolutionException(
+                    "Constructor selection is not possible for delegate factory registrations");
             }
         }
 
@@ -2385,22 +2611,19 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public WeakDelegateFactory(Type registerType, Func<Container, NamedParameterOverloads, object> factory)
             {
-                if (factory == null) throw new ArgumentNullException("factory");
+                if (factory == null)
+                {
+                    throw new ArgumentNullException("factory");
+                }
 
                 _factory = new WeakReference(factory);
 
                 this.registerType = registerType;
             }
 
-            public override bool AssumeConstruction
-            {
-                get { return true; }
-            }
+            public override bool AssumeConstruction => true;
 
-            public override Type CreatesType
-            {
-                get { return registerType; }
-            }
+            public override Type CreatesType => registerType;
 
             public override ObjectFactoryBase StrongReferenceVariant
             {
@@ -2408,22 +2631,26 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 {
                     var factory = _factory.Target as Func<Container, NamedParameterOverloads, object>;
 
-                    if (factory == null) throw new IoCWeakReferenceException(registerType);
+                    if (factory == null)
+                    {
+                        throw new IoCWeakReferenceException(registerType);
+                    }
 
                     return new DelegateFactory(registerType, factory);
                 }
             }
 
-            public override ObjectFactoryBase WeakReferenceVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase WeakReferenceVariant => this;
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 var factory = _factory.Target as Func<Container, NamedParameterOverloads, object>;
 
-                if (factory == null) throw new IoCWeakReferenceException(registerType);
+                if (factory == null)
+                {
+                    throw new IoCWeakReferenceException(registerType);
+                }
 
                 try
                 {
@@ -2437,7 +2664,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override void SetConstructor(ConstructorInfo constructor)
             {
-                throw new IoCConstructorResolutionException("Constructor selection is not possible for delegate factory registrations");
+                throw new IoCConstructorResolutionException(
+                    "Constructor selection is not possible for delegate factory registrations");
             }
         }
 
@@ -2452,53 +2680,48 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public InstanceFactory(Type registerType, Type registerImplementation, object instance)
             {
-                if (!IsValidAssignment(registerType, registerImplementation)) throw new IoCRegistrationTypeException(registerImplementation, "InstanceFactory");
+                if (!IsValidAssignment(registerType, registerImplementation))
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "InstanceFactory");
+                }
 
                 this.registerType = registerType;
                 this.registerImplementation = registerImplementation;
                 _instance = instance;
             }
 
-            public override bool AssumeConstruction
-            {
-                get { return true; }
-            }
+            public override bool AssumeConstruction => true;
 
-            public override Type CreatesType
-            {
-                get { return registerImplementation; }
-            }
+            public override Type CreatesType => registerImplementation;
 
-            public override ObjectFactoryBase MultiInstanceVariant
-            {
-                get { return new MultiInstanceFactory(registerType, registerImplementation); }
-            }
+            public override ObjectFactoryBase MultiInstanceVariant =>
+                new MultiInstanceFactory(registerType, registerImplementation);
 
-            public override ObjectFactoryBase WeakReferenceVariant
-            {
-                get { return new WeakInstanceFactory(registerType, registerImplementation, _instance); }
-            }
+            public override ObjectFactoryBase WeakReferenceVariant =>
+                new WeakInstanceFactory(registerType, registerImplementation, _instance);
 
-            public override ObjectFactoryBase StrongReferenceVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase StrongReferenceVariant => this;
 
             public void Dispose()
             {
                 var disposable = _instance as IDisposable;
 
-                if (disposable != null) disposable.Dispose();
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
             }
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 return _instance;
             }
 
             public override void SetConstructor(ConstructorInfo constructor)
             {
-                throw new IoCConstructorResolutionException("Constructor selection is not possible for instance factory registrations");
+                throw new IoCConstructorResolutionException(
+                    "Constructor selection is not possible for instance factory registrations");
             }
         }
 
@@ -2514,27 +2737,22 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public WeakInstanceFactory(Type registerType, Type registerImplementation, object instance)
             {
-                if (!IsValidAssignment(registerType, registerImplementation)) throw new IoCRegistrationTypeException(registerImplementation, "WeakInstanceFactory");
+                if (!IsValidAssignment(registerType, registerImplementation))
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "WeakInstanceFactory");
+                }
 
                 this.registerType = registerType;
                 this.registerImplementation = registerImplementation;
                 _instance = new WeakReference(instance);
             }
 
-            public override Type CreatesType
-            {
-                get { return registerImplementation; }
-            }
+            public override Type CreatesType => registerImplementation;
 
-            public override ObjectFactoryBase MultiInstanceVariant
-            {
-                get { return new MultiInstanceFactory(registerType, registerImplementation); }
-            }
+            public override ObjectFactoryBase MultiInstanceVariant =>
+                new MultiInstanceFactory(registerType, registerImplementation);
 
-            public override ObjectFactoryBase WeakReferenceVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase WeakReferenceVariant => this;
 
             public override ObjectFactoryBase StrongReferenceVariant
             {
@@ -2542,7 +2760,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 {
                     var instance = _instance.Target;
 
-                    if (instance == null) throw new IoCWeakReferenceException(registerType);
+                    if (instance == null)
+                    {
+                        throw new IoCWeakReferenceException(registerType);
+                    }
 
                     return new InstanceFactory(registerType, registerImplementation, instance);
                 }
@@ -2552,21 +2773,29 @@ namespace DCS.Alternative.Launcher.ServiceModel
             {
                 var disposable = _instance.Target as IDisposable;
 
-                if (disposable != null) disposable.Dispose();
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
             }
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 var instance = _instance.Target;
 
-                if (instance == null) throw new IoCWeakReferenceException(registerType);
+                if (instance == null)
+                {
+                    throw new IoCWeakReferenceException(registerType);
+                }
 
                 return instance;
             }
 
             public override void SetConstructor(ConstructorInfo constructor)
             {
-                throw new IoCConstructorResolutionException("Constructor selection is not possible for instance factory registrations");
+                throw new IoCConstructorResolutionException(
+                    "Constructor selection is not possible for instance factory registrations");
             }
         }
 
@@ -2582,54 +2811,66 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public SingletonFactory(Type registerType, Type registerImplementation)
             {
-                if (registerImplementation.IsAbstract || registerImplementation.IsInterface) throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                }
 
-                if (!IsValidAssignment(registerType, registerImplementation)) throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                if (!IsValidAssignment(registerType, registerImplementation))
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                }
 
                 this.registerType = registerType;
                 this.registerImplementation = registerImplementation;
             }
 
-            public override Type CreatesType
-            {
-                get { return registerImplementation; }
-            }
+            public override Type CreatesType => registerImplementation;
 
-            public override ObjectFactoryBase SingletonVariant
-            {
-                get { return this; }
-            }
+            public override ObjectFactoryBase SingletonVariant => this;
 
-            public override ObjectFactoryBase MultiInstanceVariant
-            {
-                get { return new MultiInstanceFactory(registerType, registerImplementation); }
-            }
+            public override ObjectFactoryBase MultiInstanceVariant =>
+                new MultiInstanceFactory(registerType, registerImplementation);
 
             public void Dispose()
             {
-                if (_Current == null) return;
+                if (_Current == null)
+                {
+                    return;
+                }
 
                 var disposable = _Current as IDisposable;
 
-                if (disposable != null) disposable.Dispose();
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
             }
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
-                if (parameters.Count != 0) throw new ArgumentException("Cannot specify parameters for singleton types");
+                if (parameters.Count != 0)
+                {
+                    throw new ArgumentException("Cannot specify parameters for singleton types");
+                }
 
                 lock (SingletonLock)
                 {
                     if (_Current == null)
+                    {
                         _Current = container.ConstructType(requestedType, registerImplementation, Constructor, options);
+                    }
                 }
 
                 return _Current;
             }
 
-            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
+            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(
+                IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
             {
-                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider, errorString);
+                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider,
+                    errorString);
             }
 
             public override ObjectFactoryBase GetFactoryForChildContainer(Type type, Container parent, Container child)
@@ -2653,23 +2894,30 @@ namespace DCS.Alternative.Launcher.ServiceModel
             private readonly object SingletonLock = new object();
 
             public CustomObjectLifetimeFactory(
-                Type registerType, Type registerImplementation, IIoCObjectLifetimeProvider lifetimeProvider, string errorMessage)
+                Type registerType, Type registerImplementation, IIoCObjectLifetimeProvider lifetimeProvider,
+                string errorMessage)
             {
-                if (lifetimeProvider == null) throw new ArgumentNullException("lifetimeProvider", "lifetimeProvider is null.");
+                if (lifetimeProvider == null)
+                {
+                    throw new ArgumentNullException("lifetimeProvider", "lifetimeProvider is null.");
+                }
 
-                if (!IsValidAssignment(registerType, registerImplementation)) throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                if (!IsValidAssignment(registerType, registerImplementation))
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, "SingletonFactory");
+                }
 
-                if (registerImplementation.IsAbstract || registerImplementation.IsInterface) throw new IoCRegistrationTypeException(registerImplementation, errorMessage);
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
+                {
+                    throw new IoCRegistrationTypeException(registerImplementation, errorMessage);
+                }
 
                 this.registerType = registerType;
                 this.registerImplementation = registerImplementation;
                 _LifetimeProvider = lifetimeProvider;
             }
 
-            public override Type CreatesType
-            {
-                get { return registerImplementation; }
-            }
+            public override Type CreatesType => registerImplementation;
 
             public override ObjectFactoryBase SingletonVariant
             {
@@ -2694,7 +2942,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 _LifetimeProvider.ReleaseObject();
             }
 
-            public override object GetObject(Type requestedType, Container container, NamedParameterOverloads parameters, ResolveOptions options)
+            public override object GetObject(Type requestedType, Container container,
+                NamedParameterOverloads parameters, ResolveOptions options)
             {
                 object current;
 
@@ -2711,10 +2960,12 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 return current;
             }
 
-            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
+            public override ObjectFactoryBase GetCustomObjectLifetimeVariant(
+                IIoCObjectLifetimeProvider lifetimeProvider, string errorString)
             {
                 _LifetimeProvider.ReleaseObject();
-                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider, errorString);
+                return new CustomObjectLifetimeFactory(registerType, registerImplementation, lifetimeProvider,
+                    errorString);
             }
 
             public override ObjectFactoryBase GetFactoryForChildContainer(Type type, Container parent, Container child)
@@ -2744,25 +2995,28 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 _hashCode = string.Concat(Type.FullName, "|", Name).GetHashCode();
             }
 
-            public Type Type
-            {
-                get;
-            }
+            public Type Type { get; }
 
-            public string Name
-            {
-                get;
-            }
+            public string Name { get; }
 
             public override bool Equals(object obj)
             {
                 var typeRegistration = obj as TypeRegistration;
 
-                if (typeRegistration == null) return false;
+                if (typeRegistration == null)
+                {
+                    return false;
+                }
 
-                if (Type != typeRegistration.Type) return false;
+                if (Type != typeRegistration.Type)
+                {
+                    return false;
+                }
 
-                if (string.Compare(Name, typeRegistration.Name, StringComparison.Ordinal) != 0) return false;
+                if (string.Compare(Name, typeRegistration.Name, StringComparison.Ordinal) != 0)
+                {
+                    return false;
+                }
 
                 return true;
             }

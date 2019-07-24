@@ -8,12 +8,13 @@ namespace DCS.Alternative.Launcher.Behaviors
     {
         // Using a DependencyProperty as the backing store for BindableSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BindableSourceProperty =
-            DependencyProperty.Register("BindableSource", typeof(string), typeof(WebBrowserBehavior), new PropertyMetadata(null, OnBindableSourcePropertyChanged));
+            DependencyProperty.Register("BindableSource", typeof(string), typeof(WebBrowserBehavior),
+                new PropertyMetadata(null, OnBindableSourcePropertyChanged));
 
         public string BindableSource
         {
-            get { return (string) GetValue(BindableSourceProperty); }
-            set { SetValue(BindableSourceProperty, value); }
+            get => (string) GetValue(BindableSourceProperty);
+            set => SetValue(BindableSourceProperty, value);
         }
 
 
@@ -40,12 +41,18 @@ namespace DCS.Alternative.Launcher.Behaviors
 
         private void OnBindableSourceChanged(string oldValue, string newValue)
         {
-            if (AssociatedObject?.IsLoaded ?? false) AssociatedObject.Load(newValue);
+            if (AssociatedObject?.IsLoaded ?? false)
+            {
+                AssociatedObject.Load(newValue);
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(BindableSource)) AssociatedObject.Load(BindableSource);
+            if (!string.IsNullOrEmpty(BindableSource))
+            {
+                AssociatedObject.Load(BindableSource);
+            }
         }
     }
 }

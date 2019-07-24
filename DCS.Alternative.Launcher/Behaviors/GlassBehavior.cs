@@ -11,10 +11,12 @@ namespace DCS.Alternative.Launcher.Behaviors
     public class GlassBehavior : Behavior<FrameworkElement>
     {
         public static readonly DependencyProperty VisualProperty =
-            DependencyProperty.Register("Visual", typeof(Visual), typeof(GlassBehavior), new FrameworkPropertyMetadata(null, OnVisualChanged));
+            DependencyProperty.Register("Visual", typeof(Visual), typeof(GlassBehavior),
+                new FrameworkPropertyMetadata(null, OnVisualChanged));
 
         public static readonly DependencyProperty EffectProperty =
-            DependencyProperty.Register("Effect", typeof(Effect), typeof(GlassBehavior), new FrameworkPropertyMetadata(null, OnEffectChanged));
+            DependencyProperty.Register("Effect", typeof(Effect), typeof(GlassBehavior),
+                new FrameworkPropertyMetadata(null, OnEffectChanged));
 
         private readonly VisualBrush _directVisualBrush = new VisualBrush();
         private readonly Rectangle _surrogateVisual = new Rectangle();
@@ -38,14 +40,14 @@ namespace DCS.Alternative.Launcher.Behaviors
 
         public Visual Visual
         {
-            get { return (Visual) GetValue(VisualProperty); }
-            set { SetValue(VisualProperty, value); }
+            get => (Visual) GetValue(VisualProperty);
+            set => SetValue(VisualProperty, value);
         }
 
         public Effect Effect
         {
-            get { return (Effect) GetValue(EffectProperty); }
-            set { SetValue(EffectProperty, value); }
+            get => (Effect) GetValue(EffectProperty);
+            set => SetValue(EffectProperty, value);
         }
 
         private static void OnVisualChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -71,7 +73,9 @@ namespace DCS.Alternative.Launcher.Behaviors
         private void SetEffect()
         {
             if (_surrogateVisual == null)
+            {
                 return;
+            }
 
             _surrogateVisual.Effect = Effect;
         }
@@ -80,7 +84,9 @@ namespace DCS.Alternative.Launcher.Behaviors
         {
             var element = Visual as FrameworkElement;
             if (element == null || _attachedObject == null)
+            {
                 return;
+            }
 
             SetEffect();
 
@@ -94,7 +100,9 @@ namespace DCS.Alternative.Launcher.Behaviors
         private void EnsureBrushSyncWithVisual()
         {
             if (_attachedObject == null || Visual == null)
+            {
                 return;
+            }
 
             _surrogateVisual.Width = _attachedObject.ActualWidth;
             _surrogateVisual.Height = _attachedObject.ActualHeight;
@@ -114,13 +122,17 @@ namespace DCS.Alternative.Launcher.Behaviors
         protected override void OnAttached()
         {
             if (_attachedObject != null)
+            {
                 _attachedObject.LayoutUpdated -= AssociatedObject_LayoutUpdated;
+            }
 
             _attachedObject = AssociatedObject;
 
             var info = FindFillProperty(_attachedObject);
             if (info != null)
+            {
                 info.SetValue(_attachedObject, _directVisualBrush, null);
+            }
 
             _attachedObject.LayoutUpdated += AssociatedObject_LayoutUpdated;
             SetupVisual();
@@ -130,7 +142,9 @@ namespace DCS.Alternative.Launcher.Behaviors
         protected override void OnDetaching()
         {
             if (_attachedObject != null)
+            {
                 _attachedObject.LayoutUpdated -= AssociatedObject_LayoutUpdated;
+            }
 
             base.OnDetaching();
         }

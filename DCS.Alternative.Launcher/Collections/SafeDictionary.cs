@@ -20,7 +20,10 @@ namespace DCS.Alternative.Launcher.Collections
                     {
                         var disposable = current as IDisposable;
 
-                        if (disposable != null) disposable.Dispose();
+                        if (disposable != null)
+                        {
+                            disposable.Dispose();
+                        }
                     }
 
                     _dictionary[key] = value;
@@ -28,10 +31,7 @@ namespace DCS.Alternative.Launcher.Collections
             }
         }
 
-        public IEnumerable<TKey> Keys
-        {
-            get { return _dictionary.Keys; }
-        }
+        public IEnumerable<TKey> Keys => _dictionary.Keys;
 
         public void Dispose()
         {
@@ -41,7 +41,10 @@ namespace DCS.Alternative.Launcher.Collections
                     where item is IDisposable
                     select item as IDisposable;
 
-                foreach (var item in disposableItems) item.Dispose();
+                foreach (var item in disposableItems)
+                {
+                    item.Dispose();
+                }
             }
 
             GC.SuppressFinalize(this);

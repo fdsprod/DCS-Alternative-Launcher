@@ -5,20 +5,11 @@ namespace DCS.Alternative.Launcher.Plugins
 {
     public abstract class PluginBase : IPlugin
     {
-        public abstract string Author
-        {
-            get;
-        }
+        public abstract string Author { get; }
 
-        public abstract string SupportUrl
-        {
-            get;
-        }
+        public abstract string SupportUrl { get; }
 
-        public abstract string Name
-        {
-            get;
-        }
+        public abstract string Name { get; }
 
         public virtual void OnLoad(IContainer container)
         {

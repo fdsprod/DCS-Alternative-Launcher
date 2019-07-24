@@ -15,22 +15,11 @@ namespace DCS.Alternative.Launcher.Data
             ReverseParameterName = "Reverse";
         }
 
-        public static VisibilityConverter Instance
-        {
-            get;
-        } = new VisibilityConverter();
+        public static VisibilityConverter Instance { get; } = new VisibilityConverter();
 
-        public string HiddenParameterName
-        {
-            get;
-            set;
-        }
+        public string HiddenParameterName { get; set; }
 
-        public string ReverseParameterName
-        {
-            get;
-            set;
-        }
+        public string ReverseParameterName { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -62,12 +51,21 @@ namespace DCS.Alternative.Launcher.Data
                         var enumerable = value as IEnumerable;
 
                         if (enumerable != null)
+                        {
                             result = enumerable.Cast<object>().Any() ? Visibility.Visible : Visibility.Collapsed;
+                        }
                         else if (value is int)
+                        {
                             result = (int) value > 0 ? Visibility.Visible : Visibility.Collapsed;
+                        }
                         else if (value is double)
+                        {
                             result = (double) value > 0 ? Visibility.Visible : Visibility.Collapsed;
-                        else if (value is bool) result = (bool) value ? Visibility.Visible : Visibility.Collapsed;
+                        }
+                        else if (value is bool)
+                        {
+                            result = (bool) value ? Visibility.Visible : Visibility.Collapsed;
+                        }
                     }
                 }
             }
@@ -79,13 +77,21 @@ namespace DCS.Alternative.Launcher.Data
             {
                 var parameters = parameter.ToString().Split('|');
 
-                hidden = parameters.Any(p => string.Compare(p, HiddenParameterName, StringComparison.OrdinalIgnoreCase) == 0);
-                reverse = parameters.Any(p => string.Compare(p, ReverseParameterName, StringComparison.CurrentCultureIgnoreCase) == 0);
+                hidden = parameters.Any(p =>
+                    string.Compare(p, HiddenParameterName, StringComparison.OrdinalIgnoreCase) == 0);
+                reverse = parameters.Any(p =>
+                    string.Compare(p, ReverseParameterName, StringComparison.CurrentCultureIgnoreCase) == 0);
             }
 
-            if (reverse) result = result == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            if (reverse)
+            {
+                result = result == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            }
 
-            if (hidden && result == Visibility.Collapsed) result = Visibility.Hidden;
+            if (hidden && result == Visibility.Collapsed)
+            {
+                result = Visibility.Hidden;
+            }
 
             return result;
         }

@@ -6,9 +6,15 @@ namespace DCS.Alternative.Launcher.ComponentModel
 {
     public abstract class NavigationAwareBase : INavigationAware, IActivate, IDeactivate
     {
-        public virtual Task ActivateAsync()
+        private bool _isInitialized;
+
+        public virtual async Task ActivateAsync()
         {
-            return Task.FromResult(true);
+            if (!_isInitialized)
+            {
+                await InitializeAsync();
+                _isInitialized = true;
+            }
         }
 
         public virtual Task DeactivateAsync()
@@ -20,11 +26,16 @@ namespace DCS.Alternative.Launcher.ComponentModel
         {
         }
 
-        public void NavigatedTo(Type viewType)
+        public virtual void NavigatedTo(Type viewType)
         {
         }
 
-        public Task OnNavigatingAsync(NavigatingEventArgs args)
+        public virtual Task OnNavigatingAsync(NavigatingEventArgs args)
+        {
+            return Task.FromResult(true);
+        }
+
+        protected virtual Task InitializeAsync()
         {
             return Task.FromResult(true);
         }

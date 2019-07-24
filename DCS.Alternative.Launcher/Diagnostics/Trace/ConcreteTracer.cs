@@ -87,14 +87,22 @@ namespace DCS.Alternative.Launcher.Diagnostics.Trace
             if (!string.IsNullOrEmpty(message))
             {
                 if (args.Length > 0)
+                {
                     sb.AppendFormat(message, args);
+                }
                 else
+                {
                     sb.Append(message);
+                }
             }
 
             if (ex != null)
             {
-                if (sb.Length > 0) sb.Append(Environment.NewLine).Append(Environment.NewLine);
+                if (sb.Length > 0)
+                {
+                    sb.Append(Environment.NewLine).Append(Environment.NewLine);
+                }
+
                 sb.Append(ex);
             }
 

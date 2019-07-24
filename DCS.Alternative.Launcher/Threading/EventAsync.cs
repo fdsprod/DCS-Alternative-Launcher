@@ -48,22 +48,28 @@ namespace DCS.Alternative.Launcher.Threading
                 Action<EventHandler> removeEventHandler,
                 Action beginAction = null)
             {
-                if (addEventHandler == null) throw new ArgumentNullException("addEventHandler");
+                if (addEventHandler == null)
+                {
+                    throw new ArgumentNullException("addEventHandler");
+                }
 
-                if (removeEventHandler == null) throw new ArgumentNullException("removeEventHandler");
+                if (removeEventHandler == null)
+                {
+                    throw new ArgumentNullException("removeEventHandler");
+                }
 
                 _tcs = new TaskCompletionSource<object>();
                 _removeEventHandler = removeEventHandler;
 
                 addEventHandler.Invoke(EventCompleted);
 
-                if (beginAction != null) beginAction.Invoke();
+                if (beginAction != null)
+                {
+                    beginAction.Invoke();
+                }
             }
 
-            public override Task<object> Task
-            {
-                get { return _tcs.Task; }
-            }
+            public override Task<object> Task => _tcs.Task;
 
             private void EventCompleted(object sender, EventArgs args)
             {
@@ -82,22 +88,28 @@ namespace DCS.Alternative.Launcher.Threading
                 Action<EventHandler<TEventArgs>> removeEventHandler,
                 Action beginAction = null)
             {
-                if (addEventHandler == null) throw new ArgumentNullException("addEventHandler");
+                if (addEventHandler == null)
+                {
+                    throw new ArgumentNullException("addEventHandler");
+                }
 
-                if (removeEventHandler == null) throw new ArgumentNullException("removeEventHandler");
+                if (removeEventHandler == null)
+                {
+                    throw new ArgumentNullException("removeEventHandler");
+                }
 
                 _tcs = new TaskCompletionSource<object>();
                 _removeEventHandler = removeEventHandler;
 
                 addEventHandler.Invoke(EventCompleted);
 
-                if (beginAction != null) beginAction.Invoke();
+                if (beginAction != null)
+                {
+                    beginAction.Invoke();
+                }
             }
 
-            public override Task<object> Task
-            {
-                get { return _tcs.Task; }
-            }
+            public override Task<object> Task => _tcs.Task;
 
             private void EventCompleted(object sender, TEventArgs args)
             {
@@ -116,22 +128,28 @@ namespace DCS.Alternative.Launcher.Threading
                 Action<RoutedEventHandler> removeEventHandler,
                 Action beginAction = null)
             {
-                if (addEventHandler == null) throw new ArgumentNullException("addEventHandler");
+                if (addEventHandler == null)
+                {
+                    throw new ArgumentNullException("addEventHandler");
+                }
 
-                if (removeEventHandler == null) throw new ArgumentNullException("removeEventHandler");
+                if (removeEventHandler == null)
+                {
+                    throw new ArgumentNullException("removeEventHandler");
+                }
 
                 _tcs = new TaskCompletionSource<RoutedEventArgs>();
                 _removeEventHandler = removeEventHandler;
 
                 addEventHandler.Invoke(EventCompleted);
 
-                if (beginAction != null) beginAction.Invoke();
+                if (beginAction != null)
+                {
+                    beginAction.Invoke();
+                }
             }
 
-            public override Task<RoutedEventArgs> Task
-            {
-                get { return _tcs.Task; }
-            }
+            public override Task<RoutedEventArgs> Task => _tcs.Task;
 
             private void EventCompleted(object sender, RoutedEventArgs args)
             {
@@ -150,22 +168,28 @@ namespace DCS.Alternative.Launcher.Threading
                 Action<SizeChangedEventHandler> removeEventHandler,
                 Action beginAction = null)
             {
-                if (addEventHandler == null) throw new ArgumentNullException("addEventHandler");
+                if (addEventHandler == null)
+                {
+                    throw new ArgumentNullException("addEventHandler");
+                }
 
-                if (removeEventHandler == null) throw new ArgumentNullException("removeEventHandler");
+                if (removeEventHandler == null)
+                {
+                    throw new ArgumentNullException("removeEventHandler");
+                }
 
                 _tcs = new TaskCompletionSource<SizeChangedEventArgs>();
                 _removeEventHandler = removeEventHandler;
 
                 addEventHandler.Invoke(EventCompleted);
 
-                if (beginAction != null) beginAction.Invoke();
+                if (beginAction != null)
+                {
+                    beginAction.Invoke();
+                }
             }
 
-            public override Task<SizeChangedEventArgs> Task
-            {
-                get { return _tcs.Task; }
-            }
+            public override Task<SizeChangedEventArgs> Task => _tcs.Task;
 
             private void EventCompleted(object sender, SizeChangedEventArgs args)
             {

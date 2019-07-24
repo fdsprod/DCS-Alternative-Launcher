@@ -1,18 +1,14 @@
 ﻿<Window x:Class="DCS.Alternative.Launcher.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Behaviors"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:local="clr-namespace:DCS.Alternative.Launcher"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        x:Name="RootWindow"
         Title="MainWindow"
         Width="1024"
         Height="600"
         MaxWidth="1024"
-        MaxHeight="768"
+        MaxHeight="600"
         WindowStyle="None"
         mc:Ignorable="d">
     <WindowChrome.WindowChrome>
@@ -29,6 +25,19 @@
                    VerticalAlignment="Center"
                    Source="/Images/background.jpg"
                    Stretch="UniformToFill" />
+            <Image Width="250"
+                   Height="150"
+                   Margin="30"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   RenderOptions.EdgeMode="Aliased"
+                   Source="/Images/dcs-world-logo.png"
+                   Stretch="Uniform">
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
+                </Image.Effect>
+            </Image>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80" />
@@ -73,7 +82,7 @@
                                                     Foreground="White"
                                                     Style="{StaticResource ButtonRevealStyle}"
                                                     WindowChrome.IsHitTestVisibleInChrome="True">
-                                                <TextBlock FontFamily="{StaticResource Orbitron}"
+                                                <TextBlock FontFamily="{StaticResource Prototype}"
                                                            FontSize="18"
                                                            Text="{Binding Name}">
                                                     <TextBlock.Effect>
@@ -84,7 +93,6 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-
                                 <MenuItem Margin="0,15,-20,0"
                                           HorizontalAlignment="Right"
                                           VerticalAlignment="Center"
@@ -95,17 +103,16 @@
                                           WindowChrome.IsHitTestVisibleInChrome="True">
                                     <MenuItem.ItemContainerStyle>
                                         <Style TargetType="MenuItem">
-                                            <Setter Property="Command"
-                                                    Value="{Binding DataContext.SelectInstallCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                            <Setter Property="Command" Value="{Binding DataContext.SelectInstallCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                                             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
                                         </Style>
                                     </MenuItem.ItemContainerStyle>
                                     <MenuItem.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock FontFamily="{StaticResource Orbitron}"
+                                            <TextBlock FontFamily="{StaticResource Prototype}"
                                                        FontSize="11"
                                                        FontWeight="Light"
-                                                       Text="{Binding DisplayVariant}">
+                                                       Text="{Binding Variant}">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                                                 </TextBlock.Effect>
@@ -114,7 +121,7 @@
                                     </MenuItem.ItemTemplate>
                                     <MenuItem.Header>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock FontFamily="{StaticResource Orbitron}"
+                                            <TextBlock FontFamily="{StaticResource Prototype}"
                                                        FontSize="11"
                                                        FontWeight="Light"
                                                        Text="{Binding SelectedInstall.Value.DisplayVariant}">
@@ -132,6 +139,19 @@
                                         </StackPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
+
+                                <Button Width="16"
+                                        Height="16"
+                                        Margin="5"
+                                        Padding="3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Background="Transparent"
+                                        BorderThickness="0">
+                                    <Path Data="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"
+                                          Fill="#FF5F5F5F"
+                                          Stretch="Uniform" />
+                                </Button>
                             </Grid>
                         </fw:AcrylicPanel>
                     </Grid>
@@ -144,19 +164,6 @@
                                     VerticalContentAlignment="Stretch" />
                 </Grid>
             </Grid>
-            <Image Width="250"
-                   Height="150"
-                   Margin="30"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   RenderOptions.BitmapScalingMode="HighQuality"
-                   RenderOptions.EdgeMode="Aliased"
-                   Source="/Images/dcs-world-logo.png"
-                   Stretch="Uniform">
-                <Image.Effect>
-                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
-                </Image.Effect>
-            </Image>
         </Grid>
     </Border>
 </Window>

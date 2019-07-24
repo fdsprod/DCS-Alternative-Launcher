@@ -5,20 +5,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game
 {
     public class GamePlugin : PluginBase
     {
-        public override string Name
-        {
-            get { return "Game Plugin"; }
-        }
+        public override string Name => "Game Plugin";
 
-        public override string Author
-        {
-            get { return "Jabbers"; }
-        }
+        public override string Author => "Jabbers";
 
-        public override string SupportUrl
-        {
-            get { return "(undefined)"; }
-        }
+        public override string SupportUrl => "https://github.com/jeffboulanger/DCS-Alternative-Launcher";
 
         protected override void RegisterUISiteItems(IPluginNavigationSite site)
         {

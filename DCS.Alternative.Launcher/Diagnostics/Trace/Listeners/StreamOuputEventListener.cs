@@ -23,7 +23,10 @@ namespace DCS.Alternative.Launcher.Diagnostics.Trace.Listeners
         {
             base.Dispose();
 
-            if (!m_closeStreamOnDispose || m_stream == null) return;
+            if (!m_closeStreamOnDispose || m_stream == null)
+            {
+                return;
+            }
 
             m_stream.Dispose();
             m_stream = null;

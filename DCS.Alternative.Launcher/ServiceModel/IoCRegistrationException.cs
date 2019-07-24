@@ -23,7 +23,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
         }
 
         public IoCRegistrationException(Type registerType, Type implementationType, Exception innerException)
-            : base(string.Format(GENERIC_CONSTRAINT_ERROR_TEXT, registerType.FullName, implementationType.FullName), innerException)
+            : base(string.Format(GENERIC_CONSTRAINT_ERROR_TEXT, registerType.FullName, implementationType.FullName),
+                innerException)
         {
         }
     }

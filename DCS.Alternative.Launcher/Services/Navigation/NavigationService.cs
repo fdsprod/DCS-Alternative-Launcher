@@ -22,7 +22,13 @@ namespace DCS.Alternative.Launcher.Services.Navigation
 
         public async Task<bool> NavigateAsync(Type viewType, INavigationAware viewModel)
         {
-            var success = false;
+            var previousView = _frame.Content;
+            var success = await CanNavigateAsync(new NavigatingEventArgs(viewType, previousView?.GetType()));
+
+            if (!success)
+            {
+                return false;
+            }
 
             var dispatcher = _frame.Dispatcher;
             var pattern = new NavigationHandlerTaskSource(
@@ -34,9 +40,13 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             Guard.RequireIsNotNull(view, nameof(view));
 
             if (dispatcher.CheckAccess())
+            {
                 success = await navigateAsync(view, viewModel);
+            }
             else
+            {
                 await dispatcher.InvokeAsync(async () => await navigateAsync(view, viewModel));
+            }
 
             await pattern.Task;
 
@@ -47,7 +57,13 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             where TView : UserControl, new()
             where TViewModel : INavigationAware
         {
-            var success = false;
+            var previousView = _frame.Content;
+            var success = await CanNavigateAsync(new NavigatingEventArgs(typeof(TView), previousView?.GetType()));
+
+            if (!success)
+            {
+                return false;
+            }
 
             var dispatcher = _frame.Dispatcher;
             var pattern = new NavigationHandlerTaskSource(
@@ -55,9 +71,13 @@ namespace DCS.Alternative.Launcher.Services.Navigation
                 handler => Navigated -= handler);
 
             if (dispatcher.CheckAccess())
+            {
                 success = await navigateAsync<TView, TViewModel>(viewModel);
+            }
             else
+            {
                 await dispatcher.InvokeAsync(async () => await navigateAsync<TView, TViewModel>(viewModel));
+            }
 
             await pattern.Task;
 
@@ -70,7 +90,10 @@ namespace DCS.Alternative.Launcher.Services.Navigation
         {
             await OnNavigatingAsync(this, e);
 
-            if (e.Cancel) return false;
+            if (e.Cancel)
+            {
+                return false;
+            }
 
             var previousView = _frame.Content as FrameworkElement;
 
@@ -80,7 +103,10 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             {
                 await navigationAware.OnNavigatingAsync(e);
 
-                if (e.Cancel) return false;
+                if (e.Cancel)
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -92,7 +118,11 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             {
                 var view = content as ContentControl;
 
-                if (view == null) throw new ArgumentException("View '" + content.GetType().FullName + "' should inherit from ContentControl or one of its descendents.");
+                if (view == null)
+                {
+                    throw new ArgumentException("View '" + content.GetType().FullName +
+                                                "' should inherit from ContentControl or one of its descendents.");
+                }
 
                 view.DataContext = dataContext;
             }
@@ -112,11 +142,17 @@ namespace DCS.Alternative.Launcher.Services.Navigation
         {
             var view = _frame.Content as FrameworkElement;
 
-            if (view == null) return;
+            if (view == null)
+            {
+                return;
+            }
 
             var deactivator = view.DataContext as IDeactivate;
 
-            if (deactivator != null) await deactivator.DeactivateAsync();
+            if (deactivator != null)
+            {
+                await deactivator.DeactivateAsync();
+            }
         }
 
         private async Task<bool> navigateAsync(UserControl view, INavigationAware viewModel)
@@ -124,13 +160,19 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             var previousView = _frame.Content;
             var activator = viewModel as IActivate;
 
-            if (activator != null) await activator.ActivateAsync();
+            if (activator != null)
+            {
+                await activator.ActivateAsync();
+            }
 
             _frame.Content = view;
 
             var navigationAware = viewModel;
 
-            if (navigationAware != null && previousView != null) navigationAware.NavigatedFrom(previousView.GetType());
+            if (navigationAware != null && previousView != null)
+            {
+                navigationAware.NavigatedFrom(previousView.GetType());
+            }
 
             await OnNavigatedAsync(view, viewModel, view.GetType(), previousView?.GetType());
 
@@ -155,7 +197,10 @@ namespace DCS.Alternative.Launcher.Services.Navigation
                 Action<EventHandler<NavigatedEventArgs>> removeEventHandler,
                 Action beginAction = null)
             {
-                if (addEventHandler == null) throw new ArgumentNullException(nameof(addEventHandler));
+                if (addEventHandler == null)
+                {
+                    throw new ArgumentNullException(nameof(addEventHandler));
+                }
 
                 _tcs = new TaskCompletionSource<object>();
                 _removeEventHandler = removeEventHandler ?? throw new ArgumentNullException(nameof(removeEventHandler));
@@ -165,10 +210,7 @@ namespace DCS.Alternative.Launcher.Services.Navigation
                 beginAction?.Invoke();
             }
 
-            public override Task<object> Task
-            {
-                get { return _tcs.Task; }
-            }
+            public override Task<object> Task => _tcs.Task;
 
             private void EventCompleted(object sender, NavigatedEventArgs args)
             {

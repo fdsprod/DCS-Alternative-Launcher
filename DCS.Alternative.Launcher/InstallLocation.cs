@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -11,87 +10,52 @@ namespace DCS.Alternative.Launcher
     [TypeConverter(typeof(InstallLocationTypeConverter))]
     public class InstallLocation
     {
-        private string _variant;
-        private string _variantDisplay;
-        private Version _version;
+        private const string _exePath = "bin\\dcs.exe";
+        private const string _updaterPath = "bin\\dcs_updater.exe";
+        private const string _updaterConfigPath = "autoupdate.cfg";
+
+        private AutoUpdaterConfig _config;
 
         public InstallLocation(string directory)
         {
             Directory = directory;
+
+            RefreshInfo();
         }
 
-        public string Variant
+        public string[] Modules => _config.Modules;
+
+        public bool IsValidInstall =>
+            File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath);
+
+        public string ExePath => GetPath(_exePath);
+
+        public string UpdaterPath => GetPath(_updaterPath);
+
+        public string UpdaterConfigPath => GetPath(_updaterConfigPath);
+
+        public string Variant => _config?.Branch ?? "Unknown";
+
+        public Version Version => Version.TryParse(_config.Version, out var result) ? result : new Version(0, 0, 0, 0);
+
+        public string Directory { get; }
+
+        public void RefreshInfo()
         {
-            get
+            if (File.Exists(UpdaterConfigPath))
             {
-                if (!string.IsNullOrWhiteSpace(_variant)) return _variant;
-
-                var autoupdaterConfigFile = GetPath("autoupdate.cfg");
-
-                if (!File.Exists(autoupdaterConfigFile)) return _variant = "Unknown";
-
-                var config = JsonConvert.DeserializeObject<AutoUpdaterConfig>(File.ReadAllText(autoupdaterConfigFile));
-                _variant = config.Branch;
-                return _variant;
+                _config = JsonConvert.DeserializeObject<AutoUpdaterConfig>(File.ReadAllText(UpdaterConfigPath));
             }
-        }
-
-        public string DisplayVariant
-        {
-            get
-            {
-                _variantDisplay = Variant?.ToUpper();
-
-                return _variantDisplay;
-            }
-        }
-
-        public Version Version
-        {
-            get
-            {
-                if (_version == null)
-                {
-                    var clientExe = GetExePath();
-
-                    if (File.Exists(clientExe))
-                    {
-                        var fileVersionInfo = GetClientVersion();
-                        _version = new Version(
-                            fileVersionInfo.FileMajorPart,
-                            fileVersionInfo.FileMinorPart,
-                            fileVersionInfo.FileBuildPart,
-                            fileVersionInfo.FilePrivatePart);
-                    }
-                    else
-                    {
-                        _version = new Version("0.0.0.0");
-                    }
-                }
-
-                return _version;
-            }
-        }
-
-        public string Directory
-        {
-            get;
-        }
-
-        public FileStream Create(string filename)
-        {
-            filename = GetPath(filename);
-
-            if (!File.Exists(filename)) throw new FileNotFoundException(filename);
-
-            return File.Create(filename);
         }
 
         public FileStream OpenWrite(string filename)
         {
             filename = GetPath(filename);
 
-            if (!File.Exists(filename)) throw new FileNotFoundException(filename);
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException(filename);
+            }
 
             return File.OpenWrite(filename);
         }
@@ -100,7 +64,10 @@ namespace DCS.Alternative.Launcher
         {
             filename = GetPath(filename);
 
-            if (!File.Exists(filename)) throw new FileNotFoundException(filename);
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException(filename);
+            }
 
             return File.OpenRead(filename);
         }
@@ -116,7 +83,10 @@ namespace DCS.Alternative.Launcher
         {
             filename = GetPath(filename);
 
-            if (!File.Exists(filename)) throw new FileNotFoundException(filename);
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException(filename);
+            }
 
             return File.ReadAllText(filename);
         }
@@ -125,35 +95,22 @@ namespace DCS.Alternative.Launcher
         {
             filename = GetPath(filename);
 
-            if (!File.Exists(filename)) throw new FileNotFoundException(filename);
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException(filename);
+            }
 
             File.WriteAllText(filename, contents);
-        }
-
-        private FileVersionInfo GetClientVersion()
-        {
-            var clientExe = GetExePath();
-
-            if (!File.Exists(clientExe)) throw new FileNotFoundException(clientExe);
-
-            return FileVersionInfo.GetVersionInfo(clientExe);
-        }
-
-        public string GetExePath()
-        {
-            return GetPath("bin\\dcs.exe");
-        }
-
-        public string GetUpdaterPath()
-        {
-            return GetPath("bin\\dcs_updater.exe");
         }
 
         public string GetPath(string filename, params object[] args)
         {
             var path = Path.Combine(Directory, string.Format(filename, args));
 
-            if (!File.Exists(path)) Tracer.Warn("{0} does not exists.", path);
+            if (!File.Exists(path))
+            {
+                Tracer.Warn("{0} does not exists.", path);
+            }
 
             return path;
         }
@@ -170,16 +127,24 @@ namespace DCS.Alternative.Launcher
 
         public override string ToString()
         {
-            return $"{DisplayVariant} ({Directory})";
+            return $"{Version}-{Variant} ({Directory})";
         }
+    }
 
-        public class AutoUpdaterConfig
-        {
-            public string Branch
-            {
-                get;
-                set;
-            }
-        }
+    public class AutoUpdaterConfig
+    {
+        public string Branch { get; set; }
+
+        public string Version { get; set; }
+
+        public string Timestamp { get; set; }
+
+        public string Arch { get; set; }
+
+        public string Lang { get; set; }
+
+        public string Launch { get; set; }
+
+        public string[] Modules { get; set; }
     }
 }

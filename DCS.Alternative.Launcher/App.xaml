@@ -7,10 +7,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--  FluentWPF Controls  -->
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
+
+                <!--  LoadingIndicators Controls  -->
                 <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Orbitron">pack://application:,,,/Resources/Fonts/#orbitron</FontFamily>
+            <FontFamily x:Key="Prototype">pack://application:,,,/Resources/Fonts/#prototype</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

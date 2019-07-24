@@ -1,21 +1,65 @@
-﻿namespace DCS.Alternative.Launcher
+﻿using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
+
+namespace DCS.Alternative.Launcher
 {
-    public class ExportFile
+    public class Bounds
     {
-        public ExportFile(string fileName, params string[] exportNames)
-        {
-            FileName = fileName;
-            ExportNames = exportNames;
-        }
-
-        public string[] ExportNames
+        public int X
         {
             get;
+            set;
         }
-
-        public string FileName
+        public int Y
         {
             get;
+            set;
+        }
+        public int Width
+        {
+            get;
+            set;
+        }
+        public int Height
+        {
+            get;
+            set;
+        }
+    }
+
+    public class Viewport
+    {
+        public Viewport()
+        {
+        }
+
+        public string MonitorId
+        {
+            get;
+            set;
+        }
+
+        public Bounds Bounds
+        {
+            get;
+            set;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public string InitFileName
+        {
+            get;
+            set;
+        }
+
+        public LocationIndicator Location
+        {
+            get;
+            set; 
         }
     }
 }

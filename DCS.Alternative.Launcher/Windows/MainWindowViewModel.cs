@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Navigation;
@@ -20,13 +19,13 @@ namespace DCS.Alternative.Launcher.Windows
             var settingsService = container.Resolve<ISettingsService>();
             var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
 
-            foreach (var install in settingsService.Installations)
+            foreach (var install in settingsService.GetInstallations())
             {
                 Installations.Add(install);
                 Installations.Add(install);
             }
 
-            SelectedInstall.Value = Installations.FirstOrDefault();
+            SelectedInstall.Value = settingsService.SelectedInstall;
             SelectInstallCommand.Subscribe(OnSelectInstall);
 
             ShowPluginCommand.Subscribe(OnShowPlugin);
@@ -34,30 +33,17 @@ namespace DCS.Alternative.Launcher.Windows
             pluginNavigationSite.PluginRegistered += PluginNavigationSite_PluginRegistered;
         }
 
-        public ReactiveCollection<PluginNavigationButton> PluginsButtons
-        {
-            get;
-        } = new ReactiveCollection<PluginNavigationButton>();
+        public ReactiveCollection<PluginNavigationButton> PluginsButtons { get; } =
+            new ReactiveCollection<PluginNavigationButton>();
 
-        public ReactiveCollection<InstallLocation> Installations
-        {
-            get;
-        } = new ReactiveCollection<InstallLocation>();
+        public ReactiveCollection<InstallLocation> Installations { get; } = new ReactiveCollection<InstallLocation>();
 
-        public ReactiveProperty<InstallLocation> SelectedInstall
-        {
-            get;
-        } = new ReactiveProperty<InstallLocation>();
+        public ReactiveProperty<InstallLocation> SelectedInstall { get; } = new ReactiveProperty<InstallLocation>();
 
-        public ReactiveCommand<InstallLocation> SelectInstallCommand
-        {
-            get;
-        } = new ReactiveCommand<InstallLocation>();
+        public ReactiveCommand<InstallLocation> SelectInstallCommand { get; } = new ReactiveCommand<InstallLocation>();
 
-        public ReactiveCommand<PluginNavigationButton> ShowPluginCommand
-        {
-            get;
-        } = new ReactiveCommand<PluginNavigationButton>();
+        public ReactiveCommand<PluginNavigationButton> ShowPluginCommand { get; } =
+            new ReactiveCommand<PluginNavigationButton>();
 
         private void PluginNavigationSite_PluginRegistered(object sender, PluginRegisteredEventArgs e)
         {
@@ -86,19 +72,10 @@ namespace DCS.Alternative.Launcher.Windows
             ViewModelType = viewModelType;
         }
 
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
-        public Type ViewType
-        {
-            get;
-        }
+        public Type ViewType { get; }
 
-        public Type ViewModelType
-        {
-            get;
-        }
+        public Type ViewModelType { get; }
     }
 }
