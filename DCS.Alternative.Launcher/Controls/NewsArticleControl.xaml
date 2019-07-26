@@ -30,8 +30,8 @@
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                         <GradientStop Offset="0" Color="Transparent" />
-                        <GradientStop Offset="0.35" Color="Transparent" />
-                        <GradientStop Offset="0.4" Color="#CF141819" />
+                        <GradientStop Offset="0.375" Color="Transparent" />
+                        <GradientStop Offset="0.375" Color="#CF141819" />
                         <GradientStop Offset="1" Color="#CF141819" />
                     </LinearGradientBrush>
                 </Border.Background>
@@ -69,7 +69,7 @@
             </Border>
             <Button Grid.Row="2"
                     Height="23"
-                    Margin="10,3"
+                    Margin="10,3,0,0"
                     Padding="3,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"

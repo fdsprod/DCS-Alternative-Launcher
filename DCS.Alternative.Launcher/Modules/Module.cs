@@ -12,6 +12,8 @@ namespace DCS.Alternative.Launcher.Modules
 
         public string BaseFolderPath { get; set; }
 
+        public string CockpitScriptsFolderPath { get { return Path.Combine(BaseFolderPath, "Cockpit\\Scripts"); } }
+
         public string IconPath { get; set; }
 
         public string ModuleId { get; set; }

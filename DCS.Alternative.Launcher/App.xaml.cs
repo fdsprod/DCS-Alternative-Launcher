@@ -46,7 +46,6 @@ namespace DCS.Alternative.Launcher
 
             _container = new Container();
 
-            ConsoleManager.Show();
 #endif
             _mainWindow = new MainWindow();
 
@@ -117,9 +116,6 @@ namespace DCS.Alternative.Launcher
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-#if DEBUG
-            ConsoleManager.Hide();
-#endif
         }
     }
 }

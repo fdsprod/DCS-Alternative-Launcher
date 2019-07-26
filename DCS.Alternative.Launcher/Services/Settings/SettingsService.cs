@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -47,41 +49,57 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public ModuleViewport[] GetModuleViewports()
         {
-            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new List<ModuleViewport>()).ToArray();
+            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]);
         }
 
-        public void RemoveViewport(string moduleId)
+        public void RemoveViewport(Module module, Viewport viewport)
         {
-            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new List<ModuleViewport>());
-            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == moduleId);
+            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]);
+            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
+            
+            viewport = mv?.Viewports.FirstOrDefault(v => v.Name == viewport.Name);
+
+            mv?.Viewports.Remove(viewport);
+
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
+        }
+
+        public void UpsertViewport(Module module, Viewport viewport)
+        {
+            var moduleViewports = new List<ModuleViewport>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]));
+            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
+
+            if (mv == null)
+            {
+                mv = new ModuleViewport
+                {
+                    Module = module
+                };
+
+                moduleViewports.Add(mv);
+            }
+
+            var vp = mv.Viewports.FirstOrDefault(v => v.Name == viewport.Name);
+
+            mv.Viewports.Remove(vp);
+            mv.Viewports.Add(viewport);
+
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
+        }
+
+        public void RemoveModuleViewports(Module module)
+        {
+            var moduleViewports = new List<ModuleViewport>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]));
+            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
 
             moduleViewports.Remove(mv);
 
             SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
         }
 
-        public void UpsertInstalls(ModuleViewport moduleViewport)
-        {
-            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new List<ModuleViewport>());
-            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == moduleViewport.Module.ModuleId);
-
-            if (mv == null)
-            {
-                moduleViewports.Add(moduleViewport);
-            }
-            else
-            {
-                var index = moduleViewports.IndexOf(mv);
-                moduleViewports[index] = moduleViewport;
-            }
-
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
-        }
-
         public void RemoveInstalls(params string[] directories)
         {
-            var installs = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations,
-                SettingsKeys.Installs, new string[0]));
+            var installs = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
 
             foreach (var directory in directories)
             {
@@ -137,7 +155,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     return token.ToObject<T>();
                 }
 
-                return (T) result;
+                return (T)result;
             }
         }
 
@@ -176,6 +194,57 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 {
                     _settings = new Dictionary<string, Dictionary<string, object>>();
                 }
+            }
+        }
+
+        public static class ObjectConverterter
+        {
+            public static bool TryConvert<TConvertFrom, UConvertTo>(TConvertFrom convertFrom, out UConvertTo convertTo)
+            {
+                object to;
+                var converted = TryConvert(typeof(TConvertFrom), convertFrom, typeof(UConvertTo), out to);
+
+                convertTo = (UConvertTo)to;
+
+                return converted;
+            }
+
+            public static bool TryConvert(Type convertFrom, object from, Type convertTo, out object to)
+            {
+                to = null;
+                var converted = false;
+
+                if (convertFrom == convertTo)
+                {
+                    to = from;
+                    return true;
+                }
+
+                if (from != null && convertTo.IsEnum)
+                {
+                    to = Enum.Parse(convertTo, from.ToString(), true);
+                    return true;
+                }
+
+                var converter = TypeDescriptor.GetConverter(convertFrom);
+
+                if (converter.CanConvertTo(convertTo))
+                {
+                    to = converter.ConvertTo(from, convertTo);
+                    converted = true;
+                }
+                else
+                {
+                    converter = TypeDescriptor.GetConverter(convertTo);
+
+                    if (converter.CanConvertFrom(convertFrom))
+                    {
+                        to = converter.ConvertFrom(from);
+                        converted = true;
+                    }
+                }
+
+                return converted;
             }
         }
     }

@@ -23,20 +23,84 @@ namespace DCS.Alternative.Launcher
             RefreshInfo();
         }
 
-        public string[] Modules => _config.Modules;
+        public string[] Modules
+        {
+            get
+            {
+                return _config?.Modules ?? new string[0];
+            }
+        }
 
-        public bool IsValidInstall =>
-            File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath);
+        public bool IsValidInstall
+        {
+            get
+            {
+                return File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath);
+            }
+        }
 
-        public string ExePath => GetPath(_exePath);
+        public string ExePath
+        {
+            get
+            {
+                return GetPath(_exePath);
+            }
+        }
 
-        public string UpdaterPath => GetPath(_updaterPath);
+        public string UpdaterPath
+        {
+            get
+            {
+                return GetPath(_updaterPath);
+            }
+        }
 
-        public string UpdaterConfigPath => GetPath(_updaterConfigPath);
+        public string SavedGamesPath
+        {
+            get
+            {
+                var variantFilePath = GetPath("dcs_variant.txt");
+                var userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var variant = string.Empty;
 
-        public string Variant => _config?.Branch ?? "Unknown";
+                if (File.Exists(variantFilePath))
+                {
+                    var contents = File.ReadAllText(variantFilePath);
+                    variant = $".{contents}";
+                }
 
-        public Version Version => Version.TryParse(_config.Version, out var result) ? result : new Version(0, 0, 0, 0);
+                return Path.Combine(userProfilePath, "Saved Games", "DCS" + variant);
+            }
+        }
+
+        public string UpdaterConfigPath
+        {
+            get
+            {
+                return GetPath(_updaterConfigPath);
+            }
+        }
+
+        public string Variant
+        {
+            get
+            {
+                return _config?.Branch ?? "Unknown";
+            }
+        }
+
+        public Version Version
+        {
+            get
+            {
+                if (_config == null)
+                {
+                    return new Version(0, 0, 0, 0);
+                }
+
+                return Version.TryParse(_config.Version, out var result) ? result : new Version(0, 0, 0, 0);
+            }
+        }
 
         public string Directory { get; }
 

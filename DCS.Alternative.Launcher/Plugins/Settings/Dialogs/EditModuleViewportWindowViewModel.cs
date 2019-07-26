@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
 using DCS.Alternative.Launcher.Modules;
@@ -16,6 +18,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
     {
         public MonitorModel(string deviceName, Rectangle screenBounds)
         {
+            Name = deviceName;
             DisplayName.Value = $"{deviceName.Replace("\\\\.\\DISPLAY", "Display ")} {screenBounds.Width}x{screenBounds.Height}";
         }
 
@@ -99,6 +102,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
             SelectedModule.Value = Modules.FirstOrDefault(m => m.ModuleId == moduleId);
             InitFilePath.Value = initFilePath;
+            InitFilePath.Subscribe(OnInitFilePathChanged);
             ViewportName.Value = viewportName;
             IsNoLocationIndicator.Value = locationIndicator == LocationIndicator.None;
             IsLeftLocationIndicator.Value = locationIndicator == LocationIndicator.Left;
@@ -203,6 +207,23 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             
         }
 
+        private Regex _viewportNameRegex = new Regex("(?<=try_find_assigned_viewport\\(\")(.*?)(?=\"\\))");
+
+        private void OnInitFilePathChanged(string value)
+        {
+            if (string.IsNullOrWhiteSpace(ViewportName.Value) && File.Exists(value))
+            {
+                var contents = File.ReadAllText(value);
+                var match = _viewportNameRegex.Match(contents);
+
+                if (match.Success)
+                {
+                    var name = contents.Substring(match.Index, match.Length);
+                    ViewportName.Value = name;
+                }
+            }
+        }
+
         private void OnSelectInitFilePath()
         {
             var dialog = new OpenFileDialog();
@@ -210,7 +231,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             dialog.InitialDirectory = Path.GetFullPath(
                 SelectedModule.Value == null
                     ? _install.Directory
-                    : SelectedModule.Value.BaseFolderPath);
+                    : Directory.Exists(SelectedModule.Value.CockpitScriptsFolderPath) 
+                        ? SelectedModule.Value.CockpitScriptsFolderPath 
+                        : SelectedModule.Value.BaseFolderPath);
             dialog.AutoUpgradeEnabled = true;
             dialog.RestoreDirectory = true;
             dialog.Filter = "Init Lua (*_init.lua)|*_init.lua";

@@ -12,9 +12,11 @@ namespace DCS.Alternative.Launcher.Services
 
         ModuleViewport[] GetModuleViewports();
 
-        void RemoveViewport(string moduleId);
+        void RemoveModuleViewports(Module module);
 
-        void UpsertInstalls(ModuleViewport moduleViewport);
+        void RemoveViewport(Module module, Viewport viewport);
+
+        void UpsertViewport(Module module, Viewport viewport);
 
         InstallLocation[] GetInstallations();
 

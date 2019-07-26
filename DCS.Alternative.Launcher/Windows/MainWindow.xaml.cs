@@ -11,5 +11,10 @@ namespace DCS.Alternative.Launcher.Windows
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

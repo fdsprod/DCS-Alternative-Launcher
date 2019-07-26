@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using DCS.Alternative.Launcher.ComponentModel;
+using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
@@ -18,10 +20,13 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         private readonly IContainer _container;
         private readonly IDcsWorldService _dcsWorldService;
         private readonly ISettingsService _settingsService;
+        private readonly GameController _controller;
 
         public GameViewModel(IContainer container)
         {
             _container = container;
+            _controller = container.Resolve<GameController>();
+
             _settingsService = _container.Resolve<ISettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
 
@@ -29,50 +34,170 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 IsDcsOutOfDate.AsObservable().Merge(
                         IsCheckingLatestVersion.AsObservable().Merge(
                             IsLoading.AsObservable().Merge(
-                                FailedVersionCheck.AsObservable()))).Select(_ =>
-                    {
-                        return IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value &&
-                               !FailedVersionCheck.Value;
-                    })
+                                FailedVersionCheck.AsObservable()))).Select(_ => IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value && !FailedVersionCheck.Value)
                     .ToReactiveProperty();
 
+
+            foreach (var install in _settingsService.GetInstallations())
+            {
+                Installations.Add(install);
+            }
+
+            SelectedInstall.Value = _settingsService.SelectedInstall;
+
+            SelectInstallCommand.Subscribe(OnSelectInstall);
+            UpdateDcsCommand.Subscribe(OnUpdateDcs);
             RepairDcsCommand.Subscribe(OnRepairDcs);
             LaunchDcsCommand.Subscribe(OnLaunchDcs);
-
+            CheckForUpdatesCommand.Subscribe(OnCheckForUpdates);
             ShowNewsArticleCommand.Subscribe(OnShowNewsArticle);
         }
 
-        public ReactiveProperty<bool> IsLoading { get; } = new ReactiveProperty<bool>();
+        public ReactiveCollection<InstallLocation> Installations
+        {
+            get;
+        } = new ReactiveCollection<InstallLocation>();
 
-        public ReactiveProperty<bool> IsUpdateAvailable { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<InstallLocation> SelectedInstall
+        {
+            get;
+        } = new ReactiveProperty<InstallLocation>();
 
-        public ReactiveProperty<bool> IsCheckingLatestVersion { get; } = new ReactiveProperty<bool>();
+        public ReactiveCommand<InstallLocation> SelectInstallCommand
+        {
+            get;
+        } = new ReactiveCommand<InstallLocation>();
+        
+        public ReactiveProperty<bool> IsLoading
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveProperty<bool> IsDcsOutOfDate { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> IsUpdateAvailable
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveProperty<bool> IsDcsUpToDate { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> IsCheckingLatestVersion
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveProperty<bool> FailedVersionCheck { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> IsDcsOutOfDate
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveProperty<string> DcsVersion { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<bool> IsDcsUpToDate
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveCommand RepairDcsCommand { get; } = new ReactiveCommand();
+        public ReactiveProperty<bool> FailedVersionCheck
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
-        public ReactiveCommand LaunchDcsCommand { get; } = new ReactiveCommand();
+        public ReactiveProperty<string> DcsVersion
+        {
+            get;
+        } = new ReactiveProperty<string>();
 
-        public ReactiveProperty<string> LatestEagleDynamicsYouTubeUrl { get; } = new ReactiveProperty<string>();
+        public ReactiveCommand RepairDcsCommand
+        {
+            get;
+        } = new ReactiveCommand();
 
-        public ReactiveProperty<NewsArticleModel> LatestNewsArticle { get; } = new ReactiveProperty<NewsArticleModel>();
+        public ReactiveCommand UpdateDcsCommand
+        {
+            get;
+        } = new ReactiveCommand();
 
-        public ReactiveProperty<NewsArticleModel> PreviousNewsArticle { get; } =
-            new ReactiveProperty<NewsArticleModel>();
+        public ReactiveCommand LaunchDcsCommand
+        {
+            get;
+        } = new ReactiveCommand();
 
-        public ReactiveCommand<NewsArticleModel> ShowNewsArticleCommand { get; } =
-            new ReactiveCommand<NewsArticleModel>();
+        public ReactiveCommand CheckForUpdatesCommand
+        {
+            get;
+        } = new ReactiveCommand();
+
+        public ReactiveProperty<string> LatestEagleDynamicsYouTubeUrl
+        {
+            get;
+        } = new ReactiveProperty<string>();
+
+        public ReactiveProperty<NewsArticleModel> LatestNewsArticle
+        {
+            get;
+        } = new ReactiveProperty<NewsArticleModel>();
+
+        public ReactiveProperty<NewsArticleModel> PreviousNewsArticle
+        {
+            get;
+        } = new ReactiveProperty<NewsArticleModel>();
+
+        public ReactiveCommand<NewsArticleModel> ShowNewsArticleCommand
+        {
+            get;
+        } = new ReactiveCommand<NewsArticleModel>();
+
+
+        private void OnSelectInstall(InstallLocation install)
+        {
+            SelectedInstall.Value = install;
+        }
 
         private void OnShowNewsArticle(NewsArticleModel model)
         {
             Process.Start(model.Url.Value);
+        }
+        private async void OnCheckForUpdates()
+        {
+            try
+            {
+                await CheckForUpdatesAsync();
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
+        }
+
+        private async Task CheckForUpdatesAsync()
+        {
+            var install = _settingsService.SelectedInstall;
+
+            if (install?.IsValidInstall ?? false)
+            {
+                IsCheckingLatestVersion.Value = true;
+                IsDcsOutOfDate.Value = false;
+                IsDcsUpToDate.Value = false;
+                FailedVersionCheck.Value = false;
+
+                try
+                {
+                    var latestVersions = await _dcsWorldService.GetLatestVersionsAsync();
+                    var variant = install.Variant;
+
+                    IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
+
+                    DcsVersion.Value =
+                        IsDcsOutOfDate.Value 
+                            ? "DCS WORLD IS OUT OF DATE"
+                            : $"DCS WORLD IS UP TO DATE";
+                }
+                catch (Exception e)
+                {
+                    FailedVersionCheck.Value = true;
+                    GeneralExceptionHandler.Instance.OnError(e);
+                }
+                finally
+                {
+                    IsCheckingLatestVersion.Value = false;
+                }
+            }
         }
 
         protected override async Task InitializeAsync()
@@ -84,9 +209,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 try
                 {
                     IsLoading.Value = true;
-                    LatestEagleDynamicsYouTubeUrl.Value = await _dcsWorldService.GetLatestYoutubeVideoUrlAsync();
 
                     var articles = await _dcsWorldService.GetLatestNewsArticlesAsync(2);
+                    var latestVideoUrl = await _dcsWorldService.GetLatestYoutubeVideoUrlAsync();
+
+                    LatestEagleDynamicsYouTubeUrl.Value = latestVideoUrl;
                     LatestNewsArticle.Value = articles.FirstOrDefault();
                     PreviousNewsArticle.Value = articles.Skip(1).FirstOrDefault();
                 }
@@ -99,41 +226,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     IsLoading.Value = false;
                 }
 
-                var install = _settingsService.SelectedInstall;
-
-                if (install?.IsValidInstall ?? false)
-                {
-                    IsCheckingLatestVersion.Value = true;
-                    IsDcsOutOfDate.Value = false;
-                    IsDcsUpToDate.Value = false;
-                    FailedVersionCheck.Value = false;
-
-                    try
-                    {
-                        var latestVersions = await _dcsWorldService.GetLatestVersionsAsync();
-                        var variant = install.Variant;
-
-                        IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
-
-                        if (IsDcsOutOfDate.Value)
-                        {
-                            DcsVersion.Value = "DCS WORLD IS OUT OF DATE";
-                        }
-                        else
-                        {
-                            DcsVersion.Value = $"DCS WORLD IS UP TO DATE ({install.Version})";
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        FailedVersionCheck.Value = true;
-                        Tracer.Error(e);
-                    }
-                    finally
-                    {
-                        IsCheckingLatestVersion.Value = false;
-                    }
-                }
+                await CheckForUpdatesAsync();
             });
 
             await base.InitializeAsync();
@@ -146,35 +239,63 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             return base.OnNavigatingAsync(args);
         }
 
-        private void OnLaunchDcs()
+        private async void OnLaunchDcs()
         {
-            var moduleViewports = _settingsService.GetModuleViewports();
+            var window = Application.Current.MainWindow;
 
-            foreach (var mv in moduleViewports)
+            try
             {
-                mv.PatchViewports(_settingsService.SelectedInstall);
+                if (IsDcsOutOfDate.Value && MessageBox.Show("DCS World is not currently up to date.{Environment.NewLine}Would you like to update now?", "Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    window.WindowState = WindowState.Minimized;
+                    await _controller.UpdateAsync();
+                }
+
+                window.WindowState = WindowState.Minimized;
+                await _controller.LaunchDcsAsync();
             }
-
-            var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.ExePath);
-            var process = Process.Start(processInfo);
-
-            App.Current.MainWindow.WindowState = System.Windows.WindowState.Minimized;
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
         }
 
-        private void UpdateDcs()
+        private async void OnUpdateDcs()
         {
-            var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "update");
-            var process = Process.Start(processInfo);
+            var window = Application.Current.MainWindow;
 
-            process?.WaitForExit();
+            try
+            {
+                window.WindowState = WindowState.Minimized;
+                await _controller.UpdateAsync();
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
+            finally
+            {
+                window.WindowState = WindowState.Normal;
+            }
         }
-
-        private void OnRepairDcs()
+    
+        private async void OnRepairDcs()
         {
-            var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "repair");
-            var process = Process.Start(processInfo);
+            var window = Application.Current.MainWindow;
 
-            process?.WaitForExit();
+            try
+            {
+                window.WindowState = WindowState.Minimized;
+                await _controller.RepairAsync();
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
+            finally
+            {
+                window.WindowState = WindowState.Normal;
+            }
         }
     }
 }
