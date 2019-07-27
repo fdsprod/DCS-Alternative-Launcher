@@ -218,6 +218,9 @@
     <Compile Include="Views\SettingsViewModel.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="ServiceModel\Syndication\SyndicationHelper.cs" />
+    <Compile Include="Windows\SnipViewportWindow.xaml.cs">
+      <DependentUpon>SnipViewportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Xml\XmlHelper.cs" />
     <Page Include="Controls\MessageBoxEx\MessageBoxEx.xaml">
       <SubType>Designer</SubType>
@@ -268,6 +271,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Plugins\Game\Views\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SnipViewportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

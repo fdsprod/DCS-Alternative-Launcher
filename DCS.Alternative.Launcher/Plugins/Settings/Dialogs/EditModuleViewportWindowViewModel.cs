@@ -8,8 +8,10 @@ using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
+using DCS.Alternative.Launcher.Windows;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
@@ -204,7 +206,30 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
         private void OnSnipBounds()
         {
-            
+            if (SelectedMonitor.Value == null)
+            {
+                MessageBoxEx.Show("Please select a monitor first.");
+            }
+
+            var snip = new SnipViewportWindow();
+            var screen = Screen.AllScreens.First(s => s.DeviceName == SelectedMonitor.Value.Name);
+
+            snip.Left = screen.Bounds.Left;
+            snip.Top = screen.Bounds.Top;
+            snip.Width = screen.Bounds.Width;
+            snip.Height = screen.Bounds.Height;
+
+            snip.Topmost = true;
+
+            var success = snip.ShowDialog();
+
+            if (success ?? false)
+            {
+                Bounds.Value.X.Value = (int)snip.SnippedBounds.X;
+                Bounds.Value.Y.Value = (int)snip.SnippedBounds.Y;
+                Bounds.Value.Width.Value = (int)snip.SnippedBounds.Width;
+                Bounds.Value.Height.Value = (int)snip.SnippedBounds.Height;
+            }
         }
 
         private Regex _viewportNameRegex = new Regex("(?<=try_find_assigned_viewport\\(\")(.*?)(?=\"\\))");

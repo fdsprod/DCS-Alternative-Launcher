@@ -1,4 +1,5 @@
-﻿using DCS.Alternative.Launcher.ServiceModel;
+﻿using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
 namespace DCS.Alternative.Launcher.Plugins

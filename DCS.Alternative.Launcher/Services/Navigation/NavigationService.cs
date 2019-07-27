@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using DCS.Alternative.Launcher.ComponentModel;
+using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Threading;
 
@@ -22,11 +23,14 @@ namespace DCS.Alternative.Launcher.Services.Navigation
 
         public async Task<bool> NavigateAsync(Type viewType, INavigationAware viewModel)
         {
+            Tracer.Info($"Trying to navigate to {viewType.FullName}.");
+
             var previousView = _frame.Content;
             var success = await CanNavigateAsync(new NavigatingEventArgs(viewType, previousView?.GetType()));
 
             if (!success)
             {
+                Tracer.Info($"Navigation failed.");
                 return false;
             }
 
@@ -45,10 +49,12 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             }
             else
             {
-                await dispatcher.InvokeAsync(async () => await navigateAsync(view, viewModel));
+                await dispatcher.InvokeAsync(async () => success = await navigateAsync(view, viewModel));
             }
 
             await pattern.Task;
+
+            Tracer.Info($"Navigation {(success ? "succeeded" : "failed")}.");
 
             return success;
         }

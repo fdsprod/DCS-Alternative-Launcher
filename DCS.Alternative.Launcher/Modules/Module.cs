@@ -58,13 +58,8 @@ namespace DCS.Alternative.Launcher.Modules
                 }
 
                 var originalCode = $"try_find_assigned_viewport(\"{viewport.Name}\")";
-                
-                var code =
-                    viewport.Location == LocationIndicator.None
-                        ? $"try_find_assigned_viewport(\"{Module.ViewportPrefix}_{viewport.Name}\")"
-                        : viewport.Location == LocationIndicator.Left
-                            ? $"if disposition == \"L\" then try_find_assigned_viewport(\"{Module.ViewportPrefix}_{viewport.Name}\") end"
-                            : $"if disposition == \"R\" then try_find_assigned_viewport(\"{Module.ViewportPrefix}_{viewport.Name}\") end";
+
+                var code = $"try_find_assigned_viewport(\"{Module.ViewportPrefix}_{viewport.Name}\")";
 
                 if (!contents.Contains(code))
                 {

@@ -21,8 +21,8 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <RadialGradientBrush GradientOrigin="0,0" MappingMode="RelativeToBoundingBox" RadiusX="1" RadiusY="1">
-                <GradientStop Offset="0" Color="#FF1E2029" />
+            <RadialGradientBrush GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                <GradientStop Offset="0" Color="#FF353C53" />
                 <GradientStop Offset="0.7" Color="#FF030606" />
             </RadialGradientBrush>
         </Grid.Background>

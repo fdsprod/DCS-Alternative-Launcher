@@ -27,6 +27,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public Task<Module[]> GetInstalledAircraftModulesAsync()
         {
+            Tracer.Info("Searching DCS for installed modules.");
 #pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
             return Task.Run(async () =>
 #pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
@@ -105,6 +106,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
                                 modules.Add(module);
+                                Tracer.Info($"Found module {displayName}.");
                             }
                         });
 
@@ -129,6 +131,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             {
                 using (var client = new HttpClient())
                 {
+                    Tracer.Info($"Retrieving latest verions from http://updates.digitalcombatsimulator.com/");
+
                     var html = await client.GetStringAsync("http://updates.digitalcombatsimulator.com/");
                     var doc = new HtmlDocument();
 
@@ -146,8 +150,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             var innerText = h2.InnerText;
                             var split = innerText.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                             var version = Version.Parse(split.LastOrDefault() ?? string.Empty);
+                            var branch = innerText.ToLower().Contains("stable") ? "stable" : "openbeta";
 
-                            versions.Add(innerText.ToLower().Contains("stable") ? "stable" : "openbeta", version);
+                            Tracer.Info($"Found {branch} {version}");
+                            versions.Add(branch, version);
                         }
                     }
 
@@ -160,6 +166,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             return Task.Run(async () =>
             {
+                Tracer.Info($"Retrieving latest news from https://www.digitalcombatsimulator.com/en/news/");
+
                 var articles = new List<NewsArticleModel>();
 
                 using (var client = new HttpClient())
@@ -196,6 +204,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             $"/Images/Backgrounds/background ({Convert.ToInt32(article.Day.Value.Substring(0, dayMonth.Length - 3).Trim()) % 20 + 1}).jpg";
 
                         articles.Add(article);
+
+                        Tracer.Info($"Found article {title}");
                     }
 
                     return articles.ToArray();
@@ -207,6 +217,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             return Task.Run(async () =>
             {
+                Tracer.Info($"Retrieving latest youtube videos from https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA/");
+
                 var feed = await SyndicationHelper.GetFeedAsync(
                     "https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA");
                 var latestFeed = feed.Items.OrderByDescending(i => i.PublishDate).FirstOrDefault();
@@ -214,7 +226,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 if (latestFeed != null)
                 {
                     var link = latestFeed.Links[0].Uri.ToString();
-                    return link.Replace("watch?v=", "embed/") + "?autoplay=1&rel=0";
+                    var result = link.Replace("watch?v=", "embed/") + "?autoplay=1&rel=0";
+
+                    Tracer.Info($"Found video {link}");
+
+                    return result;
                 }
 
                 return string.Empty;

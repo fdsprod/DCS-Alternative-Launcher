@@ -5,11 +5,20 @@ namespace DCS.Alternative.Launcher.Plugins.Settings
 {
     public class SettingsPlugin : PluginBase
     {
-        public override string Name => "Settings Plugin";
+        public override string Name
+        {
+            get { return "Settings Plugin"; }
+        }
 
-        public override string Author => "Jabbers";
+        public override string Author
+        {
+            get { return "Jabbers"; }
+        }
 
-        public override string SupportUrl => "https://github.com/jeffboulanger/DCS-Alternative-Launcher";
+        public override string SupportUrl
+        {
+            get { return "https://github.com/jeffboulanger/DCS-Alternative-Launcher"; }
+        }
 
         protected override void RegisterUISiteItems(IPluginNavigationSite site)
         {

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
@@ -14,6 +15,7 @@ using DCS.Alternative.Launcher.Services.Dcs;
 using DCS.Alternative.Launcher.Services.Navigation;
 using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
+using Application = System.Windows.Application;
 
 namespace DCS.Alternative.Launcher
 {
@@ -57,8 +59,6 @@ namespace DCS.Alternative.Launcher
 
             InitializePlugins();
 
-            var result = await _container.Resolve<IDcsWorldService>().GetInstalledAircraftModulesAsync();
-
             _mainWindow.Show();
 
             Tracer.Info("Startup Complete.");
@@ -78,9 +78,13 @@ namespace DCS.Alternative.Launcher
 
         private void InitializePlugins()
         {
+            Tracer.Info("Initializing Plugins.");
+
             var assembly = Assembly.GetEntryAssembly();
 
             LoadPlugins(assembly);
+
+            Tracer.Info("Plugins Complete.");
         }
 
         private void LoadPlugins(Assembly assembly)
@@ -89,6 +93,8 @@ namespace DCS.Alternative.Launcher
             {
                 if (type.GetInterfaces().Any(t => t == typeof(IPlugin)) && !type.GetTypeInfo().IsAbstract)
                 {
+                    Tracer.Info($"Loading Plugin {type.FullName}.");
+
                     var plugin = (IPlugin) Activator.CreateInstance(type);
                     plugin.OnLoad(_container.GetChildContainer());
                 }
@@ -105,6 +111,8 @@ namespace DCS.Alternative.Launcher
 
         private void RegisterServices()
         {
+            Tracer.Info("Registering Services.");
+
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container,
                 _mainWindow.NavigationFrame));
             _container.Register<ISettingsService, SettingsService>().AsSingleton()

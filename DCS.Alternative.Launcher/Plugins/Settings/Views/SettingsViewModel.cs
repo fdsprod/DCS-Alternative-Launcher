@@ -5,9 +5,11 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using DCS.Alternative.Launcher.ComponentModel;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
@@ -424,7 +426,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             if (File.Exists(monitorConfigPath))
             {
-                if (MessageBox.Show("Monitor config already exists.  Are you sure you want to override it?", "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBoxEx.Show("Monitor config already exists.  Are you sure you want to override it?", "Overwrite?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     File.WriteAllText(monitorConfigPath, contents);
                 }
@@ -443,7 +445,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 resolutionHeight = Math.Max(screen.Bounds.Y + screen.Bounds.Height, resolutionHeight);
             }
 
-            MessageBox.Show(@"Make sure you setup the proper Monitor config in DCS once it is started.
+            MessageBoxEx.Show(@"Make sure you setup the proper Monitor config in DCS once it is started.
 
 To do this go to Options -> System -> Monitors and change the drop down to ""monitor_config_DAL""
 Then make sure you change your monitor resolution to " + resolutionWidth + "x" + resolutionHeight + ".");

@@ -177,6 +177,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
+                Tracer.Info("Saving settings.json");
                 File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings));
             }
         }
@@ -185,6 +186,8 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
+                Tracer.Info("Loading settings.json");
+
                 if (File.Exists("settings.json"))
                 {
                     var json = File.ReadAllText("settings.json");
@@ -194,57 +197,6 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 {
                     _settings = new Dictionary<string, Dictionary<string, object>>();
                 }
-            }
-        }
-
-        public static class ObjectConverterter
-        {
-            public static bool TryConvert<TConvertFrom, UConvertTo>(TConvertFrom convertFrom, out UConvertTo convertTo)
-            {
-                object to;
-                var converted = TryConvert(typeof(TConvertFrom), convertFrom, typeof(UConvertTo), out to);
-
-                convertTo = (UConvertTo)to;
-
-                return converted;
-            }
-
-            public static bool TryConvert(Type convertFrom, object from, Type convertTo, out object to)
-            {
-                to = null;
-                var converted = false;
-
-                if (convertFrom == convertTo)
-                {
-                    to = from;
-                    return true;
-                }
-
-                if (from != null && convertTo.IsEnum)
-                {
-                    to = Enum.Parse(convertTo, from.ToString(), true);
-                    return true;
-                }
-
-                var converter = TypeDescriptor.GetConverter(convertFrom);
-
-                if (converter.CanConvertTo(convertTo))
-                {
-                    to = converter.ConvertTo(from, convertTo);
-                    converted = true;
-                }
-                else
-                {
-                    converter = TypeDescriptor.GetConverter(convertTo);
-
-                    if (converter.CanConvertFrom(convertFrom))
-                    {
-                        to = converter.ConvertFrom(from);
-                        converted = true;
-                    }
-                }
-
-                return converted;
             }
         }
     }

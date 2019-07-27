@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Plugins;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services.Navigation;
@@ -19,6 +20,8 @@ namespace DCS.Alternative.Launcher.Services
             where TView : UserControl, new()
             where TViewModel : class, INavigationAware
         {
+            Tracer.Info($"Registering Navigation Site [{buttonText}] as (UI: {typeof(TView).FullName}, VM: {typeof(TViewModel).FullName}).");
+
             _container.Register<TViewModel>().AsSingleton();
             _container.Register<TView>().AsSingleton();
 

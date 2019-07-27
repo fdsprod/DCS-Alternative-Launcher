@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using DCS.Alternative.Launcher.ComponentModel;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Models;
@@ -245,7 +246,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
             try
             {
-                if (IsDcsOutOfDate.Value && MessageBox.Show("DCS World is not currently up to date.{Environment.NewLine}Would you like to update now?", "Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (IsDcsOutOfDate.Value && MessageBoxEx.Show("DCS World is not currently up to date.{Environment.NewLine}Would you like to update now?", "Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     window.WindowState = WindowState.Minimized;
                     await _controller.UpdateAsync();
