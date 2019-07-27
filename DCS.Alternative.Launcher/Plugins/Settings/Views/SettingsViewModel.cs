@@ -504,7 +504,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 var contents = sb.ToString();
                 var install = _settingsService.SelectedInstall;
-                var monitorConfigPath = Path.Combine(install.SavedGamesPath, "Config\\MonitorSetup\\monitor_config_DAL.lua");
+                var monitorConfigDirectory = Path.Combine(install.SavedGamesPath, "Config\\MonitorSetup");
+                var monitorConfigPath = Path.Combine(monitorConfigDirectory, "monitor_config_DAL.lua");
+
+                if (!Directory.Exists(monitorConfigDirectory))
+                {
+                    Directory.CreateDirectory(monitorConfigDirectory);
+                }
 
                 if (File.Exists(monitorConfigPath))
                 {
