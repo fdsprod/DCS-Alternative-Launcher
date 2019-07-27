@@ -85,7 +85,7 @@ namespace DCS.Alternative.Launcher
         {
             get
             {
-                return _config?.Branch ?? "Unknown";
+                return _config?.Branch ?? "stable"; 
             }
         }
 
