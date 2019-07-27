@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="MainWindow"
+        Title="DCS Alternative Launcher"
         Width="1024"
         Height="600"
         MaxWidth="1024"
