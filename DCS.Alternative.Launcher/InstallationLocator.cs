@@ -26,18 +26,19 @@ namespace DCS.Alternative.Launcher
 
             for (var i = 0; i < KnownInstallationRegistryKeys.Count; i++)
             {
-                var exePath = GetExePath(KnownInstallationRegistryKeys[i]);
+                var path = GetPath(KnownInstallationRegistryKeys[i]);
 
-                if (!string.IsNullOrEmpty(exePath) && !installations.Contains(exePath))
+                if (!string.IsNullOrEmpty(path) && !installations.Contains(path))
                 {
-                    installations.Add(exePath);
+                    Tracer.Info($"Found DCS path ({path}) from registry key {KnownInstallationRegistryKeys[i]}");
+                    installations.Add(path);
                 }
             }
 
             return installations;
         }
 
-        private static string GetExePath(string subName)
+        private static string GetPath(string subName)
         {
             try
             {

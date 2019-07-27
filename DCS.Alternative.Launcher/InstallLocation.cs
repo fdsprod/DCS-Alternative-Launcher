@@ -108,7 +108,13 @@ namespace DCS.Alternative.Launcher
         {
             if (File.Exists(UpdaterConfigPath))
             {
+                Tracer.Info($"Updater config found in {Directory}");
                 _config = JsonConvert.DeserializeObject<AutoUpdaterConfig>(File.ReadAllText(UpdaterConfigPath));
+                Tracer.Info($"Install Detected as branch {_config.Branch} {_config.Version}");
+            }
+            else
+            {
+                Tracer.Info($"Updater config was not found in {Directory}");
             }
         }
 
