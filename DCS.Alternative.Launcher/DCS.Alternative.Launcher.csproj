@@ -358,9 +358,6 @@
   <ItemGroup>
     <Resource Include="Images\dal-icon-256.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="LICENSE" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
