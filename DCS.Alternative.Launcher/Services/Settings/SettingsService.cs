@@ -205,6 +205,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
     {
         public const string Installations = "installations";
         public const string Viewports = "viewports";
+        public const string LaunchOptions = "launchOptions";
     }
 
     public static class SettingsKeys
@@ -212,5 +213,6 @@ namespace DCS.Alternative.Launcher.Services.Settings
         public const string Installs = "installs";
         public const string SelectedInstall = "selectedInstall";
         public const string ModuleViewports = "moduleViewports";
+        public const string IsVREnabled = "isVREnabled";
     }
 }

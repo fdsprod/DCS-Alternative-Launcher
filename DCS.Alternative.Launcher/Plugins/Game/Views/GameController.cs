@@ -37,7 +37,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         }
 
-        public Task LaunchDcsAsync()
+        public Task LaunchDcsAsync(bool isVREnabled)
         {
             return Task.Run(() =>
             {
@@ -49,7 +49,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 }
 
                 var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.ExePath);
-                var process = Process.Start(processInfo);
+                processInfo.Arguments = isVREnabled ? "--force_enable_VR" : "--force_disable_VR";
+                Process.Start(processInfo);
             });
         }
     }

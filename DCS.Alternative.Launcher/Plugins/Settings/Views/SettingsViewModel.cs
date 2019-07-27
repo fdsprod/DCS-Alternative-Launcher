@@ -128,11 +128,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 try
                 {
-                    foreach (var install in _settingsService.GetInstallations())
-                    {
-                        Installations.Add(install);
-                    }
-
                     var moduleViewports = _settingsService.GetModuleViewports();
 
                     await dispatcher.InvokeAsync(() =>
@@ -154,6 +149,29 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             });
 
             return base.InitializeAsync();
+        }
+
+        public override Task ActivateAsync()
+        {
+            try
+            {
+                Installations.Clear();
+
+                foreach (var install in _settingsService.GetInstallations())
+                {
+                    Installations.Add(install);
+                }
+            }
+            catch (Exception e)
+            {
+                Tracer.Error(e);
+            }
+            finally
+            {
+                IsLoading.Value = false;
+            }
+
+            return base.ActivateAsync();
         }
 
         private void OnAddInstallation()
@@ -336,8 +354,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("_ function(p) return p end");
-            sb.AppendLine("name = _(\"monitor_config_DAL\")");
+            sb.AppendLine("_  = function(p) return p; end;");
+            sb.AppendLine("name = _(\"monitor_config_DAL\");");
             sb.AppendLine("Description = _(\"Monitor-Config created by DCS Alternate Launcher\")");
             sb.AppendLine();
             sb.AppendLine("-- *************** Displays ***************");
@@ -357,12 +375,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 sb.AppendLine($"    [{i + 1}] = ");
                 sb.AppendLine($"    {{");
-                sb.AppendLine($"        -- {screen.DeviceName}");
-                sb.AppendLine($"        x = {screen.Bounds.X}");
-                sb.AppendLine($"        y = {screen.Bounds.Y}");
-                sb.AppendLine($"        width = {screen.Bounds.Width}");
+                sb.AppendLine($"        -- {screen.DeviceName},");
+                sb.AppendLine($"        x = {screen.Bounds.X},");
+                sb.AppendLine($"        y = {screen.Bounds.Y},");
+                sb.AppendLine($"        width = {screen.Bounds.Width},");
                 sb.AppendLine($"        height = {screen.Bounds.Height}");
-                sb.AppendLine($"    }}");
+                sb.AppendLine($"    }},");
             }
 
             sb.AppendLine("}");
@@ -388,6 +406,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             usedScreens.Add(Screen.PrimaryScreen);
 
             var moduleViewports = _settingsService.GetModuleViewports();
+            var resolutionWidth = Screen.PrimaryScreen.Bounds.Width;
+            var resolutionHeight = Screen.PrimaryScreen.Bounds.Height;
 
             foreach (var module in moduleViewports)
             {
@@ -400,11 +420,14 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     var screen = screens.Single(s => s.DeviceName == viewport.MonitorId);
                     var displayIndex = screensIndexByName[screen.DeviceName];
 
+                    resolutionWidth = Math.Max(resolutionWidth, screen.Bounds.X + viewport.Bounds.X + viewport.Bounds.Width);
+                    resolutionHeight = Math.Max(resolutionHeight, screen.Bounds.Y + viewport.Bounds.Y + viewport.Bounds.Height);
+
                     sb.AppendLine($"--{viewport.InitFileName}");
                     sb.AppendLine($"{module.Module.ViewportPrefix}_{viewport.Name} =");
                     sb.AppendLine($"{{");
-                    sb.AppendLine($"    x = display[{displayIndex}].x + {viewport.Bounds.X},");
-                    sb.AppendLine($"    y = display[{displayIndex}].y + {viewport.Bounds.Y},");
+                    sb.AppendLine($"    x = displays[{displayIndex}].x + {viewport.Bounds.X},");
+                    sb.AppendLine($"    y = displays[{displayIndex}].y + {viewport.Bounds.Y},");
                     sb.AppendLine($"    width = {viewport.Bounds.Width},");
                     sb.AppendLine($"    height = {viewport.Bounds.Height},");
                     sb.AppendLine($"}}");
@@ -434,15 +457,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             else
             {
                 File.WriteAllText(monitorConfigPath, contents);
-            }
-
-            var resolutionWidth = 0;
-            var resolutionHeight = 0;
-
-            foreach (var screen in usedScreens)
-            {
-                resolutionWidth = Math.Max(screen.Bounds.X + screen.Bounds.Width, resolutionWidth);
-                resolutionHeight = Math.Max(screen.Bounds.Y + screen.Bounds.Height, resolutionHeight);
             }
 
             MessageBoxEx.Show(@"Make sure you setup the proper Monitor config in DCS once it is started.

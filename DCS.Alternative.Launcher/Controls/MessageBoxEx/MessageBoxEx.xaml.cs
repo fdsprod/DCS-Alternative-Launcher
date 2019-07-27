@@ -9,6 +9,8 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
     /// </summary>
     public partial class MessageBoxEx : Window
     {
+        private MessageBoxResult _result;
+
         private MessageBoxEx()
         {
             InitializeComponent();
@@ -60,63 +62,32 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
                     ? Visibility.Visible
                     : Visibility.Collapsed;
 
-            var result = messageBox.ShowDialog();
+            messageBox.ShowDialog();
 
-            switch (buttons)
-            {
-                case MessageBoxButton.OK:
-                    return MessageBoxResult.OK;
-                case MessageBoxButton.OKCancel:
-                    return result ?? false
-                        ? MessageBoxResult.OK
-                        : MessageBoxResult.Cancel;
-                case MessageBoxButton.YesNoCancel:
-                    return result == null
-                        ? MessageBoxResult.Cancel
-                        : result.Value
-                            ? MessageBoxResult.Yes
-                            : MessageBoxResult.No;
-                case MessageBoxButton.YesNo:
-                    return result ?? false
-                        ? MessageBoxResult.No
-                        : MessageBoxResult.Yes;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(buttons), buttons, null);
-            }
-        }
-
-        private void BtnAbort_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
-
-        private void BtnRetry_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void BtnIgnore_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
+            return messageBox._result;
         }
 
         private void BtnYes_Click(object sender, RoutedEventArgs e)
         {
+            _result = MessageBoxResult.Yes;
             DialogResult = true;
         }
 
         private void BtnNo_Click(object sender, RoutedEventArgs e)
         {
+            _result = MessageBoxResult.No;
             DialogResult = false;
         }
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
+            _result = MessageBoxResult.OK;
             DialogResult = true;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
+            _result = MessageBoxResult.Cancel;
             DialogResult = null;
         }
     }

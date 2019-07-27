@@ -12,6 +12,7 @@ using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Navigation;
+using DCS.Alternative.Launcher.Services.Settings;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Game.Views
@@ -37,22 +38,21 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                             IsLoading.AsObservable().Merge(
                                 FailedVersionCheck.AsObservable()))).Select(_ => IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value && !FailedVersionCheck.Value)
                     .ToReactiveProperty();
-
-
-            foreach (var install in _settingsService.GetInstallations())
-            {
-                Installations.Add(install);
-            }
-
-            SelectedInstall.Value = _settingsService.SelectedInstall;
-
+            
             SelectInstallCommand.Subscribe(OnSelectInstall);
             UpdateDcsCommand.Subscribe(OnUpdateDcs);
             RepairDcsCommand.Subscribe(OnRepairDcs);
             LaunchDcsCommand.Subscribe(OnLaunchDcs);
             CheckForUpdatesCommand.Subscribe(OnCheckForUpdates);
             ShowNewsArticleCommand.Subscribe(OnShowNewsArticle);
+
+            IsVREnabled.Subscribe(OnIsVREnabledChanged);
         }
+
+        public ReactiveProperty<bool> IsVREnabled
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
         public ReactiveCollection<InstallLocation> Installations
         {
@@ -201,6 +201,20 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             }
         }
 
+        public override Task ActivateAsync()
+        {
+            Installations.Clear();
+
+            foreach (var install in _settingsService.GetInstallations())
+            {
+                Installations.Add(install);
+            }
+
+            SelectedInstall.Value = _settingsService.SelectedInstall;
+
+            return base.ActivateAsync();
+        }
+
         protected override async Task InitializeAsync()
         {
 #pragma warning disable 4014
@@ -217,6 +231,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     LatestEagleDynamicsYouTubeUrl.Value = latestVideoUrl;
                     LatestNewsArticle.Value = articles.FirstOrDefault();
                     PreviousNewsArticle.Value = articles.Skip(1).FirstOrDefault();
+                    IsVREnabled.Value = _settingsService.GetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, false);
                 }
                 catch (Exception e)
                 {
@@ -253,7 +268,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 }
 
                 window.WindowState = WindowState.Minimized;
-                await _controller.LaunchDcsAsync();
+                await _controller.LaunchDcsAsync(IsVREnabled.Value);
             }
             catch (Exception e)
             {
@@ -297,6 +312,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             {
                 window.WindowState = WindowState.Normal;
             }
+        }
+
+        private void OnIsVREnabledChanged(bool value)
+        {
+            _settingsService.SetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, value);
         }
     }
 }
