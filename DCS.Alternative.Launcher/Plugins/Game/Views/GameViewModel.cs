@@ -235,7 +235,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 }
                 catch (Exception e)
                 {
-                    Tracer.Error(e);
+                    GeneralExceptionHandler.Instance.OnError(e);
                 }
                 finally
                 {

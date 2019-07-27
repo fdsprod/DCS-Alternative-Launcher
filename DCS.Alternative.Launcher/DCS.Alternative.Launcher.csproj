@@ -212,6 +212,7 @@
     <Compile Include="Modules\M2000CModule.cs" />
     <Compile Include="Threading\HandlerTaskSourceBase.cs" />
     <Compile Include="Models\NewsArticle.cs" />
+    <Compile Include="UserFriendlyExceptionHandler.cs" />
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
 using DCS.Alternative.Launcher.Plugins;
@@ -37,11 +38,13 @@ namespace DCS.Alternative.Launcher
 
         private void onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Tracer.Critical(e.Exception);
+            GeneralExceptionHandler.Instance.OnError(e.Exception);
         }
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
+            GeneralExceptionHandler.Instance = new UserFriendlyExceptionHandler();
+
 #if DEBUG
             Tracer.RegisterListener(new ConsoleOutputEventListener());
             Tracer.RegisterListener(new FileLogEventListener("trace.log"));
