@@ -31,6 +31,11 @@ namespace DCS.Alternative.Launcher
             }
         }
 
+        public string Name
+        {
+            get;set;
+        }
+
         public bool IsValidInstall
         {
             get

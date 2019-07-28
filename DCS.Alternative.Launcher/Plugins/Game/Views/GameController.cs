@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
@@ -18,6 +19,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             return Task.Run(() =>
             {
+                var install = _settingsService.SelectedInstall;
+
+                if (!install.IsValidInstall)
+                {
+                    MessageBoxEx.Show($"The installation path \"{install.Directory}\" appears to be invalid.   Please fix the path and try again.");
+                    return;
+                }
+
                 var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "update");
                 var process = Process.Start(processInfo);
 
@@ -29,6 +38,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             return Task.Run(() =>
             {
+                var install = _settingsService.SelectedInstall;
+
+                if (!install.IsValidInstall)
+                {
+                    MessageBoxEx.Show($"The installation path \"{install.Directory}\" appears to be invalid.   Please fix the path and try again.");
+                    return;
+                }
+
                 var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "repair");
                 var process = Process.Start(processInfo);
 
@@ -41,6 +58,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             return Task.Run(() =>
             {
+                var install = _settingsService.SelectedInstall;
+
+                if (!install.IsValidInstall)
+                {
+                    MessageBoxEx.Show($"The installation path \"{install.Directory}\" appears to be invalid.   Please fix the path and try again.");
+                    return;
+                }
+
                 var moduleViewports = _settingsService.GetModuleViewports();
 
                 foreach (var mv in moduleViewports)
