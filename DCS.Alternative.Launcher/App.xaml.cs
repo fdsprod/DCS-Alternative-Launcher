@@ -2,9 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using CefSharp;
+using CefSharp.Wpf;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
@@ -16,6 +19,7 @@ using DCS.Alternative.Launcher.Services.Dcs;
 using DCS.Alternative.Launcher.Services.Navigation;
 using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
+using NLua;
 using Application = System.Windows.Application;
 
 namespace DCS.Alternative.Launcher
@@ -52,6 +56,11 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 
 #endif
+            CefSettings s = new CefSettings();
+            s.SetOffScreenRenderingBestPerformanceArgs();
+            s.WindowlessRenderingEnabled = true;
+            Cef.Initialize(s);
+
             _mainWindow = new MainWindow();
 
             RegisterServices();

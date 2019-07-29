@@ -226,7 +226,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 if (latestFeed != null)
                 {
                     var link = latestFeed.Links[0].Uri.ToString();
-                    var result = link.Replace("watch?v=", "embed/") + "?autoplay=1&rel=0";
+                    var result = link.Replace("watch?v=", "embed/") + "?rel=0&disablekb=1&fs=0&modestbranding=1";
 
                     Tracer.Info($"Found video {link}");
 
