@@ -236,5 +236,71 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 return string.Empty;
             });
         }
+
+        public virtual async Task PatchViewportsAsync()
+        {
+            var settingsService = _container.Resolve<ISettingsService>();
+            var install = settingsService.SelectedInstall;
+            var viewportTemplates = settingsService.GetViewportTemplates();
+            var modules = await GetInstalledAircraftModulesAsync();
+
+            foreach (var template in viewportTemplates)
+            {
+                var module = modules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
+
+                if (module == null)
+                {
+                    Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
+                    return;
+                }
+
+                foreach (var viewport in template.Viewports)
+                {
+                    if (!install.FileExists(viewport.RelativeInitFilePath))
+                    {
+                        Tracer.Warn($"Module {template.ModuleId}: Unable to patch viewport(s) [{viewport.ViewportName} in file {viewport.RelativeInitFilePath}.");
+                        continue;
+                    }
+
+                    var contents = install.ReadAllText(viewport.RelativeInitFilePath);
+                    var isChanged = false;
+
+                    if (!contents.Contains("dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")"))
+                    {
+                        Tracer.Info($"Adding ViewportHandling code to {viewport.RelativeInitFilePath}");
+                        contents += Environment.NewLine +
+                                    "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" +
+                                    Environment.NewLine;
+                        isChanged = true;
+                    }
+
+                    var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
+
+                    var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\")";
+
+                    if (!contents.Contains(code))
+                    {
+                        Tracer.Info($"Adding viewport name assignment code to {viewport.RelativeInitFilePath}");
+
+                        if (contents.Contains(originalCode))
+                        {
+                            contents = contents.Replace(originalCode, code);
+                        }
+                        else
+                        {
+                            contents += Environment.NewLine + code + Environment.NewLine;
+                        }
+
+                        isChanged = true;
+                    }
+
+                    if (isChanged)
+                    {
+                        Tracer.Info($"Saving {viewport.RelativeInitFilePath}");
+                        install.WriteAllText(viewport.RelativeInitFilePath, contents);
+                    }
+                }
+            }
+        }
     }
 }

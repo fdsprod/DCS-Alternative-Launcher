@@ -12,5 +12,6 @@ namespace DCS.Alternative.Launcher.Services
         Task<string> GetLatestYoutubeVideoUrlAsync();
         Task<NewsArticleModel[]> GetLatestNewsArticlesAsync(int count = 10);
         Task<ReadOnlyDictionary<string, Version>> GetLatestVersionsAsync();
+        Task PatchViewportsAsync();
     }
 }

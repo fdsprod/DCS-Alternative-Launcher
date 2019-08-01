@@ -15,6 +15,14 @@ namespace DCS.Alternative.Launcher.ComponentModel
                 await InitializeAsync();
                 _isInitialized = true;
             }
+
+            IsActivated = true;
+        }
+
+        public bool IsActivated
+        {
+            get;
+            private set;
         }
 
         public virtual Task DeactivateAsync()

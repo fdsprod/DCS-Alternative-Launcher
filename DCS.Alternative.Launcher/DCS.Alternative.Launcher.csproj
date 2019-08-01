@@ -147,18 +147,43 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />
+    <Compile Include="Controls\BindingHelper.cs" />
+    <Compile Include="Controls\DesignerControl.cs" />
+    <Compile Include="Controls\DisplaySelectionControl.xaml.cs">
+      <DependentUpon>DisplaySelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstallationControl.xaml.cs">
+      <DependentUpon>InstallationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MessageBoxEx\MessageBoxEx.xaml.cs">
       <DependentUpon>MessageBoxEx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MoveThumb.cs" />
     <Compile Include="Controls\NewsArticleControl.xaml.cs">
       <DependentUpon>NewsArticleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ResizableItem.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
+    <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
+    <Compile Include="Controls\EmptyStoryboard.cs" />
+    <Compile Include="Controls\UiDispatcher.cs" />
+    <Compile Include="Controls\WizardView\IWizardStep.cs" />
+    <Compile Include="Controls\WizardView\WizardController.cs" />
+    <Compile Include="Controls\WizardView\WizardStepBase.cs" />
+    <Compile Include="Controls\WizardView\WizardView.cs" />
     <Compile Include="Data\InvertBooleanConverter.cs" />
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
+    <Compile Include="DomainObjects\MonitorDefinition.cs" />
+    <Compile Include="DomainObjects\SettingsCategories.cs" />
+    <Compile Include="DomainObjects\SettingsKeys.cs" />
+    <Compile Include="DomainObjects\Viewport.cs" />
+    <Compile Include="DomainObjects\ModuleViewportTemplate.cs" />
+    <Compile Include="Drawing\ScreenCapture.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Modules\ModuleIds.cs" />
+    <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
+    <Compile Include="DomainObjects\ModuleIds.cs" />
     <Compile Include="Plugins\Game\GamePlugin.cs" />
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
@@ -167,8 +192,12 @@
       <DependentUpon>EditModuleViewportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Dialogs\EditModuleViewportWindowViewModel.cs" />
-    <Compile Include="Plugins\Settings\Models\ModuleViewportModel.cs" />
+    <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
+      <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModuleViewportModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
+    <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -204,12 +233,7 @@
     <Compile Include="Services\PluginRegisteredEventArgs.cs" />
     <Compile Include="Services\Settings\SettingsService.cs" />
     <Compile Include="Threading\EventAsync.cs" />
-    <Compile Include="Modules\A10CModule.cs" />
-    <Compile Include="Modules\Module.cs" />
-    <Compile Include="ExportFile.cs" />
-    <Compile Include="Modules\FA18CModule.cs" />
-    <Compile Include="Modules\KA50Module.cs" />
-    <Compile Include="Modules\M2000CModule.cs" />
+    <Compile Include="DomainObjects\Module.cs" />
     <Compile Include="Threading\HandlerTaskSourceBase.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="UserFriendlyExceptionHandler.cs" />
@@ -217,12 +241,49 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsViewModel.cs" />
+    <Compile Include="Wizards\FirstUseWizard.xaml.cs">
+      <DependentUpon>FirstUseWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\FirstUseWizardViewModel.cs" />
+    <Compile Include="Wizards\Steps\QueryViewportSetupWizardStepView.xaml.cs">
+      <DependentUpon>QueryViewportSetupWizardStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\QueryViewportSetupWizardStepViewModel.cs" />
+    <Compile Include="Models\ScreenModel.cs" />
+    <Compile Include="Wizards\Steps\SelectDeviceViewportScreensStepView.xaml.cs">
+      <DependentUpon>SelectDeviceViewportScreensStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\SelectDeviceViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\SelectGameViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\SelectGameViewportScreensStepView.xaml.cs">
+      <DependentUpon>SelectGameViewportScreensStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\SelectInitialViewportsWizardStepView.xaml.cs">
+      <DependentUpon>SelectInitialViewportsWizardStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\SelectInitialViewportsWizardStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\SelectUIViewportScreensStepView.xaml.cs">
+      <DependentUpon>SelectUIViewportScreensStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\SelectUIViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\InstallationsWizardStepView.xaml.cs">
+      <DependentUpon>InstallationsWizardStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\InstallationsWizardStepViewModel.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="ServiceModel\Syndication\SyndicationHelper.cs" />
     <Compile Include="Windows\SnipViewportWindow.xaml.cs">
       <DependentUpon>SnipViewportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Xml\XmlHelper.cs" />
+    <Page Include="Controls\DisplaySelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InstallationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MessageBoxEx\MessageBoxEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,7 +292,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TransitionControl\TransitionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WizardView\WizardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Plugins\Settings\Dialogs\EditModuleViewportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,7 +312,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\FirstUseWizard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,6 +357,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SnipViewportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\InstallationsWizardStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\QueryViewportSetupWizardStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\SelectDeviceViewportScreensStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\SelectGameViewportScreensStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\SelectInitialViewportsWizardStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\SelectUIViewportScreensStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,10 +459,22 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Plugins\Settings\Models\" />
     <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\dal-icon-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vanilla-screenshot.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\viewports-screenshot.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,4 +1,6 @@
-﻿using DCS.Alternative.Launcher.Modules;
+﻿using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Modules;
+using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services
 {
@@ -10,18 +12,20 @@ namespace DCS.Alternative.Launcher.Services
 
         void AddInstalls(params string[] directory);
 
-        ModuleViewport[] GetModuleViewports();
+        ModuleViewportTemplate[] GetViewportTemplates();
 
-        void RemoveModuleViewports(Module module);
+        void RemoveViewportTemplate(string moduleId);
 
-        void RemoveViewport(Module module, Viewport viewport);
+        void RemoveViewport(string moduleId, Viewport viewport);
 
-        void UpsertViewport(Module module, Viewport viewport);
+        void UpsertViewport(string name, string moduleId, Screen screen, Viewport viewport);
 
         InstallLocation[] GetInstallations();
 
         T GetValue<T>(string category, string key, T defaultValue = default(T));
 
         void SetValue(string category, string key, object value);
+
+        ModuleViewportTemplate[] GetDefaultViewportTemplates();
     }
 }

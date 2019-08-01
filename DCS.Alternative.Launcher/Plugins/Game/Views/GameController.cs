@@ -9,10 +9,12 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
     public class GameController
     {
         public readonly ISettingsService _settingsService;
+        public readonly IDcsWorldService _dcsWorldService;
 
         public GameController(IContainer container)
         {
             _settingsService = container.Resolve<ISettingsService>();
+            _dcsWorldService = container.Resolve<IDcsWorldService>();
         }
 
         public Task UpdateAsync()
@@ -54,9 +56,9 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         }
 
-        public Task LaunchDcsAsync(bool isVREnabled)
+        public async Task LaunchDcsAsync(bool isVREnabled)
         {
-            return Task.Run(() =>
+            await Task.Run(async () =>
             {
                 var install = _settingsService.SelectedInstall;
 
@@ -66,12 +68,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                var moduleViewports = _settingsService.GetModuleViewports();
-
-                foreach (var mv in moduleViewports)
-                {
-                    mv.PatchViewports(_settingsService.SelectedInstall);
-                }
+                await _dcsWorldService.PatchViewportsAsync();
 
                 var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.ExePath);
                 processInfo.Arguments = isVREnabled ? "--force_enable_VR" : "--force_disable_VR";

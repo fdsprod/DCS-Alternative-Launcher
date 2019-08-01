@@ -1,35 +1,11 @@
-﻿using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
-
-namespace DCS.Alternative.Launcher
+﻿namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public class Bounds
-    {
-        public int X
-        {
-            get;
-            set;
-        }
-        public int Y
-        {
-            get;
-            set;
-        }
-        public int Width
-        {
-            get;
-            set;
-        }
-        public int Height
-        {
-            get;
-            set;
-        }
-    }
-
     public class Viewport
     {
-        public Viewport()
+        public string ViewportName
         {
+            get;
+            set;
         }
 
         public string MonitorId
@@ -38,28 +14,46 @@ namespace DCS.Alternative.Launcher
             set;
         }
 
-        public Bounds Bounds
+        public string RelativeInitFilePath
         {
             get;
             set;
         }
 
-        public string Name
+        public int OriginalDisplayWidth
         {
             get;
             set;
         }
 
-        public string InitFileName
+        public int OriginalDisplayHeight
         {
             get;
             set;
         }
 
-        public LocationIndicator Location
+        public int X
         {
             get;
-            set; 
+            set;
+        }
+
+        public int Y
+        {
+            get;
+            set;
+        }
+
+        public int Width
+        {
+            get;
+            set;
+        }
+
+        public int Height
+        {
+            get;
+            set;
         }
     }
 }

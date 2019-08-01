@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using Reactive.Bindings;
 
-namespace DCS.Alternative.Launcher.Plugins.Settings.Models
+namespace DCS.Alternative.Launcher.Models
 {
     public class ModuleViewportModel
     {
-        public ModuleViewportModel(Module module, IEnumerable<Viewport> viewports)
+        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<Viewport> viewports)
         {
+            Name.Value = name;
+            ImageUrl.Value = imageUrl;
             Module.Value = module;
 
             if (viewports != null)
@@ -18,6 +21,24 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 }
             }
         }
+
+        public ReactiveProperty<bool> IsSelected
+        {
+            get;
+
+        } = new ReactiveProperty<bool>();
+
+        public ReactiveProperty<string> Name
+        {
+            get;
+
+        } = new ReactiveProperty<string>();
+
+        public ReactiveProperty<string> ImageUrl
+        {
+            get;
+
+        } = new ReactiveProperty<string>();
 
         public ReactiveProperty<Module> Module
         {

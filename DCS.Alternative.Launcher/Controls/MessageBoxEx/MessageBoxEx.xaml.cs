@@ -30,19 +30,8 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
             messageBox.txtCaption.Text = caption;
             messageBox.txtMessage.Text = message;
             messageBox.imgIcon.Source = icon;
-
-            //messageBox.btnAbort.Visibility =
-            //    buttons == MessageBoxButton.AbortRetryIgnore 
-            //        ? Visibility.Visible
-            //        : Visibility.Collapsed;
-            //messageBox.btnRetry.Visibility =
-            //    buttons == MessageBoxButton.AbortRetryIgnore
-            //        ? Visibility.Visible
-            //        : Visibility.Collapsed;
-            //messageBox.btnIgnore.Visibility =
-            //    buttons == MessageBoxButton.AbortRetryIgnore
-            //        ? Visibility.Visible
-            //        : Visibility.Collapsed;
+            messageBox.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            messageBox.Owner = Application.Current.MainWindow;
 
             messageBox.btnOK.Visibility =
                 buttons == MessageBoxButton.OK || buttons == MessageBoxButton.OKCancel

@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
@@ -29,8 +31,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
             if (_selectedInstall == null && installations.Length > 0)
             {
-                Tracer.Warn(
-                    $"Unable to set selected install to {directory}.  Installation no longer exists in settings. ");
+                Tracer.Warn($"Unable to set selected install to {directory}.  Installation no longer exists in settings. ");
             }
         }
 
@@ -47,54 +48,72 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
-        public ModuleViewport[] GetModuleViewports()
+        public ModuleViewportTemplate[] GetViewportTemplates()
         {
-            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]);
+            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
         }
 
-        public void RemoveViewport(Module module, Viewport viewport)
+        public void RemoveViewport(string moduleId, Viewport viewport)
         {
-            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]);
-            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
+            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
+            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
             
-            viewport = mv?.Viewports.FirstOrDefault(v => v.Name == viewport.Name);
+            viewport = mv?.Viewports.FirstOrDefault(v => v.ViewportName == viewport.ViewportName);
 
             mv?.Viewports.Remove(viewport);
 
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
 
-        public void UpsertViewport(Module module, Viewport viewport)
+        public void UpsertViewport(string name, string moduleId, Screen screen, Viewport viewport)
         {
-            var moduleViewports = new List<ModuleViewport>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
+            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
+            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
 
             if (mv == null)
             {
-                mv = new ModuleViewport
+                mv = new ModuleViewportTemplate
                 {
-                    Module = module
+                    TemplateName = name, 
+                    ModuleId = moduleId
                 };
 
                 moduleViewports.Add(mv);
             }
 
-            var vp = mv.Viewports.FirstOrDefault(v => v.Name == viewport.Name);
+            var monitor = mv.Monitors.FirstOrDefault(m => m.MonitorId == screen.DeviceName);
+
+            if (monitor == null)
+            {
+                monitor = new MonitorDefinition
+                {
+                    MonitorId = screen.DeviceName
+                };
+
+                mv.Monitors.Add(monitor);
+            }
+
+            monitor.DisplayWidth = (int) screen.Bounds.Width;
+            monitor.DisplayHeight = (int) screen.Bounds.Height;
+
+            var vp = mv.Viewports.FirstOrDefault(v => v.ViewportName == viewport.ViewportName);
+
+            viewport.MonitorId = screen.DeviceName;
 
             mv.Viewports.Remove(vp);
             mv.Viewports.Add(viewport);
 
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
 
-        public void RemoveModuleViewports(Module module)
+        public void RemoveViewportTemplate(string moduleId)
         {
-            var moduleViewports = new List<ModuleViewport>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, new ModuleViewport[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.Module.ModuleId == module.ModuleId);
+            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
+            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
 
             moduleViewports.Remove(mv);
 
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewports, moduleViewports.ToArray());
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
 
         public void RemoveInstalls(params string[] directories)
@@ -173,6 +192,16 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
+        public ModuleViewportTemplate[] GetDefaultViewportTemplates()
+        {
+            const string path = "Data/ViewportTemplates.json";
+
+            var contents = File.ReadAllText(path);
+            var templates = JsonConvert.DeserializeObject<ModuleViewportTemplate[]>(contents);
+
+            return templates;
+        }
+
         private void Save()
         {
             lock (_syncRoot)
@@ -199,20 +228,5 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 }
             }
         }
-    }
-
-    public static class SettingsCategories
-    {
-        public const string Installations = "installations";
-        public const string Viewports = "viewports";
-        public const string LaunchOptions = "launchOptions";
-    }
-
-    public static class SettingsKeys
-    {
-        public const string Installs = "installs";
-        public const string SelectedInstall = "selectedInstall";
-        public const string ModuleViewports = "moduleViewports";
-        public const string IsVREnabled = "isVREnabled";
     }
 }

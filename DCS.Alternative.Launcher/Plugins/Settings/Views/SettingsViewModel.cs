@@ -12,9 +12,10 @@ using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
-using DCS.Alternative.Launcher.Plugins.Settings.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Settings;
@@ -40,8 +41,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             RemoveInstallationCommand.Subscribe(OnRemoveInstallation);
             AddInstallationCommand.Subscribe(OnAddInstallation);
             RemoveModuleViewportCommand.Subscribe(OnRemoveModuleViewport);
-            AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
-            EditViewportCommand.Subscribe(OnEditViewport);
+            //AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
+            //EditViewportCommand.Subscribe(OnEditViewport);
             AddViewportCommand.Subscribe(OnAddViewport);
             RemoveViewportCommand.Subscribe(OnRemoveViewport);
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
@@ -85,8 +86,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         public ReactiveCommand AddInstallationCommand
         {
             get;
-        }
-            = new ReactiveCommand();
+        } = new ReactiveCommand();
 
         public ReactiveCommand RemoveModuleViewportCommand
         {
@@ -96,8 +96,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         public ReactiveCommand AddModuleViewportCommand
         {
             get;
-        }
-            = new ReactiveCommand();
+        } = new ReactiveCommand();
 
         public ReactiveCommand DetectInstallationsCommand
         {
@@ -129,13 +128,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 try
                 {
-                    var moduleViewports = _settingsService.GetModuleViewports();
+                    var viewportTemplates = _settingsService.GetViewportTemplates();
+                    var installedModules = await _dscWorldService.GetInstalledAircraftModulesAsync();
 
                     await dispatcher.InvokeAsync(() =>
                     {
-                        foreach (var mv in moduleViewports)
+                        foreach (var template in viewportTemplates)
                         {
-                            ModuleViewports.Add(new ModuleViewportModel(mv.Module, mv.Viewports.ToArray()));
+                            var module = installedModules.First(m => m.ModuleId == template.ModuleId);
+                            ModuleViewports.Add(new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Viewports.ToArray()));
                         }
                     });
                 }
@@ -249,108 +250,108 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             }
         }
 
-        private async void OnAddModuleViewport()
-        {
-            try
-            {
-                var modules = await _dscWorldService.GetInstalledAircraftModulesAsync();
-                var viewModel = new EditModuleViewportWindowViewModel(_settingsService.SelectedInstall, modules);
+        //private async void OnAddModuleViewport()
+        //{
+        //    try
+        //    {
+        //        var modules = await _dscWorldService.GetInstalledAircraftModulesAsync();
+        //        var viewModel = new EditModuleViewportWindowViewModel(_settingsService.SelectedInstall, modules);
 
-                var view = new EditModuleViewportWindow();
+        //        var view = new EditModuleViewportWindow();
 
-                view.DataContext = viewModel;
-                view.Owner = App.Current.MainWindow;
+        //        view.DataContext = viewModel;
+        //        view.Owner = App.Current.MainWindow;
 
-                if (view.ShowDialog() == true)
-                {
-                    var viewport = new Viewport
-                    {
-                        Bounds = new Bounds
-                        {
-                            X = viewModel.Bounds.Value.X.Value,
-                            Y = viewModel.Bounds.Value.Y.Value,
-                            Width = viewModel.Bounds.Value.Width.Value,
-                            Height = viewModel.Bounds.Value.Height.Value,
-                        },
-                        InitFileName = viewModel.InitFilePath.Value,
-                        Location = viewModel.IsNoLocationIndicator.Value
-                            ? LocationIndicator.None
-                            : viewModel.IsLeftLocationIndicator.Value
-                                ? LocationIndicator.Left
-                                : LocationIndicator.Right,
-                        MonitorId = viewModel.SelectedMonitor.Value.Name,
-                        Name = viewModel.ViewportName.Value
-                    };
+        //        if (view.ShowDialog() == true)
+        //        {
+        //            var viewport = new Viewport
+        //            {
+        //                Bounds = new Bounds
+        //                {
+        //                    X = viewModel.Bounds.Value.X.Value,
+        //                    Y = viewModel.Bounds.Value.Y.Value,
+        //                    Width = viewModel.Bounds.Value.Width.Value,
+        //                    Height = viewModel.Bounds.Value.Height.Value,
+        //                },
+        //                InitFileName = viewModel.InitFilePath.Value,
+        //                Location = viewModel.IsNoLocationIndicator.Value
+        //                    ? LocationIndicator.None
+        //                    : viewModel.IsLeftLocationIndicator.Value
+        //                        ? LocationIndicator.Left
+        //                        : LocationIndicator.Right,
+        //                MonitorId = viewModel.SelectedMonitor.Value.Name,
+        //                Name = viewModel.ViewportName.Value
+        //            };
 
-                    _settingsService.UpsertViewport(viewModel.SelectedModule.Value, viewport);
+        //            _settingsService.UpsertViewport(viewModel.SelectedModule.Value, viewport);
 
-                    ModuleViewports.Add(new ModuleViewportModel(viewModel.SelectedModule.Value, new[] {viewport}));
-                }
-            }
-            catch (Exception e)
-            {
-                GeneralExceptionHandler.Instance.OnError(e);
-            }
-        }
+        //            ModuleViewports.Add(new ModuleViewportModel(viewModel.SelectedModule.Value, new[] {viewport}));
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        GeneralExceptionHandler.Instance.OnError(e);
+        //    }
+        //}
 
-        private async void OnEditViewport(Viewport viewport)
-        {
-            try
-            {
-                var model = ModuleViewports.FirstOrDefault(m => m.Viewports.Contains(viewport));
-                await EditViewportAsync(viewport, model);
-            }
-            catch (Exception e)
-            {
-                GeneralExceptionHandler.Instance.OnError(e);
-            }
-        }
+        //private async void OnEditViewport(Viewport viewport)
+        //{
+        //    try
+        //    {
+        //        var model = ModuleViewports.FirstOrDefault(m => m.Viewports.Contains(viewport));
+        //        await EditViewportAsync(viewport, model);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        GeneralExceptionHandler.Instance.OnError(e);
+        //    }
+        //}
 
-        private async Task<bool> EditViewportAsync(Viewport viewport, ModuleViewportModel model)
-        {
-            var modules = await _dscWorldService.GetInstalledAircraftModulesAsync();
-            var viewModel = new EditModuleViewportWindowViewModel(
-                _settingsService.SelectedInstall,
-                modules,
-                model.Module.Value.ModuleId,
-                viewport.MonitorId,
-                viewport.InitFileName,
-                viewport.Name,
-                viewport.Location,
-                viewport.Bounds);
+        //private async Task<bool> EditViewportAsync(Viewport viewport, ModuleViewportModel model)
+        //{
+        //    var modules = await _dscWorldService.GetInstalledAircraftModulesAsync();
+        //    var viewModel = new EditModuleViewportWindowViewModel(
+        //        _settingsService.SelectedInstall,
+        //        modules,
+        //        model.Module.Value.ModuleId,
+        //        viewport.MonitorId,
+        //        viewport.InitFileName,
+        //        viewport.Name,
+        //        viewport.Location,
+        //        viewport.Bounds);
 
-            var view = new EditModuleViewportWindow();
+        //    var view = new EditModuleViewportWindow();
 
-            view.DataContext = viewModel;
-            view.Owner = App.Current.MainWindow;
+        //    view.DataContext = viewModel;
+        //    view.Owner = App.Current.MainWindow;
 
-            //TODO: Revert if cancelled
-            if (view.ShowDialog() == true)
-            {
-                viewport.Bounds = new Bounds
-                {
-                    X = viewModel.Bounds.Value.X.Value,
-                    Y = viewModel.Bounds.Value.Y.Value,
-                    Width = viewModel.Bounds.Value.Width.Value,
-                    Height = viewModel.Bounds.Value.Height.Value,
-                };
-                viewport.InitFileName = viewModel.InitFilePath.Value;
-                viewport.Location =
-                    viewModel.IsNoLocationIndicator.Value
-                        ? LocationIndicator.None
-                        : viewModel.IsLeftLocationIndicator.Value
-                            ? LocationIndicator.Left
-                            : LocationIndicator.Right;
-                viewport.MonitorId = viewModel.SelectedMonitor.Value.Name;
-                viewport.Name = viewModel.ViewportName.Value;
+        //    //TODO: Revert if cancelled
+        //    if (view.ShowDialog() == true)
+        //    {
+        //        viewport.Bounds = new Bounds
+        //        {
+        //            X = viewModel.Bounds.Value.X.Value,
+        //            Y = viewModel.Bounds.Value.Y.Value,
+        //            Width = viewModel.Bounds.Value.Width.Value,
+        //            Height = viewModel.Bounds.Value.Height.Value,
+        //        };
+        //        viewport.InitFileName = viewModel.InitFilePath.Value;
+        //        viewport.Location =
+        //            viewModel.IsNoLocationIndicator.Value
+        //                ? LocationIndicator.None
+        //                : viewModel.IsLeftLocationIndicator.Value
+        //                    ? LocationIndicator.Left
+        //                    : LocationIndicator.Right;
+        //        viewport.MonitorId = viewModel.SelectedMonitor.Value.Name;
+        //        viewport.Name = viewModel.ViewportName.Value;
 
-                _settingsService.UpsertViewport(viewModel.SelectedModule.Value, viewport);
+        //        _settingsService.UpsertViewport(viewModel.SelectedModule.Value, viewport);
 
-                return true;
-            }
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private void OnRemoveModuleViewport()
         {
@@ -364,7 +365,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 }
 
                 ModuleViewports.Remove(moduleViewport);
-                _settingsService.RemoveModuleViewports(moduleViewport.Module.Value);
+                _settingsService.RemoveViewportTemplate(moduleViewport.Module.Value.ModuleId);
             }
             catch (Exception e)
             {
@@ -378,10 +379,10 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             {
                 var viewport = new Viewport();
 
-                if (await EditViewportAsync(viewport, model))
-                {
-                    model.Viewports.Add(viewport);
-                }
+               // if (await EditViewportAsync(viewport, model))
+               // {
+               //     model.Viewports.Add(viewport);
+               // }
             }
             catch (Exception e)
             {
@@ -398,7 +399,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 if (mvm != null)
                 {
                     mvm.Viewports.Remove(viewport);
-                    _settingsService.RemoveViewport(mvm.Module.Value, viewport);
+                    _settingsService.RemoveViewport(mvm.Module.Value.ModuleId, viewport);
                 }
             }
             catch (Exception e)
@@ -407,7 +408,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             }
         }
 
-        private void OnGenerateMonitorConfig()
+        private async void OnGenerateMonitorConfig()
         {
             try
             {
@@ -464,31 +465,52 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 usedScreens.Add(Screen.PrimaryScreen);
 
-                var moduleViewports = _settingsService.GetModuleViewports();
+                var viewportTemplates = _settingsService.GetViewportTemplates();
                 var resolutionWidth = Screen.PrimaryScreen.Bounds.Width;
                 var resolutionHeight = Screen.PrimaryScreen.Bounds.Height;
 
-                foreach (var module in moduleViewports)
+                var installedModules = await _dscWorldService.GetInstalledAircraftModulesAsync();
+
+                foreach (var template in viewportTemplates)
                 {
-                    sb.AppendLine($"-- *************** {module.Module.DisplayName} ***************");
+                    var module = installedModules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
+
+                    if (module == null)
+                    {
+                        Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
+                        continue;
+                    }
+
+                    sb.AppendLine($"-- *************** {module.DisplayName} ***************");
                     sb.AppendLine();
                     sb.AppendLine();
 
-                    foreach (var viewport in module.Viewports)
+                    foreach (var viewport in template.Viewports)
                     {
                         var screen = screens.Single(s => s.DeviceName == viewport.MonitorId);
                         var displayIndex = screensIndexByName[screen.DeviceName];
+                        var originalWidth = (double)viewport.OriginalDisplayWidth;
+                        var originalHeight = (double)viewport.OriginalDisplayHeight;
+                        var ratioX = viewport.X / originalWidth;
+                        var ratioY = viewport.Y / originalHeight;
+                        var ratioW = viewport.Width / originalWidth;
+                        var ratioH = viewport.Height / originalHeight;
 
-                        resolutionWidth = Math.Max(resolutionWidth, screen.Bounds.X + viewport.Bounds.X + viewport.Bounds.Width);
-                        resolutionHeight = Math.Max(resolutionHeight, screen.Bounds.Y + viewport.Bounds.Y + viewport.Bounds.Height);
+                        var x = (int)Math.Round(screen.Bounds.Width * ratioX, 0, MidpointRounding.AwayFromZero);
+                        var y = (int)Math.Round(screen.Bounds.Height * ratioY, 0, MidpointRounding.AwayFromZero);
+                        var w = (int)Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
+                        var h = (int)Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
 
-                        sb.AppendLine($"--{viewport.InitFileName}");
-                        sb.AppendLine($"{module.Module.ViewportPrefix}_{viewport.Name} =");
+                        resolutionWidth = Math.Max(resolutionWidth, screen.Bounds.X + x + w);
+                        resolutionHeight = Math.Max(resolutionHeight, screen.Bounds.Y + y + h);
+
+                        sb.AppendLine($"--{viewport.RelativeInitFilePath}");
+                        sb.AppendLine($"{module.ViewportPrefix}_{viewport.ViewportName} =");
                         sb.AppendLine($"{{");
-                        sb.AppendLine($"    x = displays[{displayIndex}].x + {viewport.Bounds.X},");
-                        sb.AppendLine($"    y = displays[{displayIndex}].y + {viewport.Bounds.Y},");
-                        sb.AppendLine($"    width = {viewport.Bounds.Width},");
-                        sb.AppendLine($"    height = {viewport.Bounds.Height},");
+                        sb.AppendLine($"    x = displays[{displayIndex}].x + {x},");
+                        sb.AppendLine($"    y = displays[{displayIndex}].y + {y},");
+                        sb.AppendLine($"    width = {w},");
+                        sb.AppendLine($"    height = {h},");
                         sb.AppendLine($"}}");
                         sb.AppendLine();
 

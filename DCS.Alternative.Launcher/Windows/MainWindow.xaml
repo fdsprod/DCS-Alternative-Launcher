@@ -9,6 +9,7 @@
         Height="600"
         MaxWidth="1024"
         MaxHeight="600"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
     <WindowChrome.WindowChrome>

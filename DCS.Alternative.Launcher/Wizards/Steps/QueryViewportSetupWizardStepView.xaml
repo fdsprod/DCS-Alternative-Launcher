@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.QueryViewportSetupWizardStepView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:local="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="BorderThickness" Value="4" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Width" Value="400" />
+            <Setter Property="Height" Value="300" />
+            <Setter Property="Margin" Value="30,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid Background="Transparent">
+                            <Image Source="{Binding ImageSource}" Stretch="Fill" />
+                            <Border x:Name="PART_Border"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="4" ShadowDepth="0" />
+                                </Border.Effect>
+                                <Grid>
+                                    <ContentPresenter />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsChecked" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderBrush" Value="#FFbcff8b" />
+                                    <Setter Property="Foreground" Value="#FFbcff8b" />
+                                    <Setter Property="BorderThickness" Value="4" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsChecked" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderThickness" Value="4" />
+                                    <Setter Property="Foreground" Value="#7Fbcff8b" />
+                                    <Setter Property="BorderBrush" Value="#7Fbcff8b" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="False" />
+                                    <Condition Property="IsChecked" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Foreground" Value="#FFbcff8b" />
+                                    <Setter Property="BorderBrush" Value="#FFbcff8b" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="30,30,30,0"
+                   FontFamily="{StaticResource Prototype}"
+                   FontSize="16"
+                   Foreground="#FFFFFFFF"
+                   Text="Please select monitor you would like the UI to be displayed on."
+                   TextWrapping="Wrap" />
+        <fluentWpf:AcrylicPanel Grid.Row="1"
+                                Margin="30"
+                                NoiseOpacity="0"
+                                Target="{Binding ElementName=BackgroundElement}"
+                                TintColor="#33000000"
+                                TintOpacity="0.25">
+            <Grid>
+
+                <Border Grid.RowSpan="2"
+                        Background="#40000000"
+                        BorderBrush="#FF2F2F2F"
+                        BorderThickness="1"
+                        CornerRadius="0" />
+                <Grid Margin="30"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                    <StackPanel Margin="0,30,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <RadioButton GroupName="DisplaySetupGroup"
+                                     IsChecked="{Binding IsSingleDisplaySetup.Value, Mode=TwoWay}"
+                                     Style="{StaticResource RadioButtonStyle}">
+                            <Grid>
+                                <Image HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="/Images/vanilla-screenshot.jpg"
+                                       Stretch="UniformToFill" />
+                                <TextBlock Margin="0,10"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           FontFamily="{StaticResource Prototype}"
+                                           FontSize="18"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}"
+                                           Text="Game Only">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Grid>
+                        </RadioButton>
+                        <RadioButton GroupName="DisplaySetupGroup"
+                                     IsChecked="{Binding IsMultipleDisplaySetup.Value, Mode=TwoWay}"
+                                     Style="{StaticResource RadioButtonStyle}">
+                            <Grid>
+                                <Image HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="/Images/viewports-screenshot.jpg"
+                                       Stretch="UniformToFill" />
+                                <TextBlock Margin="0,10"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           FontFamily="{StaticResource Prototype}"
+                                           FontSize="18"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}"
+                                           Text="Game and Device Viewports"
+                                           TextAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Grid>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </fluentWpf:AcrylicPanel>
+    </Grid>
+</UserControl>

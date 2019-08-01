@@ -8,6 +8,7 @@ using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;

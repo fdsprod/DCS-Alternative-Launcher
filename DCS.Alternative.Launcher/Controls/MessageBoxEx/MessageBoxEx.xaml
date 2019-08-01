@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Width="600"
         Height="200"
-        MaxWidth="600"
+        MinWidth="500"
+        MaxWidth="800"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
     <WindowChrome.WindowChrome>
