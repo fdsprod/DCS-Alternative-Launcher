@@ -53,6 +53,11 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
         }
 
+        public ModuleViewportTemplate GetViewportTemplateByModule(string moduleId)
+        {
+            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]).FirstOrDefault(mv => mv.ModuleId == moduleId);
+        }
+
         public void RemoveViewport(string moduleId, Viewport viewport)
         {
             var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
@@ -143,8 +148,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public InstallLocation[] GetInstallations()
         {
-            var directories = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations,
-                SettingsKeys.Installs, new string[0]));
+            var directories = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
             var results = new List<InstallLocation>();
 
             foreach (var directory in directories)
@@ -192,9 +196,31 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
+        public ViewportDevice[] GetViewportDevices(string moduleId)
+        {
+            const string path = "Resources/ViewportDevices.json";
+
+            var contents = File.ReadAllText(path);
+            var devices = JsonConvert.DeserializeObject<Dictionary<string, List<ViewportDevice>>>(contents);
+            var customDevices = GetValue<Dictionary<string, List<ViewportDevice>>>(SettingsCategories.Viewports, SettingsKeys.ViewportDevices);
+            var results = new List<ViewportDevice>();
+
+            if (devices.ContainsKey(moduleId))
+            {
+                results.AddRange(devices[moduleId]);
+            }
+
+            if (customDevices != null && customDevices.ContainsKey(moduleId))
+            {
+                results.AddRange(customDevices[moduleId]);
+            }
+
+            return results.ToArray();
+        }
+
         public ModuleViewportTemplate[] GetDefaultViewportTemplates()
         {
-            const string path = "Data/ViewportTemplates.json";
+            const string path = "Resources/ViewportTemplates.json";
 
             var contents = File.ReadAllText(path);
             var templates = JsonConvert.DeserializeObject<ModuleViewportTemplate[]>(contents);

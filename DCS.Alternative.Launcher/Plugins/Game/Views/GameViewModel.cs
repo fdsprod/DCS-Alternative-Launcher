@@ -125,11 +125,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             get;
         } = new ReactiveCommand();
 
-        public ReactiveProperty<string> LatestEagleDynamicsYouTubeUrl
+        public ReactiveProperty<string> LatestYouTubeUrl
         {
             get;
         } = new ReactiveProperty<string>();
-
+        
         public ReactiveProperty<NewsArticleModel> LatestNewsArticle
         {
             get;
@@ -218,35 +218,37 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         protected override async Task InitializeAsync()
         {
+            IsVREnabled.Value = _settingsService.GetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, false);
+
 #pragma warning disable 4014
             Task.Run(async () =>
 #pragma warning restore 4014
             {
-                try
-                {
                     IsLoading.Value = true;
 
-                    var articles = await _dcsWorldService.GetLatestNewsArticlesAsync(2);
-                    var latestVideoUrl = await _dcsWorldService.GetLatestYoutubeVideoUrlAsync();
+                    await Task.WhenAll(
+                        SafeAsync.RunAsync(FetchNewsAsync),
+                        SafeAsync.RunAsync(FetchLatestYouTubeAsync));
 
-                    LatestEagleDynamicsYouTubeUrl.Value = latestVideoUrl;
-                    LatestNewsArticle.Value = articles.FirstOrDefault();
-                    PreviousNewsArticle.Value = articles.Skip(1).FirstOrDefault();
-                    IsVREnabled.Value = _settingsService.GetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, false);
-                }
-                catch (Exception e)
-                {
-                    GeneralExceptionHandler.Instance.OnError(e);
-                }
-                finally
-                {
                     IsLoading.Value = false;
-                }
 
                 await CheckForUpdatesAsync();
             });
 
             await base.InitializeAsync();
+        }
+
+        private async Task FetchLatestYouTubeAsync()
+        {
+            LatestYouTubeUrl.Value = await _dcsWorldService.GetLatestYoutubeVideoUrlAsync();
+        }
+
+        private async Task FetchNewsAsync()
+        {
+            var articles = await _dcsWorldService.GetLatestNewsArticlesAsync(2);
+
+            LatestNewsArticle.Value = articles.FirstOrDefault();
+            PreviousNewsArticle.Value = articles.Skip(1).FirstOrDefault();
         }
 
         public override Task OnNavigatingAsync(NavigatingEventArgs args)

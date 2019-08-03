@@ -21,16 +21,19 @@ using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Settings;
 using KeraLua;
 using Reactive.Bindings;
+using Screen = WpfScreenHelper.Screen;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
     public class SettingsViewModel : NavigationAwareBase
     {
+        private readonly IContainer _container;
         private readonly IDcsWorldService _dscWorldService;
         private readonly ISettingsService _settingsService;
 
         public SettingsViewModel(IContainer container)
         {
+            _container = container;
             _settingsService = container.Resolve<ISettingsService>();
             _dscWorldService = container.Resolve<IDcsWorldService>();
 
@@ -41,11 +44,61 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             RemoveInstallationCommand.Subscribe(OnRemoveInstallation);
             AddInstallationCommand.Subscribe(OnAddInstallation);
             RemoveModuleViewportCommand.Subscribe(OnRemoveModuleViewport);
-            //AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
-            //EditViewportCommand.Subscribe(OnEditViewport);
+            AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
+            EditViewportsCommand.Subscribe(OnEditViewports);
+            DeleteViewportsCommand.Subscribe(OnDeleteViewports);
             AddViewportCommand.Subscribe(OnAddViewport);
             RemoveViewportCommand.Subscribe(OnRemoveViewport);
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
+        }
+
+        private void OnAddModuleViewport()
+        {
+            
+        }
+
+        private void OnEditViewports(ModuleViewportModel value)
+        {
+            foreach (var monitorId in value.MonitorIds)
+            {
+                var screen = Screen.AllScreens.FirstOrDefault(s => s.DeviceName == monitorId);
+
+                if (screen == null)
+                {
+                    Tracer.Warn($"Unable to find display id {monitorId} for viewport setup {value.Name}");
+                    continue;
+                }
+
+                var viewportModels = new List<ViewportModel>();
+
+                foreach (var viewport in value.Viewports.Where(v => v.MonitorId == screen.DeviceName))
+                {
+                    var model = new ViewportModel();
+
+                    model.Height.Value = viewport.Height;
+                    model.InitFile.Value = viewport.RelativeInitFilePath;
+                    model.ImageUrl.Value = Path.Combine(Directory.GetCurrentDirectory(), $"Resources/Images/Viewports/{value.Module.Value.ModuleId}/{viewport.ViewportName}.jpg");
+                    model.Name.Value = viewport.ViewportName;
+                    model.Width.Value = viewport.Width;
+                    model.X.Value = viewport.X;
+                    model.Y.Value = viewport.Y;
+
+                    viewportModels.Add(model);
+                }
+
+                var window = new ViewportEditorWindow();
+                var vm = new ViewportEditorWindowViewModel(_container, false, monitorId, value.Module.Value, viewportModels.ToArray());
+
+                window.Screen = screen;
+                window.DataContext = vm;
+                window.Show();
+                window.BringIntoView();
+            }
+        }
+
+        private void OnDeleteViewports(ModuleViewportModel value)
+        {
+
         }
 
         public ReactiveProperty<bool> IsLoading
@@ -103,10 +156,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             get;
         } = new ReactiveCommand();
 
-        public ReactiveCommand<Viewport> EditViewportCommand
+        public ReactiveCommand<ModuleViewportModel> EditViewportsCommand
         {
             get;
-        } = new ReactiveCommand<Viewport>();
+        } = new ReactiveCommand<ModuleViewportModel>();
+
+        public ReactiveCommand<ModuleViewportModel> DeleteViewportsCommand
+        {
+            get;
+        } = new ReactiveCommand<ModuleViewportModel>();
 
         public ReactiveCollection<InstallLocation> Installations
         {
@@ -136,7 +194,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                         foreach (var template in viewportTemplates)
                         {
                             var module = installedModules.First(m => m.ModuleId == template.ModuleId);
-                            ModuleViewports.Add(new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Viewports.ToArray()));
+                            ModuleViewports.Add(new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Monitors, template.Viewports.ToArray()));
                         }
                     });
                 }

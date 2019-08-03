@@ -44,15 +44,27 @@
                     Background="#FFFCB941"
                     CornerRadius="4">
                 <StackPanel>
-                    <TextBlock Text="{Binding Day.Value}" />
-                    <TextBlock Text="{Binding Year.Value}" />
+                    <TextBlock FontSize="20" Text="{Binding Day.Value}">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock FontSize="20" Text="{Binding Year.Value}">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1" />
+                        </TextBlock.Effect>
+                    </TextBlock>
                 </StackPanel>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" />
+                </Border.Effect>
             </Border>
             <Border Grid.Row="1" Padding="10,0">
                 <TextBlock Margin="0,0,0,10"
                            FontSize="14"
                            FontWeight="Bold"
-                           Text="{Binding Title.Value}">
+                           Text="{Binding Title.Value}"
+                           TextWrapping="Wrap">
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
                     </TextBlock.Effect>

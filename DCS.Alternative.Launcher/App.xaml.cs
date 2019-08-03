@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -27,6 +29,7 @@ using DCS.Alternative.Launcher.Services.Navigation;
 using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
 using DCS.Alternative.Launcher.Windows.FirstUse;
+using Newtonsoft.Json;
 using NLua;
 using Application = System.Windows.Application;
 
@@ -64,6 +67,14 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 
 #endif
+
+            var s = new Dictionary<string, List<string>>();
+
+            var l = new List<string>() {"Test", "One", "Two"};
+            s.Add("OK", l);
+
+            var a = JsonConvert.SerializeObject(s);
+            
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
             settings.WindowlessRenderingEnabled = true;
@@ -76,39 +87,6 @@ namespace DCS.Alternative.Launcher
             CheckFirstUse();
 
             MainWindow = _mainWindow;
-
-            //ViewportEditorWindow window = new ViewportEditorWindow();
-
-            //window.Screen = WpfScreenHelper.Screen.AllScreens.First(screen => screen.Bounds.Height == 1440);
-            //var vm = new ViewportEditorWindowViewModel();
-
-
-            //using (var screenBmp = new Bitmap(
-            //    (int)window.Screen.Bounds.Width,
-            //    (int)window.Screen.Bounds.Height,
-            //    System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-            //{
-            //    using (var bmpGraphics = Graphics.FromImage(screenBmp))
-            //    {
-            //        bmpGraphics.CopyFromScreen(
-            //            (int)window.Screen.Bounds.X,
-            //            (int)window.Screen.Bounds.Y,
-            //            0,
-            //            0,
-            //            new System.Drawing.Size((int)window.Screen.Bounds.Width, (int)window.Screen.Bounds.Height));
-            //        var image = Imaging.CreateBitmapSourceFromHBitmap(
-            //            screenBmp.GetHbitmap(),
-            //            IntPtr.Zero,
-            //            Int32Rect.Empty,
-            //            BitmapSizeOptions.FromEmptyOptions());
-
-            //        vm.BackgroundImageSource.Value = image;
-            //    }
-            //}
-
-
-           // window.DataContext = vm;
-           // window.Show();
 
             _mainWindow.DataContext = new MainWindowViewModel(_container);
             _mainWindow.Loaded += _mainWindow_Loaded;

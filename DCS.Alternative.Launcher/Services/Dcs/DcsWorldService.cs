@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -213,27 +214,54 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
+
         public Task<string> GetLatestYoutubeVideoUrlAsync()
+        {
+            return GetLatestYouTubeVideoAsync(
+                "https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA",
+                "https://www.youtube.com/feeds/videos.xml?channel_id=UCHa9LMylydkT0T3qSzAVrlw");
+        }
+
+        public Task<string> GetLatestWagsYoutubeVideoUrlAsync()
+        {
+            return GetLatestYouTubeVideoAsync();
+        }
+
+        private Task<string> GetLatestYouTubeVideoAsync(params string[] youtubeFeedUrls)
         {
             return Task.Run(async () =>
             {
-                Tracer.Info($"Retrieving latest youtube videos from https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA/");
+                var syndicationItems = new List<SyndicationItem>();
+                var tasks = new List<Task<SyndicationFeed>>();
 
-                var feed = await SyndicationHelper.GetFeedAsync(
-                    "https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA");
-                var latestFeed = feed.Items.OrderByDescending(i => i.PublishDate).FirstOrDefault();
-
-                if (latestFeed != null)
+                foreach (var url in youtubeFeedUrls)
                 {
-                    var link = latestFeed.Links[0].Uri.ToString();
-                    var result = link.Replace("watch?v=", "embed/") + "?rel=0&disablekb=1&fs=0&modestbranding=1";
-
-                    Tracer.Info($"Found video {link}");
-
-                    return result;
+                    Tracer.Info($"Retrieving latest youtube videos from {url}");
+                    tasks.Add(SyndicationHelper.GetFeedAsync(url));
                 }
 
-                return string.Empty;
+                await Task.WhenAll(tasks);
+
+                foreach (var feed in tasks.Select(t => t.Result))
+                {
+                    syndicationItems.AddRange(feed.Items);
+                }
+
+                var ordered = syndicationItems.OrderByDescending(i => i.PublishDate);
+                var latestFeed = ordered.FirstOrDefault();
+
+                if (latestFeed == null)
+                {
+                    return string.Empty;
+                }
+
+                var link = latestFeed.Links[0].Uri.ToString();
+                var result = link.Replace("watch?v=", "embed/") + "?rel=0&disablekb=1&fs=0&modestbranding=1";
+
+                Tracer.Info($"Found video {link}");
+
+                return result;
+
             });
         }
 

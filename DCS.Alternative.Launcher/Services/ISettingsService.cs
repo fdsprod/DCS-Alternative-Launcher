@@ -1,4 +1,5 @@
-﻿using DCS.Alternative.Launcher.DomainObjects;
+﻿using System.Collections.Generic;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using WpfScreenHelper;
 
@@ -14,6 +15,8 @@ namespace DCS.Alternative.Launcher.Services
 
         ModuleViewportTemplate[] GetViewportTemplates();
 
+        ModuleViewportTemplate GetViewportTemplateByModule(string moduleId);
+
         void RemoveViewportTemplate(string moduleId);
 
         void RemoveViewport(string moduleId, Viewport viewport);
@@ -27,5 +30,7 @@ namespace DCS.Alternative.Launcher.Services
         void SetValue(string category, string key, object value);
 
         ModuleViewportTemplate[] GetDefaultViewportTemplates();
+
+        ViewportDevice[] GetViewportDevices(string moduleId);
     }
 }

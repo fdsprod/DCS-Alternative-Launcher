@@ -162,7 +162,7 @@
     <Compile Include="Controls\NewsArticleControl.xaml.cs">
       <DependentUpon>NewsArticleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ResizableItem.cs" />
+    <Compile Include="Controls\DesignerItem.cs" />
     <Compile Include="Controls\ResizeThumb.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\EmptyStoryboard.cs" />
@@ -180,6 +180,7 @@
     <Compile Include="DomainObjects\SettingsKeys.cs" />
     <Compile Include="DomainObjects\Viewport.cs" />
     <Compile Include="DomainObjects\ModuleViewportTemplate.cs" />
+    <Compile Include="DomainObjects\ViewportDevice.cs" />
     <Compile Include="Drawing\ScreenCapture.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
@@ -202,6 +203,7 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Views\SettingsViewModel.cs" />
+    <Compile Include="SafeAsync.cs" />
     <Compile Include="ServiceModel\Container.cs" />
     <Compile Include="ServiceModel\IContainer.cs" />
     <Compile Include="ServiceModel\IoCAutoRegistrationException.cs" />
@@ -241,6 +243,7 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsViewModel.cs" />
+    <Compile Include="WindowAssist.cs" />
     <Compile Include="Wizards\FirstUseWizard.xaml.cs">
       <DependentUpon>FirstUseWizard.xaml</DependentUpon>
     </Compile>
@@ -415,6 +418,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="Resources\Fonts\Prototype.ttf" />
     <Resource Include="Resources\Fonts\orbitron-black.otf" />
     <Resource Include="Resources\Fonts\orbitron-bold.otf" />
@@ -459,6 +465,7 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Plugins\Settings\Controls\" />
     <Folder Include="Plugins\Settings\Models\" />
     <Folder Include="Web\" />
   </ItemGroup>
@@ -472,7 +479,58 @@
     <Resource Include="Images\viewports-screenshot.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\ViewportTemplates.json">
+    <None Include="Resources\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Viewports\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Viewports\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\Viewports\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Viewports\FA-18C\RWR.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

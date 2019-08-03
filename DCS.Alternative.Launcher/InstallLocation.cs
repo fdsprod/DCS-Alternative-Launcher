@@ -90,7 +90,15 @@ namespace DCS.Alternative.Launcher
         {
             get
             {
-                return _config?.Branch ?? "stable"; 
+                return _config?.Branch ?? "stable";
+            }
+        }
+
+        public string DirectoryName
+        {
+            get
+            {
+                return new DirectoryInfo(Directory).Name;
             }
         }
 

@@ -23,7 +23,7 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
             Loaded -= OnLoaded;
         }
 
-        public static MessageBoxResult Show(string message, string caption = "", MessageBoxButton buttons = MessageBoxButton.OK, ImageSource icon = null)
+        public static MessageBoxResult Show(string message, string caption = "", MessageBoxButton buttons = MessageBoxButton.OK, ImageSource icon = null, Window parent = null)
         {
             var messageBox = new MessageBoxEx();
 
@@ -31,7 +31,7 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
             messageBox.txtMessage.Text = message;
             messageBox.imgIcon.Source = icon;
             messageBox.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            messageBox.Owner = Application.Current.MainWindow;
+            messageBox.Owner = parent ?? Application.Current.MainWindow;
 
             messageBox.btnOK.Visibility =
                 buttons == MessageBoxButton.OK || buttons == MessageBoxButton.OKCancel

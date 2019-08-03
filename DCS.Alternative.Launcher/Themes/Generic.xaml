@@ -12,98 +12,158 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MoveThumb}">
-                    <Border Background="#01FFFFFF" Cursor="SizeAll" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ResizeThumbStyle" TargetType="{x:Type controls:ResizeThumb}">
-        <Setter Property="Background" Value="Red" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ResizeThumb}">
-                    <Border Background="{TemplateBinding Background}">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="4" ShadowDepth="2" />
-                        </Border.Effect>
+                    <Border Background="#FFFFFFFF" Cursor="SizeAll">
+                        <Path Data="M 40 3.585938 L 29.292969 14.292969 L 30.707031 15.707031 L 39 7.414062 L 39 22 L 41 22 L 41 7.414062 L 49.292969 15.707031 L 50.707031 14.292969 Z M 40 24 C 39.449219 24 39 24.449219 39 25 C 39 25.550781 39.449219 26 40 26 C 40.550781 26 41 25.550781 41 25 C 41 24.449219 40.550781 24 40 24 Z M 40 28 C 39.449219 28 39 28.449219 39 29 C 39 29.550781 39.449219 30 40 30 C 40.550781 30 41 29.550781 41 29 C 41 28.449219 40.550781 28 40 28 Z M 14.292969 29.292969 L 3.585938 40 L 14.292969 50.707031 L 15.707031 49.292969 L 7.414062 41 L 22 41 L 22 39 L 7.414062 39 L 15.707031 30.707031 Z M 65.707031 29.292969 L 64.292969 30.707031 L 72.585938 39 L 58 39 L 58 41 L 72.585938 41 L 64.292969 49.292969 L 65.707031 50.707031 L 76.414062 40 Z M 40 32 C 39.449219 32 39 32.449219 39 33 C 39 33.550781 39.449219 34 40 34 C 40.550781 34 41 33.550781 41 33 C 41 32.449219 40.550781 32 40 32 Z M 25 39 C 24.449219 39 24 39.449219 24 40 C 24 40.550781 24.449219 41 25 41 C 25.550781 41 26 40.550781 26 40 C 26 39.449219 25.550781 39 25 39 Z M 29 39 C 28.449219 39 28 39.449219 28 40 C 28 40.550781 28.449219 41 29 41 C 29.550781 41 30 40.550781 30 40 C 30 39.449219 29.550781 39 29 39 Z M 33 39 C 32.449219 39 32 39.449219 32 40 C 32 40.550781 32.449219 41 33 41 C 33.550781 41 34 40.550781 34 40 C 34 39.449219 33.550781 39 33 39 Z M 47 39 C 46.449219 39 46 39.449219 46 40 C 46 40.550781 46.449219 41 47 41 C 47.550781 41 48 40.550781 48 40 C 48 39.449219 47.550781 39 47 39 Z M 51 39 C 50.449219 39 50 39.449219 50 40 C 50 40.550781 50.449219 41 51 41 C 51.550781 41 52 40.550781 52 40 C 52 39.449219 51.550781 39 51 39 Z M 55 39 C 54.449219 39 54 39.449219 54 40 C 54 40.550781 54.449219 41 55 41 C 55.550781 41 56 40.550781 56 40 C 56 39.449219 55.550781 39 55 39 Z M 40 46 C 39.449219 46 39 46.449219 39 47 C 39 47.550781 39.449219 48 40 48 C 40.550781 48 41 47.550781 41 47 C 41 46.449219 40.550781 46 40 46 Z M 40 50 C 39.449219 50 39 50.449219 39 51 C 39 51.550781 39.449219 52 40 52 C 40.550781 52 41 51.550781 41 51 C 41 50.449219 40.550781 50 40 50 Z M 40 54 C 39.449219 54 39 54.449219 39 55 C 39 55.550781 39.449219 56 40 56 C 40.550781 56 41 55.550781 41 55 C 41 54.449219 40.550781 54 40 54 Z M 39 58 L 39 72.585938 L 30.707031 64.292969 L 29.292969 65.707031 L 40 76.414062 L 50.707031 65.707031 L 49.292969 64.292969 L 41 72.585938 L 41 58 Z M 39 58 "
+                              Fill="#FF000000"
+                              Stretch="Uniform"
+                              Stroke="#FF000000" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:ResizableItem}">
+    <Style x:Key="ResizeThumbStyle" TargetType="{x:Type controls:ResizeThumb}">
+        <Setter Property="Background" Value="#FFFFFFFF" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ResizeThumb}">
+                    <Border Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:DesignerItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ResizableItem}">
+                <ControlTemplate TargetType="{x:Type controls:DesignerItem}">
                     <Grid>
-                        <controls:MoveThumb DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource MoveThumbStyle}" />
-                        <controls:ResizeThumb Height="3"
-                                              Margin="0,-4,0,0"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top"
-                                              Cursor="SizeNS"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="3"
-                                              Margin="-4,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Stretch"
-                                              Cursor="SizeWE"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="3"
-                                              Margin="0,0,-4,0"
-                                              HorizontalAlignment="Right"
-                                              VerticalAlignment="Stretch"
-                                              Cursor="SizeWE"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Height="3"
-                                              Margin="0,0,0,-4"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Bottom"
-                                              Cursor="SizeNS"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="7"
-                                              Height="7"
-                                              Margin="-6,-6,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Top"
-                                              Cursor="SizeNWSE"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="7"
-                                              Height="7"
-                                              Margin="0,-6,-6,0"
-                                              HorizontalAlignment="Right"
-                                              VerticalAlignment="Top"
-                                              Cursor="SizeNESW"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="7"
-                                              Height="7"
-                                              Margin="-6,0,0,-6"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Bottom"
-                                              Cursor="SizeNESW"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <controls:ResizeThumb Width="7"
-                                              Height="7"
-                                              Margin="0,0,-6,-6"
-                                              HorizontalAlignment="Right"
-                                              VerticalAlignment="Bottom"
-                                              Cursor="SizeNWSE"
-                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                              Style="{StaticResource ResizeThumbStyle}" />
-                        <Border>
+                        <Border Background="#01FFFFFF">
                             <ContentPresenter />
                         </Border>
+                        <Grid x:Name="AdornerishLayer" Opacity="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Path Grid.Row="0"
+                                      Grid.Column="0"
+                                      Stretch="Fill"
+                                      Stroke="#CFFFFFFF"
+                                      StrokeThickness="1">
+                                    <Path.Data>
+                                        <LineGeometry StartPoint="0,0" EndPoint="1,1" />
+                                    </Path.Data>
+                                </Path>
+                                <Path Grid.Row="0"
+                                      Grid.Column="2"
+                                      Stretch="Fill"
+                                      Stroke="#CFFFFFFF"
+                                      StrokeThickness="1">
+                                    <Path.Data>
+                                        <LineGeometry StartPoint="1,0" EndPoint="0,1" />
+                                    </Path.Data>
+                                </Path>
+                                <Path Grid.Row="2"
+                                      Grid.Column="0"
+                                      Stretch="Fill"
+                                      Stroke="#CFFFFFFF"
+                                      StrokeThickness="1">
+                                    <Path.Data>
+                                        <LineGeometry StartPoint="0 1" EndPoint="1 0" />
+                                    </Path.Data>
+                                </Path>
+                                <Path Grid.Row="2"
+                                      Grid.Column="2"
+                                      Stretch="Fill"
+                                      Stroke="#CFFFFFFF"
+                                      StrokeThickness="1">
+                                    <Path.Data>
+                                        <LineGeometry StartPoint="0 0" EndPoint="1 1" />
+                                    </Path.Data>
+                                </Path>
+                                <controls:MoveThumb Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Width="20"
+                                                    Height="20"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                    Style="{StaticResource MoveThumbStyle}" />
+                            </Grid>
+                            <controls:ResizeThumb Height="2"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Top"
+                                                  Cursor="SizeNS"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="2"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Stretch"
+                                                  Cursor="SizeWE"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="2"
+                                                  HorizontalAlignment="Right"
+                                                  VerticalAlignment="Stretch"
+                                                  Cursor="SizeWE"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Height="2"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Bottom"
+                                                  Cursor="SizeNS"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="7"
+                                                  Height="7"
+                                                  Margin="-2,-2,0,0"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Top"
+                                                  Cursor="SizeNWSE"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="7"
+                                                  Height="7"
+                                                  Margin="0,-2,-2,0"
+                                                  HorizontalAlignment="Right"
+                                                  VerticalAlignment="Top"
+                                                  Cursor="SizeNESW"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="7"
+                                                  Height="7"
+                                                  Margin="-2,0,0,-2"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Bottom"
+                                                  Cursor="SizeNESW"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                            <controls:ResizeThumb Width="7"
+                                                  Height="7"
+                                                  Margin="0,0,-2,-2"
+                                                  HorizontalAlignment="Right"
+                                                  VerticalAlignment="Bottom"
+                                                  Cursor="SizeNWSE"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ResizeThumbStyle}" />
+                        </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="AdornerishLayer" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -114,7 +174,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <Canvas />
+                    <Canvas IsItemsHost="True" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>

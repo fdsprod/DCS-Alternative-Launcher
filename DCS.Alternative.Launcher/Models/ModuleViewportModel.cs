@@ -7,11 +7,16 @@ namespace DCS.Alternative.Launcher.Models
 {
     public class ModuleViewportModel
     {
-        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<Viewport> viewports)
+        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<MonitorDefinition> monitors, IEnumerable<Viewport> viewports)
         {
             Name.Value = name;
             ImageUrl.Value = imageUrl;
             Module.Value = module;
+
+            foreach (var monitor in monitors)
+            {
+                MonitorIds.Add(monitor.MonitorId);
+            }
 
             if (viewports != null)
             {
@@ -46,9 +51,15 @@ namespace DCS.Alternative.Launcher.Models
 
         } = new ReactiveProperty<Module>();
 
+        public ReactiveCollection<string> MonitorIds
+        {
+            get;
+
+        } = new ReactiveCollection<string>();
+
         public ReactiveCollection<Viewport> Viewports
         {
-            get; 
+            get;
 
         } = new ReactiveCollection<Viewport>();
     }
