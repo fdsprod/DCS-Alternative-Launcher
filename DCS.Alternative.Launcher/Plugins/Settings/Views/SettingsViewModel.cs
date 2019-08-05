@@ -30,10 +30,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         private readonly IContainer _container;
         private readonly IDcsWorldService _dscWorldService;
         private readonly ISettingsService _settingsService;
+        private readonly SettingsController _controller;
 
         public SettingsViewModel(IContainer container)
         {
             _container = container;
+            _controller = container.Resolve<SettingsController>();
+
             _settingsService = container.Resolve<ISettingsService>();
             _dscWorldService = container.Resolve<IDcsWorldService>();
 
@@ -52,48 +55,97 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
         }
 
-        private void OnAddModuleViewport()
+        private async void OnAddModuleViewport()
         {
-            
+            var deviceViewportMonitorIds = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new string[0]);
+
+            if (deviceViewportMonitorIds.Length == 0)
+            {
+                if (MessageBoxEx.Show($"You have not defined a screen for device viewports.  Do you want to do that now?", "Device Viewport Screen") == MessageBoxResult.Yes)
+                {
+                    //TODO Wizard...
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            var selectModuleDialog = new SelectModuleDialog();
+            var viewportTemplates = _settingsService.GetViewportTemplates();
+
+            foreach (var i in await _dscWorldService.GetInstalledAircraftModulesAsync())
+            {
+                if (viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
+                {
+                    continue;
+                }
+
+                selectModuleDialog.Modules.Add(i);
+            }
+
+            selectModuleDialog.SelectedModule = selectModuleDialog.Modules.First();
+
+            if (!selectModuleDialog.ShowDialog() ?? false)
+            {
+                return;
+            }
+
+            var module = selectModuleDialog.SelectedModule;
+            var templates = _settingsService.GetDefaultViewportTemplates();
+            var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
+            var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
+
+            if (templates == null || templates.Length == 0)
+            {
+                MessageBoxEx.Show($"There are no default templates for the {module.DisplayName}.  An empty template will be created.", "No Template Defined");
+
+                var model = 
+                    new ModuleViewportModel(
+                        module.DisplayName, 
+                        null,
+                        module,
+                        monitorDefinitions,
+                        new Viewport[0]);
+
+                _controller.EditViewports(model);
+            }
+            else if(templates.Length > 1)
+            {
+                //TODO: Show wizard for selection
+            }
+            else
+            {
+                if (MessageBoxEx.Show($"Would you like to start with the default template {templates[0].TemplateName}?", "Default Template", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var model =
+                        new ModuleViewportModel(
+                            templates[0].TemplateName,
+                            templates[0].ExampleImageUrl,
+                            module,
+                            monitorDefinitions,
+                            templates[0].Viewports);
+
+                    _controller.EditViewports(model);
+                }
+                else
+                {
+                    var model =
+                        new ModuleViewportModel(
+                            module.DisplayName,
+                            null,
+                            module,
+                            monitorDefinitions,
+                            new Viewport[0]);
+
+                    _controller.EditViewports(model);
+                }
+            }
         }
 
         private void OnEditViewports(ModuleViewportModel value)
         {
-            foreach (var monitorId in value.MonitorIds)
-            {
-                var screen = Screen.AllScreens.FirstOrDefault(s => s.DeviceName == monitorId);
-
-                if (screen == null)
-                {
-                    Tracer.Warn($"Unable to find display id {monitorId} for viewport setup {value.Name}");
-                    continue;
-                }
-
-                var viewportModels = new List<ViewportModel>();
-
-                foreach (var viewport in value.Viewports.Where(v => v.MonitorId == screen.DeviceName))
-                {
-                    var model = new ViewportModel();
-
-                    model.Height.Value = viewport.Height;
-                    model.InitFile.Value = viewport.RelativeInitFilePath;
-                    model.ImageUrl.Value = Path.Combine(Directory.GetCurrentDirectory(), $"Resources/Images/Viewports/{value.Module.Value.ModuleId}/{viewport.ViewportName}.jpg");
-                    model.Name.Value = viewport.ViewportName;
-                    model.Width.Value = viewport.Width;
-                    model.X.Value = viewport.X;
-                    model.Y.Value = viewport.Y;
-
-                    viewportModels.Add(model);
-                }
-
-                var window = new ViewportEditorWindow();
-                var vm = new ViewportEditorWindowViewModel(_container, false, monitorId, value.Module.Value, viewportModels.ToArray());
-
-                window.Screen = screen;
-                window.DataContext = vm;
-                window.Show();
-                window.BringIntoView();
-            }
+            _controller.EditViewports(value);
         }
 
         private void OnDeleteViewports(ModuleViewportModel value)

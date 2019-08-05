@@ -67,14 +67,6 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 
 #endif
-
-            var s = new Dictionary<string, List<string>>();
-
-            var l = new List<string>() {"Test", "One", "Two"};
-            s.Add("OK", l);
-
-            var a = JsonConvert.SerializeObject(s);
-            
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
             settings.WindowlessRenderingEnabled = true;

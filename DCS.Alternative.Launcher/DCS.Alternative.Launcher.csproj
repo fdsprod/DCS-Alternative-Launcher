@@ -172,6 +172,7 @@
     <Compile Include="Controls\WizardView\WizardStepBase.cs" />
     <Compile Include="Controls\WizardView\WizardView.cs" />
     <Compile Include="Data\InvertBooleanConverter.cs" />
+    <Compile Include="Data\UriToBitmapConverter.cs" />
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
@@ -193,12 +194,16 @@
       <DependentUpon>EditModuleViewportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Dialogs\EditModuleViewportWindowViewModel.cs" />
+    <Compile Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml.cs">
+      <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
       <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\SettingsController.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -304,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Plugins\Settings\Dialogs\EditModuleViewportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

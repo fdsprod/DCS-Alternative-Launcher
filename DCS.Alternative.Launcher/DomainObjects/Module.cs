@@ -19,5 +19,17 @@ namespace DCS.Alternative.Launcher.Modules
         public string ModuleId { get; set; }
 
         public string DisplayName { get; set; }
+
+        public string LoadingImagePath
+        {
+            get;
+            set;
+        }
+
+        public string MainMenuLogoPath
+        {
+            get;
+            set;
+        }
     }
 }

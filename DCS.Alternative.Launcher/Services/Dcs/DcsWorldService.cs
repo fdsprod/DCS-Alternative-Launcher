@@ -102,6 +102,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 {
                                     ModuleId = moduleId,
                                     DisplayName = displayName,
+                                    LoadingImagePath = Path.Combine(folder, skinsPath, "ME", "loading-window.png"),
+                                    MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
                                     BaseFolderPath = folder,
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
