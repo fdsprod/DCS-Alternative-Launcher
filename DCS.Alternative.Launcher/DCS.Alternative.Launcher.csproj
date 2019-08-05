@@ -190,10 +190,6 @@
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Plugins\Settings\Dialogs\EditModuleViewportWindow.xaml.cs">
-      <DependentUpon>EditModuleViewportWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\Settings\Dialogs\EditModuleViewportWindowViewModel.cs" />
     <Compile Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml.cs">
       <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
     </Compile>
@@ -242,7 +238,7 @@
     <Compile Include="Threading\EventAsync.cs" />
     <Compile Include="DomainObjects\Module.cs" />
     <Compile Include="Threading\HandlerTaskSourceBase.cs" />
-    <Compile Include="Models\NewsArticle.cs" />
+    <Compile Include="Models\NewsArticleModel.cs" />
     <Compile Include="UserFriendlyExceptionHandler.cs" />
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -305,10 +301,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WizardView\WizardView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Plugins\Settings\Dialogs\EditModuleViewportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

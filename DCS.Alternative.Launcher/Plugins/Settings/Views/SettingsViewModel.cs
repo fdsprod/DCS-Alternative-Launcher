@@ -14,12 +14,9 @@ using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
-using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
-using DCS.Alternative.Launcher.Services.Settings;
-using KeraLua;
 using Reactive.Bindings;
 using Screen = WpfScreenHelper.Screen;
 
@@ -28,9 +25,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
     public class SettingsViewModel : NavigationAwareBase
     {
         private readonly IContainer _container;
+        private readonly SettingsController _controller;
         private readonly IDcsWorldService _dscWorldService;
         private readonly ISettingsService _settingsService;
-        private readonly SettingsController _controller;
 
         public SettingsViewModel(IContainer container)
         {
@@ -53,104 +50,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             AddViewportCommand.Subscribe(OnAddViewport);
             RemoveViewportCommand.Subscribe(OnRemoveViewport);
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
-        }
-
-        private async void OnAddModuleViewport()
-        {
-            var deviceViewportMonitorIds = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new string[0]);
-
-            if (deviceViewportMonitorIds.Length == 0)
-            {
-                if (MessageBoxEx.Show($"You have not defined a screen for device viewports.  Do you want to do that now?", "Device Viewport Screen") == MessageBoxResult.Yes)
-                {
-                    //TODO Wizard...
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            var selectModuleDialog = new SelectModuleDialog();
-            var viewportTemplates = _settingsService.GetViewportTemplates();
-
-            foreach (var i in await _dscWorldService.GetInstalledAircraftModulesAsync())
-            {
-                if (viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
-                {
-                    continue;
-                }
-
-                selectModuleDialog.Modules.Add(i);
-            }
-
-            selectModuleDialog.SelectedModule = selectModuleDialog.Modules.First();
-
-            if (!selectModuleDialog.ShowDialog() ?? false)
-            {
-                return;
-            }
-
-            var module = selectModuleDialog.SelectedModule;
-            var templates = _settingsService.GetDefaultViewportTemplates();
-            var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
-            var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
-
-            if (templates == null || templates.Length == 0)
-            {
-                MessageBoxEx.Show($"There are no default templates for the {module.DisplayName}.  An empty template will be created.", "No Template Defined");
-
-                var model = 
-                    new ModuleViewportModel(
-                        module.DisplayName, 
-                        null,
-                        module,
-                        monitorDefinitions,
-                        new Viewport[0]);
-
-                _controller.EditViewports(model);
-            }
-            else if(templates.Length > 1)
-            {
-                //TODO: Show wizard for selection
-            }
-            else
-            {
-                if (MessageBoxEx.Show($"Would you like to start with the default template {templates[0].TemplateName}?", "Default Template", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    var model =
-                        new ModuleViewportModel(
-                            templates[0].TemplateName,
-                            templates[0].ExampleImageUrl,
-                            module,
-                            monitorDefinitions,
-                            templates[0].Viewports);
-
-                    _controller.EditViewports(model);
-                }
-                else
-                {
-                    var model =
-                        new ModuleViewportModel(
-                            module.DisplayName,
-                            null,
-                            module,
-                            monitorDefinitions,
-                            new Viewport[0]);
-
-                    _controller.EditViewports(model);
-                }
-            }
-        }
-
-        private void OnEditViewports(ModuleViewportModel value)
-        {
-            _controller.EditViewports(value);
-        }
-
-        private void OnDeleteViewports(ModuleViewportModel value)
-        {
-
         }
 
         public ReactiveProperty<bool> IsLoading
@@ -227,6 +126,103 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             get;
         } = new ReactiveProperty<InstallLocation>();
+
+        private async void OnAddModuleViewport()
+        {
+            var deviceViewportMonitorIds = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new string[0]);
+
+            if (deviceViewportMonitorIds.Length == 0)
+            {
+                if (MessageBoxEx.Show("You have not defined a screen for device viewports.  Do you want to do that now?", "Device Viewport Screen") == MessageBoxResult.Yes)
+                {
+                    //TODO Wizard...
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            var selectModuleDialog = new SelectModuleDialog();
+            var viewportTemplates = _settingsService.GetViewportTemplates();
+
+            foreach (var i in await _dscWorldService.GetInstalledAircraftModulesAsync())
+            {
+                if (viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
+                {
+                    continue;
+                }
+
+                selectModuleDialog.Modules.Add(i);
+            }
+
+            selectModuleDialog.SelectedModule = selectModuleDialog.Modules.First();
+
+            if (!selectModuleDialog.ShowDialog() ?? false)
+            {
+                return;
+            }
+
+            var module = selectModuleDialog.SelectedModule;
+            var templates = _settingsService.GetDefaultViewportTemplates();
+            var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
+            var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
+
+            if (templates == null || templates.Length == 0)
+            {
+                MessageBoxEx.Show($"There are no default templates for the {module.DisplayName}.  An empty template will be created.", "No Template Defined");
+
+                var model =
+                    new ModuleViewportModel(
+                        module.DisplayName,
+                        null,
+                        module,
+                        monitorDefinitions,
+                        new Viewport[0]);
+
+                _controller.EditViewports(model);
+            }
+            else if (templates.Length > 1)
+            {
+                //TODO: Show wizard for selection
+            }
+            else
+            {
+                if (MessageBoxEx.Show($"Would you like to start with the default template {templates[0].TemplateName}?", "Default Template", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var model =
+                        new ModuleViewportModel(
+                            templates[0].TemplateName,
+                            templates[0].ExampleImageUrl,
+                            module,
+                            monitorDefinitions,
+                            templates[0].Viewports);
+
+                    _controller.EditViewports(model);
+                }
+                else
+                {
+                    var model =
+                        new ModuleViewportModel(
+                            module.DisplayName,
+                            null,
+                            module,
+                            monitorDefinitions,
+                            new Viewport[0]);
+
+                    _controller.EditViewports(model);
+                }
+            }
+        }
+
+        private void OnEditViewports(ModuleViewportModel value)
+        {
+            _controller.EditViewports(value);
+        }
+
+        private void OnDeleteViewports(ModuleViewportModel value)
+        {
+        }
 
         protected override Task InitializeAsync()
         {
@@ -489,10 +485,10 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             {
                 var viewport = new Viewport();
 
-               // if (await EditViewportAsync(viewport, model))
-               // {
-               //     model.Viewports.Add(viewport);
-               // }
+                // if (await EditViewportAsync(viewport, model))
+                // {
+                //     model.Viewports.Add(viewport);
+                // }
             }
             catch (Exception e)
             {
@@ -544,31 +540,31 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     screensIndexByName.Add(screen.DeviceName, i + 1);
 
                     sb.AppendLine($"    [{i + 1}] = ");
-                    sb.AppendLine($"    {{");
+                    sb.AppendLine("    {");
                     sb.AppendLine($"        -- {screen.DeviceName},");
                     sb.AppendLine($"        x = {screen.Bounds.X},");
                     sb.AppendLine($"        y = {screen.Bounds.Y},");
                     sb.AppendLine($"        width = {screen.Bounds.Width},");
                     sb.AppendLine($"        height = {screen.Bounds.Height}");
-                    sb.AppendLine($"    }},");
+                    sb.AppendLine("    },");
                 }
 
                 sb.AppendLine("}");
                 sb.AppendLine();
 
-                sb.AppendLine($"Viewports =");
-                sb.AppendLine($"{{");
-                sb.AppendLine($"    Center =");
-                sb.AppendLine($"    {{");
+                sb.AppendLine("Viewports =");
+                sb.AppendLine("{");
+                sb.AppendLine("    Center =");
+                sb.AppendLine("    {");
                 sb.AppendLine($"        x = {Screen.PrimaryScreen.Bounds.X},");
                 sb.AppendLine($"        y = {Screen.PrimaryScreen.Bounds.Y},");
                 sb.AppendLine($"        width = {Screen.PrimaryScreen.Bounds.Width},");
                 sb.AppendLine($"        height = {Screen.PrimaryScreen.Bounds.Height},");
-                sb.AppendLine($"        viewDx = 0,");
-                sb.AppendLine($"        viewDy = 0,");
+                sb.AppendLine("        viewDx = 0,");
+                sb.AppendLine("        viewDy = 0,");
                 sb.AppendLine($"        aspect = {Screen.PrimaryScreen.Bounds.Width} / {Screen.PrimaryScreen.Bounds.Height},");
-                sb.AppendLine($"    }},");
-                sb.AppendLine($"}}");
+                sb.AppendLine("    },");
+                sb.AppendLine("}");
                 sb.AppendLine();
                 sb.AppendLine("UIMainView = Viewports.Center");
                 sb.AppendLine();
@@ -599,29 +595,29 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     {
                         var screen = screens.Single(s => s.DeviceName == viewport.MonitorId);
                         var displayIndex = screensIndexByName[screen.DeviceName];
-                        var originalWidth = (double)viewport.OriginalDisplayWidth;
-                        var originalHeight = (double)viewport.OriginalDisplayHeight;
+                        var originalWidth = (double) viewport.OriginalDisplayWidth;
+                        var originalHeight = (double) viewport.OriginalDisplayHeight;
                         var ratioX = viewport.X / originalWidth;
                         var ratioY = viewport.Y / originalHeight;
                         var ratioW = viewport.Width / originalWidth;
                         var ratioH = viewport.Height / originalHeight;
 
-                        var x = (int)Math.Round(screen.Bounds.Width * ratioX, 0, MidpointRounding.AwayFromZero);
-                        var y = (int)Math.Round(screen.Bounds.Height * ratioY, 0, MidpointRounding.AwayFromZero);
-                        var w = (int)Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
-                        var h = (int)Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
+                        var x = (int) Math.Round(screen.Bounds.Width * ratioX, 0, MidpointRounding.AwayFromZero);
+                        var y = (int) Math.Round(screen.Bounds.Height * ratioY, 0, MidpointRounding.AwayFromZero);
+                        var w = (int) Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
+                        var h = (int) Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
 
                         resolutionWidth = Math.Max(resolutionWidth, screen.Bounds.X + x + w);
                         resolutionHeight = Math.Max(resolutionHeight, screen.Bounds.Y + y + h);
 
                         sb.AppendLine($"--{viewport.RelativeInitFilePath}");
                         sb.AppendLine($"{module.ViewportPrefix}_{viewport.ViewportName} =");
-                        sb.AppendLine($"{{");
+                        sb.AppendLine("{");
                         sb.AppendLine($"    x = displays[{displayIndex}].x + {x},");
                         sb.AppendLine($"    y = displays[{displayIndex}].y + {y},");
                         sb.AppendLine($"    width = {w},");
                         sb.AppendLine($"    height = {h},");
-                        sb.AppendLine($"}}");
+                        sb.AppendLine("}");
                         sb.AppendLine();
 
                         if (!usedScreens.Contains(screen))
