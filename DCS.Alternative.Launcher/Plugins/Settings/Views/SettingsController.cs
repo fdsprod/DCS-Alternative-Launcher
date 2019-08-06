@@ -32,16 +32,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             var windows = new List<Window>();
             var viewModels = new List<ViewportEditorWindowViewModel>();
 
-            foreach (var monitorId in value.MonitorIds)
+            var editorScreens = Screen.AllScreens.Where(s => value.MonitorIds.Contains(s.DeviceName));
+            var overlayScreens = Screen.AllScreens.Where(s => !value.MonitorIds.Contains(s.DeviceName));
+
+            foreach (var screen in editorScreens)
             {
-                var screen = Screen.AllScreens.FirstOrDefault(s => s.DeviceName == monitorId);
-
-                if (screen == null)
-                {
-                    Tracer.Warn($"Unable to find display id {monitorId} for viewport setup {value.Name}");
-                    continue;
-                }
-
                 var viewportModels = new List<ViewportModel>();
 
                 foreach (var viewport in value.Viewports.Where(v => v.MonitorId == screen.DeviceName))
@@ -60,7 +55,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 }
 
                 var window = new ViewportEditorWindow();
-                var vm = new ViewportEditorWindowViewModel(_container, false, monitorId, value.Module.Value, devices, viewportModels.ToArray());
+                var vm = new ViewportEditorWindowViewModel(_container, false, screen.DeviceName, value.Module.Value, devices, viewportModels.ToArray());
 
                 window.Screen = screen;
                 window.DataContext = vm;
@@ -75,14 +70,37 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     handler => window.Closed -= handler));
             }
 
+            foreach (var screen in overlayScreens)
+            {
+                var window = new MonitorOverlay
+                {
+                    Screen = screen
+                };
+
+                window.Show();
+                window.BringIntoView();
+                windows.Add(window);
+
+                tasks.Add(EventAsync.FromEvent(
+                    handler => window.Closed += handler,
+                    handler => window.Closed -= handler));
+            }
+
             await Task.WhenAny(tasks);
 
             foreach (var window in windows)
             {
-                window.Close();
+                try
+                {
+                    window.Close();
+                }
+                catch
+                {
+
+                }
             }
 
-            var save = windows.Any(w => w.DialogResult == true);
+            var save = viewModels.Any(vm => vm.DialogResult.Value == true);
             var viewports = new List<Viewport>();
 
             if (save)

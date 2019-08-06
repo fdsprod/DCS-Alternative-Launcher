@@ -15,10 +15,11 @@
         launcher:WindowAssist.ViewModel="{Binding}"
         AllowsTransparency="True"
         Background="Transparent"
+        Topmost="True"
         WindowStyle="None"
         mc:Ignorable="d">
     <i:Interaction.Behaviors>
-        <behaviors:DialogResultBehavior Value="{Binding DialogResult.Value}" />
+        <behaviors:DialogResultBehavior IsDialog="False" Value="{Binding DialogResult.Value}" />
     </i:Interaction.Behaviors>
     <Window.Resources>
         <Style TargetType="{x:Type Button}">

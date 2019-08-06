@@ -7,7 +7,16 @@ namespace DCS.Alternative.Launcher.Interaction.Behaviors
     {
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(bool?), typeof(DialogResultBehavior), new PropertyMetadata(null, OnValuePropertyChanged));
-        
+
+        public static readonly DependencyProperty IsDialogProperty =
+            DependencyProperty.Register("IsDialog", typeof(bool), typeof(DialogResultBehavior), new PropertyMetadata(true));
+
+        public bool IsDialog
+        {
+            get { return (bool) GetValue(IsDialogProperty); }
+            set { SetValue(IsDialogProperty, value); }
+        }
+
         public bool? Value
         {
             get { return (bool?) GetValue(ValueProperty); }
@@ -23,7 +32,14 @@ namespace DCS.Alternative.Launcher.Interaction.Behaviors
 
         private void OnValueChanged(bool? oldValue, bool? newValue)
         {
-            AssociatedObject.DialogResult = newValue;
+            if (IsDialog)
+            {
+                AssociatedObject.DialogResult = newValue;
+            }
+            else
+            {
+                AssociatedObject.Close();
+            }
         }
     }
 }

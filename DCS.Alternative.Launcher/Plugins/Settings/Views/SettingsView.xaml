@@ -195,9 +195,6 @@
                                                         <Button Command="{Binding DataContext.EditViewportsCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                                                 CommandParameter="{Binding}"
                                                                 Content="EDIT" />
-                                                        <Button Command="{Binding DataContext.RemoveModuleViewportCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                                                CommandParameter="{Binding}"
-                                                                Content="DELETE" />
                                                     </StackPanel>
                                                 </Grid>
                                             </Grid>

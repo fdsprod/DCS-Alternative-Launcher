@@ -198,6 +198,9 @@
     <Compile Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml.cs">
       <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Settings\Dialogs\MonitorOverlay.xaml.cs">
+      <DependentUpon>MonitorOverlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
       <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
     <Page Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Dialogs\MonitorOverlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml">
       <SubType>Designer</SubType>

@@ -68,11 +68,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             get;
         } = new ReactiveProperty<ModuleViewportModel>();
 
-        public ReactiveCommand<ModuleViewportModel> AddViewportCommand
-        {
-            get;
-        } = new ReactiveCommand<ModuleViewportModel>();
-        
         public ReactiveCommand GenerateMonitorConfigCommand
         {
             get;
@@ -162,7 +157,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
                 var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
 
-                if (templates == null || templates.Length == 0)
+                if (templates.Length == 0)
                 {
                     MessageBoxEx.Show($"There are no default templates for the {module.DisplayName}.  An empty template will be created.", "No Template Defined");
 
@@ -176,7 +171,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                     var viewports = await _controller.EditViewportsAsync(model);
 
-                    SaveViewports(module.DisplayName, module.ModuleId, viewports);
+                    await SaveViewportsAsync(module.DisplayName, module.ModuleId, viewports);
                 }
                 else if (templates.Length > 1)
                 {
@@ -186,17 +181,21 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 {
                     if (MessageBoxEx.Show($"Would you like to start with the default template {templates[0].TemplateName}?", "Default Template", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
+                        var viewports = templates[0].Viewports.ToArray();
+
+                        Array.ForEach(viewports,v => v.MonitorId = screens[0].DeviceName);
+
                         var model =
                             new ModuleViewportModel(
                                 templates[0].TemplateName,
                                 templates[0].ExampleImageUrl,
                                 module,
                                 monitorDefinitions,
-                                templates[0].Viewports);
+                                viewports);
 
-                        var viewports = await _controller.EditViewportsAsync(model);
+                        viewports = await _controller.EditViewportsAsync(model);
 
-                        SaveViewports(templates[0].TemplateName, module.ModuleId, viewports);
+                        await SaveViewportsAsync(templates[0].TemplateName, module.ModuleId, viewports);
                     }
                     else
                     {
@@ -210,7 +209,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                         var viewports = await _controller.EditViewportsAsync(model);
 
-                        SaveViewports(module.DisplayName, module.ModuleId, viewports);
+                        await SaveViewportsAsync(module.DisplayName, module.ModuleId, viewports);
                     }
                 }
             }
@@ -220,12 +219,23 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             }
         }
 
-        private void SaveViewports(string name, string moduleId, Viewport[] viewports)
+        private async Task SaveViewportsAsync(string name, string moduleId, Viewport[] viewports)
         {
-            foreach (var viewport in viewports)
+            try
             {
-                var screen = Screen.AllScreens.First(s => s.DeviceName == viewport.MonitorId);
-                _settingsService.UpsertViewport(name, moduleId, screen, viewport);
+                IsLoading.Value = true;
+
+                foreach (var viewport in viewports)
+                {
+                    var screen = Screen.AllScreens.First(s => s.DeviceName == viewport.MonitorId);
+                    _settingsService.UpsertViewport(name, moduleId, screen, viewport);
+                }
+
+                await PopulateViewportsAsync();
+            }
+            finally
+            {
+                IsLoading.Value = false;
             }
         }
 
@@ -235,7 +245,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             {
                 var viewports = await _controller.EditViewportsAsync(value);
 
-                SaveViewports(value.Name.Value, value.Module.Value.ModuleId, viewports);
+                await SaveViewportsAsync(value.Name.Value, value.Module.Value.ModuleId, viewports);
             }
             catch (Exception e)
             {
@@ -243,16 +253,24 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             }
         }
 
-        protected override Task InitializeAsync()
+        protected override async Task InitializeAsync()
+        {
+            await PopulateViewportsAsync();
+            await base.InitializeAsync();
+        }
+
+        private async Task PopulateViewportsAsync()
         {
             var dispatcher = Dispatcher.CurrentDispatcher;
 
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
                 IsLoading.Value = true;
 
                 try
                 {
+                    dispatcher.Invoke(() => ModuleViewports.Clear());
+
                     var viewportTemplates = _settingsService.GetViewportTemplates();
                     var installedModules = await _dscWorldService.GetInstalledAircraftModulesAsync();
 
@@ -274,8 +292,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     IsLoading.Value = false;
                 }
             });
-
-            return base.InitializeAsync();
         }
 
         public override Task ActivateAsync()
