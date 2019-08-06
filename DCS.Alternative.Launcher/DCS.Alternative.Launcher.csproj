@@ -176,6 +176,8 @@
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
+    <Compile Include="DomainObjects\AdvancedOption.cs" />
+    <Compile Include="DomainObjects\AdvancedOptionMinMax.cs" />
     <Compile Include="DomainObjects\MonitorDefinition.cs" />
     <Compile Include="DomainObjects\SettingsCategories.cs" />
     <Compile Include="DomainObjects\SettingsKeys.cs" />
@@ -190,6 +192,9 @@
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml.cs">
+      <DependentUpon>SelectViewportDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml.cs">
       <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
     </Compile>
@@ -197,6 +202,7 @@
       <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
+    <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsController.cs" />
@@ -303,6 +309,10 @@
     <Page Include="Controls\WizardView\WizardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml">
       <SubType>Designer</SubType>
@@ -419,6 +429,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\AdvancedTweakingOptions.json" />
     <None Include="Resources\ViewportDevices.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

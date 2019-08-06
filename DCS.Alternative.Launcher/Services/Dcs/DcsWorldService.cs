@@ -8,6 +8,7 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;

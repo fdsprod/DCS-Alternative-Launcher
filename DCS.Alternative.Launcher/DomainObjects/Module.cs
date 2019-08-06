@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using DCS.Alternative.Launcher.Diagnostics.Trace;
-using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
+﻿using System.IO;
 
-namespace DCS.Alternative.Launcher.Modules
+namespace DCS.Alternative.Launcher.DomainObjects
 {
     public class Module
     {

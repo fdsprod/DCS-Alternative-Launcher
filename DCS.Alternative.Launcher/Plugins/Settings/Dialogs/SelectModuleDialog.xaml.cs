@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using Reactive.Bindings;
 
@@ -33,11 +34,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+            Close();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+            Close();
         }
     }
 }

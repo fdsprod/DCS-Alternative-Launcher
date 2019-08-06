@@ -1,8 +1,10 @@
 ﻿<Window x:Class="DCS.Alternative.Launcher.Plugins.Settings.Dialogs.ViewportEditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:launcher="clr-namespace:DCS.Alternative.Launcher"
         xmlns:local="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Dialogs"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,6 +17,9 @@
         Background="Transparent"
         WindowStyle="None"
         mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <behaviors:DialogResultBehavior Value="{Binding DialogResult.Value}" />
+    </i:Interaction.Behaviors>
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Style.Triggers>
@@ -158,7 +163,7 @@
                     VerticalAlignment="Top"
                     Background="Transparent"
                     BorderBrush="#CFFFFFFF"
-                    Command="{Binding AddViewportCommand}"
+                    Command="{Binding SaveCommand}"
                     Foreground="#CFFFFFFF">
                 <Button.Content>
                     <Grid>
@@ -185,7 +190,7 @@
                     VerticalAlignment="Top"
                     Background="Transparent"
                     BorderBrush="#CFFFFFFF"
-                    Command="{Binding AddViewportCommand}"
+                    Command="{Binding CancelCommand}"
                     Foreground="#CFFFFFFF">
                 <Button.Content>
                     <Grid>

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
@@ -18,10 +20,9 @@ using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins;
 using DCS.Alternative.Launcher.Plugins.Game.Views;
-using DCS.Alternative.Launcher.Plugins.Settings;
-using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Dcs;
@@ -40,6 +41,9 @@ namespace DCS.Alternative.Launcher
     /// </summary>
     public partial class App : Application
     {
+        private static Regex _splitAtUpperRegex =
+            new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
+
         private IContainer _container;
         private MainWindow _mainWindow;
 
@@ -67,6 +71,8 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 
 #endif
+            DumpAutoexecLua();
+
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
             settings.WindowlessRenderingEnabled = true;
@@ -86,8 +92,91 @@ namespace DCS.Alternative.Launcher
             InitializePlugins();
 
             _mainWindow.Show();
-
             Tracer.Info("Startup Complete.");
+        }
+
+        private void DumpAutoexecLua()
+        {
+            using (var lua = new Lua())
+            {
+                lua.State.Encoding = Encoding.UTF8;
+
+                var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
+                lua["sendIt"] = new Action<LuaTable>((table) =>
+                {
+                    var options = new List<AdvancedOption>();
+                    RecursiveDump("options", table, options);
+                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c=>c=='.')).ThenBy(o=>o.Id), Formatting.Indented);
+                });
+
+                var result = lua.DoString($"sendIt(loadfile('{path}')());");
+            }
+
+        }
+
+        private void RecursiveDump(string empty, LuaTable table, List<AdvancedOption> options)
+        {
+            var ti = new CultureInfo("en-US", false).TextInfo;
+
+            foreach (var key in table.Keys)
+            {
+                var subTable = table[key] as LuaTable;
+                var id = string.Join(".", empty, key.ToString());
+                var displayName =
+                    id.Replace("options.graphics.", string.Empty)
+                        .Replace("options.sound.", string.Empty)
+                        .Replace("terrainreflection", "terrain_reflection")
+                    .Replace("terrainmirror", "terrain_mirror");
+
+                displayName =
+                    ti.ToTitleCase(
+                            _splitAtUpperRegex
+                                .Replace(displayName, " ")
+                                .Replace("_", " "))
+                        .Replace(".", " ")
+                        .Replace("  ", " ");
+
+                if (subTable != null)
+                {
+                    var firstKey = subTable.Keys.OfType<object>().First();
+
+                    if (firstKey is string)
+                    {
+                        RecursiveDump(id, (LuaTable)table[key], options);
+                    }
+                    else
+                    {
+                        var values = new List<object>();
+                        var option = new AdvancedOption
+                        {
+                            Id = id,
+                            DisplayName = displayName
+                        };
+
+                        foreach (var k in subTable.Keys)
+                        {
+                            values.Add(subTable[k]);
+                            option.MinMax.Add(new AdvancedOptionMinMax());
+                        }
+
+                        option.Value = values.ToArray();
+
+                        options.Add(option);
+                    }
+                }
+                else
+                {
+                    var option = new AdvancedOption
+                    {
+                        Id = id,
+                        DisplayName = displayName,
+                        Value = table[key]
+                    };
+
+                    option.MinMax.Add(new AdvancedOptionMinMax());
+                    options.Add(option);
+                }
+            }
         }
 
         private void CheckFirstUse()

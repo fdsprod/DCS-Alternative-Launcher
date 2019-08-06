@@ -2,140 +2,199 @@
 	"FA-18C": [
 		{
 			"viewportName": "IFEI",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
+			"width" : 528,
+			"height" : 200
 		},
 		{
 			"viewportName": "UFC",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
+			"width" : 451,
+			"height" : 258
 		},
 		{
 			"viewportName": "CENTER_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
+			"width" : 376,
+			"height" : 358
 		},
 		{
 			"viewportName": "RWR",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
+			"width" : 178,
+			"height" : 177
 		},
 		{
 			"viewportName": "RIGHT_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
+			"width" : 387,
+			"height" : 374
 		},
 		{
 			"viewportName": "LEFT_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
+			"width" : 387,
+			"height" : 374
 		}
 	],
 	"KA-50": [
 		{
 			"viewportName": "SHKVAL",
-			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/SHKVAL/SHKVAL_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/SHKVAL/SHKVAL_init.lua",
+			"width" : 800,
+			"height" : 648
 		},
 		{
 			"viewportName": "PVI",
-			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/PVI/PVI_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/PVI/PVI_init.lua",
+			"width" : 260,
+			"height" : 110
 		},
 		{
 			"viewportName": "ABRIS",
-			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/ABRIS/ABRIS_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/ABRIS/ABRIS_init.lua",
+			"width" : 589,
+			"height" : 845
 		},
 		{
 			"viewportName": "EKRAN",
-			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/EKRAN/Indicator/Ekran_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/EKRAN/Indicator/Ekran_init.lua",
+			"width" : 156,
+			"height" : 106
 		},
 		{
 			"viewportName": "UV26",
-			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/UV_26/UV_26_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/UV_26/UV_26_init.lua",
+			"width" : 159,
+			"height" : 88
 		}
 	],
 	"A-10C": [
 		{
 			"viewportName": "RIGHT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_right_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_right_init.lua",
+			"width": 445,
+			"height": 445
 		},
 		{
 			"viewportName": "LEFT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_left_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_left_init.lua",
+			"width": 445,
+			"height": 445
 		},
 		{
 			"viewportName": "CMSC_SCREEN",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSC/indicator/CMSC_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSC/indicator/CMSC_init.lua",
+			"width": 230,
+			"height": 49
 		},
 		{
 			"viewportName": "CMSP_SCREEN",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSP/indicator/CMSP_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSP/indicator/CMSP_init.lua",
+			"width": 270,
+			"height": 70
 		},
 		{
 			"viewportName": "RWR_SCREEN",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/AN_ALR69V/indicator/AN_ALR69V_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/AN_ALR69V/indicator/AN_ALR69V_init.lua",
+			"width": 175,
+			"height": 175
 		},
 		{
 			"viewportName": "DIGIT_CLOCK",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/DigitalClock/Indicator/DIGIT_CLK_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/DigitalClock/Indicator/DIGIT_CLK_init.lua",
+			"width": 122,
+			"height": 122
 		},
 		{
 			"viewportName": "UHF_FREQUENCY_STATUS",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/freq_status_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/freq_status_init.lua",
+			"width": 120,
+			"height": 30
 		},
 		{
 			"viewportName": "UHF_PRESET_CHANNEL",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/preset_channel_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/preset_channel_init.lua",
+			"width": 30,
+			"height": 30
 		},
 		{
 			"viewportName": "UHF_REPEATER",
-			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/repeater_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/repeater_init.lua",
+			"width": 110,
+			"height": 30
 		}
 	],
 	"AV8BNA":  [
 		{
 			"viewportName": "LEFT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/MPCD/indicator/MPCD_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/MPCD/indicator/MPCD_init.lua",
+			"width": 332,
+			"height": 306
 		},
 		{
 			"viewportName": "RIGHT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/MPCD/indicator/MPCD_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/MPCD/indicator/MPCD_init.lua",
+			"width": 332,
+			"height": 306
 		},
 		{
 			"viewportName": "ODU_base",
-			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/ODU/Indicator/ODU_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/ODU/Indicator/ODU_init.lua",
+			"width": 283,
+			"height": 140
 		},
 		{
 			"viewportName": "UFC_base",
-			"relativeInitFilePath": "MMods/aircraft/AV8BNA/Cockpit/UFC/indicator/UFC_init.lua"
+			"relativeInitFilePath": "MMods/aircraft/AV8BNA/Cockpit/UFC/indicator/UFC_init.lua",
+			"width": 456,
+			"height": 354
 		},
 		{
 			"viewportName": "UVHF_base",
-			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/UVHF/indicator/UVHF_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/UVHF/indicator/UVHF_init.lua",
+			"width": 300,
+			"height": 150
 		}	
 	],
 	"F14":  [
 		{
 			"viewportName": "HSD",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/HorizontalSituationDisplay/Indicator/init.lua"
+			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/HorizontalSituationDisplay/Indicator/init.lua",
+			"width": 700,
+			"height": 700
 		},
 		{
 			"viewportName": "VDI",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/VerticalDisplayIndicator/Indicator/init.lua"
+			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/VerticalDisplayIndicator/Indicator/init.lua",
+			"width": 700,
+			"height": 700
 		},
 		{
 			"viewportName": "DDD",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/DetailDataDisplay/Indicator/init.lua"
+			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/DetailDataDisplay/Indicator/init.lua",
+			"width": 500,
+			"height": 400
 		},
 		{
 			"viewportName": "RWR",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/RWR/Indicator/Pilot/init.lua"
+			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/RWR/Indicator/Pilot/init.lua",
+			"width": 400,
+			"height": 400
 		}
 	],
 	"M-2000C" : [
 		{
 			"viewportName": "RADAR",
-			"relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/VTB/VTB_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/VTB/VTB_init.lua",
+			"width": 1080,
+			"height": 1080
 		},
 		{
 			"viewportName": "RWR",
-			"relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/RWR/RWR_init.lua"
+			"relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/RWR/RWR_init.lua",
+			"width": 800,
+			"height": 800
 		}
 	]
 }

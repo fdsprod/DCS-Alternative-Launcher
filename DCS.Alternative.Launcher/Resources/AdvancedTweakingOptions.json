@@ -1,0 +1,7215 @@
+﻿[
+    {
+      "Id": "options.graphics.cockpitOnly",
+      "DisplayName": "Cockpit Only",
+      "Value": false,
+      "MinMax": []
+    },
+    {
+      "Id": "options.graphics.DebugColoredTexture",
+      "DisplayName": "Debug Colored Texture",
+      "Value": 0,
+      "MinMax": []
+    },
+    {
+      "Id": "options.graphics.DistanceFactorDefaultFovy",
+      "DisplayName": "Distance Factor Default Fovy",
+      "Value": 90,
+      "MinMax": [
+        {
+          "Min": 20,
+          "Max": 210
+        }
+      ]
+    }/*,
+    {
+      "Id": "options.graphics.FogParam1",
+      "DisplayName": "Fog Param1",
+      "Value": 6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.FogParam2",
+      "DisplayName": "Fog Param2",
+      "Value": 1.1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    }*/,
+    {
+      "Id": "options.graphics.maxfps",
+      "DisplayName": "Max FPS",
+      "Value": 180,
+      "MinMax": [
+        {
+          "Min": 1,
+          "Max": 1000
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.PilotNames",
+      "DisplayName": "Pilot Names",
+      "Value": false,
+      "MinMax": [
+      ]
+    },
+    {
+      "Id": "options.graphics.render3D",
+      "DisplayName": "Render3 D",
+      "Value": true,
+      "MinMax": []
+    },
+    {
+      "Id": "options.graphics.ScreenshotExt",
+      "DisplayName": "Screenshot Ext",
+      "Value": "png",
+      "MinMax": []
+    },
+    {
+      "Id": "options.graphics.ScreenshotQuality",
+      "DisplayName": "Screenshot Quality",
+      "Value": 90,
+      "MinMax": [
+        {
+          "Min": 1,
+          "Max": 100
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.statsColor",
+      "DisplayName": "Stats Color",
+      "Value": [
+        255,
+        255,
+        0
+      ],
+      "MinMax": []
+    },
+    {
+      "Id": "options.graphics.stereo_mode_use_shared_parser",
+      "DisplayName": "Stereo Mode Use Shared Parser",
+      "Value": false,
+      "MinMax": []
+    }/*,
+    {
+      "Id": "options.sound.doppler_warp",
+      "DisplayName": "Doppler Warp",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.world_fadein_time",
+      "DisplayName": "World Fadein Time",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.MFD_render_params.dist_multiplier_fov_base",
+      "DisplayName": "M F D Render Params Dist Multiplier Fov Base",
+      "Value": 0.3,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.MFD_render_params.second_pass_far_clip",
+      "DisplayName": "M F D Render Params Second Pass Far Clip",
+      "Value": 100,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.MFD_render_params.second_pass_start_fov",
+      "DisplayName": "M F D Render Params Second Pass Start Fov",
+      "Value": 0.1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.MFD_render_params.single_pass_near_clip",
+      "DisplayName": "M F D Render Params Single Pass Near Clip",
+      "Value": 10,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.MFD_render_params.two_pass_always",
+      "DisplayName": "M F D Render Params Two Pass Always",
+      "Value": true,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Moon.Hmax",
+      "DisplayName": "Moon Hmax",
+      "Value": 45,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Moon.Ktex",
+      "DisplayName": "Moon Ktex",
+      "Value": 1.7355,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Moon.moonLightColor",
+      "DisplayName": "Moon Moon Light Color",
+      "Value": [
+        63.75,
+        71.4,
+        89.25
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Moon.Smax",
+      "DisplayName": "Moon Smax",
+      "Value": 3,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Moon.Smin",
+      "DisplayName": "Moon Smin",
+      "Value": 2.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Precaching.around_camera",
+      "DisplayName": "Precaching Around Camera",
+      "Value": 50000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Precaching.around_objects",
+      "DisplayName": "Precaching Around Objects",
+      "Value": 10000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.c0",
+      "DisplayName": "Stars C0",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.c1",
+      "DisplayName": "Stars C1",
+      "Value": 2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.c2",
+      "DisplayName": "Stars C2",
+      "Value": 9,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.c3",
+      "DisplayName": "Stars C3",
+      "Value": 10,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.flickerEnabled",
+      "DisplayName": "Stars Flicker Enabled",
+      "Value": true,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.period",
+      "DisplayName": "Stars Period",
+      "Value": 20,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Stars.tau",
+      "DisplayName": "Stars Tau",
+      "Value": 15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.LevelFormap0",
+      "DisplayName": "Terrain Level Formap0",
+      "Value": 25000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.LevelFormap1",
+      "DisplayName": "Terrain Level Formap1",
+      "Value": 50000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.LevelFormap2",
+      "DisplayName": "Terrain Level Formap2",
+      "Value": 120000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.ambientSound.fadeOutHeight",
+      "DisplayName": "Ambient Sound Fade Out Height",
+      "Value": 100,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.ambientSound.resampleDistance",
+      "DisplayName": "Ambient Sound Resample Distance",
+      "Value": 10,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.ambientSound.resampleTime",
+      "DisplayName": "Ambient Sound Resample Time",
+      "Value": 0.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.ambientSound.sampleRadius",
+      "DisplayName": "Ambient Sound Sample Radius",
+      "Value": 30,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.ambientSound.surfaceSamples",
+      "DisplayName": "Ambient Sound Surface Samples",
+      "Value": 12,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.districtobjects",
+      "DisplayName": "Camera Extreme Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.districts",
+      "DisplayName": "Camera Extreme Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.dynamic",
+      "DisplayName": "Camera Extreme Dynamic",
+      "Value": [
+        300,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.dynamic2",
+      "DisplayName": "Camera Extreme Dynamic2",
+      "Value": [
+        300,
+        20000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.far_clip",
+      "DisplayName": "Camera Extreme Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.lights",
+      "DisplayName": "Camera Extreme Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.lodAdd",
+      "DisplayName": "Camera Extreme Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.lodMult",
+      "DisplayName": "Camera Extreme Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.mirage",
+      "DisplayName": "Camera Extreme Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.near_clip",
+      "DisplayName": "Camera Extreme Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.objects",
+      "DisplayName": "Camera Extreme Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.structures",
+      "DisplayName": "Camera Extreme Structures",
+      "Value": [
+        60,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Extreme.surface",
+      "DisplayName": "Camera Extreme Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.districtobjects",
+      "DisplayName": "Camera High Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.districts",
+      "DisplayName": "Camera High Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.dynamic",
+      "DisplayName": "Camera High Dynamic",
+      "Value": [
+        300,
+        16000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.dynamic2",
+      "DisplayName": "Camera High Dynamic2",
+      "Value": [
+        300,
+        16000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.far_clip",
+      "DisplayName": "Camera High Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.lights",
+      "DisplayName": "Camera High Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.lodAdd",
+      "DisplayName": "Camera High Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.lodMult",
+      "DisplayName": "Camera High Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.mirage",
+      "DisplayName": "Camera High Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.near_clip",
+      "DisplayName": "Camera High Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.objects",
+      "DisplayName": "Camera High Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.structures",
+      "DisplayName": "Camera High Structures",
+      "Value": [
+        80,
+        16000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.High.surface",
+      "DisplayName": "Camera High Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.districtobjects",
+      "DisplayName": "Camera Low Districtobjects",
+      "Value": [
+        400,
+        400
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.districts",
+      "DisplayName": "Camera Low Districts",
+      "Value": [
+        8000,
+        8000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.dynamic",
+      "DisplayName": "Camera Low Dynamic",
+      "Value": [
+        300,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.dynamic2",
+      "DisplayName": "Camera Low Dynamic2",
+      "Value": [
+        300,
+        12000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.far_clip",
+      "DisplayName": "Camera Low Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.lights",
+      "DisplayName": "Camera Low Lights",
+      "Value": [
+        200,
+        40000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.lodAdd",
+      "DisplayName": "Camera Low Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.lodMult",
+      "DisplayName": "Camera Low Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.mirage",
+      "DisplayName": "Camera Low Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.near_clip",
+      "DisplayName": "Camera Low Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.objects",
+      "DisplayName": "Camera Low Objects",
+      "Value": [
+        3000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.structures",
+      "DisplayName": "Camera Low Structures",
+      "Value": [
+        100,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Low.surface",
+      "DisplayName": "Camera Low Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.districtobjects",
+      "DisplayName": "Camera Medium Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.districts",
+      "DisplayName": "Camera Medium Districts",
+      "Value": [
+        10000,
+        10000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.dynamic",
+      "DisplayName": "Camera Medium Dynamic",
+      "Value": [
+        300,
+        14000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.dynamic2",
+      "DisplayName": "Camera Medium Dynamic2",
+      "Value": [
+        300,
+        14000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.far_clip",
+      "DisplayName": "Camera Medium Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.lights",
+      "DisplayName": "Camera Medium Lights",
+      "Value": [
+        200,
+        60000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.lodAdd",
+      "DisplayName": "Camera Medium Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.lodMult",
+      "DisplayName": "Camera Medium Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.mirage",
+      "DisplayName": "Camera Medium Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.near_clip",
+      "DisplayName": "Camera Medium Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.objects",
+      "DisplayName": "Camera Medium Objects",
+      "Value": [
+        3000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.structures",
+      "DisplayName": "Camera Medium Structures",
+      "Value": [
+        90,
+        14000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Medium.surface",
+      "DisplayName": "Camera Medium Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.districtobjects",
+      "DisplayName": "Camera Ultra Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.districts",
+      "DisplayName": "Camera Ultra Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.dynamic",
+      "DisplayName": "Camera Ultra Dynamic",
+      "Value": [
+        300,
+        18000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.dynamic2",
+      "DisplayName": "Camera Ultra Dynamic2",
+      "Value": [
+        300,
+        18000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.far_clip",
+      "DisplayName": "Camera Ultra Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.lights",
+      "DisplayName": "Camera Ultra Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.lodAdd",
+      "DisplayName": "Camera Ultra Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.lodMult",
+      "DisplayName": "Camera Ultra Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.mirage",
+      "DisplayName": "Camera Ultra Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.near_clip",
+      "DisplayName": "Camera Ultra Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.objects",
+      "DisplayName": "Camera Ultra Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.structures",
+      "DisplayName": "Camera Ultra Structures",
+      "Value": [
+        70,
+        18000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Camera.Ultra.surface",
+      "DisplayName": "Camera Ultra Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.districtobjects",
+      "DisplayName": "Camera Mirrors Extreme Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.districts",
+      "DisplayName": "Camera Mirrors Extreme Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.dynamic",
+      "DisplayName": "Camera Mirrors Extreme Dynamic",
+      "Value": [
+        300,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.dynamic2",
+      "DisplayName": "Camera Mirrors Extreme Dynamic2",
+      "Value": [
+        300,
+        20000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.far_clip",
+      "DisplayName": "Camera Mirrors Extreme Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.lights",
+      "DisplayName": "Camera Mirrors Extreme Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.lodAdd",
+      "DisplayName": "Camera Mirrors Extreme Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.lodMult",
+      "DisplayName": "Camera Mirrors Extreme Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.mirage",
+      "DisplayName": "Camera Mirrors Extreme Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.near_clip",
+      "DisplayName": "Camera Mirrors Extreme Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.objects",
+      "DisplayName": "Camera Mirrors Extreme Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.structures",
+      "DisplayName": "Camera Mirrors Extreme Structures",
+      "Value": [
+        60,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Extreme.surface",
+      "DisplayName": "Camera Mirrors Extreme Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.districtobjects",
+      "DisplayName": "Camera Mirrors High Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.districts",
+      "DisplayName": "Camera Mirrors High Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.dynamic",
+      "DisplayName": "Camera Mirrors High Dynamic",
+      "Value": [
+        300,
+        16000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.dynamic2",
+      "DisplayName": "Camera Mirrors High Dynamic2",
+      "Value": [
+        300,
+        16000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.far_clip",
+      "DisplayName": "Camera Mirrors High Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.lights",
+      "DisplayName": "Camera Mirrors High Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.lodAdd",
+      "DisplayName": "Camera Mirrors High Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.lodMult",
+      "DisplayName": "Camera Mirrors High Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.mirage",
+      "DisplayName": "Camera Mirrors High Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.near_clip",
+      "DisplayName": "Camera Mirrors High Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.objects",
+      "DisplayName": "Camera Mirrors High Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.structures",
+      "DisplayName": "Camera Mirrors High Structures",
+      "Value": [
+        80,
+        16000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.High.surface",
+      "DisplayName": "Camera Mirrors High Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.districtobjects",
+      "DisplayName": "Camera Mirrors Low Districtobjects",
+      "Value": [
+        400,
+        400
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.districts",
+      "DisplayName": "Camera Mirrors Low Districts",
+      "Value": [
+        8000,
+        8000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.dynamic",
+      "DisplayName": "Camera Mirrors Low Dynamic",
+      "Value": [
+        300,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.dynamic2",
+      "DisplayName": "Camera Mirrors Low Dynamic2",
+      "Value": [
+        300,
+        12000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.far_clip",
+      "DisplayName": "Camera Mirrors Low Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.lights",
+      "DisplayName": "Camera Mirrors Low Lights",
+      "Value": [
+        200,
+        40000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.lodAdd",
+      "DisplayName": "Camera Mirrors Low Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.lodMult",
+      "DisplayName": "Camera Mirrors Low Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.mirage",
+      "DisplayName": "Camera Mirrors Low Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.near_clip",
+      "DisplayName": "Camera Mirrors Low Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.objects",
+      "DisplayName": "Camera Mirrors Low Objects",
+      "Value": [
+        3000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.structures",
+      "DisplayName": "Camera Mirrors Low Structures",
+      "Value": [
+        100,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Low.surface",
+      "DisplayName": "Camera Mirrors Low Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.districtobjects",
+      "DisplayName": "Camera Mirrors Medium Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.districts",
+      "DisplayName": "Camera Mirrors Medium Districts",
+      "Value": [
+        10000,
+        10000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.dynamic",
+      "DisplayName": "Camera Mirrors Medium Dynamic",
+      "Value": [
+        300,
+        14000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.dynamic2",
+      "DisplayName": "Camera Mirrors Medium Dynamic2",
+      "Value": [
+        300,
+        14000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.far_clip",
+      "DisplayName": "Camera Mirrors Medium Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.lights",
+      "DisplayName": "Camera Mirrors Medium Lights",
+      "Value": [
+        200,
+        60000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.lodAdd",
+      "DisplayName": "Camera Mirrors Medium Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.lodMult",
+      "DisplayName": "Camera Mirrors Medium Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.mirage",
+      "DisplayName": "Camera Mirrors Medium Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.near_clip",
+      "DisplayName": "Camera Mirrors Medium Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.objects",
+      "DisplayName": "Camera Mirrors Medium Objects",
+      "Value": [
+        3000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.structures",
+      "DisplayName": "Camera Mirrors Medium Structures",
+      "Value": [
+        90,
+        14000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Medium.surface",
+      "DisplayName": "Camera Mirrors Medium Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.districtobjects",
+      "DisplayName": "Camera Mirrors Ultra Districtobjects",
+      "Value": [
+        300,
+        300
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.districts",
+      "DisplayName": "Camera Mirrors Ultra Districts",
+      "Value": [
+        12000,
+        12000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.dynamic",
+      "DisplayName": "Camera Mirrors Ultra Dynamic",
+      "Value": [
+        300,
+        18000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.dynamic2",
+      "DisplayName": "Camera Mirrors Ultra Dynamic2",
+      "Value": [
+        300,
+        18000,
+        0.5
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.far_clip",
+      "DisplayName": "Camera Mirrors Ultra Far Clip",
+      "Value": 150000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.lights",
+      "DisplayName": "Camera Mirrors Ultra Lights",
+      "Value": [
+        200,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.lodAdd",
+      "DisplayName": "Camera Mirrors Ultra Lod Add",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.lodMult",
+      "DisplayName": "Camera Mirrors Ultra Lod Mult",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.mirage",
+      "DisplayName": "Camera Mirrors Ultra Mirage",
+      "Value": [
+        3000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.near_clip",
+      "DisplayName": "Camera Mirrors Ultra Near Clip",
+      "Value": 0.02,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.objects",
+      "DisplayName": "Camera Mirrors Ultra Objects",
+      "Value": [
+        5000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.structures",
+      "DisplayName": "Camera Mirrors Ultra Structures",
+      "Value": [
+        70,
+        18000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.CameraMirrors.Ultra.surface",
+      "DisplayName": "Camera Mirrors Ultra Surface",
+      "Value": [
+        20000,
+        80000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.civTraffic.high",
+      "DisplayName": "Terrain Civ Traffic High",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.civTraffic.low",
+      "DisplayName": "Terrain Civ Traffic Low",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.civTraffic.medium",
+      "DisplayName": "Terrain Civ Traffic Medium",
+      "Value": 2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffDrawRoutine",
+      "DisplayName": "Terrain Debug Switchoff Draw Routine",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffEdm",
+      "DisplayName": "Terrain Debug Switchoff Edm",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffFetchDistricts",
+      "DisplayName": "Terrain Debug Switchoff Fetch Districts",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffFetchLights",
+      "DisplayName": "Terrain Debug Switchoff Fetch Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffFetchSurface",
+      "DisplayName": "Terrain Debug Switchoff Fetch Surface",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffFetchUniqueScenes",
+      "DisplayName": "Terrain Debug Switchoff Fetch Unique Scenes",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.debug.switchoffRenderLights",
+      "DisplayName": "Terrain Debug Switchoff Render Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.distance10x10",
+      "DisplayName": "Terrain Distance Distance10x10",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.distanceLevel0",
+      "DisplayName": "Terrain Distance Distance Level0",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.mapLodDistance0",
+      "DisplayName": "Terrain Distance Map Lod Distance0",
+      "Value": 2000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.mapLodDistance1",
+      "DisplayName": "Terrain Distance Map Lod Distance1",
+      "Value": 4000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.mapLodDistance2",
+      "DisplayName": "Terrain Distance Map Lod Distance2",
+      "Value": 6000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.mapLodDistance3",
+      "DisplayName": "Terrain Distance Map Lod Distance3",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.minimalSquareOnScreen",
+      "DisplayName": "Terrain Distance Minimal Square On Screen",
+      "Value": 50,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.minimalSquareOnScreenFull",
+      "DisplayName": "Terrain Distance Minimal Square On Screen Full",
+      "Value": 100,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.smallShitDimention",
+      "DisplayName": "Terrain Distance Small Shit Dimention",
+      "Value": 200,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.smokesSceneFarDistance",
+      "DisplayName": "Terrain Distance Smokes Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distance.uniqueSceneFarDistance",
+      "DisplayName": "Terrain Distance Unique Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.beach",
+      "DisplayName": "Terrain Distance Blend Beach",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.fieldFarDistance",
+      "DisplayName": "Terrain Distance Blend Field Far Distance",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.fieldNearDistance",
+      "DisplayName": "Terrain Distance Blend Field Near Distance",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.road",
+      "DisplayName": "Terrain Distance Blend Road",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.subforest",
+      "DisplayName": "Terrain Distance Blend Subforest",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.townFarDistance",
+      "DisplayName": "Terrain Distance Blend Town Far Distance",
+      "Value": 120000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.townLightFarDistance",
+      "DisplayName": "Terrain Distance Blend Town Light Far Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.townLightNearDistance",
+      "DisplayName": "Terrain Distance Blend Town Light Near Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.townNearDistance",
+      "DisplayName": "Terrain Distance Blend Town Near Distance",
+      "Value": 80000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.waterFarDistance",
+      "DisplayName": "Terrain Distance Blend Water Far Distance",
+      "Value": 30000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.distanceBlend.waterNearDistance",
+      "DisplayName": "Terrain Distance Blend Water Near Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.distancFactor.Extreme",
+      "DisplayName": "Terrain Distanc Factor Extreme",
+      "Value": 1.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.distancFactor.High",
+      "DisplayName": "Terrain Distanc Factor High",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.distancFactor.Low",
+      "DisplayName": "Terrain Distanc Factor Low",
+      "Value": 0.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.distancFactor.Medium",
+      "DisplayName": "Terrain Distanc Factor Medium",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.Terrain.distancFactor.Ultra",
+      "DisplayName": "Terrain Distanc Factor Ultra",
+      "Value": 1.2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.farDistance",
+      "DisplayName": "Terrain District Far Distance",
+      "Value": 13000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.farFullRenderDistance",
+      "DisplayName": "Terrain District Far Full Render Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lampFarDistance",
+      "DisplayName": "Terrain District Lamp Far Distance",
+      "Value": 10000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.maxDistrictsAround",
+      "DisplayName": "Terrain District Max Districts Around",
+      "Value": 100000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.nearDistance",
+      "DisplayName": "Terrain District Near Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.nearFullRenderDistance",
+      "DisplayName": "Terrain District Near Full Render Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.renderType",
+      "DisplayName": "Terrain District Render Type",
+      "Value": "simple",
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.splineBlockFarDistance",
+      "DisplayName": "Terrain District Spline Block Far Distance",
+      "Value": 500.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.dir",
+      "DisplayName": "Terrain Fan Dir",
+      "Value": [
+        0,
+        -1,
+        0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.frequency",
+      "DisplayName": "Terrain Fan Frequency",
+      "Value": 15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.oscillator",
+      "DisplayName": "Terrain Fan Oscillator",
+      "Value": 0.2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.pos",
+      "DisplayName": "Terrain Fan Pos",
+      "Value": [
+        -117,
+        0.3,
+        120
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.power",
+      "DisplayName": "Terrain Fan Power",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.radius",
+      "DisplayName": "Terrain Fan Radius",
+      "Value": 30,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fan.read",
+      "DisplayName": "Terrain Fan Read",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fog.back",
+      "DisplayName": "Terrain Fog Back",
+      "Value": 70000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.fog.front",
+      "DisplayName": "Terrain Fog Front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.infrared.landDarkness",
+      "DisplayName": "Terrain Infrared Land Darkness",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.infrared.landDetail",
+      "DisplayName": "Terrain Infrared Land Detail",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.infrared.riverDarkness",
+      "DisplayName": "Terrain Infrared River Darkness",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.infrared.roadDarkness",
+      "DisplayName": "Terrain Infrared Road Darkness",
+      "Value": 1.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.infrared.runwayDarkness",
+      "DisplayName": "Terrain Infrared Runway Darkness",
+      "Value": 1.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.lampOn",
+      "DisplayName": "Terrain Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.maxAlpha",
+      "DisplayName": "Terrain Lamp Max Alpha",
+      "Value": 0.26,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain Lamp Max Alpha Distance",
+      "Value": 1300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain Lamp Max Brightness Distance",
+      "Value": 15000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.maxDistance",
+      "DisplayName": "Terrain Lamp Max Distance",
+      "Value": 3385.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.maxSize",
+      "DisplayName": "Terrain Lamp Max Size",
+      "Value": 5.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.minAlpha",
+      "DisplayName": "Terrain Lamp Min Alpha",
+      "Value": 0.36,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.minAlphaDistance",
+      "DisplayName": "Terrain Lamp Min Alpha Distance",
+      "Value": 250.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.minDistance",
+      "DisplayName": "Terrain Lamp Min Distance",
+      "Value": 100.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.spriteScale",
+      "DisplayName": "Terrain Lamp Sprite Scale",
+      "Value": 0.0025,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp.staticSize",
+      "DisplayName": "Terrain Lamp Static Size",
+      "Value": 2.9,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.dsLightBrightness",
+      "DisplayName": "Terrain Lamp31 Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.dsLightRadius",
+      "DisplayName": "Terrain Lamp31 Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.lampOn",
+      "DisplayName": "Terrain Lamp31 Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.maxAlpha",
+      "DisplayName": "Terrain Lamp31 Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.maxAlphaDistance",
+      "DisplayName": "Terrain Lamp31 Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.maxBrightnessDistance",
+      "DisplayName": "Terrain Lamp31 Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.maxDistance",
+      "DisplayName": "Terrain Lamp31 Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.maxSize",
+      "DisplayName": "Terrain Lamp31 Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.minAlpha",
+      "DisplayName": "Terrain Lamp31 Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.minAlphaDistance",
+      "DisplayName": "Terrain Lamp31 Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.minBrightnessDistance",
+      "DisplayName": "Terrain Lamp31 Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.minDistance",
+      "DisplayName": "Terrain Lamp31 Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.spriteScale",
+      "DisplayName": "Terrain Lamp31 Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.lamp31.staticSize",
+      "DisplayName": "Terrain Lamp31 Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_detailNoise.Height",
+      "DisplayName": "Terrain Land Detail Noise Height",
+      "Value": 300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_detailNoise.Slope",
+      "DisplayName": "Terrain Land Detail Noise Slope",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise1back",
+      "DisplayName": "Terrain Land Noise Noise1back",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise1bottom",
+      "DisplayName": "Terrain Land Noise Noise1bottom",
+      "Value": 2000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise1front",
+      "DisplayName": "Terrain Land Noise Noise1front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise1PerSquare",
+      "DisplayName": "Terrain Land Noise Noise1 Per Square",
+      "Value": 2.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise1top",
+      "DisplayName": "Terrain Land Noise Noise1top",
+      "Value": 8000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noise2PerSquare",
+      "DisplayName": "Terrain Land Noise Noise2 Per Square",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noisemax",
+      "DisplayName": "Terrain Land Noise Noisemax",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.land_noise.noisemin",
+      "DisplayName": "Terrain Land Noise Noisemin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.layerfog.fog_begin",
+      "DisplayName": "Terrain Layerfog Fog Begin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.layerfog.fog_color",
+      "DisplayName": "Terrain Layerfog Fog Color",
+      "Value": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.layerfog.fog_end",
+      "DisplayName": "Terrain Layerfog Fog End",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.layerfog.fog_strength",
+      "DisplayName": "Terrain Layerfog Fog Strength",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.noiseEndDistance",
+      "DisplayName": "Terrain Noise Noise End Distance",
+      "Value": 200.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.noiseMaxBlend",
+      "DisplayName": "Terrain Noise Noise Max Blend",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.noiseScale",
+      "DisplayName": "Terrain Noise Noise Scale",
+      "Value": 15.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.noiseStartDistance",
+      "DisplayName": "Terrain Noise Noise Start Distance",
+      "Value": 3000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.rampNoisePower",
+      "DisplayName": "Terrain Noise Ramp Noise Power",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.rampNoiseScale",
+      "DisplayName": "Terrain Noise Ramp Noise Scale",
+      "Value": 17.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.smallNoiseEndDistance",
+      "DisplayName": "Terrain Noise Small Noise End Distance",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.smallNoiseMaxBlend",
+      "DisplayName": "Terrain Noise Small Noise Max Blend",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.smallNoiseScale",
+      "DisplayName": "Terrain Noise Small Noise Scale",
+      "Value": 450.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.noise.smallNoiseStartDistance",
+      "DisplayName": "Terrain Noise Small Noise Start Distance",
+      "Value": 80.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainMapMFD.distance.mapLodDistance0",
+      "DisplayName": "Terrain Map M F D Distance Map Lod Distance0",
+      "Value": 25000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainMapMFD.distance.mapLodDistance1",
+      "DisplayName": "Terrain Map M F D Distance Map Lod Distance1",
+      "Value": 50000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainMapMFD.distance.mapLodDistance2",
+      "DisplayName": "Terrain Map M F D Distance Map Lod Distance2",
+      "Value": 100000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainMapMFD.distance.mapLodDistance3",
+      "DisplayName": "Terrain Map M F D Distance Map Lod Distance3",
+      "Value": 200000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffDrawRoutine",
+      "DisplayName": "Terrain Mirror Debug Switchoff Draw Routine",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffEdm",
+      "DisplayName": "Terrain Mirror Debug Switchoff Edm",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffFetchDistricts",
+      "DisplayName": "Terrain Mirror Debug Switchoff Fetch Districts",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffFetchLights",
+      "DisplayName": "Terrain Mirror Debug Switchoff Fetch Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffFetchSurface",
+      "DisplayName": "Terrain Mirror Debug Switchoff Fetch Surface",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffFetchUniqueScenes",
+      "DisplayName": "Terrain Mirror Debug Switchoff Fetch Unique Scenes",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.debug.switchoffRenderLights",
+      "DisplayName": "Terrain Mirror Debug Switchoff Render Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.distance10x10",
+      "DisplayName": "Terrain Mirror Distance Distance10x10",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.distanceLevel0",
+      "DisplayName": "Terrain Mirror Distance Distance Level0",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.mapLodDistance0",
+      "DisplayName": "Terrain Mirror Distance Map Lod Distance0",
+      "Value": 2000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.mapLodDistance1",
+      "DisplayName": "Terrain Mirror Distance Map Lod Distance1",
+      "Value": 4000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.mapLodDistance2",
+      "DisplayName": "Terrain Mirror Distance Map Lod Distance2",
+      "Value": 6000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.mapLodDistance3",
+      "DisplayName": "Terrain Mirror Distance Map Lod Distance3",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.minimalSquareOnScreen",
+      "DisplayName": "Terrain Mirror Distance Minimal Square On Screen",
+      "Value": 50,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.minimalSquareOnScreenFull",
+      "DisplayName": "Terrain Mirror Distance Minimal Square On Screen Full",
+      "Value": 100,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.smallShitDimention",
+      "DisplayName": "Terrain Mirror Distance Small Shit Dimention",
+      "Value": 200,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.smokesSceneFarDistance",
+      "DisplayName": "Terrain Mirror Distance Smokes Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distance.uniqueSceneFarDistance",
+      "DisplayName": "Terrain Mirror Distance Unique Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.beach",
+      "DisplayName": "Terrain Mirror Distance Blend Beach",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.fieldFarDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Field Far Distance",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.fieldNearDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Field Near Distance",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.road",
+      "DisplayName": "Terrain Mirror Distance Blend Road",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.subforest",
+      "DisplayName": "Terrain Mirror Distance Blend Subforest",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.townFarDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Town Far Distance",
+      "Value": 120000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.townLightFarDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Town Light Far Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.townLightNearDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Town Light Near Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.townNearDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Town Near Distance",
+      "Value": 80000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.waterFarDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Water Far Distance",
+      "Value": 30000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.distanceBlend.waterNearDistance",
+      "DisplayName": "Terrain Mirror Distance Blend Water Near Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.farDistance",
+      "DisplayName": "Terrain Mirror District Far Distance",
+      "Value": 13000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.farFullRenderDistance",
+      "DisplayName": "Terrain Mirror District Far Full Render Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lampFarDistance",
+      "DisplayName": "Terrain Mirror District Lamp Far Distance",
+      "Value": 10000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.maxDistrictsAround",
+      "DisplayName": "Terrain Mirror District Max Districts Around",
+      "Value": 100000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.nearDistance",
+      "DisplayName": "Terrain Mirror District Near Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.nearFullRenderDistance",
+      "DisplayName": "Terrain Mirror District Near Full Render Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.renderType",
+      "DisplayName": "Terrain Mirror District Render Type",
+      "Value": "simple",
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.splineBlockFarDistance",
+      "DisplayName": "Terrain Mirror District Spline Block Far Distance",
+      "Value": 500.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.dir",
+      "DisplayName": "Terrain Mirror Fan Dir",
+      "Value": [
+        0,
+        -1,
+        0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.frequency",
+      "DisplayName": "Terrain Mirror Fan Frequency",
+      "Value": 15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.oscillator",
+      "DisplayName": "Terrain Mirror Fan Oscillator",
+      "Value": 0.2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.pos",
+      "DisplayName": "Terrain Mirror Fan Pos",
+      "Value": [
+        -117,
+        0.3,
+        120
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.power",
+      "DisplayName": "Terrain Mirror Fan Power",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.radius",
+      "DisplayName": "Terrain Mirror Fan Radius",
+      "Value": 30,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fan.read",
+      "DisplayName": "Terrain Mirror Fan Read",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.flat_shadow.farDistance",
+      "DisplayName": "Terrain Mirror Flat Shadow Far Distance",
+      "Value": 1500.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.flat_shadow.fullFarDistance",
+      "DisplayName": "Terrain Mirror Flat Shadow Full Far Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fog.back",
+      "DisplayName": "Terrain Mirror Fog Back",
+      "Value": 70000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.fog.front",
+      "DisplayName": "Terrain Mirror Fog Front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.infrared.landDarkness",
+      "DisplayName": "Terrain Mirror Infrared Land Darkness",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.infrared.landDetail",
+      "DisplayName": "Terrain Mirror Infrared Land Detail",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.infrared.riverDarkness",
+      "DisplayName": "Terrain Mirror Infrared River Darkness",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.infrared.roadDarkness",
+      "DisplayName": "Terrain Mirror Infrared Road Darkness",
+      "Value": 1.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.infrared.runwayDarkness",
+      "DisplayName": "Terrain Mirror Infrared Runway Darkness",
+      "Value": 1.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.lampOn",
+      "DisplayName": "Terrain Mirror Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.maxAlpha",
+      "DisplayName": "Terrain Mirror Lamp Max Alpha",
+      "Value": 0.26,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain Mirror Lamp Max Alpha Distance",
+      "Value": 1300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain Mirror Lamp Max Brightness Distance",
+      "Value": 15000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.maxDistance",
+      "DisplayName": "Terrain Mirror Lamp Max Distance",
+      "Value": 3385.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.maxSize",
+      "DisplayName": "Terrain Mirror Lamp Max Size",
+      "Value": 5.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.minAlpha",
+      "DisplayName": "Terrain Mirror Lamp Min Alpha",
+      "Value": 0.36,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.minAlphaDistance",
+      "DisplayName": "Terrain Mirror Lamp Min Alpha Distance",
+      "Value": 250.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain Mirror Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.minDistance",
+      "DisplayName": "Terrain Mirror Lamp Min Distance",
+      "Value": 100.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.spriteScale",
+      "DisplayName": "Terrain Mirror Lamp Sprite Scale",
+      "Value": 0.0025,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp.staticSize",
+      "DisplayName": "Terrain Mirror Lamp Static Size",
+      "Value": 2.9,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.dsLightBrightness",
+      "DisplayName": "Terrain Mirror Lamp31 Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.dsLightRadius",
+      "DisplayName": "Terrain Mirror Lamp31 Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.lampOn",
+      "DisplayName": "Terrain Mirror Lamp31 Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.maxAlpha",
+      "DisplayName": "Terrain Mirror Lamp31 Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.maxAlphaDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.maxBrightnessDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.maxDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.maxSize",
+      "DisplayName": "Terrain Mirror Lamp31 Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.minAlpha",
+      "DisplayName": "Terrain Mirror Lamp31 Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.minAlphaDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.minBrightnessDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.minDistance",
+      "DisplayName": "Terrain Mirror Lamp31 Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.spriteScale",
+      "DisplayName": "Terrain Mirror Lamp31 Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.lamp31.staticSize",
+      "DisplayName": "Terrain Mirror Lamp31 Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_detailNoise.Height",
+      "DisplayName": "Terrain Mirror Land Detail Noise Height",
+      "Value": 300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_detailNoise.Slope",
+      "DisplayName": "Terrain Mirror Land Detail Noise Slope",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise1back",
+      "DisplayName": "Terrain Mirror Land Noise Noise1back",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise1bottom",
+      "DisplayName": "Terrain Mirror Land Noise Noise1bottom",
+      "Value": 2000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise1front",
+      "DisplayName": "Terrain Mirror Land Noise Noise1front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise1PerSquare",
+      "DisplayName": "Terrain Mirror Land Noise Noise1 Per Square",
+      "Value": 2.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise1top",
+      "DisplayName": "Terrain Mirror Land Noise Noise1top",
+      "Value": 8000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noise2PerSquare",
+      "DisplayName": "Terrain Mirror Land Noise Noise2 Per Square",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noisemax",
+      "DisplayName": "Terrain Mirror Land Noise Noisemax",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.land_noise.noisemin",
+      "DisplayName": "Terrain Mirror Land Noise Noisemin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.layerfog.fog_begin",
+      "DisplayName": "Terrain Mirror Layerfog Fog Begin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.layerfog.fog_color",
+      "DisplayName": "Terrain Mirror Layerfog Fog Color",
+      "Value": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.layerfog.fog_end",
+      "DisplayName": "Terrain Mirror Layerfog Fog End",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.layerfog.fog_strength",
+      "DisplayName": "Terrain Mirror Layerfog Fog Strength",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.noiseEndDistance",
+      "DisplayName": "Terrain Mirror Noise Noise End Distance",
+      "Value": 200.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.noiseMaxBlend",
+      "DisplayName": "Terrain Mirror Noise Noise Max Blend",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.noiseScale",
+      "DisplayName": "Terrain Mirror Noise Noise Scale",
+      "Value": 15.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.noiseStartDistance",
+      "DisplayName": "Terrain Mirror Noise Noise Start Distance",
+      "Value": 3000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.rampNoisePower",
+      "DisplayName": "Terrain Mirror Noise Ramp Noise Power",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.rampNoiseScale",
+      "DisplayName": "Terrain Mirror Noise Ramp Noise Scale",
+      "Value": 17.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.smallNoiseEndDistance",
+      "DisplayName": "Terrain Mirror Noise Small Noise End Distance",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.smallNoiseMaxBlend",
+      "DisplayName": "Terrain Mirror Noise Small Noise Max Blend",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.smallNoiseScale",
+      "DisplayName": "Terrain Mirror Noise Small Noise Scale",
+      "Value": 450.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.noise.smallNoiseStartDistance",
+      "DisplayName": "Terrain Mirror Noise Small Noise Start Distance",
+      "Value": 80.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffDrawRoutine",
+      "DisplayName": "Terrain Reflection Debug Switchoff Draw Routine",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffEdm",
+      "DisplayName": "Terrain Reflection Debug Switchoff Edm",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffFetchDistricts",
+      "DisplayName": "Terrain Reflection Debug Switchoff Fetch Districts",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffFetchLights",
+      "DisplayName": "Terrain Reflection Debug Switchoff Fetch Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffFetchSurface",
+      "DisplayName": "Terrain Reflection Debug Switchoff Fetch Surface",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffFetchUniqueScenes",
+      "DisplayName": "Terrain Reflection Debug Switchoff Fetch Unique Scenes",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.debug.switchoffRenderLights",
+      "DisplayName": "Terrain Reflection Debug Switchoff Render Lights",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.distance10x10",
+      "DisplayName": "Terrain Reflection Distance Distance10x10",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.distanceLevel0",
+      "DisplayName": "Terrain Reflection Distance Distance Level0",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.mapLodDistance0",
+      "DisplayName": "Terrain Reflection Distance Map Lod Distance0",
+      "Value": 2000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.mapLodDistance1",
+      "DisplayName": "Terrain Reflection Distance Map Lod Distance1",
+      "Value": 4000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.mapLodDistance2",
+      "DisplayName": "Terrain Reflection Distance Map Lod Distance2",
+      "Value": 6000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.mapLodDistance3",
+      "DisplayName": "Terrain Reflection Distance Map Lod Distance3",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.minimalSquareOnScreen",
+      "DisplayName": "Terrain Reflection Distance Minimal Square On Screen",
+      "Value": 50,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.minimalSquareOnScreenFull",
+      "DisplayName": "Terrain Reflection Distance Minimal Square On Screen Full",
+      "Value": 100,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.smallShitDimention",
+      "DisplayName": "Terrain Reflection Distance Small Shit Dimention",
+      "Value": 200,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.smokesSceneFarDistance",
+      "DisplayName": "Terrain Reflection Distance Smokes Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distance.uniqueSceneFarDistance",
+      "DisplayName": "Terrain Reflection Distance Unique Scene Far Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.beach",
+      "DisplayName": "Terrain Reflection Distance Blend Beach",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.fieldFarDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Field Far Distance",
+      "Value": 140000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.fieldNearDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Field Near Distance",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.road",
+      "DisplayName": "Terrain Reflection Distance Blend Road",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.subforest",
+      "DisplayName": "Terrain Reflection Distance Blend Subforest",
+      "Value": [
+        10000,
+        20000
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.townFarDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Town Far Distance",
+      "Value": 120000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.townLightFarDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Town Light Far Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.townLightNearDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Town Light Near Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.townNearDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Town Near Distance",
+      "Value": 80000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.waterFarDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Water Far Distance",
+      "Value": 30000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.distanceBlend.waterNearDistance",
+      "DisplayName": "Terrain Reflection Distance Blend Water Near Distance",
+      "Value": 20000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.farDistance",
+      "DisplayName": "Terrain Reflection District Far Distance",
+      "Value": 13000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.farFullRenderDistance",
+      "DisplayName": "Terrain Reflection District Far Full Render Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lampFarDistance",
+      "DisplayName": "Terrain Reflection District Lamp Far Distance",
+      "Value": 10000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.maxDistrictsAround",
+      "DisplayName": "Terrain Reflection District Max Districts Around",
+      "Value": 100000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.nearDistance",
+      "DisplayName": "Terrain Reflection District Near Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.nearFullRenderDistance",
+      "DisplayName": "Terrain Reflection District Near Full Render Distance",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.renderType",
+      "DisplayName": "Terrain Reflection District Render Type",
+      "Value": "simple",
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.splineBlockFarDistance",
+      "DisplayName": "Terrain Reflection District Spline Block Far Distance",
+      "Value": 500.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.dir",
+      "DisplayName": "Terrain Reflection Fan Dir",
+      "Value": [
+        0,
+        -1,
+        0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.frequency",
+      "DisplayName": "Terrain Reflection Fan Frequency",
+      "Value": 15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.oscillator",
+      "DisplayName": "Terrain Reflection Fan Oscillator",
+      "Value": 0.2,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.pos",
+      "DisplayName": "Terrain Reflection Fan Pos",
+      "Value": [
+        -117,
+        0.3,
+        120
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.power",
+      "DisplayName": "Terrain Reflection Fan Power",
+      "Value": 8000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.radius",
+      "DisplayName": "Terrain Reflection Fan Radius",
+      "Value": 30,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fan.read",
+      "DisplayName": "Terrain Reflection Fan Read",
+      "Value": 0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.flat_shadow.farDistance",
+      "DisplayName": "Terrain Reflection Flat Shadow Far Distance",
+      "Value": 1500.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.flat_shadow.fullFarDistance",
+      "DisplayName": "Terrain Reflection Flat Shadow Full Far Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fog.back",
+      "DisplayName": "Terrain Reflection Fog Back",
+      "Value": 70000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.fog.front",
+      "DisplayName": "Terrain Reflection Fog Front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.infrared.landDarkness",
+      "DisplayName": "Terrain Reflection Infrared Land Darkness",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.infrared.landDetail",
+      "DisplayName": "Terrain Reflection Infrared Land Detail",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.infrared.riverDarkness",
+      "DisplayName": "Terrain Reflection Infrared River Darkness",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.infrared.roadDarkness",
+      "DisplayName": "Terrain Reflection Infrared Road Darkness",
+      "Value": 1.5,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.infrared.runwayDarkness",
+      "DisplayName": "Terrain Reflection Infrared Runway Darkness",
+      "Value": 1.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.lampOn",
+      "DisplayName": "Terrain Reflection Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.maxAlpha",
+      "DisplayName": "Terrain Reflection Lamp Max Alpha",
+      "Value": 0.26,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain Reflection Lamp Max Alpha Distance",
+      "Value": 1300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain Reflection Lamp Max Brightness Distance",
+      "Value": 15000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.maxDistance",
+      "DisplayName": "Terrain Reflection Lamp Max Distance",
+      "Value": 3385.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.maxSize",
+      "DisplayName": "Terrain Reflection Lamp Max Size",
+      "Value": 5.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.minAlpha",
+      "DisplayName": "Terrain Reflection Lamp Min Alpha",
+      "Value": 0.36,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.minAlphaDistance",
+      "DisplayName": "Terrain Reflection Lamp Min Alpha Distance",
+      "Value": 250.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain Reflection Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.minDistance",
+      "DisplayName": "Terrain Reflection Lamp Min Distance",
+      "Value": 100.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.spriteScale",
+      "DisplayName": "Terrain Reflection Lamp Sprite Scale",
+      "Value": 0.0025,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp.staticSize",
+      "DisplayName": "Terrain Reflection Lamp Static Size",
+      "Value": 2.9,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.dsLightBrightness",
+      "DisplayName": "Terrain Reflection Lamp31 Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.dsLightRadius",
+      "DisplayName": "Terrain Reflection Lamp31 Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.lampOn",
+      "DisplayName": "Terrain Reflection Lamp31 Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.maxAlpha",
+      "DisplayName": "Terrain Reflection Lamp31 Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.maxAlphaDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.maxBrightnessDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.maxDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.maxSize",
+      "DisplayName": "Terrain Reflection Lamp31 Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.minAlpha",
+      "DisplayName": "Terrain Reflection Lamp31 Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.minAlphaDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.minBrightnessDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.minDistance",
+      "DisplayName": "Terrain Reflection Lamp31 Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.spriteScale",
+      "DisplayName": "Terrain Reflection Lamp31 Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.lamp31.staticSize",
+      "DisplayName": "Terrain Reflection Lamp31 Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_detailNoise.Height",
+      "DisplayName": "Terrain Reflection Land Detail Noise Height",
+      "Value": 300.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_detailNoise.Slope",
+      "DisplayName": "Terrain Reflection Land Detail Noise Slope",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise1back",
+      "DisplayName": "Terrain Reflection Land Noise Noise1back",
+      "Value": 40000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise1bottom",
+      "DisplayName": "Terrain Reflection Land Noise Noise1bottom",
+      "Value": 2000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise1front",
+      "DisplayName": "Terrain Reflection Land Noise Noise1front",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise1PerSquare",
+      "DisplayName": "Terrain Reflection Land Noise Noise1 Per Square",
+      "Value": 2.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise1top",
+      "DisplayName": "Terrain Reflection Land Noise Noise1top",
+      "Value": 8000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noise2PerSquare",
+      "DisplayName": "Terrain Reflection Land Noise Noise2 Per Square",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noisemax",
+      "DisplayName": "Terrain Reflection Land Noise Noisemax",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.land_noise.noisemin",
+      "DisplayName": "Terrain Reflection Land Noise Noisemin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.layerfog.fog_begin",
+      "DisplayName": "Terrain Reflection Layerfog Fog Begin",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.layerfog.fog_color",
+      "DisplayName": "Terrain Reflection Layerfog Fog Color",
+      "Value": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        },
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.layerfog.fog_end",
+      "DisplayName": "Terrain Reflection Layerfog Fog End",
+      "Value": 1000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.layerfog.fog_strength",
+      "DisplayName": "Terrain Reflection Layerfog Fog Strength",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.noiseEndDistance",
+      "DisplayName": "Terrain Reflection Noise Noise End Distance",
+      "Value": 200.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.noiseMaxBlend",
+      "DisplayName": "Terrain Reflection Noise Noise Max Blend",
+      "Value": 0.7,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.noiseScale",
+      "DisplayName": "Terrain Reflection Noise Noise Scale",
+      "Value": 15.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.noiseStartDistance",
+      "DisplayName": "Terrain Reflection Noise Noise Start Distance",
+      "Value": 3000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.rampNoisePower",
+      "DisplayName": "Terrain Reflection Noise Ramp Noise Power",
+      "Value": 0.8,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.rampNoiseScale",
+      "DisplayName": "Terrain Reflection Noise Ramp Noise Scale",
+      "Value": 17.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.smallNoiseEndDistance",
+      "DisplayName": "Terrain Reflection Noise Small Noise End Distance",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.smallNoiseMaxBlend",
+      "DisplayName": "Terrain Reflection Noise Small Noise Max Blend",
+      "Value": 0.6,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.smallNoiseScale",
+      "DisplayName": "Terrain Reflection Noise Small Noise Scale",
+      "Value": 450.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.noise.smallNoiseStartDistance",
+      "DisplayName": "Terrain Reflection Noise Small Noise Start Distance",
+      "Value": 80.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.a-10a.gain",
+      "DisplayName": "Cockpit World A-10A Gain",
+      "Value": 0.12,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.a-10a.lowpass",
+      "DisplayName": "Cockpit World A-10A Lowpass",
+      "Value": 1000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.A-10C.gain",
+      "DisplayName": "Cockpit World A-10 C Gain",
+      "Value": 0.12,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.A-10C.lowpass",
+      "DisplayName": "Cockpit World A-10 C Lowpass",
+      "Value": 1000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.Bf-109K-4.gain",
+      "DisplayName": "Cockpit World Bf-109 K-4 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.Bf-109K-4.lowpass",
+      "DisplayName": "Cockpit World Bf-109 K-4 Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-15C.gain",
+      "DisplayName": "Cockpit World F-15 C Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-15C.lowpass",
+      "DisplayName": "Cockpit World F-15 C Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-5E-3.gain",
+      "DisplayName": "Cockpit World F-5 E-3 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-5E-3.lowpass",
+      "DisplayName": "Cockpit World F-5 E-3 Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-86F.gain",
+      "DisplayName": "Cockpit World F-86 F Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.F-86F.lowpass",
+      "DisplayName": "Cockpit World F-86 F Lowpass",
+      "Value": 1500,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.FA-18C_hornet.gain",
+      "DisplayName": "Cockpit World F A-18 C Hornet Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.FA-18C_hornet.lowpass",
+      "DisplayName": "Cockpit World F A-18 C Hornet Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.FW-190D9.gain",
+      "DisplayName": "Cockpit World F W-190 D9 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.FW-190D9.lowpass",
+      "DisplayName": "Cockpit World F W-190 D9 Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.ka-50.gain",
+      "DisplayName": "Cockpit World Ka-50 Gain",
+      "Value": 0.3,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.ka-50.lowpass",
+      "DisplayName": "Cockpit World Ka-50 Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.L-39C.gain",
+      "DisplayName": "Cockpit World L-39 C Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.L-39C.lowpass",
+      "DisplayName": "Cockpit World L-39 C Lowpass",
+      "Value": 1500,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.L-39ZA.gain",
+      "DisplayName": "Cockpit World L-39 Z A Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.L-39ZA.lowpass",
+      "DisplayName": "Cockpit World L-39 Z A Lowpass",
+      "Value": 1500,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mi-8mt.gain",
+      "DisplayName": "Cockpit World Mi-8Mt Gain",
+      "Value": 0.3,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mi-8mt.lowpass",
+      "DisplayName": "Cockpit World Mi-8Mt Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.MiG-15bis.gain",
+      "DisplayName": "Cockpit World Mi G-15Bis Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.MiG-15bis.lowpass",
+      "DisplayName": "Cockpit World Mi G-15Bis Lowpass",
+      "Value": 1500,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mig-29.gain",
+      "DisplayName": "Cockpit World Mig-29 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mig-29.lowpass",
+      "DisplayName": "Cockpit World Mig-29 Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mig-29c.gain",
+      "DisplayName": "Cockpit World Mig-29C Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.mig-29c.lowpass",
+      "DisplayName": "Cockpit World Mig-29C Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.P-51D.gain",
+      "DisplayName": "Cockpit World P-51 D Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.P-51D.lowpass",
+      "DisplayName": "Cockpit World P-51 D Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.SpitfireLFMkIX.gain",
+      "DisplayName": "Cockpit World Spitfire L F Mk I X Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.SpitfireLFMkIX.lowpass",
+      "DisplayName": "Cockpit World Spitfire L F Mk I X Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-25.gain",
+      "DisplayName": "Cockpit World Su-25 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-25.lowpass",
+      "DisplayName": "Cockpit World Su-25 Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-25T.gain",
+      "DisplayName": "Cockpit World Su-25 T Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-25T.lowpass",
+      "DisplayName": "Cockpit World Su-25 T Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-27.gain",
+      "DisplayName": "Cockpit World Su-27 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-27.lowpass",
+      "DisplayName": "Cockpit World Su-27 Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-33.gain",
+      "DisplayName": "Cockpit World Su-33 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.su-33.lowpass",
+      "DisplayName": "Cockpit World Su-33 Lowpass",
+      "Value": 800,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.TF-51D.gain",
+      "DisplayName": "Cockpit World T F-51 D Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.TF-51D.lowpass",
+      "DisplayName": "Cockpit World T F-51 D Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.UH-1H.gain",
+      "DisplayName": "Cockpit World U H-1 H Gain",
+      "Value": 0.3,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.UH-1H.lowpass",
+      "DisplayName": "Cockpit World U H-1 H Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.Yak-52.gain",
+      "DisplayName": "Cockpit World Yak-52 Gain",
+      "Value": 0.15,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.sound.cockpit_world.Yak-52.lowpass",
+      "DisplayName": "Cockpit World Yak-52 Lowpass",
+      "Value": 3000,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.dsLightBrightness",
+      "DisplayName": "Terrain District Lamp Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.dsLightRadius",
+      "DisplayName": "Terrain District Lamp Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.lampOn",
+      "DisplayName": "Terrain District Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.maxAlpha",
+      "DisplayName": "Terrain District Lamp Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain District Lamp Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain District Lamp Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.maxDistance",
+      "DisplayName": "Terrain District Lamp Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.maxSize",
+      "DisplayName": "Terrain District Lamp Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.minAlpha",
+      "DisplayName": "Terrain District Lamp Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.minAlphaDistance",
+      "DisplayName": "Terrain District Lamp Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain District Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.minDistance",
+      "DisplayName": "Terrain District Lamp Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.spriteScale",
+      "DisplayName": "Terrain District Lamp Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrain.district.lamp.staticSize",
+      "DisplayName": "Terrain District Lamp Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.dsLightBrightness",
+      "DisplayName": "Terrain Mirror District Lamp Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.dsLightRadius",
+      "DisplayName": "Terrain Mirror District Lamp Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.lampOn",
+      "DisplayName": "Terrain Mirror District Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.maxAlpha",
+      "DisplayName": "Terrain Mirror District Lamp Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain Mirror District Lamp Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain Mirror District Lamp Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.maxDistance",
+      "DisplayName": "Terrain Mirror District Lamp Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.maxSize",
+      "DisplayName": "Terrain Mirror District Lamp Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.minAlpha",
+      "DisplayName": "Terrain Mirror District Lamp Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.minAlphaDistance",
+      "DisplayName": "Terrain Mirror District Lamp Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain Mirror District Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.minDistance",
+      "DisplayName": "Terrain Mirror District Lamp Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.spriteScale",
+      "DisplayName": "Terrain Mirror District Lamp Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainmirror.district.lamp.staticSize",
+      "DisplayName": "Terrain Mirror District Lamp Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.dsLightBrightness",
+      "DisplayName": "Terrain Reflection District Lamp Ds Light Brightness",
+      "Value": 4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.dsLightRadius",
+      "DisplayName": "Terrain Reflection District Lamp Ds Light Radius",
+      "Value": 60,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.lampOn",
+      "DisplayName": "Terrain Reflection District Lamp Lamp On",
+      "Value": 1,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.maxAlpha",
+      "DisplayName": "Terrain Reflection District Lamp Max Alpha",
+      "Value": 1.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.maxAlphaDistance",
+      "DisplayName": "Terrain Reflection District Lamp Max Alpha Distance",
+      "Value": 400.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.maxBrightnessDistance",
+      "DisplayName": "Terrain Reflection District Lamp Max Brightness Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.maxDistance",
+      "DisplayName": "Terrain Reflection District Lamp Max Distance",
+      "Value": 10000.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.maxSize",
+      "DisplayName": "Terrain Reflection District Lamp Max Size",
+      "Value": 8.4,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.minAlpha",
+      "DisplayName": "Terrain Reflection District Lamp Min Alpha",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.minAlphaDistance",
+      "DisplayName": "Terrain Reflection District Lamp Min Alpha Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.minBrightnessDistance",
+      "DisplayName": "Terrain Reflection District Lamp Min Brightness Distance",
+      "Value": 0.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.minDistance",
+      "DisplayName": "Terrain Reflection District Lamp Min Distance",
+      "Value": 150.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.spriteScale",
+      "DisplayName": "Terrain Reflection District Lamp Sprite Scale",
+      "Value": 0.001,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    },
+    {
+      "Id": "options.graphics.terrainreflection.district.lamp.staticSize",
+      "DisplayName": "Terrain Reflection District Lamp Static Size",
+      "Value": 4.0,
+      "MinMax": [
+        {
+          "Min": 0.0,
+          "Max": 0.0
+        }
+      ]
+    }*/
+  ]

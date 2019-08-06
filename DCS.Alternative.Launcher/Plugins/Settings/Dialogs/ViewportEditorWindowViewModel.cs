@@ -1,41 +1,49 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Media;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
+using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
+using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 {
     public class ViewportEditorWindowViewModel
     {
         private readonly Module _module;
+        private readonly ViewportDevice[] _devices;
         private readonly ISettingsService _settingsService;
-        private readonly string _monitorId;
+        public readonly string MonitorId;
 
-        public ViewportEditorWindowViewModel(IContainer container, bool isPreview, string monitorId, Module module, ViewportModel[] viewports)
+        public ViewportEditorWindowViewModel(IContainer container, bool isPreview, string monitorId, Module module, ViewportDevice[] devices, ViewportModel[] viewports)
         {
             _module = module;
-            _monitorId = monitorId;
+            MonitorId = monitorId;
             _settingsService = container.Resolve<ISettingsService>();
+            _devices = devices;
 
             foreach (var viewport in viewports)
             {
                 Viewports.Add(viewport);
             }
 
-            IsPreview.Value = !isPreview;
+            IsNotPreview.Value = !isPreview;
 
-            AddViewportCommand = new ReactiveCommand(IsPreview.AsObservable(), isPreview);
-            DeleteViewportCommand = new ReactiveCommand<ViewportModel>(IsPreview.AsObservable(), isPreview);
-            SaveCommand = new ReactiveCommand(IsPreview.AsObservable(), isPreview);
-            CancelCommand = new ReactiveCommand(IsPreview.AsObservable(), isPreview);
+            var canAddViewportPredicate = new Func<bool>(() => IsNotPreview.Value && devices.Any(d => Viewports.All(v => d.ViewportName != v.Name.Value)));
+            var canAddViewportObservable = IsNotPreview.Select(v => Unit.Default).Merge(Viewports.Select(v => Unit.Default).ToObservable()).Select(v => canAddViewportPredicate());
 
-            CancelCommand.Subscribe(OnAddViewport);
+            AddViewportCommand = new ReactiveCommand(canAddViewportObservable, canAddViewportPredicate());
+            DeleteViewportCommand = new ReactiveCommand<ViewportModel>(IsNotPreview.AsObservable(), isPreview);
+            SaveCommand = new ReactiveCommand(IsNotPreview.AsObservable(), isPreview);
+            CancelCommand = new ReactiveCommand(IsNotPreview.AsObservable(), isPreview);
+
+            AddViewportCommand.Subscribe(OnAddViewport);
             DeleteViewportCommand.Subscribe(OnDeleteViewport);
             SaveCommand.Subscribe(OnSave);
             CancelCommand.Subscribe(OnCancel);
@@ -43,14 +51,20 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
         private void OnCancel()
         {
+            DialogResult.Value = false;
         }
 
         private void OnSave()
         {
+            DialogResult.Value = true;
         }
 
-
-        public ReactiveProperty<bool> IsPreview
+        public ReactiveProperty<bool?> DialogResult
+        {
+            get;
+        } = new ReactiveProperty<bool?>();
+        
+        public ReactiveProperty<bool> IsNotPreview
         {
             get;
         } = new ReactiveProperty<bool>();
@@ -67,14 +81,38 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
         private void OnAddViewport()
         {
-            var vp = new ViewportModel();
+            var window = WindowAssist.GetWindow(this);
+            var dialog = new SelectViewportsDialog();
 
-            vp.X.Value = 200;
-            vp.Y.Value = 200;
-            vp.Width.Value = 200;
-            vp.Height.Value = 200;
+            foreach (var device in _devices)
+            {
+                if (Viewports.Any(v => v.Name.Value == device.ViewportName))
+                {
+                    continue;
+                }
 
-            Viewports.Add(vp);
+                var model = new ViewportModel();
+                
+                model.Height.Value = device.Height;
+                model.InitFile.Value = device.RelativeInitFilePath;
+                model.ImageUrl.Value = Path.Combine(Directory.GetCurrentDirectory(), $"Resources/Images/Viewports/{_module.ModuleId}/{device.ViewportName}.jpg");
+                model.Name.Value = device.ViewportName;
+                model.Width.Value = device.Width;
+                model.X.Value = 0;
+                model.Y.Value = 0;
+
+                dialog.Viewports.Add(model);
+            }
+
+            dialog.SelectedViewport = dialog.Viewports.First();
+            dialog.Owner = window;
+
+            if (dialog.ShowDialog() ?? false)
+            {
+                var viewport = dialog.SelectedViewport;
+
+                Viewports.Add(viewport);
+            }
         }
 
         public ReactiveCommand SaveCommand
@@ -101,43 +139,5 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
         {
             get;
         } = new ReactiveCollection<ViewportModel>();
-    }
-
-    public class ViewportModel
-    {
-        public ReactiveProperty<double> X
-        {
-            get;
-        } = new ReactiveProperty<double>();
-
-        public ReactiveProperty<double> Y
-        {
-            get;
-        } = new ReactiveProperty<double>();
-
-        public ReactiveProperty<double> Width
-        {
-            get;
-        } = new ReactiveProperty<double>();
-
-        public ReactiveProperty<double> Height
-        {
-            get;
-        } = new ReactiveProperty<double>();
-
-        public ReactiveProperty<string> InitFile
-        {
-            get;
-        } = new ReactiveProperty<string>();
-
-        public ReactiveProperty<string> Name
-        {
-            get;
-        } = new ReactiveProperty<string>();
-
-        public ReactiveProperty<string> ImageUrl
-        {
-            get;
-        } = new ReactiveProperty<string>();
     }
 }
