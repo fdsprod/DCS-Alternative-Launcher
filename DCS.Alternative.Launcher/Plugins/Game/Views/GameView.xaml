@@ -74,7 +74,8 @@
                             BorderBrush="#FF2F2F2F"
                             BorderThickness="1">
 
-                        <cef:ChromiumWebBrowser HorizontalAlignment="Stretch"
+                        <cef:ChromiumWebBrowser x:Name="Browser"
+                                                HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Address="{Binding LatestYouTubeUrl.Value}"
                                                 Background="Black" />
