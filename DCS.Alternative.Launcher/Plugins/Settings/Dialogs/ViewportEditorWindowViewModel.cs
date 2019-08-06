@@ -83,6 +83,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
         {
             var window = WindowAssist.GetWindow(this);
             var dialog = new SelectViewportsDialog();
+            var screen = Screen.AllScreens.First(d => d.DeviceName == MonitorId);
 
             foreach (var device in _devices)
             {
@@ -98,8 +99,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 model.ImageUrl.Value = Path.Combine(Directory.GetCurrentDirectory(), $"Resources/Images/Viewports/{_module.ModuleId}/{device.ViewportName}.jpg");
                 model.Name.Value = device.ViewportName;
                 model.Width.Value = device.Width;
-                model.X.Value = 0;
-                model.Y.Value = 0;
+                model.X.Value = screen.Bounds.Width / 2 - device.Width / 2;
+                model.Y.Value = screen.Bounds.Height / 2 - device.Height / 2;
 
                 dialog.Viewports.Add(model);
             }

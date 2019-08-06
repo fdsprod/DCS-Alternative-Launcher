@@ -17,6 +17,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
         public SelectModuleDialog()
         {
             InitializeComponent();
+
+            Modules = new ReactiveCollection<Module>();
         }
         
         public Module SelectedModule

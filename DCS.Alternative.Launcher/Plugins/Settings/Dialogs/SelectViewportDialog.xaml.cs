@@ -11,12 +11,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             DependencyProperty.Register("SelectededModule", typeof(ViewportModel), typeof(SelectModuleDialog), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ViewportsProperty =
-            DependencyProperty.Register("ViewportsProperty", typeof(ReactiveCollection<ViewportModel>), typeof(SelectModuleDialog), new PropertyMetadata(new ReactiveCollection<ViewportModel>()));
-
-
+            DependencyProperty.Register("ViewportsProperty", typeof(ReactiveCollection<ViewportModel>), typeof(SelectModuleDialog), new PropertyMetadata(null));
+        
         public SelectViewportsDialog()
         {
             InitializeComponent();
+
+            Viewports = new ReactiveCollection<ViewportModel>();
         }
         
         public ViewportModel SelectedViewport
@@ -24,7 +25,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             get { return (ViewportModel) GetValue(SelectedViewportProperty); }
             set { SetValue(SelectedViewportProperty, value); }
         }
-        
+
         public ReactiveCollection<ViewportModel> Viewports
         {
             get { return (ReactiveCollection<ViewportModel>) GetValue(ViewportsProperty); }
