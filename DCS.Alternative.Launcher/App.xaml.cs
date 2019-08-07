@@ -71,7 +71,7 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 
 #endif
-            DumpAutoexecLua();
+            //DumpAutoexecLua();
 
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
