@@ -180,7 +180,10 @@
       <DependentUpon>NewsArticleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DesignerItem.cs" />
+    <Compile Include="Controls\PropertyChangeNotifier.cs" />
     <Compile Include="Controls\ResizeThumb.cs" />
+    <Compile Include="Controls\ToggleSwitch.cs" />
+    <Compile Include="Controls\ToggleSwitchButton.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\EmptyStoryboard.cs" />
     <Compile Include="Controls\UiDispatcher.cs" />
@@ -189,6 +192,11 @@
     <Compile Include="Controls\WizardView\WizardStepBase.cs" />
     <Compile Include="Controls\WizardView\WizardView.cs" />
     <Compile Include="Data\InvertBooleanConverter.cs" />
+    <Compile Include="Data\MarkupConverter.cs" />
+    <Compile Include="Data\MarkupMultiConverter.cs" />
+    <Compile Include="Data\RectangleHeightToRadiusConverter.cs" />
+    <Compile Include="Data\ThicknessSideType.cs" />
+    <Compile Include="Data\ThicknessToDoubleConverter.cs" />
     <Compile Include="Data\UriToBitmapConverter.cs" />
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
@@ -274,6 +282,9 @@
     </Compile>
     <Compile Include="Views\SettingsViewModel.cs" />
     <Compile Include="WindowAssist.cs" />
+    <Compile Include="Windows\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\FirstUseWizard.xaml.cs">
       <DependentUpon>FirstUseWizard.xaml</DependentUpon>
     </Compile>
@@ -309,6 +320,14 @@
       <DependentUpon>SnipViewportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Xml\XmlHelper.cs" />
+    <Page Include="Controls\DesignerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DesignerItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DisplaySelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +341,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NewsArticleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToggleSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,6 +385,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

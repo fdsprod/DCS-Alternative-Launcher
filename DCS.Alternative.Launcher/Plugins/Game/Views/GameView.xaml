@@ -165,8 +165,8 @@
                                 </Setter>
                             </Style>
                         </StackPanel.Resources>
-                        <Button Width="200"
-                                Height="100"
+                        <Button Width="250"
+                                Height="125"
                                 Margin="0"
                                 Background="#6F1CC600"
                                 Command="{Binding LaunchDcsCommand}"
@@ -188,7 +188,7 @@
                                 <RowDefinition Height="20" />
                                 <RowDefinition Height="20" />
                                 <RowDefinition Height="20" />
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -288,19 +288,18 @@
                                        FontSize="11"
                                        Foreground="#FFAFAFAF"
                                        Text="{Binding SelectedInstall.Value.Version}" />
-                            <CheckBox Grid.Row="5"
-                                      VerticalAlignment="Center"
-                                      VerticalContentAlignment="Center"
-                                      FontFamily="{StaticResource Prototype}"
-                                      FontSize="11"
-                                      Foreground="#FFFFFFFF"
-                                      IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}">
-                                <TextBlock VerticalAlignment="Center"
-                                           FontFamily="{StaticResource Prototype}"
-                                           FontSize="11"
-                                           Foreground="#FFFFFFFF"
-                                           Text="LAUNCH IN VR" />
-                            </CheckBox>
+                            <controls:ToggleSwitch Grid.Row="5"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Top"
+                                                   Background="#FFFFFFFF"
+                                                   BorderBrush="#FFFFFFFF"
+                                                   FontFamily="{StaticResource Prototype}"
+                                                   FontSize="11"
+                                                   Foreground="#FFFFFFFF"
+                                                   Header="VR ENABLED"
+                                                   HeaderFontFamily="{StaticResource Prototype}"
+                                                   IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}" />
+
                         </Grid>
                     </StackPanel>
                     <Grid Grid.Row="4"

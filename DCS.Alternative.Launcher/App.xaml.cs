@@ -72,6 +72,7 @@ namespace DCS.Alternative.Launcher
 
 #endif
             //DumpAutoexecLua();
+            ShowTestWindow();
 
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
@@ -93,6 +94,12 @@ namespace DCS.Alternative.Launcher
 
             _mainWindow.Show();
             Tracer.Info("Startup Complete.");
+        }
+
+        private void ShowTestWindow()
+        {
+            TestWindow window = new TestWindow();
+            window.Show();
         }
 
         private void DumpAutoexecLua()
