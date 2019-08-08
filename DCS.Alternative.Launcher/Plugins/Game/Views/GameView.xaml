@@ -32,6 +32,9 @@
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="#FFFFFFFF" />
             </Style>
+            <data:BooleanToStringConverter x:Key="BooleanToStringConverter"
+                                           FalseString="OFF"
+                                           TrueString="ON" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -188,11 +191,9 @@
                                 <RowDefinition Height="20" />
                                 <RowDefinition Height="20" />
                                 <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
                             <Menu Grid.Row="1"
                                   Width="100"
                                   Height="Auto"
@@ -273,7 +274,7 @@
                             <TextBlock Grid.Row="2"
                                        Grid.Column="0"
                                        FontFamily="{StaticResource Prototype}"
-                                       Foreground="#FFAFAFAF">
+                                       Foreground="#FFCFCFCF">
                                 <Run Text="{Binding SelectedInstall.Value.Variant, Mode=OneWay}" />
                                 <Run Text="( " /><Run Text="{Binding SelectedInstall.Value.DirectoryName, Mode=OneWay}" /><Run Text=" )" />
                             </TextBlock>
@@ -286,23 +287,27 @@
                             <TextBlock Grid.Row="4"
                                        FontFamily="{StaticResource Prototype}"
                                        FontSize="11"
-                                       Foreground="#FFAFAFAF"
+                                       Foreground="#FFCFCFCF"
                                        Text="{Binding SelectedInstall.Value.Version}" />
-                            <controls:ToggleSwitch Grid.Row="5"
-                                                   HorizontalAlignment="Left"
-                                                   VerticalAlignment="Top"
-                                                   Background="#FFFFFFFF"
-                                                   BorderBrush="#FFFFFFFF"
-                                                   FontFamily="{StaticResource Prototype}"
-                                                   FontSize="11"
-                                                   Foreground="#FFFFFFFF"
-                                                   Header="VR ENABLED"
-                                                   HeaderFontFamily="{StaticResource Prototype}"
-                                                   IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}" />
+                            <TextBlock Grid.Row="5"
+                                       Margin="0,0,0,3"
+                                       FontFamily="{StaticResource Prototype}"
+                                       FontSize="11"
+                                       Foreground="#FFFFFFFF"
+                                       Text="VR ENABLED" />
+                            <ToggleButton Grid.Row="6"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Top"
+                                          FontFamily="{StaticResource Prototype}"
+                                          FontSize="11"
+                                          IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}"
+                                          Style="{StaticResource ToggleSwitchStyle}">
+                                <TextBlock Text="{Binding IsVREnabled.Value, Converter={StaticResource BooleanToStringConverter}}" />
+                            </ToggleButton>
 
                         </Grid>
                     </StackPanel>
-                    <Grid Grid.Row="4"
+                    <Grid Grid.Row="3"
                           Grid.Column="0"
                           Grid.ColumnSpan="3">
                         <TextBlock Margin="0,0,0,0"

@@ -17,6 +17,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             set;
         }
 
+        public string Description
+        {
+            get;
+            set;
+        }
+
         public object Value
         {
             get;
@@ -28,5 +34,10 @@ namespace DCS.Alternative.Launcher.DomainObjects
             get;
             set;
         } = new List<AdvancedOptionMinMax>();
+
+        public Dictionary<string, object> Params
+        {
+            get;
+        } = new Dictionary<string, object>();
     }
 }

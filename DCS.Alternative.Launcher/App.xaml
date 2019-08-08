@@ -15,6 +15,112 @@
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Orbitron">pack://application:,,,/Resources/Fonts/#orbitron</FontFamily>
             <FontFamily x:Key="Prototype">pack://application:,,,/Resources/Fonts/#prototype</FontFamily>
+            <Color x:Key="OffColor">#FFFF3434</Color>
+            <Color x:Key="OnColor">#FF11AF11</Color>
+            <SolidColorBrush x:Key="OffBrush" Color="{StaticResource OffColor}" />
+
+            <Style x:Key="ToggleSwitchStyle" TargetType="ToggleButton">
+                <Setter Property="MinHeight" Value="20" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                <Setter Property="MaxHeight" Value="20" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="Border"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="10">
+                                    <Grid>
+                                        <Border x:Name="PART_Background"
+                                                Background="{StaticResource OffBrush}"
+                                                CornerRadius="10" />
+                                        <Border x:Name="PART_BackgroundOverlay"
+                                                Background="#FFFFFFFF"
+                                                CornerRadius="10"
+                                                Opacity="0" />
+                                    </Grid>
+                                </Border>
+                                <Ellipse x:Name="PART_ThumbIndicator"
+                                         Grid.Column="0"
+                                         Width="14"
+                                         Height="14"
+                                         Margin="3,0,0,0"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Fill="{TemplateBinding BorderBrush}"
+                                         Stretch="Uniform">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform x:Name="PART_ThumbTranslate" />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                <ContentPresenter Grid.Column="1"
+                                                  Margin="4,0,0,0"
+                                                  VerticalAlignment="Center" />
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0.2" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0.4" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0.5" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="PART_Background"
+                                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                To="{StaticResource OnColor}"
+                                                                Duration="0:0:0.20" />
+                                                <DoubleAnimation Storyboard.TargetName="PART_ThumbTranslate"
+                                                                 Storyboard.TargetProperty="X"
+                                                                 To="20"
+                                                                 Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="PART_Background"
+                                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                To="{StaticResource OffColor}"
+                                                                Duration="0:0:0.20" />
+                                                <DoubleAnimation Storyboard.TargetName="PART_ThumbTranslate"
+                                                                 Storyboard.TargetProperty="X"
+                                                                 To="0"
+                                                                 Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Indeterminate" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

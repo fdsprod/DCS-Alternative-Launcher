@@ -30,6 +30,7 @@ using DCS.Alternative.Launcher.Services.Navigation;
 using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
 using DCS.Alternative.Launcher.Windows.FirstUse;
+using DCS.Alternative.Launcher.Wizards;
 using Newtonsoft.Json;
 using NLua;
 using Application = System.Windows.Application;
@@ -72,7 +73,7 @@ namespace DCS.Alternative.Launcher
 
 #endif
             //DumpAutoexecLua();
-            ShowTestWindow();
+            //ShowTestWindow();
 
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();

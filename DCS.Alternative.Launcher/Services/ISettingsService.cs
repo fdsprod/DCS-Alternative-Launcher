@@ -7,6 +7,8 @@ namespace DCS.Alternative.Launcher.Services
 {
     public interface ISettingsService
     {
+        AdvancedOption[] GetAdvancedOptions(string category);
+
         InstallLocation SelectedInstall { get; set; }
 
         void RemoveInstalls(params string[] directory);
@@ -26,6 +28,8 @@ namespace DCS.Alternative.Launcher.Services
         InstallLocation[] GetInstallations();
 
         T GetValue<T>(string category, string key, T defaultValue = default(T));
+
+        bool TryGetValue<T>(string category, string key, out T value);
 
         void SetValue(string category, string key, object value);
 

@@ -14,6 +14,7 @@ using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.ServiceModel.Syndication;
 using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
 using NLua;
 
 namespace DCS.Alternative.Launcher.Services.Dcs
@@ -21,10 +22,12 @@ namespace DCS.Alternative.Launcher.Services.Dcs
     public class DcsWorldService : IDcsWorldService
     {
         private readonly IContainer _container;
+        private readonly ISettingsService _settingsService;
 
         public DcsWorldService(IContainer container)
         {
             _container = container;
+            _settingsService = container.Resolve<ISettingsService>();
         }
 
         public Task<Module[]> GetInstalledAircraftModulesAsync()
@@ -270,9 +273,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public virtual async Task PatchViewportsAsync()
         {
-            var settingsService = _container.Resolve<ISettingsService>();
-            var install = settingsService.SelectedInstall;
-            var viewportTemplates = settingsService.GetViewportTemplates();
+            var install = _settingsService.SelectedInstall;
+            var viewportTemplates = _settingsService.GetViewportTemplates();
             var modules = await GetInstalledAircraftModulesAsync();
 
             foreach (var template in viewportTemplates)
@@ -332,6 +334,44 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     }
                 }
             }
+        }
+
+        public Task UpdateAdvancedOptionsAsync()
+        {
+            var options = _settingsService.GetAdvancedOptions(AdvancedOptions.Graphics);
+
+            var sb = new StringBuilder();
+
+            using (var lua = new Lua())
+            {
+                sb.AppendLine("options = options or {}");
+                sb.AppendLine("options.graphics = options.graphics or {}");
+
+                foreach (var option in options)
+                {
+                    if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    {
+                        if (value is JArray)
+                        {
+                            sb.AppendLine($"{option.Id} = {{ {string.Join(",", ((JArray)value).Select(i => i.ToString()).ToArray())} }}");
+                        }
+                        else if (value is int[])
+                        {
+                            sb.AppendLine($"{option.Id} = {{ {string.Join(",", ((int[])value).Select(i=>i.ToString()).ToArray())} }}");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"{option.Id} = {value}");
+                        }
+                    }
+                }
+            }
+
+            var install = _settingsService.SelectedInstall;
+
+            File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
+
+            return Task.FromResult(true);
         }
     }
 }

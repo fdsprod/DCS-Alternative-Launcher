@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Controls
+namespace DCS.Alternative.Launcher.Plugins.Settings.Controls
 {
     /// <summary>
     /// Interaction logic for ViewportsSettingsControl.xaml

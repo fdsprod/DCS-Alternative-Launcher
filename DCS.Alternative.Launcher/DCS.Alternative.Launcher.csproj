@@ -157,6 +157,21 @@
     <Reference Include="WpfScreenHelper, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -191,6 +206,9 @@
     <Compile Include="Controls\WizardView\WizardController.cs" />
     <Compile Include="Controls\WizardView\WizardStepBase.cs" />
     <Compile Include="Controls\WizardView\WizardView.cs" />
+    <Compile Include="Data\BooleanToStringConverter.cs" />
+    <Compile Include="Data\BooleanToThicknessConverter.cs" />
+    <Compile Include="Data\DictionaryItemConverter.cs" />
     <Compile Include="Data\InvertBooleanConverter.cs" />
     <Compile Include="Data\MarkupConverter.cs" />
     <Compile Include="Data\MarkupMultiConverter.cs" />
@@ -203,6 +221,7 @@
     <Compile Include="Diagnostics\ProcessHelper.cs" />
     <Compile Include="DomainObjects\AdvancedOption.cs" />
     <Compile Include="DomainObjects\AdvancedOptionMinMax.cs" />
+    <Compile Include="DomainObjects\AdvancedOptions.cs" />
     <Compile Include="DomainObjects\MonitorDefinition.cs" />
     <Compile Include="DomainObjects\SettingsCategories.cs" />
     <Compile Include="DomainObjects\SettingsKeys.cs" />
@@ -233,9 +252,17 @@
     <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Controls\ViewportsSettingsControl.xaml.cs">
+    <Compile Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml.cs">
       <DependentUpon>ViewportsSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Settings\Views\Categories\CategoryHeaderSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml.cs">
+      <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Categories\GraphicsSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\InstallationSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\SettingsCategoryViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\ViewportSettingsViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsController.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -372,7 +399,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Views\Controls\ViewportsSettingsControl.xaml">
+    <Page Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -487,7 +518,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\AdvancedTweakingOptions.json" />
+    <None Include="Resources\AdvancedOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\ViewportDevices.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -535,7 +568,6 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugins\Settings\Controls\" />
     <Folder Include="Plugins\Settings\Models\" />
     <Folder Include="Web\" />
   </ItemGroup>

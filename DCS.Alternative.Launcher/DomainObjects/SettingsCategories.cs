@@ -6,5 +6,6 @@
         public const string Installations = "installations";
         public const string Viewports = "viewports";
         public const string LaunchOptions = "launchOptions";
+        public const string AdvancedOptions = "advancedOptions";
     }
 }

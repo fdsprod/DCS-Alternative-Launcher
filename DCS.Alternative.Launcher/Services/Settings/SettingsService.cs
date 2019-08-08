@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Modules;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Reactive.Bindings;
 using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services.Settings
@@ -15,14 +18,30 @@ namespace DCS.Alternative.Launcher.Services.Settings
     internal class SettingsService : ISettingsService
     {
         private static readonly object _syncRoot = new object();
+        private static readonly string[] _optionsCategories =
+        {
+            AdvancedOptions.TerrainReflection,
+            AdvancedOptions.TerrainMirror,
+            AdvancedOptions.Terrain,
+            AdvancedOptions.CameraMirrors,
+            AdvancedOptions.Camera,
+            AdvancedOptions.Graphics,
+            AdvancedOptions.Sound
+        };
+
         private InstallLocation _selectedInstall;
+        private Dictionary<string, AdvancedOption[]> _advancedOptionCache;
 
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
 
+        private ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
+
         public SettingsService()
         {
             Load();
+
+            _isDirty.Throttle(TimeSpan.FromMilliseconds(300)).Subscribe(x => { Save(); });
 
             var directory = GetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, string.Empty);
             var installations = GetInstallations();
@@ -46,6 +65,31 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     SetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, value.Directory);
                 }
             }
+        }
+
+        public AdvancedOption[] GetAdvancedOptions(string category)
+        {
+            if (_advancedOptionCache == null)
+            {
+                const string path = "Resources/AdvancedOptions.json";
+
+                var contents = File.ReadAllText(path);
+                var allOptions = JsonConvert.DeserializeObject<AdvancedOption[]>(contents);
+
+                _advancedOptionCache = new Dictionary<string, AdvancedOption[]>();
+
+                foreach (var group in allOptions.GroupBy(o => GetCategory(o?.Id)))
+                {
+                    _advancedOptionCache.Add(group.Key, group.ToArray());
+                }
+            }
+
+            return _advancedOptionCache[category];
+        }
+
+        private string GetCategory(string id)
+        {
+            return _optionsCategories.First(id.Contains);
         }
 
         public ModuleViewportTemplate[] GetViewportTemplates()
@@ -159,6 +203,35 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return results.ToArray();
         }
 
+        public bool TryGetValue<T>(string category, string key, out T value)
+        {
+            lock (_settings)
+            {
+                value = default(T);
+
+                if (!_settings.TryGetValue(category, out var keyLookup))
+                {
+                    return false;
+                }
+
+                if (!keyLookup.TryGetValue(key, out var result))
+                {
+                    return false;
+                }
+
+                if (result is JToken token)
+                {
+                    value = token.ToObject<T>();
+                }
+                else
+                {
+                    value = (T) result;
+                }
+
+                return true;
+            }
+        }
+
         public T GetValue<T>(string category, string key, T defaultValue = default(T))
         {
             lock (_settings)
@@ -192,7 +265,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 }
 
                 keyLookup[key] = value;
-                Save();
+                _isDirty.Value = true;
             }
         }
 
@@ -232,8 +305,13 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
-                Tracer.Info("Saving settings.json");
-                File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings));
+                if (_isDirty.Value)
+                {
+                    _isDirty.Value = false;
+
+                    Tracer.Info("Saving settings.json");
+                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings));
+                }
             }
         }
 
