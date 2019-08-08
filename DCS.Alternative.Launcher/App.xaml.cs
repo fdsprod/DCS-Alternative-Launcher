@@ -70,7 +70,6 @@ namespace DCS.Alternative.Launcher
             Tracer.RegisterListener(new FileLogEventListener("trace.log"));
 
             _container = new Container();
-
 #endif
             //DumpAutoexecLua();
             //ShowTestWindow();

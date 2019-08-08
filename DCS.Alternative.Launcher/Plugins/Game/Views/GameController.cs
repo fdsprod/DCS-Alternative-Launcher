@@ -62,6 +62,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             {
                 var install = _settingsService.SelectedInstall;
 
+                Guard.RequireIsNotNull(install, nameof(install));
+
                 if (!install.IsValidInstall)
                 {
                     MessageBoxEx.Show($"The installation path \"{install.Directory}\" appears to be invalid.   Please fix the path and try again.");

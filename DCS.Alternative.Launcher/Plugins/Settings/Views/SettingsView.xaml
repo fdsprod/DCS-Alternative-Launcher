@@ -85,6 +85,14 @@
                             <categories:GraphicsSettingsView />
                         </DataTemplate>
 
+                        <DataTemplate DataType="{x:Type categories:CameraSettingsViewModel}">
+                            <categories:CameraSettingsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type categories:CameraMirrorsSettingsViewModel}">
+                            <categories:CameraMirrorsSettingsView />
+                        </DataTemplate>
+
                         <Style TargetType="TabItem">
                             <Setter Property="MinHeight" Value="30" />
                             <Setter Property="HeaderTemplate" Value="{StaticResource TabItemHeaderTemplate}" />

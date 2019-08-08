@@ -196,9 +196,8 @@
     </Compile>
     <Compile Include="Controls\DesignerItem.cs" />
     <Compile Include="Controls\PropertyChangeNotifier.cs" />
+    <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizeThumb.cs" />
-    <Compile Include="Controls\ToggleSwitch.cs" />
-    <Compile Include="Controls\ToggleSwitchButton.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\EmptyStoryboard.cs" />
     <Compile Include="Controls\UiDispatcher.cs" />
@@ -236,6 +235,9 @@
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Plugins\Settings\Controls\AdvancedOptionsControl.xaml.cs">
+      <DependentUpon>AdvancedOptionsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml.cs">
       <DependentUpon>SelectViewportDialog.xaml</DependentUpon>
     </Compile>
@@ -250,12 +252,32 @@
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
+    <Compile Include="Plugins\Settings\Models\AdvancedOptioonModel.cs" />
+    <Compile Include="Plugins\Settings\Models\ColorAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\DoubleRangeSliderAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\MultiValueAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\QuadRangeSliderAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SingleValueAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SliderAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SwitchAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\TextAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\TripleRangeSliderAdvancedOptionModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
     <Compile Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml.cs">
       <DependentUpon>ViewportsSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Settings\Models\AdvancedOptionModelFactory.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\AdvancedOptionSettingsViewModelBase.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsView.xaml.cs">
+      <DependentUpon>CameraMirrorsSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Categories\CameraSettingsViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\Categories\CategoryHeaderSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Categories\CameraSettingsView.xaml.cs">
+      <DependentUpon>CameraSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml.cs">
       <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
     </Compile>
@@ -371,7 +393,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToggleSwitch.xaml">
+    <Page Include="Controls\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -380,6 +402,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WizardView\WizardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Controls\AdvancedOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,6 +428,14 @@
     <Page Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Categories\CameraSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml">
       <SubType>Designer</SubType>
@@ -568,7 +602,6 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugins\Settings\Models\" />
     <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>

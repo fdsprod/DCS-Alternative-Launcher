@@ -334,9 +334,9 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
             _settingsService.RemoveViewportTemplate(moduleId);
         }
 
-        public AdvancedOption[] GetAdvancedGraphicsOptions()
+        public AdvancedOption[] GetAdvancedOptions(string optionsCategory)
         {
-            var options = _settingsService.GetAdvancedOptions(AdvancedOptions.Graphics);
+            var options = _settingsService.GetAdvancedOptions(optionsCategory);
 
             foreach (var option in options)
             {

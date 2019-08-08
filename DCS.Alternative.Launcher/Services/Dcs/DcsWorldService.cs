@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -336,33 +337,63 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             }
         }
 
+        private static readonly string[] _cameraRangeSettings = 
+        {
+            "Low",
+            "Medium",
+            "High",
+            "Ultra",
+            "Extreme"
+        };
+
         public Task UpdateAdvancedOptionsAsync()
         {
-            var options = _settingsService.GetAdvancedOptions(AdvancedOptions.Graphics);
+            var options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Graphics);
 
             var sb = new StringBuilder();
 
-            using (var lua = new Lua())
+            sb.AppendLine("options = options or {}");
+            sb.AppendLine("options.graphics = options.graphics or {}");
+
+            foreach (var option in options)
             {
-                sb.AppendLine("options = options or {}");
-                sb.AppendLine("options.graphics = options.graphics or {}");
+                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                {
+                    WriteOptionValue(sb, option.Id, value);
+
+                }
+            }
+
+            sb.AppendLine("options.graphics.Camera = options.graphics.Camera or {}");
+
+            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Camera);
+
+            foreach (var range in _cameraRangeSettings)
+            {
+                sb.AppendLine($"options.graphics.Camera.{range} = options.graphics.Camera.{range} or {{}}");
 
                 foreach (var option in options)
                 {
                     if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                     {
-                        if (value is JArray)
-                        {
-                            sb.AppendLine($"{option.Id} = {{ {string.Join(",", ((JArray)value).Select(i => i.ToString()).ToArray())} }}");
-                        }
-                        else if (value is int[])
-                        {
-                            sb.AppendLine($"{option.Id} = {{ {string.Join(",", ((int[])value).Select(i=>i.ToString()).ToArray())} }}");
-                        }
-                        else
-                        {
-                            sb.AppendLine($"{option.Id} = {value}");
-                        }
+                        WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                    }
+                }
+            }
+
+            sb.AppendLine("options.graphics.CameraMirror = options.graphics.CameraMirror or {}");
+
+            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.CameraMirrors);
+
+            foreach (var range in _cameraRangeSettings)
+            {
+                sb.AppendLine($"options.graphics.CameraMirrors.{range} = options.graphics.CameraMirrors.{range} or {{}}");
+
+                foreach (var option in options)
+                {
+                    if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    {
+                        WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
                     }
                 }
             }
@@ -372,6 +403,27 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
 
             return Task.FromResult(true);
+        }
+
+        private void WriteOptionValue(StringBuilder sb, string id, object value)
+        {
+            if (!(value is string) && value is IEnumerable)
+            {
+                var enumerable = (IEnumerable)value;
+                var values =
+                    (value is JArray
+                        ? enumerable.OfType<JValue>().Select(j => j.Value)
+                        : enumerable)
+                    .Cast<object>()
+                    .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
+                    .ToArray();
+
+                sb.AppendLine($"{id} = {{ {string.Join(",", values.Select(i => i.ToString()).ToArray())} }}");
+            }
+            else
+            {
+                sb.AppendLine($"{id} = {value}");
+            }
         }
     }
 }

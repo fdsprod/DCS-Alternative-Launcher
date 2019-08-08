@@ -393,10 +393,10 @@
                 "Max": 0.0
             }
         ]
-    },
+    }*/,
     {
         "Id": "options.graphics.Camera.Extreme.districtobjects",
-        "DisplayName": "Camera Extreme Districtobjects",
+        "DisplayName": "Camera District Objects",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -404,18 +404,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 600
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.districts",
-        "DisplayName": "Camera Extreme Districts",
+        "DisplayName": "Camera Districts",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             12000,
@@ -423,18 +419,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 24000
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.dynamic",
-        "DisplayName": "Camera Extreme Dynamic",
+        "DisplayName": "Camera Dynamic",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -442,18 +434,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
-    },
+    }/*,
     {
         "Id": "options.graphics.Camera.Extreme.dynamic2",
-        "DisplayName": "Camera Extreme Dynamic2",
+        "DisplayName": "Camera Dynamic2",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -474,22 +462,26 @@
                 "Max": 0.0
             }
         ]
-    },
+    }*/,
     {
         "Id": "options.graphics.Camera.Extreme.far_clip",
-        "DisplayName": "Camera Extreme Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
+        "DisplayName": "Camera Far Clip",
+        "Description": "The farthest distance (in meters?) relative to the camera that drawing will occur.",
         "Value": 150000,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0.02,
+                "Max": 300000.0
             }
-        ]
+        ],
+        "Params": {
+	        "IsSnapToTickEnabled": "true",
+	        "TickFrequency": "0.02"
+        }
     },
     {
         "Id": "options.graphics.Camera.Extreme.lights",
-        "DisplayName": "Camera Extreme Lights",
+        "DisplayName": "Camera Lights",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             200,
@@ -497,42 +489,44 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 1,
+                "Max": 160000
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.lodAdd",
-        "DisplayName": "Camera Extreme Lod Add",
+        "DisplayName": "Camera LOD Add",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 0,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0,
+                "Max": 5
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.1"
+        }
     },
     {
         "Id": "options.graphics.Camera.Extreme.lodMult",
-        "DisplayName": "Camera Extreme Lod Mult",
+        "DisplayName": "Camera LOD Multiplier",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 1.0,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 1,
+                "Max": 4
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.1"
+        }
     },
     {
         "Id": "options.graphics.Camera.Extreme.mirage",
-        "DisplayName": "Camera Extreme Mirage",
+        "DisplayName": "Camera Mirage",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             3000,
@@ -540,30 +534,29 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.near_clip",
-        "DisplayName": "Camera Extreme Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
+        "DisplayName": "Camera Near Clip",
+        "Description": "The closest distance (in meters?) relative to the camera that drawing will occur.",
         "Value": 0.02,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0.02,
+                "Max": 10
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.02"
+        }
     },
     {
         "Id": "options.graphics.Camera.Extreme.objects",
-        "DisplayName": "Camera Extreme Objects",
+        "DisplayName": "Camera Objects",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             5000,
@@ -571,18 +564,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 160000
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.structures",
-        "DisplayName": "Camera Extreme Structures",
+        "DisplayName": "Camera Structures",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             60,
@@ -590,18 +579,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
     },
     {
         "Id": "options.graphics.Camera.Extreme.surface",
-        "DisplayName": "Camera Extreme Surface",
+        "DisplayName": "Camera Surface",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             20000,
@@ -609,914 +594,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.districtobjects",
-        "DisplayName": "Camera High Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.districts",
-        "DisplayName": "Camera High Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            12000,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.dynamic",
-        "DisplayName": "Camera High Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            16000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.dynamic2",
-        "DisplayName": "Camera High Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            16000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.far_clip",
-        "DisplayName": "Camera High Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.lights",
-        "DisplayName": "Camera High Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.lodAdd",
-        "DisplayName": "Camera High Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.lodMult",
-        "DisplayName": "Camera High Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.mirage",
-        "DisplayName": "Camera High Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.near_clip",
-        "DisplayName": "Camera High Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.objects",
-        "DisplayName": "Camera High Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            5000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.structures",
-        "DisplayName": "Camera High Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            80,
-            16000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.High.surface",
-        "DisplayName": "Camera High Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.districtobjects",
-        "DisplayName": "Camera Low Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            400,
-            400
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.districts",
-        "DisplayName": "Camera Low Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            8000,
-            8000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.dynamic",
-        "DisplayName": "Camera Low Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.dynamic2",
-        "DisplayName": "Camera Low Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            12000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.far_clip",
-        "DisplayName": "Camera Low Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.lights",
-        "DisplayName": "Camera Low Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            40000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.lodAdd",
-        "DisplayName": "Camera Low Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.lodMult",
-        "DisplayName": "Camera Low Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.mirage",
-        "DisplayName": "Camera Low Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.near_clip",
-        "DisplayName": "Camera Low Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.objects",
-        "DisplayName": "Camera Low Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.structures",
-        "DisplayName": "Camera Low Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            100,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Low.surface",
-        "DisplayName": "Camera Low Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.districtobjects",
-        "DisplayName": "Camera Medium Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.districts",
-        "DisplayName": "Camera Medium Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            10000,
-            10000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.dynamic",
-        "DisplayName": "Camera Medium Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            14000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.dynamic2",
-        "DisplayName": "Camera Medium Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            14000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.far_clip",
-        "DisplayName": "Camera Medium Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.lights",
-        "DisplayName": "Camera Medium Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            60000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.lodAdd",
-        "DisplayName": "Camera Medium Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.lodMult",
-        "DisplayName": "Camera Medium Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.mirage",
-        "DisplayName": "Camera Medium Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.near_clip",
-        "DisplayName": "Camera Medium Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.objects",
-        "DisplayName": "Camera Medium Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.structures",
-        "DisplayName": "Camera Medium Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            90,
-            14000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Medium.surface",
-        "DisplayName": "Camera Medium Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.districtobjects",
-        "DisplayName": "Camera Ultra Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.districts",
-        "DisplayName": "Camera Ultra Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            12000,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.dynamic",
-        "DisplayName": "Camera Ultra Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            18000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.dynamic2",
-        "DisplayName": "Camera Ultra Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            18000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.far_clip",
-        "DisplayName": "Camera Ultra Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.lights",
-        "DisplayName": "Camera Ultra Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.lodAdd",
-        "DisplayName": "Camera Ultra Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.lodMult",
-        "DisplayName": "Camera Ultra Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.mirage",
-        "DisplayName": "Camera Ultra Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.near_clip",
-        "DisplayName": "Camera Ultra Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.objects",
-        "DisplayName": "Camera Ultra Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            5000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.structures",
-        "DisplayName": "Camera Ultra Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            70,
-            18000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.Camera.Ultra.surface",
-        "DisplayName": "Camera Ultra Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 160000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.districtobjects",
-        "DisplayName": "Camera Mirrors Extreme Districtobjects",
+        "DisplayName": "Mirror District Objects",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -1524,18 +609,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 600
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.districts",
-        "DisplayName": "Camera Mirrors Extreme Districts",
+        "DisplayName": "Mirror Districts",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             12000,
@@ -1543,18 +624,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 24000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.dynamic",
-        "DisplayName": "Camera Mirrors Extreme Dynamic",
+        "DisplayName": "Mirror Dynamic",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -1562,18 +639,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
-    },
+    }/*,
     {
         "Id": "options.graphics.CameraMirrors.Extreme.dynamic2",
-        "DisplayName": "Camera Mirrors Extreme Dynamic2",
+        "DisplayName": "Mirror Dynamic2",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             300,
@@ -1594,22 +667,26 @@
                 "Max": 0.0
             }
         ]
-    },
+    }*/,
     {
         "Id": "options.graphics.CameraMirrors.Extreme.far_clip",
-        "DisplayName": "Camera Mirrors Extreme Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
+        "DisplayName": "Mirror Far Clip",
+        "Description": "The farthest distance (in meters?) relative to the camera that drawing will occur.",
         "Value": 150000,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0.02,
+                "Max": 300000.0
             }
-        ]
+        ],
+        "Params": {
+	        "IsSnapToTickEnabled": "true",
+	        "TickFrequency": "0.02"
+        }
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.lights",
-        "DisplayName": "Camera Mirrors Extreme Lights",
+        "DisplayName": "Mirror Lights",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             200,
@@ -1617,42 +694,44 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 1,
+                "Max": 160000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.lodAdd",
-        "DisplayName": "Camera Mirrors Extreme Lod Add",
+        "DisplayName": "Mirror LOD Add",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 0,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0,
+                "Max": 5
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.1"
+        }
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.lodMult",
-        "DisplayName": "Camera Mirrors Extreme Lod Mult",
+        "DisplayName": "Mirror LOD Multiplier",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 1.0,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 1,
+                "Max": 4
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.1"
+        }
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.mirage",
-        "DisplayName": "Camera Mirrors Extreme Mirage",
+        "DisplayName": "Mirror Mirage",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             3000,
@@ -1660,30 +739,29 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.near_clip",
-        "DisplayName": "Camera Mirrors Extreme Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
+        "DisplayName": "Mirror Near Clip",
+        "Description": "The closest distance (in meters?) relative to the camera that drawing will occur.",
         "Value": 0.02,
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 0.02,
+                "Max": 10
             }
-        ]
+        ],
+        "Params": {
+	        "TickFrequency": "0.02"
+        }
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.objects",
-        "DisplayName": "Camera Mirrors Extreme Objects",
+        "DisplayName": "Mirror Objects",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             5000,
@@ -1691,18 +769,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 160000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.structures",
-        "DisplayName": "Camera Mirrors Extreme Structures",
+        "DisplayName": "Mirror Structures",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             60,
@@ -1710,18 +784,14 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 40000
             }
         ]
     },
     {
         "Id": "options.graphics.CameraMirrors.Extreme.surface",
-        "DisplayName": "Camera Mirrors Extreme Surface",
+        "DisplayName": "Mirror Surface",
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": [
             20000,
@@ -1729,911 +799,11 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+	            "Min": 1,
+	            "Max": 160000
             }
         ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.districtobjects",
-        "DisplayName": "Camera Mirrors High Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.districts",
-        "DisplayName": "Camera Mirrors High Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            12000,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.dynamic",
-        "DisplayName": "Camera Mirrors High Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            16000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.dynamic2",
-        "DisplayName": "Camera Mirrors High Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            16000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.far_clip",
-        "DisplayName": "Camera Mirrors High Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.lights",
-        "DisplayName": "Camera Mirrors High Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.lodAdd",
-        "DisplayName": "Camera Mirrors High Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.lodMult",
-        "DisplayName": "Camera Mirrors High Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.mirage",
-        "DisplayName": "Camera Mirrors High Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.near_clip",
-        "DisplayName": "Camera Mirrors High Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.objects",
-        "DisplayName": "Camera Mirrors High Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            5000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.structures",
-        "DisplayName": "Camera Mirrors High Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            80,
-            16000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.High.surface",
-        "DisplayName": "Camera Mirrors High Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.districtobjects",
-        "DisplayName": "Camera Mirrors Low Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            400,
-            400
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.districts",
-        "DisplayName": "Camera Mirrors Low Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            8000,
-            8000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.dynamic",
-        "DisplayName": "Camera Mirrors Low Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.dynamic2",
-        "DisplayName": "Camera Mirrors Low Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            12000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.far_clip",
-        "DisplayName": "Camera Mirrors Low Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.lights",
-        "DisplayName": "Camera Mirrors Low Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            40000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.lodAdd",
-        "DisplayName": "Camera Mirrors Low Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.lodMult",
-        "DisplayName": "Camera Mirrors Low Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.mirage",
-        "DisplayName": "Camera Mirrors Low Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.near_clip",
-        "DisplayName": "Camera Mirrors Low Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.objects",
-        "DisplayName": "Camera Mirrors Low Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.structures",
-        "DisplayName": "Camera Mirrors Low Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            100,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Low.surface",
-        "DisplayName": "Camera Mirrors Low Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.districtobjects",
-        "DisplayName": "Camera Mirrors Medium Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.districts",
-        "DisplayName": "Camera Mirrors Medium Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            10000,
-            10000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.dynamic",
-        "DisplayName": "Camera Mirrors Medium Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            14000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.dynamic2",
-        "DisplayName": "Camera Mirrors Medium Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            14000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.far_clip",
-        "DisplayName": "Camera Mirrors Medium Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.lights",
-        "DisplayName": "Camera Mirrors Medium Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            60000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.lodAdd",
-        "DisplayName": "Camera Mirrors Medium Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.lodMult",
-        "DisplayName": "Camera Mirrors Medium Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.mirage",
-        "DisplayName": "Camera Mirrors Medium Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.near_clip",
-        "DisplayName": "Camera Mirrors Medium Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.objects",
-        "DisplayName": "Camera Mirrors Medium Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.structures",
-        "DisplayName": "Camera Mirrors Medium Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            90,
-            14000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Medium.surface",
-        "DisplayName": "Camera Mirrors Medium Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.districtobjects",
-        "DisplayName": "Camera Mirrors Ultra Districtobjects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            300
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.districts",
-        "DisplayName": "Camera Mirrors Ultra Districts",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            12000,
-            12000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.dynamic",
-        "DisplayName": "Camera Mirrors Ultra Dynamic",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            18000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.dynamic2",
-        "DisplayName": "Camera Mirrors Ultra Dynamic2",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            300,
-            18000,
-            0.5
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.far_clip",
-        "DisplayName": "Camera Mirrors Ultra Far Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 150000,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.lights",
-        "DisplayName": "Camera Mirrors Ultra Lights",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            200,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.lodAdd",
-        "DisplayName": "Camera Mirrors Ultra Lod Add",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.lodMult",
-        "DisplayName": "Camera Mirrors Ultra Lod Mult",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 1.0,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.mirage",
-        "DisplayName": "Camera Mirrors Ultra Mirage",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            3000,
-            20000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.near_clip",
-        "DisplayName": "Camera Mirrors Ultra Near Clip",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": 0.02,
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.objects",
-        "DisplayName": "Camera Mirrors Ultra Objects",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            5000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.structures",
-        "DisplayName": "Camera Mirrors Ultra Structures",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            70,
-            18000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
-    {
-        "Id": "options.graphics.CameraMirrors.Ultra.surface",
-        "DisplayName": "Camera Mirrors Ultra Surface",
-        "Description": "This is just placeholder text and needs to be fixed.",
-        "Value": [
-            20000,
-            80000
-        ],
-        "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
-        ]
-    },
+    }/*,
     {
         "Id": "options.graphics.Terrain.civTraffic.high",
         "DisplayName": "Terrain Civ Traffic High",

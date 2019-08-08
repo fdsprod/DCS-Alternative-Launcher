@@ -20,13 +20,13 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private static readonly object _syncRoot = new object();
         private static readonly string[] _optionsCategories =
         {
-            AdvancedOptions.TerrainReflection,
-            AdvancedOptions.TerrainMirror,
-            AdvancedOptions.Terrain,
-            AdvancedOptions.CameraMirrors,
-            AdvancedOptions.Camera,
-            AdvancedOptions.Graphics,
-            AdvancedOptions.Sound
+            AdvancedOptionCategory.TerrainReflection,
+            AdvancedOptionCategory.TerrainMirror,
+            AdvancedOptionCategory.Terrain,
+            AdvancedOptionCategory.CameraMirrors,
+            AdvancedOptionCategory.Camera,
+            AdvancedOptionCategory.Graphics,
+            AdvancedOptionCategory.Sound
         };
 
         private InstallLocation _selectedInstall;

@@ -1,6 +1,6 @@
 ﻿namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public static class AdvancedOptions
+    public static class AdvancedOptionCategory
     {
         public const string TerrainReflection = "options.graphics.terrainreflection";
         public const string TerrainMirror = "options.graphics.terraimirror";
