@@ -200,16 +200,14 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         var year = divs[0].SelectSingleNode("div[1]/div[2]").InnerText.Trim();
                         var title = divs[0].SelectSingleNode("div[2]/div[1]/h3[1]/a[1]").InnerText.Trim();
                         var summary = divs[0].SelectSingleNode("div[2]/div[2]/div[1]").InnerText.Trim();
-                        var url = "https://www.digitalcombatsimulator.com" +
-                                  divs[0].SelectSingleNode("div[2]/a[1]").Attributes["href"].Value.Trim();
+                        var url = "https://www.digitalcombatsimulator.com" + divs[0].SelectSingleNode("div[2]/a[1]").Attributes["href"].Value.Trim();
 
                         article.Title.Value = title;
                         article.Summary.Value = summary;
                         article.Url.Value = url;
                         article.Day.Value = dayMonth;
                         article.Year.Value = year;
-                        article.ImageSource.Value =
-                            $"/Images/Backgrounds/background ({Convert.ToInt32(article.Day.Value.Substring(0, dayMonth.Length - 3).Trim()) % 20 + 1}).jpg";
+                        article.ImageSource.Value = $"/Images/Backgrounds/background ({Convert.ToInt32(article.Day.Value.Substring(0, dayMonth.Length - 3).Trim()) % 20 + 1}).jpg";
 
                         articles.Add(article);
 
@@ -302,9 +300,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     if (!contents.Contains("dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")"))
                     {
                         Tracer.Info($"Adding ViewportHandling code to {viewport.RelativeInitFilePath}");
-                        contents += Environment.NewLine +
-                                    "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" +
-                                    Environment.NewLine;
+                        contents += Environment.NewLine + "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" + Environment.NewLine;
                         isChanged = true;
                     }
 

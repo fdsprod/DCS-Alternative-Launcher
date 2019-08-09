@@ -30,6 +30,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         };
 
         private InstallLocation _selectedInstall;
+        private List<InstallLocation> _installationCache;
         private Dictionary<string, AdvancedOption[]> _advancedOptionCache;
 
         private Dictionary<string, Dictionary<string, object>> _settings =
@@ -39,16 +40,17 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public SettingsService()
         {
-            Load();
-
             _isDirty.Throttle(TimeSpan.FromMilliseconds(300)).Subscribe(x => { Save(); });
 
+            Load();
+
             var directory = GetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, string.Empty);
-            var installations = GetInstallations();
 
-            _selectedInstall = installations.FirstOrDefault(i => i == directory);
+            GetInstallations();
 
-            if (_selectedInstall == null && installations.Length > 0)
+            SelectedInstall = _installationCache.FirstOrDefault(i => i == directory);
+
+            if (SelectedInstall == null && _installationCache.Count > 0)
             {
                 Tracer.Warn($"Unable to set selected install to {directory}.  Installation no longer exists in settings. ");
             }
@@ -56,12 +58,25 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public InstallLocation SelectedInstall
         {
-            get => _selectedInstall;
+            get
+            {
+                return _selectedInstall;
+            }
             set
             {
                 if (_selectedInstall != value)
                 {
                     _selectedInstall = value;
+
+                    if (value != null)
+                    {
+                        Tracer.Info($"Selected Install set to {value.Directory}");
+                    }
+                    else
+                    {
+                        Tracer.Warn($"Selected Install set to (null)");
+                    }
+
                     SetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, value.Directory);
                 }
             }
@@ -167,40 +182,40 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public void RemoveInstalls(params string[] directories)
         {
-            var installs = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
-
-            foreach (var directory in directories)
-            {
-                installs.Remove(directory);
-            }
-
-            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, installs.ToArray());
+            _installationCache.RemoveAll(i => directories.Contains(i.Directory));
+            
+            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i=>i.Directory).ToArray());
         }
 
         public void AddInstalls(params string[] directories)
         {
-            var installs = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations,
-                SettingsKeys.Installs, new string[0]));
-
-            foreach (var directory in directories)
+            foreach (var dir in directories)
             {
-                installs.Add(directory);
+                if (_installationCache.All(i => i.Directory != dir))
+                {
+                    _installationCache.Add(new InstallLocation(dir));
+                }
             }
 
-            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, installs.ToArray());
+            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i => i.Directory).ToArray());
         }
 
         public InstallLocation[] GetInstallations()
         {
-            var directories = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
-            var results = new List<InstallLocation>();
-
-            foreach (var directory in directories)
+            if (_installationCache == null)
             {
-                results.Add(new InstallLocation(directory));
+                var directories = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
+                var results = new List<InstallLocation>();
+
+                foreach (var directory in directories)
+                {
+                    results.Add(new InstallLocation(directory));
+                }
+
+                _installationCache = new List<InstallLocation>(results.ToArray());
             }
 
-            return results.ToArray();
+            return _installationCache.ToArray();
         }
 
         public bool TryGetValue<T>(string category, string key, out T value)
@@ -310,6 +325,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     _isDirty.Value = false;
 
                     Tracer.Info("Saving settings.json");
+
                     File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings));
                 }
             }
@@ -319,15 +335,17 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
-                Tracer.Info("Loading settings.json");
-
                 if (File.Exists("settings.json"))
                 {
+                    Tracer.Info("Loading settings.json");
+
                     var json = File.ReadAllText("settings.json");
                     _settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
                 }
                 else
                 {
+                    Tracer.Info("settings.json was not found.");
+
                     _settings = new Dictionary<string, Dictionary<string, object>>();
                 }
             }

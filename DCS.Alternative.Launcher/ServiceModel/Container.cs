@@ -1771,8 +1771,6 @@ namespace DCS.Alternative.Launcher.ServiceModel
         private object ResolveInternal(TypeRegistration registration, NamedParameterOverloads parameters,
             ResolveOptions options)
         {
-            Tracer.Info($"Resolving {registration.Type.FullName}.");
-
             ObjectFactoryBase factory;
 
             // Attempt container resolution
