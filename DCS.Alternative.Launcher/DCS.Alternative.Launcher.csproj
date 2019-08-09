@@ -601,9 +601,7 @@
     <Resource Include="Images\Backgrounds\background %288%29.jpg" />
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Web\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\dal-icon-256.png" />
   </ItemGroup>
