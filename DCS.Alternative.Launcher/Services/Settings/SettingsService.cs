@@ -193,7 +193,14 @@ namespace DCS.Alternative.Launcher.Services.Settings
             {
                 if (_installationCache.All(i => i.Directory != dir))
                 {
-                    _installationCache.Add(new InstallLocation(dir));
+                    var install = new InstallLocation(dir);
+
+                    _installationCache.Add(install);
+
+                    if (SelectedInstall == null)
+                    {
+                        SelectedInstall = install;
+                    }
                 }
             }
 
