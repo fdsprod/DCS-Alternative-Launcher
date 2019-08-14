@@ -40,7 +40,7 @@ The current planned and WIP feature list is as follows:
 **Cloud Syncronization** (Planned)  
 *-Save your bindings, settings, cm profiles, etc. to the cloud to allow backup and restore*  
 
-The app is currently in an infant state, but moving along at a fairly decent pace.  If you are interested in helping test it, provide feedback, and offer suggestions, please join my discord here https://discord.gg/fsd2Bxa
+If you are interested in helping test, provide feedback, and /or offer suggestions, please join https://discord.gg/fsd2Bxa
 
 **If you do consider to download and** help out... or to even just look at the app and evaluate it,  **please take into consideration** that the application is **pre-alpha**, so there are **lots of bugs** and it does have the **potential to mess up your settings** or **overwrite files** you have made edits to... so **please** make a **backup of your files** first.  
   
