@@ -566,6 +566,9 @@
     <None Include="Resources\AdvancedOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\ViewportDevices.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

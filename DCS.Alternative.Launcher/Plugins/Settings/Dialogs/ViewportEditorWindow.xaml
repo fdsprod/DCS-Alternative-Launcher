@@ -74,8 +74,6 @@
                         </Viewbox>
                         <Grid>
                             <TextBlock x:Name="WidthHeightText"
-                                       Grid.Row="2"
-                                       Grid.Column="2"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Bottom"
                                        FontSize="10"

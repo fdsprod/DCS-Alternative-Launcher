@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows.Threading;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
@@ -14,6 +13,11 @@ namespace DCS.Alternative.Launcher.Windows
     {
         private readonly IContainer _container;
         private readonly INavigationService _navigationService;
+
+        private readonly DispatcherTimer _timer = new DispatcherTimer();
+        private readonly List<string> _images = new List<string>();
+
+        private int _nextIndex;
 
         public MainWindowViewModel(IContainer container)
         {
@@ -45,12 +49,25 @@ namespace DCS.Alternative.Launcher.Windows
             }
         }
 
+        public ReactiveProperty<string> ImageUrl
+        {
+            get;
+        } = new ReactiveProperty<string>();
+
+        public ReactiveCollection<PluginNavigationButton> PluginsButtons
+        {
+            get;
+        } = new ReactiveCollection<PluginNavigationButton>();
+
+        public ReactiveCommand<PluginNavigationButton> ShowPluginCommand
+        {
+            get;
+        } = new ReactiveCommand<PluginNavigationButton>();
+
         private void _timer_Tick(object sender, EventArgs e)
         {
             NextImage();
         }
-
-        private readonly DispatcherTimer _timer = new DispatcherTimer();
 
         private void NextImage()
         {
@@ -62,25 +79,6 @@ namespace DCS.Alternative.Launcher.Windows
                 _nextIndex = 0;
             }
         }
-
-        private int _nextIndex;
-        private List<string> _images = new List<string>();
-
-        public ReactiveProperty<string> ImageUrl
-        {
-            get;
-        } = new ReactiveProperty<string>();
-
-        public ReactiveCollection<PluginNavigationButton> PluginsButtons
-        {
-            get;
-
-        } = new ReactiveCollection<PluginNavigationButton>();
-
-        public ReactiveCommand<PluginNavigationButton> ShowPluginCommand
-        {
-            get;
-        } = new ReactiveCommand<PluginNavigationButton>();
 
         private void PluginNavigationSite_PluginRegistered(object sender, PluginRegisteredEventArgs e)
         {

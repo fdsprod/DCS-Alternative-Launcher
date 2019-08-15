@@ -1,0 +1,41 @@
+﻿{
+
+	"FA-18C": [
+		{
+			"name":  "Stroke Thickness",
+			"description":  "The size of the stroke",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bstroke_thickness\s*=\s)(.*?)(?=\r\n)"
+		},
+		{
+			"name":  "Stroke Fuzziness",
+			"description":  "The size of the stroke fuzzy",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bstroke_fuzziness\s*=\s)(.*?)(?=\r\n)"
+		},
+		{
+			"name":  "DMC Outline Thickness",
+			"description":  "The thickness of the DMC Outline",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bDMC_outline_thickness\s*=\s)(.*?)(?=\r\n)"
+		},
+		{
+			"name":  "DMC Outline Fuzziness",
+			"description":  "The size of the DMC Outline fuzzy",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bDMC_outline_fuzziness\s*=\s)(.*?)(?=\r\n)"
+		},
+		{
+			"name":  "DMC Stoke Thickness",
+			"description":  "The thickness of the DMC Stoke",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bDMC_stroke_thickness\s*=\s)(.*?)(?=\r\n)"
+		},
+		{
+			"name":  "DMC Stoke Fuzziness",
+			"description":  "The size of the DMC Stoke fuzzy",
+			"filePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/Common/indicator/MDG_strokesDefs.lua",
+			"regex": "(?<=\bDMC_stroke_fuzziness\s*=\s)(.*?)(?=\r\n)"
+		},
+	]
+}
