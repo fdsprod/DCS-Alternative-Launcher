@@ -11,6 +11,7 @@
              xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
              xmlns:settingsControls="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Controls"
              xmlns:views="clr-namespace:DCS.Alternative.Launcher.Views"
+             xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
              d:DesignHeight="450"
              d:DesignWidth="800"
              ClipToBounds="True"
@@ -21,33 +22,12 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid x:Name="PART_BackgroundImage">
-            <Image Margin="0,-80,0,0"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Source="/Images/background.jpg"
-                   Stretch="UniformToFill" />
-            <Image Width="250"
-                   Height="150"
-                   Margin="30"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Opacity="0.25"
-                   RenderOptions.BitmapScalingMode="HighQuality"
-                   RenderOptions.EdgeMode="Aliased"
-                   Source="/Images/dcs-world-logo.png"
-                   Stretch="Uniform">
-                <Image.Effect>
-                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
-                </Image.Effect>
-            </Image>
-        </Grid>
         <Border Margin="30"
                 BorderBrush="#FF2F2F2F"
                 BorderThickness="1"
                 CornerRadius="0">
             <fluentWpf:AcrylicPanel NoiseOpacity="0"
-                                    Target="{Binding ElementName=PART_BackgroundImage}"
+                                    Target="{x:Static windows:MainWindow.AcrylicSource}"
                                     TintColor="#33000000"
                                     TintOpacity="1">
                 <TabControl Background="Transparent"
@@ -91,6 +71,11 @@
 
                         <DataTemplate DataType="{x:Type categories:CameraMirrorsSettingsViewModel}">
                             <categories:CameraMirrorsSettingsView />
+                        </DataTemplate>
+
+
+                        <DataTemplate DataType="{x:Type categories:TerrainSettingsViewModel}">
+                            <categories:TerrainSettingsView />
                         </DataTemplate>
 
                         <Style TargetType="TabItem">

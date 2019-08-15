@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows.Threading;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Navigation;
@@ -15,13 +19,57 @@ namespace DCS.Alternative.Launcher.Windows
         {
             _container = container;
             _navigationService = container.Resolve<INavigationService>();
-
-            var settingsService = container.Resolve<ISettingsService>();
             var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
             ShowPluginCommand.Subscribe(OnShowPlugin);
 
             pluginNavigationSite.PluginRegistered += PluginNavigationSite_PluginRegistered;
+
+            var files = new List<string>(Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Images", "Wallpaper"), "*.jpg"));
+            var rand = new Random();
+
+            while (files.Count > 0)
+            {
+                var index = rand.Next(files.Count);
+                var file = files[index];
+                files.RemoveAt(index);
+                _images.Add(file);
+            }
+
+            if (_images.Count > 0)
+            {
+                _timer.Interval = TimeSpan.FromMinutes(1);
+                _timer.Tick += _timer_Tick;
+                _timer.Start();
+
+                NextImage();
+            }
         }
+
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            NextImage();
+        }
+
+        private readonly DispatcherTimer _timer = new DispatcherTimer();
+
+        private void NextImage()
+        {
+            ImageUrl.Value = _images[_nextIndex];
+            _nextIndex++;
+
+            if (_nextIndex >= _images.Count)
+            {
+                _nextIndex = 0;
+            }
+        }
+
+        private int _nextIndex;
+        private List<string> _images = new List<string>();
+
+        public ReactiveProperty<string> ImageUrl
+        {
+            get;
+        } = new ReactiveProperty<string>();
 
         public ReactiveCollection<PluginNavigationButton> PluginsButtons
         {

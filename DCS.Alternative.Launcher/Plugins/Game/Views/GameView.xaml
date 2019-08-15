@@ -39,7 +39,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid Visibility="{Binding IsLoading.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
-            <Grid Margin="50">
+            <Grid Margin="50,125,50,50">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -53,7 +53,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="275" />
+                        <RowDefinition Height="260" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="40*" />
                     </Grid.RowDefinitions>
@@ -69,7 +69,6 @@
                                                  DataContext="{Binding PreviousNewsArticle.Value}" />
 
                     <Border Grid.Row="0"
-                            Grid.RowSpan="3"
                             Grid.Column="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -336,6 +335,21 @@
                                    Visibility="{Binding FailedVersionCheck.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
                     </Grid>
                 </Grid>
+            </Grid>
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image Width="250"
+                       Height="150"
+                       Margin="50"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       RenderOptions.EdgeMode="Aliased"
+                       Source="/Images/dcs-world-logo.png"
+                       Stretch="Uniform">
+                    <Image.Effect>
+                        <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
+                    </Image.Effect>
+                </Image>
             </Grid>
         </Grid>
         <wpf:LoadingIndicator IsActive="{Binding IsLoading.Value}" Style="{DynamicResource LoadingIndicatorArcsStyle}" />

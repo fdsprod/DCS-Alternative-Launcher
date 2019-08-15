@@ -1,5 +1,119 @@
 ﻿[
 	{
+		"templateName" : "F-14B Pilot (Helios 16/9)",
+		"moduleId" : "HEATBLUR_F-14",
+		"viewports" : [
+			{
+				"viewportName" : "UHF_ARC159_RP",
+				"relativeInitFilePath" : "Mods/aircraft/F14/Cockpit/Scripts/UHF_Radio/Indicator/RemotePilot/init.lua",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1452,
+				"y" : 270,
+				"width" : 120,
+				"height" : 30
+			},
+			{
+				"viewportName" : "VHF_ARC182_RP",
+				"relativeInitFilePath" : "Mods/aircraft/F14/Cockpit/Scripts/VHF_Radio/Indicator/RemotePilot/init.lua",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1452,
+				"y" : 354,
+				"width" : 120,
+				"height" : 30
+			},
+			{
+				"viewportName" : "ECMD",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 729,
+				"y" : 697,
+				"width" : 480,
+				"height" : 480
+			},
+			{
+				"viewportName" : "VDI",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 794,
+				"y" : 290,
+				"width" : 338,
+				"height" : 324
+			},
+			{
+				"viewportName" : "RWR_P",
+				"relativeInitFilePath" : "Mods/aircraft/F14/Cockpit/Scripts/RWR/Indicator/Pilot/init.lua",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1472,
+				"y" : 443,
+				"width" : 170,
+				"height" : 170
+			}
+		]
+	},
+	{
+		"templateName" : "F-14B RIO (Helios 16/9)",
+		"moduleId" : "HEATBLUR_F-14",
+		"viewports" : [
+			{
+				"viewportName" : "UHF_ARC159_RR",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1452,
+				"y" : 270,
+				"width" : 120,
+				"height" : 30
+			},
+			{
+				"viewportName" : "VHF_ARC182_RR",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1452,
+				"y" : 354,
+				"width" : 120,
+				"height" : 30
+			},
+			{
+				"viewportName" : "TID",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 729,
+				"y" : 697,
+				"width" : 480,
+				"height" : 480
+			},
+			{
+				"viewportName" : "DDD",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 729,
+				"y" : 697,
+				"width" : 480,
+				"height" : 480
+			},
+			{
+				"viewportName" : "ECMD",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 794,
+				"y" : 290,
+				"width" : 338,
+				"height" : 324
+			},
+			{
+				"viewportName" : "RWR_R",
+				"originalDisplayWidth" : 1920,
+				"originalDisplayHeight" : 1080,
+				"x" : 1472,
+				"y" : 443,
+				"width" : 170,
+				"height" : 170
+			}
+		]
+	},
+	{
 		"templateName" : "F/A-18C (Helios 16/9)",
 		"moduleId" : "FA-18C",
 		"viewports" : [

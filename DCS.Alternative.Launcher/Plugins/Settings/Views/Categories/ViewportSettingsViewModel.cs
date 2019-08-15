@@ -73,12 +73,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Categories
 
                 if (deviceViewportMonitorIds.Length == 0)
                 {
-                    if (MessageBoxEx.Show("You have not defined a screen for device viewports.  Do you want to do that now?", "Device Viewports") == MessageBoxResult.Yes)
+                    if (MessageBoxEx.Show("You have not defined a screen for device viewports.  Do you want to do that now?", "Device Viewports", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         using (var container = Controller.GetChildContainer())
                         {
                             var firstUseWizard = new FirstUseWizard();
-                            var viewModel = new FirstUseWizardViewModel(container, new SelectDeviceViewportScreensStepViewModel(container));
+                            var viewModel = new FirstUseWizardViewModel(container,
+                                new SelectGameViewportScreensStepViewModel(container),
+                                new SelectUIViewportScreensStepViewModel(container),
+                                new SelectDeviceViewportScreensStepViewModel(container));
 
                             firstUseWizard.DataContext = viewModel;
                             firstUseWizard.ShowDialog();

@@ -4,6 +4,7 @@
         xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:launcher="clr-namespace:DCS.Alternative.Launcher"
         xmlns:local="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Dialogs"
@@ -58,6 +59,19 @@
                         <Image IsHitTestVisible="False"
                                Source="{Binding ImageUrl.Value}"
                                Stretch="Fill" />
+                        <Grid Visibility="{Binding ImageUrl.Value, Converter={x:Static data:VisibilityConverter.Instance}}">
+                            <Border Background="#3C2F2F2F"
+                                    BorderBrush="#FF2F2F2F"
+                                    BorderThickness="1" />
+                        </Grid>
+                        <Viewbox MaxHeight="40" Margin="5">
+
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       Foreground="#8FFFFFFF"
+                                       Text="{Binding Name.Value}" />
+                        </Viewbox>
                         <Grid>
                             <TextBlock x:Name="WidthHeightText"
                                        Grid.Row="2"

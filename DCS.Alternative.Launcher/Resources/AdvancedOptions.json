@@ -1055,7 +1055,7 @@
                 "Max": 0.0
             }
         ]
-    },
+    }*/,
     {
         "Id": "options.graphics.terrain.distanceBlend.beach",
         "DisplayName": "Terrain Distance Blend Beach",
@@ -1066,12 +1066,8 @@
         ],
         "MinMax": [
             {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
+                "Min": 5000,
+                "Max": 40000
             }
         ]
     },
@@ -1081,10 +1077,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 140000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 70000,
+		        "Max": 280000
+	        }
         ]
     },
     {
@@ -1093,10 +1089,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 40000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 20000,
+		        "Max": 80000
+	        }
         ]
     },
     {
@@ -1108,14 +1104,10 @@
             20000
         ],
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 5000,
+		        "Max": 40000
+	        }
         ]
     },
     {
@@ -1127,14 +1119,10 @@
             20000
         ],
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            },
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 5000,
+		        "Max": 40000
+	        }
         ]
     },
     {
@@ -1143,10 +1131,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 120000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 60000,
+		        "Max": 240000
+	        }
         ]
     },
     {
@@ -1155,10 +1143,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 20000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 10000,
+		        "Max": 40000
+	        }
         ]
     },
     {
@@ -1167,10 +1155,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 10000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 5000,
+		        "Max": 20000
+	        }
         ]
     },
     {
@@ -1179,10 +1167,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 80000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 40000,
+		        "Max": 160000
+	        }
         ]
     },
     {
@@ -1191,10 +1179,10 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 30000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 15000,
+		        "Max": 60000
+	        }
         ]
     },
     {
@@ -1203,12 +1191,12 @@
         "Description": "This is just placeholder text and needs to be fixed.",
         "Value": 20000.0,
         "MinMax": [
-            {
-                "Min": 0.0,
-                "Max": 0.0
-            }
+	        {
+		        "Min": 10000,
+		        "Max": 40000
+	        }
         ]
-    },
+    }/*,
     {
         "Id": "options.graphics.Terrain.distancFactor.Extreme",
         "DisplayName": "Terrain Distanc Factor Extreme",

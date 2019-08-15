@@ -345,52 +345,63 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         public Task UpdateAdvancedOptionsAsync()
         {
             var options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Graphics);
+            var createdTables = new Dictionary<string, bool>();
 
             var sb = new StringBuilder();
-
-            sb.AppendLine("options = options or {}");
-            sb.AppendLine("options.graphics = options.graphics or {}");
 
             foreach (var option in options)
             {
                 if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                 {
+                    EnsureTableCreated(sb, option.Id, createdTables);
                     WriteOptionValue(sb, option.Id, value);
-
                 }
             }
-
-            sb.AppendLine("options.graphics.Camera = options.graphics.Camera or {}");
 
             options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Camera);
 
             foreach (var range in _cameraRangeSettings)
             {
-                sb.AppendLine($"options.graphics.Camera.{range} = options.graphics.Camera.{range} or {{}}");
-
                 foreach (var option in options)
                 {
-                    if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                     {
-                        WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                        continue;
                     }
+
+                    var table = option.Id.Replace("Extreme", range);
+                        
+                    EnsureTableCreated(sb, table, createdTables);
+                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
                 }
             }
-
-            sb.AppendLine("options.graphics.CameraMirror = options.graphics.CameraMirror or {}");
 
             options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.CameraMirrors);
 
             foreach (var range in _cameraRangeSettings)
             {
-                sb.AppendLine($"options.graphics.CameraMirrors.{range} = options.graphics.CameraMirrors.{range} or {{}}");
-
                 foreach (var option in options)
                 {
-                    if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                     {
-                        WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                        continue;
                     }
+
+                    var table = option.Id.Replace("Extreme", range);
+
+                    EnsureTableCreated(sb, table, createdTables);
+                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                }
+            }
+
+            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Terrain);
+
+            foreach (var option in options)
+            {
+                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                {
+                    EnsureTableCreated(sb, option.Id, createdTables);
+                    WriteOptionValue(sb, option.Id, value);
                 }
             }
 
@@ -399,6 +410,23 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
 
             return Task.FromResult(true);
+        }
+
+        private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
+        {
+            var optionPaths = path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            var table = string.Empty;
+
+            for (int i = 0; i < optionPaths.Length - 1; i++)
+            {
+                table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);
+
+                if (!createdTables.ContainsKey(table))
+                {
+                    createdTables.Add(table, true);
+                    sb.AppendLine($"{table} = {table} or {{}}");
+                }
+            }
         }
 
         private void WriteOptionValue(StringBuilder sb, string id, object value)
