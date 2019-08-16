@@ -31,7 +31,7 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals
 
         protected override void RegisterUISiteItems(IPluginNavigationSite site)
         {
-            site.RegisterPluginNavigation<ManualsView, ManualsViewModel>("MANUALS", this);
+            site.RegisterPluginNavigation<ManualsView, ManualsViewModel>("DOCUMENTATION", this);
 
             base.RegisterUISiteItems(site);
         }

@@ -21,10 +21,16 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
             _container = container;
             _controller = container.Resolve<ManualsController>();
 
-            OpenDocumentCommand.Subscribe(onOpenDocument);
+            OpenDocumentCommand.Subscribe(OnOpenDocument);
+            OpenUrlCommand.Subscribe(OnOpenUrl);
         }
 
-        private void onOpenDocument(FileModel value)
+        private void OnOpenUrl(string value)
+        {
+            Process.Start(value);
+        }
+
+        private void OnOpenDocument(FileModel value)
         {
             Process.Start(value.Path);
         }
@@ -56,6 +62,10 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
                             });
                         }
 
+                        var resources = _controller.GetAdditionResources(module.ModuleId);
+
+                        model.AdditionalResources.AddRange(resources);
+
                         ModuleDocuments.Add(model);
                     }
                 });
@@ -67,11 +77,16 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 
             await base.InitializeAsync();
         }
-
+        
         public ReactiveCommand<FileModel> OpenDocumentCommand
         {
             get;
         } = new ReactiveCommand<FileModel>();
+
+        public ReactiveCommand<string> OpenUrlCommand
+        {
+            get;
+        } = new ReactiveCommand<string>();
 
         public ReactiveProperty<bool> IsLoading
         {
@@ -96,6 +111,11 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
         {
             get;
         } = new List<FileModel>();
+
+        public List<AdditionalResource> AdditionalResources
+        {
+            get;
+        } = new List<AdditionalResource>();
     }
 
     public class  FileModel

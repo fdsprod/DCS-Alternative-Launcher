@@ -222,6 +222,7 @@
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
+    <Compile Include="DomainObjects\AdditionalResource.cs" />
     <Compile Include="DomainObjects\Option.cs" />
     <Compile Include="DomainObjects\OptionMinMax.cs" />
     <Compile Include="DomainObjects\OptionCategory.cs" />
@@ -586,6 +587,9 @@
     <None Include="Resources\AdvancedOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\AdditionalResources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\ViewportOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -774,6 +778,7 @@
     <Content Include="Images\Wizard\FirstUse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Icons\external-link.png" />
     <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
   </ItemGroup>
   <ItemGroup>

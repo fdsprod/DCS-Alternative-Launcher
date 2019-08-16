@@ -34,6 +34,8 @@ namespace DCS.Alternative.Launcher.Services
 
         Dictionary<string, ViewportOption[]> GetAllViewportOptions();
 
+        AdditionalResource[] GetAdditionalResourcesByModule(string moduleId);
+
         T GetValue<T>(string category, string key, T defaultValue = default(T));
 
         bool TryGetValue<T>(string category, string key, out T value);

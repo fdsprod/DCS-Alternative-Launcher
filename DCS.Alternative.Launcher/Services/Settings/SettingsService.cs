@@ -345,6 +345,21 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return optionsLookup;
         }
 
+        public AdditionalResource[] GetAdditionalResourcesByModule(string moduleId)
+        {
+            const string path = "Resources/AdditionalResources.json";
+
+            var contents = File.ReadAllText(path);
+            var chucksGuides = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
+
+            if (chucksGuides.TryGetValue(moduleId, out var resources))
+            {
+                return resources;
+            }
+
+            return new AdditionalResource[0];
+        }
+
         private void Save()
         {
             lock (_syncRoot)
