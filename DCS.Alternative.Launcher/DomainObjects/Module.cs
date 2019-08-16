@@ -8,6 +8,21 @@ namespace DCS.Alternative.Launcher.DomainObjects
 
         public string BaseFolderPath { get; set; }
 
+        public string DocumentationPath
+        {
+            get
+            {
+                var path = Path.Combine(BaseFolderPath, "Doc");
+
+                if (!Directory.Exists(path))
+                {
+                    path = Path.Combine(BaseFolderPath, "Docs");
+                }
+
+                return path;
+            }
+        }
+
         public string CockpitScriptsFolderPath { get { return Path.Combine(BaseFolderPath, "Cockpit\\Scripts"); } }
 
         public string IconPath { get; set; }

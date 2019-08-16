@@ -240,6 +240,12 @@
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Plugins\Manuals\ManualsPlugin.cs" />
+    <Compile Include="Plugins\Manuals\Views\ManualsController.cs" />
+    <Compile Include="Plugins\Manuals\Views\ManualsView.xaml.cs">
+      <DependentUpon>ManualsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Manuals\Views\ManualsViewModel.cs" />
     <Compile Include="Plugins\Settings\Controls\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
@@ -417,6 +423,10 @@
     <Page Include="Controls\WizardView\WizardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Manuals\Views\ManualsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Plugins\Settings\Controls\OptionsControl.xaml">
       <SubType>Designer</SubType>
@@ -623,6 +633,9 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Plugins\About\" />
+    <Folder Include="Plugins\Manuals\Models\" />
+    <Folder Include="Plugins\Support\" />
     <Folder Include="Resources\Images\Viewports\HEATBLUR_F14\" />
     <Folder Include="Resources\Images\Viewports\KA-50\" />
   </ItemGroup>
@@ -761,6 +774,7 @@
     <Content Include="Images\Wizard\FirstUse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Wallpaper\2.png">
