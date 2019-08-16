@@ -34,7 +34,7 @@
                 <Image x:Name="BackgroundImage"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Source="/Images/background.jpg"
+                       Source="/Images/Wizard/FirstUse.png"
                        Stretch="UniformToFill" />
                 <Border>
                     <Border.Background>
