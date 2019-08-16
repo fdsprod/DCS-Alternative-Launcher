@@ -1,29 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Threading;
 using DCS.Alternative.Launcher.ComponentModel;
-using DCS.Alternative.Launcher.Controls.MessageBoxEx;
-using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
-using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Models;
-using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
-using DCS.Alternative.Launcher.Plugins.Settings.Views.Categories;
+using DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced;
+using DCS.Alternative.Launcher.Plugins.Settings.Views.General;
+using DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports;
 using DCS.Alternative.Launcher.ServiceModel;
-using DCS.Alternative.Launcher.Services;
-using DCS.Alternative.Launcher.Windows.FirstUse;
-using DCS.Alternative.Launcher.Wizards;
-using DCS.Alternative.Launcher.Wizards.Steps;
 using Reactive.Bindings;
-using Application = System.Windows.Application;
-using Screen = WpfScreenHelper.Screen;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
@@ -36,10 +20,29 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             _container = container;
             _controller = container.Resolve<SettingsController>();
+        }
 
-            Categories.Add(new CategoryHeaderSettingsViewModel("SETTINGS"));
+        protected override async Task InitializeAsync()
+        {
+
+            Categories.Add(new CategoryHeaderSettingsViewModel("GENERAL"));
             Categories.Add(new InstallationSettingsViewModel(_controller));
+
+            Categories.Add(new CategoryHeaderSettingsViewModel("VIEWPORTS"));
             Categories.Add(new ViewportSettingsViewModel(_controller));
+
+            var modules = await _controller.GetInstalledAircraftModulesAsync();
+
+            foreach (var module in modules)
+            {
+                var options = _controller.GetViewportOptions(module.ModuleId);
+
+                if (options.Length > 0)
+                {
+                    Categories.Add(new ViewportOptionsViewModel(module, options, _controller));
+                }
+            }
+
             Categories.Add(new CategoryHeaderSettingsViewModel("ADVANCED OPTIONS"));
             Categories.Add(new GraphicsSettingsViewModel(_controller));
             Categories.Add(new CameraSettingsViewModel(_controller));
@@ -48,6 +51,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             SelectedCategory.Value = Categories.First(c => !(c is CategoryHeaderSettingsViewModel));
             SelectedCategory.Subscribe(OnSelectedCategoryChanged);
+
+            await base.InitializeAsync();
         }
 
         private async void OnSelectedCategoryChanged(SettingsCategoryViewModelBase value)

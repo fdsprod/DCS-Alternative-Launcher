@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.ServiceModel.Syndication;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -22,6 +23,15 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 {
     public class DcsWorldService : IDcsWorldService
     {
+        private static readonly string[] CameraRangeSettings =
+        {
+            "Low",
+            "Medium",
+            "High",
+            "Ultra",
+            "Extreme"
+        };
+
         private readonly IContainer _container;
         private readonly ISettingsService _settingsService;
 
@@ -101,6 +111,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                         lua["make_flyable"] = new Action<string, string, LuaTable, string>((displayName, b, c, d) =>
                         {
+                            // For whatever reason ED decided the Hornet would have a stupid display name... 
+                            // So, we get to add stupid code like this... 
+                            if (displayName.Contains("_hornet")) ;
+                            {
+                                displayName = displayName.Split('_')[0];
+                            }
+
                             if (!string.IsNullOrEmpty(moduleId) && autoupdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
                                 var module = new Module()
@@ -333,83 +350,131 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             }
         }
 
-        private static readonly string[] _cameraRangeSettings = 
+        public async Task UpdateAdvancedOptionsAsync()
         {
-            "Low",
-            "Medium",
-            "High",
-            "Ultra",
-            "Extreme"
-        };
-
-        public Task UpdateAdvancedOptionsAsync()
-        {
-            var options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Graphics);
+            var install = _settingsService.SelectedInstall;
             var createdTables = new Dictionary<string, bool>();
-
             var sb = new StringBuilder();
 
-            foreach (var option in options)
-            {
-                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                {
-                    EnsureTableCreated(sb, option.Id, createdTables);
-                    WriteOptionValue(sb, option.Id, value);
-                }
-            }
-
-            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Camera);
-
-            foreach (var range in _cameraRangeSettings)
-            {
-                foreach (var option in options)
-                {
-                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                    {
-                        continue;
-                    }
-
-                    var table = option.Id.Replace("Extreme", range);
-                        
-                    EnsureTableCreated(sb, table, createdTables);
-                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
-                }
-            }
-
-            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.CameraMirrors);
-
-            foreach (var range in _cameraRangeSettings)
-            {
-                foreach (var option in options)
-                {
-                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                    {
-                        continue;
-                    }
-
-                    var table = option.Id.Replace("Extreme", range);
-
-                    EnsureTableCreated(sb, table, createdTables);
-                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
-                }
-            }
-
-            options = _settingsService.GetAdvancedOptions(AdvancedOptionCategory.Terrain);
-
-            foreach (var option in options)
-            {
-                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                {
-                    EnsureTableCreated(sb, option.Id, createdTables);
-                    WriteOptionValue(sb, option.Id, value);
-                }
-            }
-
-            var install = _settingsService.SelectedInstall;
+            WriteGraphicsOptions(sb, createdTables);
+            WriteCameraOptions(sb, createdTables);
+            WriteCameraMirrorsOptions(sb, createdTables);
+            WriteTerrainOptions(sb, createdTables);
 
             File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
 
-            return Task.FromResult(true);
+            await WriteViewportOptionsAsync(install);
+        }
+
+        private async Task WriteViewportOptionsAsync(InstallLocation install)
+        {
+            var modules = await GetInstalledAircraftModulesAsync();
+
+            foreach (var module in modules)
+            {
+                var options = _settingsService.GetViewportOptionsByModuleId(module.ModuleId);
+
+                foreach (var option in options)
+                {
+                    if (!_settingsService.TryGetValue<object>(string.Format(SettingsCategories.ViewportOptionsFormat, module.ModuleId), option.Id, out var value))
+                    {
+                        continue;
+                    }
+
+                    var filePath = Path.Combine(install.Directory, option.FilePath);
+
+                    if (!File.Exists(filePath))
+                    {
+                        Tracer.Warn($"Unable to find file \"{filePath}\", skipping output of option {option.Id} for module {module.ModuleId}.");
+                        continue;
+                    }
+
+                    var fileContents = File.ReadAllText(filePath);
+                    var regex = new Regex(option.Regex);
+                    var match = regex.Match(fileContents);
+
+                    if (!match.Success)
+                    {
+                        Tracer.Warn($"Unable to make a match on regex {option.Regex} for file \"{filePath}\", skipping output of option {option.Id} for module {module.ModuleId}.");
+                        continue;
+                    }
+
+                    fileContents = fileContents.Remove(match.Index, match.Length);
+                    fileContents = fileContents.Insert(match.Index, value is bool ? value.ToString().ToLower() : value.ToString());
+
+                    File.WriteAllText(filePath, fileContents);
+                }
+            }
+        }
+
+        private void WriteTerrainOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        {
+            var options = _settingsService.GetAdvancedOptions(OptionCategory.Terrain);
+
+            foreach (var option in options)
+            {
+                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                {
+                    EnsureTableCreated(sb, option.Id, createdTables);
+                    WriteOptionValue(sb, option.Id, value);
+                }
+            }
+        }
+
+        private void WriteCameraMirrorsOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        {
+            var options = _settingsService.GetAdvancedOptions(OptionCategory.CameraMirrors);
+
+            foreach (var range in CameraRangeSettings)
+            {
+                foreach (var option in options)
+                {
+                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    {
+                        continue;
+                    }
+
+                    var table = option.Id.Replace("Extreme", range);
+
+                    EnsureTableCreated(sb, table, createdTables);
+                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                }
+            }
+        }
+
+        private void WriteCameraOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        {
+            var options = _settingsService.GetAdvancedOptions(OptionCategory.Camera);
+
+            foreach (var range in CameraRangeSettings)
+            {
+                foreach (var option in options)
+                {
+                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    {
+                        continue;
+                    }
+
+                    var table = option.Id.Replace("Extreme", range);
+
+                    EnsureTableCreated(sb, table, createdTables);
+                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                }
+            }
+        }
+
+        private void WriteGraphicsOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        {
+            var options = _settingsService.GetAdvancedOptions(OptionCategory.Graphics);
+
+            foreach (var option in options)
+            {
+                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                {
+                    EnsureTableCreated(sb, option.Id, createdTables);
+                    WriteOptionValue(sb, option.Id, value);
+                }
+            }
         }
 
         private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
@@ -446,7 +511,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             }
             else
             {
-                sb.AppendLine($"{id} = {value}");
+                sb.AppendLine($"{id} = {((value is bool) ? value.ToString().ToLower() : value.ToString())}");
             }
         }
     }

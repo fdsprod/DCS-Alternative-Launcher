@@ -1,15 +1,17 @@
 ﻿<UserControl x:Class="DCS.Alternative.Launcher.Plugins.Settings.Views.SettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:categories="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Categories"
+             xmlns:advanced="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced"
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
              xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
              xmlns:settingsControls="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Controls"
+             xmlns:viewports="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports"
              xmlns:views="clr-namespace:DCS.Alternative.Launcher.Views"
              xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
              d:DesignHeight="450"
@@ -53,29 +55,33 @@
                                        TextAlignment="Right" />
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type categories:InstallationSettingsViewModel}">
+                        <DataTemplate DataType="{x:Type general:InstallationSettingsViewModel}">
                             <controls:InstallationControl Margin="30" />
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type categories:ViewportSettingsViewModel}">
+                        <DataTemplate DataType="{x:Type viewports:ViewportSettingsViewModel}">
                             <settingsControls:ViewportsSettingsControl Margin="30" />
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type categories:GraphicsSettingsViewModel}">
-                            <categories:GraphicsSettingsView />
+                        <DataTemplate DataType="{x:Type advanced:GraphicsSettingsViewModel}">
+                            <advanced:GraphicsSettingsView />
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type categories:CameraSettingsViewModel}">
-                            <categories:CameraSettingsView />
+                        <DataTemplate DataType="{x:Type advanced:CameraSettingsViewModel}">
+                            <advanced:CameraSettingsView />
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type categories:CameraMirrorsSettingsViewModel}">
-                            <categories:CameraMirrorsSettingsView />
+                        <DataTemplate DataType="{x:Type advanced:CameraMirrorsSettingsViewModel}">
+                            <advanced:CameraMirrorsSettingsView />
                         </DataTemplate>
 
 
-                        <DataTemplate DataType="{x:Type categories:TerrainSettingsViewModel}">
-                            <categories:TerrainSettingsView />
+                        <DataTemplate DataType="{x:Type advanced:TerrainSettingsViewModel}">
+                            <advanced:TerrainSettingsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type viewports:ViewportOptionsViewModel}">
+                            <viewports:ViewportOptionsView />
                         </DataTemplate>
 
                         <Style TargetType="TabItem">

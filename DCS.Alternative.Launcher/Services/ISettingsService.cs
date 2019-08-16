@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Modules;
 using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services
 {
     public interface ISettingsService
     {
-        AdvancedOption[] GetAdvancedOptions(string category);
+        Option[] GetAdvancedOptions(string category);
 
         InstallLocation SelectedInstall { get; set; }
 
@@ -27,14 +26,19 @@ namespace DCS.Alternative.Launcher.Services
 
         InstallLocation[] GetInstallations();
 
+        ModuleViewportTemplate[] GetDefaultViewportTemplates();
+
+        ViewportDevice[] GetViewportDevices(string moduleId);
+
+        ViewportOption[] GetViewportOptionsByModuleId(string moduleId);
+
+        Dictionary<string, ViewportOption[]> GetAllViewportOptions();
+
         T GetValue<T>(string category, string key, T defaultValue = default(T));
 
         bool TryGetValue<T>(string category, string key, out T value);
 
         void SetValue(string category, string key, object value);
 
-        ModuleViewportTemplate[] GetDefaultViewportTemplates();
-
-        ViewportDevice[] GetViewportDevices(string moduleId);
     }
 }

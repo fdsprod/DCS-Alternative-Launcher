@@ -334,7 +334,7 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
             _settingsService.RemoveViewportTemplate(moduleId);
         }
 
-        public AdvancedOption[] GetAdvancedOptions(string optionsCategory)
+        public Option[] GetAdvancedOptions(string optionsCategory)
         {
             var options = _settingsService.GetAdvancedOptions(optionsCategory);
 
@@ -352,6 +352,26 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
         public void UpsertAdvancedOption(string id, object value)
         {
             _settingsService.SetValue(SettingsCategories.AdvancedOptions, id, value);
+        }
+
+        public void UpsertViewportOption(string moduleId, string optionId, object value)
+        {
+            _settingsService.SetValue(string.Format(SettingsCategories.ViewportOptionsFormat, moduleId), optionId, value);
+        }
+
+        public ViewportOption[] GetViewportOptions(string moduleId)
+        {
+            var options = _settingsService.GetViewportOptionsByModuleId(moduleId);
+
+            foreach (var option in options)
+            {
+                if (_settingsService.TryGetValue<object>(string.Format(SettingsCategories.ViewportOptionsFormat, moduleId), option.Id, out var value))
+                {
+                    option.Value = value;
+                }
+            }
+
+            return options;
         }
     }
 }

@@ -20,18 +20,18 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private static readonly object _syncRoot = new object();
         private static readonly string[] _optionsCategories =
         {
-            AdvancedOptionCategory.TerrainReflection,
-            AdvancedOptionCategory.TerrainMirror,
-            AdvancedOptionCategory.Terrain,
-            AdvancedOptionCategory.CameraMirrors,
-            AdvancedOptionCategory.Camera,
-            AdvancedOptionCategory.Graphics,
-            AdvancedOptionCategory.Sound
+            OptionCategory.TerrainReflection,
+            OptionCategory.TerrainMirror,
+            OptionCategory.Terrain,
+            OptionCategory.CameraMirrors,
+            OptionCategory.Camera,
+            OptionCategory.Graphics,
+            OptionCategory.Sound
         };
 
         private InstallLocation _selectedInstall;
         private List<InstallLocation> _installationCache;
-        private Dictionary<string, AdvancedOption[]> _advancedOptionCache;
+        private Dictionary<string, Option[]> _advancedOptionCache;
 
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
@@ -82,16 +82,16 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
-        public AdvancedOption[] GetAdvancedOptions(string category)
+        public Option[] GetAdvancedOptions(string category)
         {
             if (_advancedOptionCache == null)
             {
                 const string path = "Resources/AdvancedOptions.json";
 
                 var contents = File.ReadAllText(path);
-                var allOptions = JsonConvert.DeserializeObject<AdvancedOption[]>(contents);
+                var allOptions = JsonConvert.DeserializeObject<Option[]>(contents);
 
-                _advancedOptionCache = new Dictionary<string, AdvancedOption[]>();
+                _advancedOptionCache = new Dictionary<string, Option[]>();
 
                 foreach (var group in allOptions.GroupBy(o => GetCategory(o?.Id)))
                 {
@@ -323,6 +323,28 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return templates;
         }
 
+        public ViewportOption[] GetViewportOptionsByModuleId(string moduleId)
+        {
+            var optionsLookup = GetAllViewportOptions();
+
+            if (optionsLookup.TryGetValue(moduleId, out var options))
+            {
+                return options;
+            }
+
+            return new ViewportOption[0];
+        }
+
+        public Dictionary<string, ViewportOption[]> GetAllViewportOptions()
+        {
+            const string path = "Resources/ViewportOptions.json";
+
+            var contents = File.ReadAllText(path);
+            var optionsLookup = JsonConvert.DeserializeObject<Dictionary<string, ViewportOption[]>>(contents);
+
+            return optionsLookup;
+        }
+
         private void Save()
         {
             lock (_syncRoot)
@@ -333,11 +355,11 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
                     Tracer.Info("Saving settings.json");
 
-                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings));
+                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings, Formatting.Indented));
                 }
             }
         }
-
+        
         private void Load()
         {
             lock (_syncRoot)

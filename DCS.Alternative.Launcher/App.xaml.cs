@@ -111,7 +111,7 @@ namespace DCS.Alternative.Launcher
                 var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
                 lua["sendIt"] = new Action<LuaTable>((table) =>
                 {
-                    var options = new List<AdvancedOption>();
+                    var options = new List<Option>();
                     RecursiveDump("options", table, options);
                     var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c=>c=='.')).ThenBy(o=>o.Id), Formatting.Indented);
                 });
@@ -121,7 +121,7 @@ namespace DCS.Alternative.Launcher
 
         }
 
-        private void RecursiveDump(string empty, LuaTable table, List<AdvancedOption> options)
+        private void RecursiveDump(string empty, LuaTable table, List<Option> options)
         {
             var ti = new CultureInfo("en-US", false).TextInfo;
 
@@ -154,7 +154,7 @@ namespace DCS.Alternative.Launcher
                     else
                     {
                         var values = new List<object>();
-                        var option = new AdvancedOption
+                        var option = new Option
                         {
                             Id = id,
                             DisplayName = displayName
@@ -163,7 +163,7 @@ namespace DCS.Alternative.Launcher
                         foreach (var k in subTable.Keys)
                         {
                             values.Add(subTable[k]);
-                            option.MinMax.Add(new AdvancedOptionMinMax());
+                            option.MinMax.Add(new OptionMinMax());
                         }
 
                         option.Value = values.ToArray();
@@ -173,14 +173,14 @@ namespace DCS.Alternative.Launcher
                 }
                 else
                 {
-                    var option = new AdvancedOption
+                    var option = new Option
                     {
                         Id = id,
                         DisplayName = displayName,
                         Value = table[key]
                     };
 
-                    option.MinMax.Add(new AdvancedOptionMinMax());
+                    option.MinMax.Add(new OptionMinMax());
                     options.Add(option);
                 }
             }

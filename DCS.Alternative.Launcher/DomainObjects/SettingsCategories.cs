@@ -7,5 +7,6 @@
         public const string Viewports = "viewports";
         public const string LaunchOptions = "launchOptions";
         public const string AdvancedOptions = "advancedOptions";
+        public const string ViewportOptionsFormat = "viewportOptions_{0}";
     }
 }

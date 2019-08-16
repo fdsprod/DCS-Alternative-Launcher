@@ -217,19 +217,21 @@
     <Compile Include="Data\RectangleHeightToRadiusConverter.cs" />
     <Compile Include="Data\ThicknessSideType.cs" />
     <Compile Include="Data\ThicknessToDoubleConverter.cs" />
+    <Compile Include="Data\StringFormatConverter.cs" />
     <Compile Include="Data\UriToBitmapConverter.cs" />
     <Compile Include="Data\VisibilityConverter.cs" />
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
-    <Compile Include="DomainObjects\AdvancedOption.cs" />
-    <Compile Include="DomainObjects\AdvancedOptionMinMax.cs" />
-    <Compile Include="DomainObjects\AdvancedOptions.cs" />
+    <Compile Include="DomainObjects\Option.cs" />
+    <Compile Include="DomainObjects\OptionMinMax.cs" />
+    <Compile Include="DomainObjects\OptionCategory.cs" />
     <Compile Include="DomainObjects\MonitorDefinition.cs" />
     <Compile Include="DomainObjects\SettingsCategories.cs" />
     <Compile Include="DomainObjects\SettingsKeys.cs" />
     <Compile Include="DomainObjects\Viewport.cs" />
     <Compile Include="DomainObjects\ModuleViewportTemplate.cs" />
     <Compile Include="DomainObjects\ViewportDevice.cs" />
+    <Compile Include="DomainObjects\ViewportOptionTemplate.cs" />
     <Compile Include="Drawing\ScreenCapture.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
@@ -238,8 +240,8 @@
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Plugins\Settings\Controls\AdvancedOptionsControl.xaml.cs">
-      <DependentUpon>AdvancedOptionsControl.xaml</DependentUpon>
+    <Compile Include="Plugins\Settings\Controls\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml.cs">
       <DependentUpon>SelectViewportDialog.xaml</DependentUpon>
@@ -255,43 +257,47 @@
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
-    <Compile Include="Plugins\Settings\Models\AdvancedOptioonModel.cs" />
-    <Compile Include="Plugins\Settings\Models\ColorAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\DoubleRangeSliderAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\MultiValueAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\QuadRangeSliderAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SingleValueAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SliderAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SwitchAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\TextAdvancedOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\TripleRangeSliderAdvancedOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\OptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\ColorOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\DoubleRangeSliderOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\MultiValueOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\QuadRangeSliderOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SingleValueOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SliderOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SwitchOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\TextOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\TripleRangeSliderOptionModel.cs" />
     <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
     <Compile Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml.cs">
       <DependentUpon>ViewportsSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Models\AdvancedOptionModelFactory.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\AdvancedOptionSettingsViewModelBase.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsView.xaml.cs">
+    <Compile Include="Plugins\Settings\Models\OptionModelFactory.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\AdvancedOptionSettingsViewModelBase.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml.cs">
       <DependentUpon>CameraMirrorsSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Categories\TerrainSettingsView.xaml.cs">
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsView.xaml.cs">
       <DependentUpon>TerrainSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Categories\CameraSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\CategoryHeaderSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\CameraSettingsView.xaml.cs">
+    <Compile Include="Plugins\Settings\Views\Advanced\CameraSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\CategoryHeaderSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\CameraSettingsView.xaml.cs">
       <DependentUpon>CameraSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml.cs">
+    <Compile Include="Plugins\Settings\Views\Advanced\GraphicsSettingsView.xaml.cs">
       <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Categories\GraphicsSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\InstallationSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\SettingsCategoryViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\TerrainSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Categories\ViewportSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\GraphicsSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\General\InstallationSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\SettingsCategoryViewModelBase.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Viewports\ViewportOptionsView.xaml.cs">
+      <DependentUpon>ViewportOptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Viewports\ViewportOptionsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Viewports\ViewportSettingsViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsController.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -412,7 +418,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Controls\AdvancedOptionsControl.xaml">
+    <Page Include="Plugins\Settings\Controls\OptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -436,25 +442,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Views\Categories\CameraMirrorsSettingsView.xaml">
+    <Page Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Views\Categories\TerrainSettingsView.xaml">
+    <Page Include="Plugins\Settings\Views\Advanced\TerrainSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Views\Categories\CameraSettingsView.xaml">
+    <Page Include="Plugins\Settings\Views\Advanced\CameraSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Views\Categories\GraphicsSettingsView.xaml">
+    <Page Include="Plugins\Settings\Views\Advanced\GraphicsSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Plugins\Settings\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Viewports\ViewportOptionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
