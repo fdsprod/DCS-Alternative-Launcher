@@ -129,7 +129,7 @@
                                            Width="310"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Top"
-                                           Source="{Binding Module.MainMenuLogoPath, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=200}"
+                                           Source="{Binding Module.MainMenuLogoPath, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=400}"
                                            Stretch="Uniform" />
                                     <Grid Grid.Row="1">
                                         <Grid.ColumnDefinitions>

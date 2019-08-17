@@ -712,6 +712,9 @@
     <Resource Include="Images\Overlay.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\lauch-background-mask.png" />
+    <Resource Include="Images\lauch-background.jpg" />
+    <Resource Include="Images\lauch-background-mask-2.png" />
     <Content Include="Images\Wallpaper\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -45,7 +46,7 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
                 {
                     var modules = await _controller.GetModulesAsync();
 
-                    foreach (var module in modules)
+                    foreach (var module in modules.GroupBy(m=>m.DocumentationPath).Select(g=>g.First()))
                     {
                         var model = new ModuleDocumentModel();
 
