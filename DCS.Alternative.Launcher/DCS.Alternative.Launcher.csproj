@@ -80,8 +80,8 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="KeraLua, Version=1.0.14.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\KeraLua.1.0.14\lib\net45\KeraLua.dll</HintPath>
+    <Reference Include="KeraLua, Version=1.0.19.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\KeraLua.1.0.19\lib\net45\KeraLua.dll</HintPath>
     </Reference>
     <Reference Include="LoadingIndicators.WPF, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LoadingIndicators.WPF.0.0.1\lib\LoadingIndicators.WPF.dll</HintPath>
@@ -101,8 +101,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLua, Version=1.4.18.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLua.1.4.18\lib\net45\NLua.dll</HintPath>
+    <Reference Include="NLua, Version=1.4.20.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.4.20\lib\net45\NLua.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveProperty, Version=5.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.dll</HintPath>
@@ -237,6 +237,12 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
     <Compile Include="DomainObjects\ModuleIds.cs" />
+    <Compile Include="Plugins\About\AboutPlugin.cs" />
+    <Compile Include="Plugins\About\Views\AboutController.cs" />
+    <Compile Include="Plugins\About\Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\About\Views\AboutViewModel.cs" />
     <Compile Include="Plugins\Game\GamePlugin.cs" />
     <Compile Include="Plugins\Game\Views\GameController.cs" />
     <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
@@ -310,6 +316,12 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Views\SettingsViewModel.cs" />
+    <Compile Include="Plugins\Support\SupportPlugin.cs" />
+    <Compile Include="Plugins\Support\Views\SupportViewModel.cs" />
+    <Compile Include="Plugins\Support\Views\SupportView.xaml.cs">
+      <DependentUpon>SupportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Support\Views\SupportController.cs" />
     <Compile Include="SafeAsync.cs" />
     <Compile Include="ServiceModel\Container.cs" />
     <Compile Include="ServiceModel\IContainer.cs" />
@@ -425,6 +437,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Plugins\About\Views\AboutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Plugins\Manuals\Views\ManualsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -474,6 +490,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Plugins\Settings\Views\Viewports\ViewportOptionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Support\Views\SupportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -584,6 +604,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\DcsOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\AdvancedOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -637,9 +660,7 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugins\About\" />
     <Folder Include="Plugins\Manuals\Models\" />
-    <Folder Include="Plugins\Support\" />
     <Folder Include="Resources\Images\Viewports\HEATBLUR_F14\" />
     <Folder Include="Resources\Images\Viewports\KA-50\" />
   </ItemGroup>
@@ -800,14 +821,14 @@
     <Error Condition="!Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets'))" />
-    <Error Condition="!Exists('..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets'))" />
+    <Error Condition="!Exists('..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets'))" />
   </Target>
   <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" />
-  <Import Project="..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
+  <Import Project="..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets')" />
 </Project>

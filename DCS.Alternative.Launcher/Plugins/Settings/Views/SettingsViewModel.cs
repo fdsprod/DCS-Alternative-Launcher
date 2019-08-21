@@ -45,9 +45,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             Categories.Add(new CategoryHeaderSettingsViewModel("ADVANCED OPTIONS"));
             Categories.Add(new GraphicsSettingsViewModel(_controller));
-            Categories.Add(new CameraSettingsViewModel(_controller));
-            Categories.Add(new CameraMirrorsSettingsViewModel(_controller));
-            Categories.Add(new TerrainSettingsViewModel(_controller));
+            //Categories.Add(new CameraSettingsViewModel(_controller));
+            //Categories.Add(new CameraMirrorsSettingsViewModel(_controller));
+            //Categories.Add(new TerrainSettingsViewModel(_controller));
 
             SelectedCategory.Value = Categories.First(c => !(c is CategoryHeaderSettingsViewModel));
             SelectedCategory.Subscribe(OnSelectedCategoryChanged);

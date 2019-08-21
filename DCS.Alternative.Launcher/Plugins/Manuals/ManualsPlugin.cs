@@ -12,6 +12,11 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals
             get { return "Manuals Plugin"; }
         }
 
+        public override int LoadOrder
+        {
+            get { return 2; }
+        }
+
         public override string Author
         {
             get { return "Jabbers"; }

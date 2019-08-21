@@ -42,11 +42,11 @@ namespace DCS.Alternative.Launcher
         {
             try
             {
-                var key = Registry.LocalMachine.OpenSubKey(string.Format(@"SOFTWARE\{0}", subName));
+                var key = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\{subName}");
 
                 if (key == null)
                 {
-                    key = Registry.CurrentUser.OpenSubKey(string.Format(@"SOFTWARE\{0}", subName));
+                    key = Registry.CurrentUser.OpenSubKey($@"SOFTWARE\{subName}");
 
                     if (key == null)
                     {

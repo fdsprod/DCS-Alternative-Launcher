@@ -6,6 +6,8 @@ namespace DCS.Alternative.Launcher.Plugins
 {
     public abstract class PluginBase : IPlugin
     {
+        public abstract int LoadOrder { get; }
+
         public abstract string Author { get; }
 
         public abstract string SupportUrl { get; }

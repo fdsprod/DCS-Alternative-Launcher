@@ -1,19 +1,20 @@
-﻿using DCS.Alternative.Launcher.Plugins.Game.Views;
+﻿using DCS.Alternative.Launcher.Plugins.Manuals.Views;
+using DCS.Alternative.Launcher.Plugins.Support.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
-namespace DCS.Alternative.Launcher.Plugins.Game
+namespace DCS.Alternative.Launcher.Plugins.Support
 {
-    public class GamePlugin : PluginBase
+    public class SupportPlugin : PluginBase
     {
         public override string Name
         {
-            get { return "Game Plugin"; }
+            get { return "Support Plugin"; }
         }
 
         public override int LoadOrder
         {
-            get { return 0; }
+            get { return 3; }
         }
 
         public override string Author
@@ -28,14 +29,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game
 
         protected override void RegisterContainerItems(IContainer container)
         {
-            container.Register(new GameController(container));
+            container.Register(new SupportController(container));
 
             base.RegisterContainerItems(container);
         }
 
         protected override void RegisterUISiteItems(IPluginNavigationSite site)
         {
-            site.RegisterPluginNavigation<GameView, GameViewModel>("GAME", this);
+            //site.RegisterPluginNavigation<SupportView, SupportViewModel>("SUPPORT", this);
 
             base.RegisterUISiteItems(site);
         }

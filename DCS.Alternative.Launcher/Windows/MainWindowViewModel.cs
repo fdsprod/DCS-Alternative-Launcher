@@ -82,11 +82,18 @@ namespace DCS.Alternative.Launcher.Windows
 
         private void PluginNavigationSite_PluginRegistered(object sender, PluginRegisteredEventArgs e)
         {
-            PluginsButtons.Insert(0, new PluginNavigationButton(e.Name, e.ViewType, e.ViewModelType));
+            PluginsButtons.Add(new PluginNavigationButton(e.Name, e.ViewType, e.ViewModelType));
         }
 
         private async void OnShowPlugin(PluginNavigationButton plugin)
         {
+            foreach (var button in PluginsButtons)
+            {
+                button.IsSelected.Value = false;
+            }
+
+            plugin.IsSelected.Value = true;
+
             var viewModel = (INavigationAware) _container.Resolve(plugin.ViewModelType);
 
             await _navigationService.NavigateAsync(plugin.ViewType, viewModel);
@@ -103,6 +110,11 @@ namespace DCS.Alternative.Launcher.Windows
         }
 
         public string Name { get; }
+
+        public ReactiveProperty<bool> IsSelected
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
         public Type ViewType { get; }
 

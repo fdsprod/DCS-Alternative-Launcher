@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -72,6 +73,7 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 #endif
             //DumpAutoexecLua();
+            //DumpOptionsLua();
             //ShowTestWindow();
 
             var settings = new CefSettings();
@@ -102,23 +104,51 @@ namespace DCS.Alternative.Launcher
             window.Show();
         }
 
+        private void DumpOptionsLua()
+        {
+            using (var lua = new Lua())
+            {
+                lua.State.Encoding = Encoding.UTF8;
+                lua.RegisterFunction("print", typeof(App).GetMethod("print"));
+
+
+                var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\options.lua";
+
+                lua["sendIt"] = new Action<LuaTable>((table) =>
+                {
+                    var options = new List<Option>();
+                    RecursiveDump("options", table, options);
+                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
+                });
+
+                lua.DoString($"print(loadfile('{path}')());");
+            }
+
+        }
+
         private void DumpAutoexecLua()
         {
             using (var lua = new Lua())
             {
                 lua.State.Encoding = Encoding.UTF8;
+                lua.RegisterFunction("print", typeof(App).GetMethod("print"));
 
                 var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
+
                 lua["sendIt"] = new Action<LuaTable>((table) =>
                 {
                     var options = new List<Option>();
                     RecursiveDump("options", table, options);
                     var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c=>c=='.')).ThenBy(o=>o.Id), Formatting.Indented);
                 });
-
-                var result = lua.DoString($"sendIt(loadfile('{path}')());");
+                
+                lua.DoString($"sendIt(loadfile('{path}'));");
             }
 
+        }
+        public static void print(params object[] text)
+        {
+            Debug.WriteLine(text);
         }
 
         private void RecursiveDump(string empty, LuaTable table, List<Option> options)
@@ -235,15 +265,19 @@ namespace DCS.Alternative.Launcher
 
         private void LoadPlugins(Assembly assembly)
         {
-            foreach (var type in assembly.GetTypes())
-            {
-                if (type.GetInterfaces().Any(t => t == typeof(IPlugin)) && !type.GetTypeInfo().IsAbstract)
-                {
-                    Tracer.Info($"Loading Plugin {type.FullName}.");
+            var plugins = new List<IPlugin>();
 
-                    var plugin = (IPlugin) Activator.CreateInstance(type);
-                    plugin.OnLoad(_container.GetChildContainer());
-                }
+            foreach (var type in assembly.GetTypes().Where(type => type.GetInterfaces().Any(t => t == typeof(IPlugin)) && !type.GetTypeInfo().IsAbstract))
+            {
+                Tracer.Info($"Loading Plugin {type.FullName}.");
+
+                var plugin = (IPlugin) Activator.CreateInstance(type);
+                plugins.Add(plugin);
+            }
+            
+            foreach (var plugin in plugins.OrderBy(plugin=>plugin.LoadOrder))
+            {
+                plugin.OnLoad(_container.GetChildContainer());
             }
         }
 

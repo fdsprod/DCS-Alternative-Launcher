@@ -30,6 +30,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             _container = container;
             _controller = container.Resolve<GameController>();
 
+            PlayButtonText.Value = "PLAY";
+
             _settingsService = _container.Resolve<ISettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
 
@@ -69,7 +71,12 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             get;
         } = new ReactiveCommand<InstallLocation>();
-        
+
+        public ReactiveProperty<string> PlayButtonText
+        {
+            get;
+        } = new ReactiveProperty<string>();
+
         public ReactiveProperty<bool> IsLoading
         {
             get;
@@ -184,11 +191,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     var variant = install.Variant;
 
                     IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
-
-                    DcsVersion.Value =
-                        IsDcsOutOfDate.Value 
-                            ? "DCS WORLD IS OUT OF DATE"
-                            : $"DCS WORLD IS UP TO DATE";
+                    PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" :"PLAY";
+                    DcsVersion.Value = IsDcsOutOfDate.Value ? "DCS WORLD IS OUT OF DATE" : $"DCS WORLD IS UP TO DATE";
                 }
                 catch (Exception e)
                 {

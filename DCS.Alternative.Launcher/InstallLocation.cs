@@ -186,9 +186,9 @@ namespace DCS.Alternative.Launcher
             File.WriteAllText(filename, contents);
         }
 
-        public string GetPath(string filename, params object[] args)
+        public string GetPath(string filename)
         {
-            var path = Path.Combine(Directory, string.Format(filename, args));
+            var path = Path.Combine(Directory, filename);
 
             if (!File.Exists(path))
             {

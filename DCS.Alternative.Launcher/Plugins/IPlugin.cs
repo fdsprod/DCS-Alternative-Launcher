@@ -6,6 +6,11 @@ namespace DCS.Alternative.Launcher.Plugins
     {
         string Name { get; }
 
+        int LoadOrder
+        {
+            get;
+        }
+
         void OnLoad(IContainer container);
 
         void OnUnload(IContainer container);

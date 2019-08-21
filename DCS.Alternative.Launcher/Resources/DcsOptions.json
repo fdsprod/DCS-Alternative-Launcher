@@ -1,0 +1,1151 @@
+﻿[
+	{
+		"Id": "VR",
+		"DisplayName": "VR",
+		"Options": [
+			{
+				"id": "box_mouse_cursor",
+				"displayName": "Confine Mouse Cursor to Game Window",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"box_mouse_cursor\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "custom_IPD",
+				"displayName": "Custom IPD",
+				"value": "63.5",
+				"Params": {
+					"SaveAsString":  true
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"custom_IPD\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "custom_IPD_enable",
+				"displayName": "Enable Custom Ipd",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"custom_IPD_enable\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "enable",
+				"displayName": "Enable VR",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"enable\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "hand_controllers",
+				"displayName": "Use Hand Controllers",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"hand_controllers\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "pixel_density",
+				"displayName": "Pixel Density",
+				"value": 1,
+				"Params": {
+					"TickFrequency": "0.1",
+					"FormatString": "N1"
+				},
+				"minMax": [
+					{
+						"min": 0.5,
+						"max": 2.5
+					}
+				],
+				"regex": "(?<=\\[\\\"pixel_density\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "prefer_built_in_audio",
+				"displayName": "Prefer Built In Audio",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"prefer_built_in_audio\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "use_mouse",
+				"displayName": "Use Mouse",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"use_mouse\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			}
+		]
+	},
+	{
+		"Id": "difficulty",
+		"DisplayName": "Difficulty",
+		"Options": [
+			{
+				"id": "RBDAI",
+				"displayName": "Enable Battle Damage Assessment",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"RBDAI\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			/*  //I believe these are MAC options
+			{
+				"id": "aircraftMode",
+				"displayName": "Aircraftmode",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"aircraftMode\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{ 
+				"id": "autoTrimmer",
+				"displayName": "Autotrimmer",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"autoTrimmer\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "avionicsLanguage",
+				"displayName": "Avionics Language",
+				"value": "native",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Native",
+							"Value": "native"
+						},
+						{
+							"DisplayName": "English",
+							"Value": "english"
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"avionicsLanguage\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "birds",
+				"displayName": "Birds",
+				"value": 1000,
+				"Params": {
+					"TickFrequency": "1",
+					"FormatString": "N0"
+				},
+				"minMax": [
+					{
+						"min": 0,
+						"max": 1000
+					}
+				],
+				"regex": "(?<=\\[\\\"birds\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "cockpitStatusBarAllowed",
+				"displayName": "Cockpit Status Bar Allowed",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"cockpitStatusBarAllowed\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "cockpitVisualRM",
+				"displayName": "Cockpit Visual Recon Mode",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"cockpitVisualRM\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			/*  //I believe these are MAC options
+			{
+				"id": "compassTape",
+				"displayName": "Compasstape",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"compassTape\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "controlsIndicator",
+				"displayName": "Show Controls Indicator",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"controlsIndicator\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "easyCommunication",
+				"displayName": "Easy Communications",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"easyCommunication\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "easyFlight",
+				"displayName": "Game Flight Mode",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"easyFlight\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			/*
+			{
+				"id": "easyRadar",
+				"displayName": "Easyradar",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"easyRadar\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "externalViews",
+				"displayName": "Externalviews",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"externalViews\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "fuel",
+				"displayName": "Unlimited Fuel",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"fuel\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "geffect",
+				"displayName": "Enable G-Effect",
+				"value": "realistic",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Realistic",
+							"Value": "realistic"
+						},
+						{
+							"DisplayName": "Reduced",
+							"Value": "reduced"
+						}
+					]
+				},
+				"regex": "(?<=\\[\\\"geffect\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "hideStick",
+				"displayName": "Hide Control Stick",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"hideStick\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "iconsTheme",
+				"displayName": "Editor Icon Style",
+				"value": "nato",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "NATO",
+							"Value": "nato"
+						},
+						{
+							"DisplayName": "Russian",
+							"Value": "russian"
+						}
+					]},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"iconsTheme\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "immortal",
+				"displayName": "Immortal",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"immortal\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "labels",
+				"displayName": "Show Labels",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "Fulll",
+							"Value": 1
+						},
+						{
+							"DisplayName": "Abbreviated",
+							"Value": 2
+						},
+						{
+							"DisplayName": "Dot Only",
+							"Value": 3
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"labels\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},/* // Unknown
+			{
+				"id": "map",
+				"displayName": "Allow Map",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"map\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "miniHUD",
+				"displayName": "Show Mini HUD",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"miniHUD\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "optionsView",
+				"displayName": "Map View",
+				"value": "optview_all",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "All",
+							"Value": "optview_all"
+						},
+						{
+							"DisplayName": "Map Only",
+							"Value": "optview_onlymap"
+						},
+						{
+							"DisplayName": "My Plane Only",
+							"Value": "optview_myaircraft"
+						},
+						{
+							"DisplayName": "Fog of War",
+							"Value": "optview_allies"
+						},
+						{
+							"DisplayName": "Allies Only",
+							"Value": "optview_onlyallies"
+						}
+					]},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"optionsView\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "padlock",
+				"displayName": "Allow Padlock",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"padlock\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "permitCrash",
+				"displayName": "Permit Crash RCVR",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"permitCrash\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "radio",
+				"displayName": "Radio Assist",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"radio\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "reports",
+				"displayName": "Allied Flight Reports",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"reports\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "setGlobal",
+				"displayName": "Apply Options to All Missions",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"setGlobal\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},/*
+			{
+				"id": "spectatorExternalViews",
+				"displayName": "Spectatorexternalviews",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"spectatorExternalViews\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "tips",
+				"displayName": "Show Tooltips",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"tips\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "units",
+				"displayName": "Units",
+				"value": "metric",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Metric",
+							"Value": "metric"
+						},
+						{
+							"DisplayName": "Imerial",
+							"Value": "imperial"
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"units\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "userMarks",
+				"displayName": "Allow F10 Map User Marks",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"userMarks\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "userSnapView",
+				"displayName": "Allow Snapviews",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"userSnapView\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "wakeTurbulence",
+				"displayName": "Enable Wake Turbulance (WIP)",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"wakeTurbulence\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "weapons",
+				"displayName": "Unlimited Weapons",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"weapons\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			}
+		]
+	},
+	{
+		"Id": "graphics",
+		"DisplayName": "Graphics",
+		"Options": [
+			{
+				"id": "DOF",
+				"displayName": "Depth Of Field",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Off",
+							"Value": 0
+						},
+						{
+							"DisplayName": "Bokeh",
+							"Value": 1
+						},
+						{
+							"DisplayName": "Simple",
+							"Value": 2
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"DOF\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "LensEffects",
+				"displayName": "Lens Effects",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "Dirt",
+							"Value": 1
+						},
+						{
+							"DisplayName": "Flare",
+							"Value": 2
+						},
+						{
+							"DisplayName": "Dirt + Flare",
+							"Value": 3
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"LensEffects\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "MSAA",
+				"displayName": "MSAA",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "2x",
+							"Value": 1
+						},
+						{
+							"DisplayName": "4x",
+							"Value": 2
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"MSAA\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "SSAA",
+				"displayName": "SSAA",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "1.5x",
+							"Value": 1
+						},
+						{
+							"DisplayName": "2.0x",
+							"Value": 2
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"SSAA\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},/*
+			{
+				"id": "SSAO",
+				"displayName": "Ssao",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "Dirt",
+							"Value": 1
+						},
+						{
+							"DisplayName": "Flare",
+							"Value": 2
+						},
+						{
+							"DisplayName": "Dirt + Flare",
+							"Value": 3
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"SSAO\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "anisotropy",
+				"displayName": "Anisotropic Filtering",
+				"value": 4,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": 0
+						},
+						{
+							"DisplayName": "2x",
+							"Value": 1
+						},
+						{
+							"DisplayName": "4x",
+							"Value": 2
+						},
+						{
+							"DisplayName": "8x",
+							"Value": 3
+						},
+						{
+							"DisplayName": "16x",
+							"Value": 4
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"anisotropy\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "aspect",
+				"displayName": "Aspect Ratio",
+				"value": 1.7777777777778,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "4:3",
+							"Value": 1.33333333333
+						},
+						{
+							"DisplayName": "3:2",
+							"Value": 1.5
+						},
+						{
+							"DisplayName": "5:4",
+							"Value": 1.25
+						},
+						{
+							"DisplayName": "16:9",
+							"Value": 1.77777777778
+						},
+						{
+							"DisplayName": "16:10",
+							"Value": 1.6
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"aspect\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "chimneySmokeDensity",
+				"displayName": "Chimney Smoke Density",
+				"value": 5,
+				"Params": {
+					"TickFrequency": "1",
+					"FormatString": "N0"
+				},
+				"minMax": [
+					{
+						"Min": 0,
+						"Max": 10
+					}
+				],
+				"regex": "(?<=\\[\\\"chimneySmokeDensity\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "civTraffic",
+				"displayName": "Civilian Traffic",
+				"value": "",
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "None",
+							"Value": ""
+						},
+						{
+							"DisplayName": "Low",
+							"Value": "low"
+						},
+						{
+							"DisplayName": "Medium",
+							"Value": "medium"
+						},
+						{
+							"DisplayName": "High",
+							"Value": "high"
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"civTraffic\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},/*
+			{
+				"id": "clouds",
+				"displayName": "Clouds",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"clouds\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},*/
+			{
+				"id": "clutterMaxDistance",
+				"displayName": "Ground Clutter Max Distance",
+				"value": 750,
+				"Params": {
+					"TickFrequency": "1",
+					"FormatString": "N0"
+				},
+				"minMax": [
+					{
+						"Min": 0,
+						"Max": 1500
+					}
+				],
+				"regex": "(?<=\\[\\\"clutterMaxDistance\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "cockpitGI",
+				"displayName": "Cockpit Global Illumination",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "On",
+							"Value": 1
+						},
+						{
+							"DisplayName": "Off",
+							"Value": 0
+						}
+					]
+				},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"cockpitGI\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "effects",
+				"displayName": "Effects (Not in DCS Options GUI)",
+				"value": 3,
+				"Params": {
+					"TickFrequency": "1",
+					"FormatString": "N0"
+				},
+				"minMax": [
+					{
+						"Min": 0,
+						"Max": 5
+					}
+				],
+				"regex": "(?<=\\[\\\"effects\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "flatTerrainShadows",
+				"displayName": "Flatterrainshadows",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"flatTerrainShadows\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "forestDistanceFactor",
+				"displayName": "Forestdistancefactor",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"forestDistanceFactor\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "fullScreen",
+				"displayName": "Fullscreen",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"fullScreen\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "heatBlr",
+				"displayName": "Heatblr",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"heatBlr\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "height",
+				"displayName": "Height",
+				"value": 2160,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"height\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "lights",
+				"displayName": "Lights",
+				"value": 2,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"lights\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "messagesFontScale",
+				"displayName": "Messagesfontscale",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"messagesFontScale\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "motionBlur",
+				"displayName": "Motionblur",
+				"value": 0,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"motionBlur\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "multiMonitorSetup",
+				"displayName": "Multimonitorsetup",
+				"value": "1camera",
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"multiMonitorSetup\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "outputGamma",
+				"displayName": "Outputgamma",
+				"value": 2.2,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"outputGamma\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "preloadRadius",
+				"displayName": "Preloadradius",
+				"value": 79900,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"preloadRadius\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "rainDroplets",
+				"displayName": "Raindroplets",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"rainDroplets\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "scaleGui",
+				"displayName": "Scalegui",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"scaleGui\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "shadowTree",
+				"displayName": "Shadowtree",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"shadowTree\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "shadows",
+				"displayName": "Shadows",
+				"value": 3,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"shadows\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "sync",
+				"displayName": "Sync",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"sync\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "terrainTextures",
+				"displayName": "Terraintextures",
+				"value": "max",
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"terrainTextures\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "textures",
+				"displayName": "Textures",
+				"value": 2,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"textures\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "treesVisibility",
+				"displayName": "Treesvisibility",
+				"value": 10000,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"treesVisibility\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "useDeferredShading",
+				"displayName": "Usedeferredshading",
+				"value": 1,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"useDeferredShading\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "visibRange",
+				"displayName": "Visibrange",
+				"value": "High",
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"visibRange\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "water",
+				"displayName": "Water",
+				"value": 2,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"water\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "width",
+				"displayName": "Width",
+				"value": 3840,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"width\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			}
+		]
+	},
+	{
+		"Id": "miscellaneous",
+		"DisplayName": "Miscellaneous",
+		"Options": [
+			{
+				"id": "Coordinate_Display",
+				"displayName": "Coordinate Display",
+				"value": "Lat Long",
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"Coordinate_Display\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "F2_view_effects",
+				"displayName": "F2 View Effects",
+				"value": 0,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"F2_view_effects\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "TrackIR_external_views",
+				"displayName": "Trackir External Views",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"TrackIR_external_views\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "accidental_failures",
+				"displayName": "Accidental Failures",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"accidental_failures\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "allow_server_screenshots",
+				"displayName": "Allow Server Screenshots",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"allow_server_screenshots\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "autologin",
+				"displayName": "Autologin",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"autologin\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "chat_window_at_start",
+				"displayName": "Chat Window At Start",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"chat_window_at_start\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "collect_stat",
+				"displayName": "Collect Stat",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"collect_stat\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "f10_awacs",
+				"displayName": "F10 Awacs",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"f10_awacs\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "f11_free_camera",
+				"displayName": "F11 Free Camera",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"f11_free_camera\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "f5_nearest_ac",
+				"displayName": "F5 Nearest Ac",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"f5_nearest_ac\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "force_feedback_enabled",
+				"displayName": "Force Feedback Enabled",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"force_feedback_enabled\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "headmove",
+				"displayName": "Headmove",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"headmove\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "show_pilot_body",
+				"displayName": "Show Pilot Body",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"show_pilot_body\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "synchronize_controls",
+				"displayName": "Synchronize Controls",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"synchronize_controls\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			}
+		]
+	},
+	{
+		"Id": "sound",
+		"DisplayName": "Sound",
+		"Options": [
+			{
+				"id": "GBreathEffect",
+				"displayName": "Gbreatheffect",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"GBreathEffect\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "cockpit",
+				"displayName": "Cockpit",
+				"value": 60,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"cockpit\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "gui",
+				"displayName": "Gui",
+				"value": 70,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"gui\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "headphones",
+				"displayName": "Headphones",
+				"value": 38,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"headphones\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "headphones_on_external_views",
+				"displayName": "Headphones On External Views",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"headphones_on_external_views\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "hear_in_helmet",
+				"displayName": "Hear In Helmet",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"hear_in_helmet\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "music",
+				"displayName": "Music",
+				"value": 0,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"music\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "radioSpeech",
+				"displayName": "Radiospeech",
+				"value": true,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"radioSpeech\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "subtitles",
+				"displayName": "Subtitles",
+				"value": false,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"subtitles\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "volume",
+				"displayName": "Volume",
+				"value": 74,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"volume\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			},
+			{
+				"id": "world",
+				"displayName": "World",
+				"value": 8,
+				"Params": {},
+				"minMax": [],
+				"regex": "(?<=\\[\\\"world\\\"\\]\\s=\\s)(.*?)(?=\\,)"
+			}
+		]
+	}
+]

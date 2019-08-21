@@ -407,7 +407,7 @@
                                                FontFamily="{StaticResource Prototype}"
                                                FontSize="18"
                                                Foreground="#8FFFFFFF"
-                                               Text="PLAY">
+                                               Text="{Binding PlayButtonText.Value}">
                                         <TextBlock.Effect>
                                             <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                                         </TextBlock.Effect>
