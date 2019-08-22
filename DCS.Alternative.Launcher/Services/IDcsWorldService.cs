@@ -15,5 +15,6 @@ namespace DCS.Alternative.Launcher.Services
         Task<ReadOnlyDictionary<string, Version>> GetLatestVersionsAsync();
         Task PatchViewportsAsync();
         Task UpdateAdvancedOptionsAsync();
+        Task WriteOptionsAsync(bool isVREnabled);
     }
 }

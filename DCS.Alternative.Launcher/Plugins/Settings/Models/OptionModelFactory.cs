@@ -20,8 +20,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
                 OptionModel model = null;
 
-                if (type == typeof(string))
+                if (option.Params.ContainsKey("Items"))
                 {
+                    model = new ComboBoxOptionModel(option);
+                }
+                else if (type == typeof(string))
+                {
+
                     model = new TextOptionModel(option);
                 }
                 else if (type == typeof(long) || type == typeof(double))

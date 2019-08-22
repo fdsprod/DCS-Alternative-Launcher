@@ -21,6 +21,7 @@ using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins;
 using DCS.Alternative.Launcher.Plugins.Game.Views;
@@ -73,7 +74,6 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
 #endif
             //DumpAutoexecLua();
-            //DumpOptionsLua();
             //ShowTestWindow();
 
             var settings = new CefSettings();
@@ -104,31 +104,9 @@ namespace DCS.Alternative.Launcher
             window.Show();
         }
 
-        private void DumpOptionsLua()
-        {
-            using (var lua = new Lua())
-            {
-                lua.State.Encoding = Encoding.UTF8;
-                lua.RegisterFunction("print", typeof(App).GetMethod("print"));
-
-
-                var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\options.lua";
-
-                lua["sendIt"] = new Action<LuaTable>((table) =>
-                {
-                    var options = new List<Option>();
-                    RecursiveDump("options", table, options);
-                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
-                });
-
-                lua.DoString($"print(loadfile('{path}')());");
-            }
-
-        }
-
         private void DumpAutoexecLua()
         {
-            using (var lua = new Lua())
+            using (var lua = new NLua.Lua())
             {
                 lua.State.Encoding = Encoding.UTF8;
                 lua.RegisterFunction("print", typeof(App).GetMethod("print"));
@@ -145,10 +123,6 @@ namespace DCS.Alternative.Launcher
                 lua.DoString($"sendIt(loadfile('{path}'));");
             }
 
-        }
-        public static void print(params object[] text)
-        {
-            Debug.WriteLine(text);
         }
 
         private void RecursiveDump(string empty, LuaTable table, List<Option> options)

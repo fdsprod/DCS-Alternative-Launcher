@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;
@@ -62,7 +63,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                 foreach (var folder in aircraftFolders)
                 {
-                    using (var lua = new Lua())
+                    using (var lua = new NLua.Lua())
                     {
                         lua.State.Encoding = Encoding.UTF8;
 
@@ -287,83 +288,152 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-        public virtual async Task PatchViewportsAsync()
+        public Task WriteOptionsAsync(bool isVr)
         {
-            var install = _settingsService.SelectedInstall;
-            var viewportTemplates = _settingsService.GetViewportTemplates();
-            var modules = await GetInstalledAircraftModulesAsync();
-
-            foreach (var template in viewportTemplates)
+            return Task.Run(() =>
             {
-                var module = modules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
+                var install = _settingsService.SelectedInstall;
+                var categories = _settingsService.GetDcsOptions();
+                var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 
-                if (module == null)
+                if (!File.Exists(optionsFile))
                 {
-                    Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
-                    return;
+                    Tracer.Warn($"options.lua was not found in path {optionsFile}");
+                    return Task.FromResult(true);
                 }
 
-                foreach (var viewport in template.Viewports)
+                string contents = null;
+
+                try
                 {
-                    if (!install.FileExists(viewport.RelativeInitFilePath))
+                    contents = File.ReadAllText(optionsFile);
+                }
+                catch (Exception ex)
+                {
+                    Tracer.Error(ex);
+                    return Task.FromResult(true);
+                }
+
+                try
+                {
+                    using (var context = new DcsOptionLuaContext(optionsFile))
                     {
-                        Tracer.Warn($"Module {template.ModuleId}: Unable to patch viewport(s) [{viewport.ViewportName} in file {viewport.RelativeInitFilePath}.");
-                        continue;
-                    }
-
-                    var contents = install.ReadAllText(viewport.RelativeInitFilePath);
-                    var isChanged = false;
-
-                    if (!contents.Contains("dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")"))
-                    {
-                        Tracer.Info($"Adding ViewportHandling code to {viewport.RelativeInitFilePath}");
-                        contents += Environment.NewLine + "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" + Environment.NewLine;
-                        isChanged = true;
-                    }
-
-                    var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
-
-                    var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\")";
-
-                    if (!contents.Contains(code))
-                    {
-                        Tracer.Info($"Adding viewport name assignment code to {viewport.RelativeInitFilePath}");
-
-                        if (contents.Contains(originalCode))
+                        foreach (var category in categories)
                         {
-                            contents = contents.Replace(originalCode, code);
-                        }
-                        else
-                        {
-                            contents += Environment.NewLine + code + Environment.NewLine;
+                            foreach (var option in category.Options)
+                            {
+                                if (_settingsService.TryGetValue<object>(string.Format(SettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
+                                {
+                                    context.SetValue(category.Id, option.Id, value);
+                                }
+                            }
                         }
 
-                        isChanged = true;
-                    }
-
-                    if (isChanged)
-                    {
-                        Tracer.Info($"Saving {viewport.RelativeInitFilePath}");
-                        install.WriteAllText(viewport.RelativeInitFilePath, contents);
+                        context.Save();
                     }
                 }
-            }
+                catch (Exception ex)
+                {
+                    Tracer.Error(ex);
+
+                    if (!string.IsNullOrEmpty(contents))
+                    {
+                        File.WriteAllText(optionsFile, contents);
+                    }
+                }
+
+                return Task.FromResult(true);
+            });
         }
 
-        public async Task UpdateAdvancedOptionsAsync()
+        public Task PatchViewportsAsync()
         {
-            var install = _settingsService.SelectedInstall;
-            var createdTables = new Dictionary<string, bool>();
-            var sb = new StringBuilder();
+            return Task.Run(async () =>
+            {
+                var install = _settingsService.SelectedInstall;
+                var viewportTemplates = _settingsService.GetViewportTemplates();
+                var modules = await GetInstalledAircraftModulesAsync();
 
-            WriteGraphicsOptions(sb, createdTables);
-            WriteCameraOptions(sb, createdTables);
-            WriteCameraMirrorsOptions(sb, createdTables);
-            WriteTerrainOptions(sb, createdTables);
+                foreach (var template in viewportTemplates)
+                {
+                    var module = modules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
 
-            File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
+                    if (module == null)
+                    {
+                        Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
+                        return;
+                    }
 
-            await WriteViewportOptionsAsync(install);
+                    foreach (var viewport in template.Viewports)
+                    {
+                        if (string.IsNullOrEmpty(viewport.RelativeInitFilePath))
+                        {
+                            continue;
+                        }
+
+                        if (!install.FileExists(viewport.RelativeInitFilePath))
+                        {
+                            Tracer.Warn($"Module {template.ModuleId}: Unable to patch viewport(s) [{viewport.ViewportName} in file {viewport.RelativeInitFilePath}.");
+                            continue;
+                        }
+
+                        var contents = install.ReadAllText(viewport.RelativeInitFilePath);
+                        var isChanged = false;
+
+                        if (!contents.Contains("dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")"))
+                        {
+                            Tracer.Info($"Adding ViewportHandling code to {viewport.RelativeInitFilePath}");
+                            contents += Environment.NewLine + "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" + Environment.NewLine;
+                            isChanged = true;
+                        }
+
+                        var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
+
+                        var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\")";
+
+                        if (!contents.Contains(code))
+                        {
+                            Tracer.Info($"Adding viewport name assignment code to {viewport.RelativeInitFilePath}");
+
+                            if (contents.Contains(originalCode))
+                            {
+                                contents = contents.Replace(originalCode, code);
+                            }
+                            else
+                            {
+                                contents += Environment.NewLine + code + Environment.NewLine;
+                            }
+
+                            isChanged = true;
+                        }
+
+                        if (isChanged)
+                        {
+                            Tracer.Info($"Saving {viewport.RelativeInitFilePath}");
+                            install.WriteAllText(viewport.RelativeInitFilePath, contents);
+                        }
+                    }
+                }
+            });
+        }
+
+        public Task UpdateAdvancedOptionsAsync()
+        {
+            return Task.Run(async () =>
+            {
+                var install = _settingsService.SelectedInstall;
+                var createdTables = new Dictionary<string, bool>();
+                var sb = new StringBuilder();
+
+                WriteGraphicsOptions(sb, createdTables);
+                WriteCameraOptions(sb, createdTables);
+                WriteCameraMirrorsOptions(sb, createdTables);
+                WriteTerrainOptions(sb, createdTables);
+
+                File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
+
+                await WriteViewportOptionsAsync(install);
+            });
         }
 
         private async Task WriteViewportOptionsAsync(InstallLocation install)

@@ -70,6 +70,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
+                await _dcsWorldService.WriteOptionsAsync(isVREnabled);
                 await _dcsWorldService.PatchViewportsAsync();
                 await _dcsWorldService.UpdateAdvancedOptionsAsync();
 

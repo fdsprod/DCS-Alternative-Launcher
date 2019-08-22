@@ -104,6 +104,7 @@
     <Reference Include="NLua, Version=1.4.20.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.20\lib\net45\NLua.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="ReactiveProperty, Version=5.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.dll</HintPath>
     </Reference>
@@ -223,6 +224,7 @@
     <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
     <Compile Include="Diagnostics\ProcessHelper.cs" />
     <Compile Include="DomainObjects\AdditionalResource.cs" />
+    <Compile Include="DomainObjects\DcsOptionsCategory.cs" />
     <Compile Include="DomainObjects\Option.cs" />
     <Compile Include="DomainObjects\OptionMinMax.cs" />
     <Compile Include="DomainObjects\OptionCategory.cs" />
@@ -237,6 +239,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
     <Compile Include="DomainObjects\ModuleIds.cs" />
+    <Compile Include="Lua\DcsOptionLuaContext.cs" />
+    <Compile Include="Lua\LuaContextBase.cs" />
     <Compile Include="Plugins\About\AboutPlugin.cs" />
     <Compile Include="Plugins\About\Views\AboutController.cs" />
     <Compile Include="Plugins\About\Views\AboutView.xaml.cs">
@@ -270,11 +274,13 @@
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
     <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
+    <Compile Include="Plugins\Settings\Models\ComboBoxOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\OptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\ColorOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\DoubleRangeSliderOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\MultiValueOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\QuadRangeSliderOptionModel.cs" />
+    <Compile Include="Plugins\Settings\Models\SelectorItem.cs" />
     <Compile Include="Plugins\Settings\Models\SingleValueOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\SliderOptionModel.cs" />
     <Compile Include="Plugins\Settings\Models\SwitchOptionModel.cs" />
@@ -303,6 +309,10 @@
       <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Settings\Views\Advanced\GraphicsSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryView.xaml.cs">
+      <DependentUpon>DcsOptionCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\General\InstallationSettingsViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\SettingsCategoryViewModelBase.cs" />
     <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsViewModel.cs" />
@@ -485,6 +495,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Plugins\Settings\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -611,6 +625,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\AdditionalResources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Lua\IO.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Lua\Serializer.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\ViewportOptions.json">

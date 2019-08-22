@@ -32,6 +32,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private InstallLocation _selectedInstall;
         private List<InstallLocation> _installationCache;
         private Dictionary<string, Option[]> _advancedOptionCache;
+        private DcsOptionsCategory[] _dcsOptions;
 
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
@@ -100,6 +101,21 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
 
             return _advancedOptionCache[category];
+        }
+
+        public DcsOptionsCategory[] GetDcsOptions()
+        {
+            if (_advancedOptionCache == null)
+            {
+                const string path = "Resources/DcsOptions.json";
+
+                var contents = File.ReadAllText(path);
+                var allOptions = JsonConvert.DeserializeObject<DcsOptionsCategory[]>(contents);
+
+                _dcsOptions = allOptions;
+            }
+
+            return _dcsOptions;
         }
 
         private string GetCategory(string id)

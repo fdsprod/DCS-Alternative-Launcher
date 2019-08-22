@@ -5,6 +5,7 @@
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
+             xmlns:dcs="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Dcs"
              xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -75,13 +76,16 @@
                             <advanced:CameraMirrorsSettingsView />
                         </DataTemplate>
 
-
                         <DataTemplate DataType="{x:Type advanced:TerrainSettingsViewModel}">
                             <advanced:TerrainSettingsView />
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type viewports:ViewportOptionsViewModel}">
                             <viewports:ViewportOptionsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type advanced:DcsOptionCategoryViewModel}">
+                            <dcs:DcsOptionCategoryView />
                         </DataTemplate>
 
                         <Style TargetType="TabItem">

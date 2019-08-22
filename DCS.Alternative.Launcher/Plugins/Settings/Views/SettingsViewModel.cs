@@ -7,6 +7,7 @@ using DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced;
 using DCS.Alternative.Launcher.Plugins.Settings.Views.General;
 using DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports;
 using DCS.Alternative.Launcher.ServiceModel;
+using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views
@@ -15,18 +16,31 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
     {
         private readonly IContainer _container;
         private readonly SettingsController _controller;
+        private readonly ISettingsService _settingsService;
 
         public SettingsViewModel(IContainer container)
         {
             _container = container;
             _controller = container.Resolve<SettingsController>();
+            _settingsService = container.Resolve<ISettingsService>();
         }
 
         protected override async Task InitializeAsync()
         {
-
             Categories.Add(new CategoryHeaderSettingsViewModel("GENERAL"));
             Categories.Add(new InstallationSettingsViewModel(_controller));
+
+            var optionsCategories = _controller.GetDcsOptionCategories();
+
+            if (optionsCategories.Length > 0)
+            {
+                Categories.Add(new CategoryHeaderSettingsViewModel("DCS WORLD"));
+            }
+
+            foreach (var category in optionsCategories)
+            {
+                Categories.Add(new DcsOptionCategoryViewModel(category.DisplayName.ToUpper(), category.Id, _controller));
+            }
 
             Categories.Add(new CategoryHeaderSettingsViewModel("VIEWPORTS"));
             Categories.Add(new ViewportSettingsViewModel(_controller));

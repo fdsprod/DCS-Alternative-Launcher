@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
-using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Threading;
 using WpfScreenHelper;
+using IContainer = DCS.Alternative.Launcher.ServiceModel.IContainer;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
@@ -170,6 +173,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             sb.AppendLine("displays =");
             sb.AppendLine("{");
 
+            var realBounds = new Rect();
+
             for (var i = 0; i < screens.Length; i++)
             {
                 var screen = screens[i];
@@ -184,7 +189,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 sb.AppendLine($"        width = {screen.Bounds.Width},");
                 sb.AppendLine($"        height = {screen.Bounds.Height}");
                 sb.AppendLine("    },");
+
+                realBounds.Union(screen.Bounds);
             }
+
+            var xOffset = Math.Abs(Screen.PrimaryScreen.Bounds.X - realBounds.X);
+            var yOffset = Math.Abs(Screen.PrimaryScreen.Bounds.X - realBounds.X);
 
             sb.AppendLine("}");
             sb.AppendLine();
@@ -193,8 +203,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             sb.AppendLine("{");
             sb.AppendLine("    Center =");
             sb.AppendLine("    {");
-            sb.AppendLine($"        x = {Screen.PrimaryScreen.Bounds.X},");
-            sb.AppendLine($"        y = {Screen.PrimaryScreen.Bounds.Y},");
+            sb.AppendLine($"        x = {xOffset},");
+            sb.AppendLine($"        y = {yOffset},");
             sb.AppendLine($"        width = {Screen.PrimaryScreen.Bounds.Width},");
             sb.AppendLine($"        height = {Screen.PrimaryScreen.Bounds.Height},");
             sb.AppendLine("        viewDx = 0,");
@@ -349,6 +359,53 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
             return options;
         }
 
+        public DcsOptionsCategory[] GetDcsOptionCategories()
+        {
+            return _settingsService.GetDcsOptions();
+        }
+
+        public DcsOptionsCategory[] GetDcsCategoryOptionForInstall(InstallLocation install, bool isVr)
+        {
+            var categories = _settingsService.GetDcsOptions();
+            var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
+
+            using (var context = new DcsOptionLuaContext(optionsFile))
+            {
+                foreach (var category in categories)
+                {
+                    foreach (var option in category.Options)
+                    {
+                        if (!_settingsService.TryGetValue<object>(string.Format(SettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
+                        {
+                            value = context.GetValue(category.Id, option.Id);
+                        }
+
+                        if (value != null)
+                        {
+                            var valueStr = value.ToString();
+                            var valueType = option.Value.GetType();
+                            var converter = TypeDescriptor.GetConverter(valueType);
+
+                            try
+                            {
+                                option.Value = converter.ConvertFromString(valueStr);
+                            }
+                            catch (Exception e)
+                            {
+                                Tracer.Error(e, $"An error occured while trying to convert the value {valueStr} to type {valueType} for option id {option.Id}.");
+                            }
+                        }
+                        else
+                        {
+                            Tracer.Warn($"Unable to find option value for {category.DisplayName} {option.Id}.  Using default value");
+                        }
+                    }
+                }
+            }
+
+            return categories;
+        }
+
         public void UpsertAdvancedOption(string id, object value)
         {
             _settingsService.SetValue(SettingsCategories.AdvancedOptions, id, value);
@@ -372,6 +429,16 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
             }
 
             return options;
+        }
+
+        public InstallLocation GetCurrentInstall()
+        {
+            return _settingsService.SelectedInstall;
+        }
+
+        public void UpsertDcsOption(string categoryId, string id, object value, bool isVr)
+        {
+            _settingsService.SetValue(string.Format(SettingsCategories.DcsOptionsFormat, categoryId, isVr ? "VR" : "Default"), id, value);
         }
     }
 }

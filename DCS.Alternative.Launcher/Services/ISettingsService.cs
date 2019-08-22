@@ -8,6 +8,8 @@ namespace DCS.Alternative.Launcher.Services
     {
         Option[] GetAdvancedOptions(string category);
 
+        DcsOptionsCategory[] GetDcsOptions();
+
         InstallLocation SelectedInstall { get; set; }
 
         void RemoveInstalls(params string[] directory);
