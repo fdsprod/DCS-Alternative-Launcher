@@ -2,7 +2,7 @@
   
 ![DCS Alternative Launcher](https://cdn.discordapp.com/attachments/415664512981794818/611242983978827802/dal-icon-256.png)  
 
-**Want to help support the project?**
+**Want to help support the project?**  
 Never required but always appreciated.  Donations and Patreon subscriptions help motivate continued ehancements, feature request and support.   If you choose.  Please only subscribe or dontate if you feel that I deserve it or have earned it, and are financially able to do so (make sure you're taken care of first!).
 
 [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9RRKTB5QZBKDS&source=url)
