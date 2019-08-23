@@ -297,6 +297,18 @@
     <Compile Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml.cs">
       <DependentUpon>CameraMirrorsSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml.cs">
+      <DependentUpon>TerrainReflectionSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml.cs">
+      <DependentUpon>TerrainMirrorSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Advanced\SoundSettingsView.xaml.cs">
+      <DependentUpon>SoundSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings\Views\Advanced\SoundSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsViewModel.cs" />
+    <Compile Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsViewModel.cs" />
     <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsView.xaml.cs">
       <DependentUpon>TerrainSettingsView.xaml</DependentUpon>
     </Compile>
@@ -480,6 +492,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Settings\Views\Advanced\SoundSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

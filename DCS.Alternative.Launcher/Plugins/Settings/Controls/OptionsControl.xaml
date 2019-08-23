@@ -296,7 +296,6 @@
                                     VerticalAlignment="Center"
                                     Maximum="{Binding MaxValue.Value}"
                                     Minimum="{Binding MinValue.Value}"
-                                    SmallChange="{Binding Params, Converter={x:Static data:DictionaryItemConverter.Instance}, ConverterParameter=SmallChange}"
                                     Value="{Binding Value.Value}" />
                         </Grid>
                     </Grid>

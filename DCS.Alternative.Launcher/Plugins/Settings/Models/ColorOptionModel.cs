@@ -10,6 +10,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
     public class ColorOptionModel : SingleValueOptionModel<Color>
     {
+        private readonly bool _isNormalized;
+
         public ColorOptionModel(Option option)
             : base(option.Id, option.DisplayName, option.Description, option.Params)
         {
@@ -18,15 +20,33 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 (option.Value is JArray 
                     ? enumerable.OfType<JValue>().Select(j=>j.Value) 
                     : enumerable)
-                .Cast<long>()
+                .Cast<object>()
                 .ToArray();
+            
+            if (Params.TryGetValue("IsNormalized", out var value) && (bool)value)
+            {
+                _isNormalized = true;
+                var rgb = values.Select(Convert.ToDouble).ToArray();
+                Value.Value = Color.FromRgb((byte)(_isNormalized ? (rgb[0] * 255) : rgb[0]), (byte)(_isNormalized ? (rgb[1] * 255) : rgb[1]), (byte)(_isNormalized ? (rgb[2] * 255) : rgb[2]));
+            }
+            else
+            {
+                var rgb = values.Select(Convert.ToUInt64).ToArray();
+                Value.Value = Color.FromRgb((byte)rgb[0], (byte)rgb[1], (byte)rgb[2]);
+            }
 
-            Value.Value = Color.FromRgb((byte)values[0], (byte)values[1], (byte)values[2]);
         }
 
         protected override object ConvertOutputValue(Color value)
         {
-            return new int[] { (int)value.R, (int)value.G, (int)value.B };
+            if (_isNormalized)
+            {
+                return new[] { (value.R * 1.0), (value.G * 1.0), (value.B * 1.0)};
+            }
+            else
+            {
+                return new [] {(int) value.R, (int) value.G, (int) value.B};
+            }
         }
     }
 }

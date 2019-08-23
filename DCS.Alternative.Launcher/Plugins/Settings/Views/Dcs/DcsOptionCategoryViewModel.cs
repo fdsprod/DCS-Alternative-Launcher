@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
@@ -70,22 +71,31 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
                 return;
             }
 
-            var categories = Controller.GetDcsCategoryOptionForInstall(install, false);
-            var category = categories.FirstOrDefault(c => c.Id == _categoryId);
-
-            if (category == null)
+            Task.Run(() =>
             {
-                return;
-            }
-            
-            var models = OptionModelFactory.CreateAll(category.Options);
+                try
+                {
+                    var categories = Controller.GetDcsCategoryOptionForInstall(install, false);
+                    var category = categories.FirstOrDefault(c => c.Id == _categoryId);
 
-            foreach (var model in models)
-            {
-                model.ValueChangeObservable.Subscribe(value => OnValueChanged(model, value));
-                Options.Add(model);
-            }
+                    if (category == null)
+                    {
+                        return;
+                    }
 
+                    var models = OptionModelFactory.CreateAll(category.Options);
+
+                    foreach (var model in models)
+                    {
+                        model.ValueChangeObservable.Subscribe(value => OnValueChanged(model, value));
+                        Options.AddOnScheduler(model);
+                    }
+                }
+                catch (Exception e)
+                {
+                    GeneralExceptionHandler.Instance.OnError(e);
+                }
+            });
         }
         
         private void OnValueChanged(OptionModel model, object value)

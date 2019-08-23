@@ -46,14 +46,16 @@
                                                           TrueThickness="25 0 5 0" />
 
                         <DataTemplate x:Key="TabItemHeaderTemplate">
-                            <TextBlock Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       FontFamily="{StaticResource Prototype}"
-                                       FontSize="14"
-                                       Foreground="#FFFFFFFF"
-                                       Text="{Binding Name}"
-                                       TextAlignment="Right" />
+                            <Border Background="#01000000">
+                                <TextBlock Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource Prototype}"
+                                           FontSize="14"
+                                           Foreground="#FFFFFFFF"
+                                           Text="{Binding Name}"
+                                           TextAlignment="Right" />
+                            </Border>
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type general:InstallationSettingsViewModel}">
@@ -78,6 +80,18 @@
 
                         <DataTemplate DataType="{x:Type advanced:TerrainSettingsViewModel}">
                             <advanced:TerrainSettingsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type advanced:TerrainMirrorSettingsViewModel}">
+                            <advanced:TerrainMirrorSettingsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type advanced:TerrainReflectionSettingsViewModel}">
+                            <advanced:TerrainReflectionSettingsView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type advanced:SoundSettingsViewModel}">
+                            <advanced:SoundSettingsView />
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type viewports:ViewportOptionsViewModel}">

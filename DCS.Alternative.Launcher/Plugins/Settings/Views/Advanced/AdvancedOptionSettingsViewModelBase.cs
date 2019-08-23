@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 {
-    public class AdvancedOptionSettingsViewModelBase : SettingsCategoryViewModelBase
+    public abstract class AdvancedOptionSettingsViewModelBase : SettingsCategoryViewModelBase
     {
         private readonly string _advancedOptionsCategory;
 
-        public AdvancedOptionSettingsViewModelBase(string name, string optionsCategory, SettingsController controller)
+        protected AdvancedOptionSettingsViewModelBase(string name, string optionsCategory, SettingsController controller)
             : base(name, controller)
         {
             _advancedOptionsCategory = optionsCategory;
@@ -17,14 +18,24 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
         protected override Task InitializeAsync()
         {
-            var options = Controller.GetAdvancedOptions(_advancedOptionsCategory);
-            var models = OptionModelFactory.CreateAll(options);
-
-            foreach (var model in models)
+            Task.Run(() =>
             {
-                model.ValueChangeObservable.Subscribe(value => OnValueChanged(model, value));
-                Options.Add(model);
-            }
+                try
+                {
+                    var options = Controller.GetAdvancedOptions(_advancedOptionsCategory);
+                    var models = OptionModelFactory.CreateAll(options);
+
+                    foreach (var model in models)
+                    {
+                        model.ValueChangeObservable.Subscribe(value => OnValueChanged(model, value));
+                        Options.AddOnScheduler(model);
+                    }
+                }
+                catch (Exception e)
+                {
+                    GeneralExceptionHandler.Instance.OnError(e);
+                }
+            });
 
             return base.InitializeAsync();
         }

@@ -34,7 +34,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             if (optionsCategories.Length > 0)
             {
-                Categories.Add(new CategoryHeaderSettingsViewModel("DCS WORLD"));
+                Categories.Add(new CategoryHeaderSettingsViewModel("DCS"));
             }
 
             foreach (var category in optionsCategories)
@@ -57,11 +57,14 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 }
             }
 
-            Categories.Add(new CategoryHeaderSettingsViewModel("ADVANCED OPTIONS"));
+            Categories.Add(new CategoryHeaderSettingsViewModel("ADVANCED"));
             Categories.Add(new GraphicsSettingsViewModel(_controller));
-            //Categories.Add(new CameraSettingsViewModel(_controller));
-            //Categories.Add(new CameraMirrorsSettingsViewModel(_controller));
-            //Categories.Add(new TerrainSettingsViewModel(_controller));
+            Categories.Add(new CameraSettingsViewModel(_controller));
+            Categories.Add(new CameraMirrorsSettingsViewModel(_controller));
+            Categories.Add(new TerrainSettingsViewModel(_controller));
+            Categories.Add(new TerrainMirrorSettingsViewModel(_controller));
+            Categories.Add(new TerrainReflectionSettingsViewModel(_controller));
+            Categories.Add(new SoundSettingsViewModel(_controller));
 
             SelectedCategory.Value = Categories.First(c => !(c is CategoryHeaderSettingsViewModel));
             SelectedCategory.Subscribe(OnSelectedCategoryChanged);
