@@ -1,25 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
 
-    public abstract class OptionModel
+    public abstract class OptionModelBase
     {
-        protected OptionModel(string id, string displayName, string description, Dictionary<string, object> @params)
+        protected OptionModelBase(string id, string displayName, string description, Dictionary<string, object> @params)
         {
             Id = id;
             DisplayName = displayName;
             Description = description;
-            Params = @params;
+            Params = @params ?? new Dictionary<string, object>(); 
         }
 
         public Dictionary<string, object> Params
         {
             get;
-        } = new Dictionary<string, object>();
+        } 
 
         public string Description
         {
@@ -40,5 +38,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         {
             get;
         } = new ReactiveProperty<object>(mode: ReactivePropertyMode.DistinctUntilChanged);
+
+        public abstract void ResetValue(object value);
     }
 }

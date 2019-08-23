@@ -5,7 +5,7 @@ using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
-    public abstract class SingleValueOptionModel<T> : OptionModel
+    public abstract class SingleValueOptionModel<T> : OptionModelBase
     {
         private bool _isValueChangeSuspended;
 

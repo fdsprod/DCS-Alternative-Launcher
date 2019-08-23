@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics;
-using DCS.Alternative.Launcher.Diagnostics.Trace;
-using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
 using Reactive.Bindings;
 
@@ -19,12 +17,14 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             _categoryId = categoryId;
 
             SelectedInstall.Subscribe(OnSelectedInstallChanged);
+            ResetCommand.Subscribe(OnReset);
+            ResetAllCommand.Subscribe(OnResetAll);
         }
 
-        public ReactiveCollection<OptionModel> Options
+        public ReactiveCollection<OptionModelBase> Options
         {
             get;
-        } = new ReactiveCollection<OptionModel>();
+        } = new ReactiveCollection<OptionModelBase>();
 
         public ReactiveCollection<InstallLocation> Installations
         {
@@ -35,6 +35,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         {
             get;
         } = new ReactiveProperty<InstallLocation>();
+        public ReactiveCommand<OptionModelBase> ResetCommand
+        {
+            get;
+        } = new ReactiveCommand<OptionModelBase>();
+
+        public ReactiveCommand ResetAllCommand
+        {
+            get;
+        } = new ReactiveCommand();
 
         public override Task ActivateAsync()
         {
@@ -98,9 +107,24 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             });
         }
         
-        private void OnValueChanged(OptionModel model, object value)
+        private void OnValueChanged(OptionModelBase model, object value)
         {
             Controller.UpsertDcsOption(_categoryId, model.Id, value, false);
+        }
+
+        private void OnReset(OptionModelBase model)
+        {
+            var value = Controller.ResetDcsOption(_categoryId, model.Id);
+            model.ResetValue(value);
+        }
+
+        private void OnResetAll()
+        {
+            foreach (var model in Options)
+            {
+                var value = Controller.ResetDcsOption(_categoryId, model.Id);
+                model.ResetValue(value);
+            }
         }
     }
 }

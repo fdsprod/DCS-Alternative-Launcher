@@ -8,7 +8,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         public TextOptionModel(Option option)
             : base(option.Id, option.DisplayName, option.Description, option.Params)
         {
-            Value.Value = (string)option.Value;
+            UpdateValue(option.Value);
 
             MaxValue.Value = option.MinMax[0].Max;
             MinValue.Value = option.MinMax[0].Min;
@@ -23,5 +23,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         {
             get;
         } = new ReactiveProperty<double>();
+
+        public override void ResetValue(object value)
+        {
+            UpdateValue(value);
+        }
+
+        private void UpdateValue(object value)
+        {
+            Value.Value = (string)value;
+        }
     }
 }

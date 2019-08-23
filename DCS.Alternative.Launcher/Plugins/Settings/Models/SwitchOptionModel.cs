@@ -9,9 +9,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         public SwitchOptionModel(Option option, bool isNumericOutput)
             : base(option.Id, option.DisplayName, option.Description, option.Params)
         {
-            Value.Value = isNumericOutput ? (long)option.Value == 1 : (bool)option.Value;
-
             _isNumericOutput = isNumericOutput;
+
+            UpdateValue(option.Value);
         }
 
         protected override object ConvertOutputValue(bool value)
@@ -22,6 +22,16 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             }
 
             return base.ConvertOutputValue(value);
+        }
+
+        public override void ResetValue(object value)
+        {
+            UpdateValue(value);
+        }
+
+        private void UpdateValue(object value)
+        {
+            Value.Value = _isNumericOutput ? (long)value == 1 : (bool)value;
         }
     }
 }

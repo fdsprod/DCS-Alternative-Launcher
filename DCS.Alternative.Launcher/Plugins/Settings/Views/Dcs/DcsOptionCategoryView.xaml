@@ -4,6 +4,7 @@
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
+             xmlns:local="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Dcs"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Models"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -14,6 +15,13 @@
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FFFFFFFF" />
         </Style>
+        <Style x:Key="ResetButtonStyle"
+               BasedOn="{StaticResource ButtonRevealStyle}"
+               TargetType="Button">
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="Padding" Value="10,3" />
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -21,10 +29,22 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
                    Margin="10"
                    Text="None of these have been tested so please use at your own risk, complete WIP!" />
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                Command="{Binding DataContext.ResetAllCommand, RelativeSource={RelativeSource AncestorType={x:Type local:DcsOptionCategoryView}}}"
+                Content="RESET ALL"
+                Style="{StaticResource ResetButtonStyle}" />
         <Border Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Background="#40000000"
                 BorderBrush="#FF2F2F2F"
                 BorderThickness="1" />

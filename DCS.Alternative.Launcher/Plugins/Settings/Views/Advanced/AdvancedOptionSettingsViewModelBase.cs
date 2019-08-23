@@ -14,7 +14,25 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             : base(name, controller)
         {
             _advancedOptionsCategory = optionsCategory;
+
+            ResetCommand.Subscribe(OnReset);
+            ResetAllCommand.Subscribe(OnResetAll);
         }
+
+        public ReactiveCommand<OptionModelBase> ResetCommand
+        {
+            get;
+        } = new ReactiveCommand<OptionModelBase>();
+
+        public ReactiveCommand ResetAllCommand
+        {
+            get;
+        } = new ReactiveCommand();
+
+        public ReactiveCollection<OptionModelBase> Options
+        {
+            get;
+        } = new ReactiveCollection<OptionModelBase>();
 
         protected override Task InitializeAsync()
         {
@@ -40,14 +58,24 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             return base.InitializeAsync();
         }
 
-        private void OnValueChanged(OptionModel model, object value)
+        private void OnValueChanged(OptionModelBase model, object value)
         {
             Controller.UpsertAdvancedOption(model.Id, value);
         }
 
-        public ReactiveCollection<OptionModel> Options
+        private void OnReset(OptionModelBase model)
         {
-            get;
-        } = new ReactiveCollection<OptionModel>();
+            var value = Controller.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
+            model.ResetValue(value);
+        }
+
+        private void OnResetAll()
+        {
+            foreach (var model in Options)
+            {
+                var value = Controller.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
+                model.ResetValue(value);
+            }
+        }
     }
 }

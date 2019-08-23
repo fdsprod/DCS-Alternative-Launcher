@@ -9,7 +9,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         public SliderOptionModel(Option option)
             : base(option.Id, option.DisplayName, option.Description, option.Params)
         {
-            Value.Value = Convert.ToDouble(option.Value);
+            UpdateValue(option.Value);
 
             MaxValue.Value = option.MinMax[0].Max;
             MinValue.Value = option.MinMax[0].Min;
@@ -38,6 +38,16 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             }
 
             return Math.Round(value, decimalCount, MidpointRounding.AwayFromZero);
+        }
+
+        public override void ResetValue(object value)
+        {
+            UpdateValue(value);
+        }
+
+        private void UpdateValue(object value)
+        {
+            Value.Value = Convert.ToDouble(value);
         }
     }
 }

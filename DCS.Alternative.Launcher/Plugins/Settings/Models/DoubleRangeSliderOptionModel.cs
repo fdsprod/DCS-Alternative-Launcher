@@ -12,17 +12,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         public DoubleRangeSliderOptionModel(Option option)
             : base(option.Id, option.DisplayName, option.Description, option.Params)
         {
-            var enumerable = (IEnumerable) option.Value;
-            var values =
-                (option.Value is JArray
-                    ? enumerable.OfType<JValue>().Select(j => j.Value)
-                    : enumerable)
-                .Cast<object>()
-                .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
-                .ToArray();
-
-            Value1.Value = values[0];
-            Value2.Value = values[1];
+            UpdateValue(option.Value);
 
             MaxValue.Value = option.MinMax[0].Max;
             MinValue.Value = option.MinMax[0].Min;
@@ -68,6 +58,26 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 Math.Round(Value1.Value, decimalCount, MidpointRounding.AwayFromZero),
                 Math.Round(Value2.Value, decimalCount, MidpointRounding.AwayFromZero)
             };
+        }
+
+        public override void ResetValue(object value)
+        {
+            UpdateValue(value);
+        }
+
+        private void UpdateValue(object value)
+        {
+            var enumerable = (IEnumerable) value;
+            var values =
+                (value is JArray
+                    ? enumerable.OfType<JValue>().Select(j => j.Value)
+                    : enumerable)
+                .Cast<object>()
+                .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
+                .ToArray();
+
+            Value1.Value = values[0];
+            Value2.Value = values[1];
         }
     }
 }

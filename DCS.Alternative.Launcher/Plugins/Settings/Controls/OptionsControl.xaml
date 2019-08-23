@@ -17,6 +17,7 @@
                                            FalseString="OFF"
                                            TrueString="ON" />
             <Style TargetType="{x:Type ItemsControl}">
+                <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
@@ -40,6 +41,13 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style x:Key="ResetButtonStyle"
+                   BasedOn="{StaticResource ButtonRevealStyle}"
+                   TargetType="Button">
+                <Setter Property="Margin" Value="10,5" />
+                <Setter Property="Padding" Value="10,3" />
+                <Setter Property="Foreground" Value="#FFFFFFFF" />
+            </Style>
         </Grid.Resources>
 
         <ItemsControl ItemsSource="{Binding Options}">
@@ -49,6 +57,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="500" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -66,7 +75,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <ComboBox Grid.Row="0"
                                   Grid.RowSpan="2"
                                   Grid.Column="1"
@@ -79,6 +89,13 @@
                                   FontSize="16"
                                   ItemsSource="{Binding Items}"
                                   SelectedItem="{Binding Value.Value}" />
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:TextOptionModel}">
@@ -86,6 +103,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="500" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -103,7 +121,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <TextBox Grid.Row="0"
                                  Grid.RowSpan="2"
                                  Grid.Column="1"
@@ -116,6 +135,13 @@
                                  MaxLength="{Binding MaxValue.Value}"
                                  Text="{Binding Value.Value}"
                                  TextAlignment="Right" />
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:ColorOptionModel}">
@@ -123,6 +149,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="500" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -140,7 +167,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <xctk:ColorPicker Grid.Row="0"
                                           Grid.RowSpan="2"
                                           Grid.Column="1"
@@ -155,6 +183,13 @@
                                           ShowStandardColors="False"
                                           ShowTabHeaders="False"
                                           UsingAlphaChannel="False" />
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:DoubleRangeSliderOptionModel}">
@@ -162,6 +197,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="500" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -179,7 +215,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <Grid Grid.Row="0"
                               Grid.RowSpan="2"
                               Grid.Column="1">
@@ -236,6 +273,13 @@
                                               Maximum="{Binding MaxValue.Value}"
                                               Minimum="{Binding MinValue.Value}" />
                         </Grid>
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:SliderOptionModel}">
@@ -243,6 +287,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="500" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -260,7 +305,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <Grid Grid.Row="0"
                               Grid.RowSpan="2"
                               Grid.Column="1">
@@ -298,6 +344,13 @@
                                     Minimum="{Binding MinValue.Value}"
                                     Value="{Binding Value.Value}" />
                         </Grid>
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:SwitchOptionModel}">
@@ -305,6 +358,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -322,7 +376,8 @@
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="14"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Description}" />
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
                         <ToggleButton Grid.Row="0"
                                       Grid.RowSpan="2"
                                       Grid.Column="1"
@@ -334,6 +389,13 @@
                                       Style="{StaticResource ToggleSwitchStyle}">
                             <TextBlock Foreground="#FFFFFFFF" Text="{Binding Value.Value, Converter={StaticResource BooleanToStringConverter}}" />
                         </ToggleButton>
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Command="{Binding DataContext.ResetCommand, RelativeSource={RelativeSource AncestorType={x:Type local:OptionsControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="RESET"
+                                Style="{StaticResource ResetButtonStyle}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.Resources>

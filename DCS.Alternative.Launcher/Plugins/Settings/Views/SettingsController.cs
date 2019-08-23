@@ -454,5 +454,32 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             _settingsService.SetValue(string.Format(SettingsCategories.DcsOptionsFormat, categoryId, isVr ? "VR" : "Default"), id, value);
         }
+
+        public object ResetAdvancedOptionValue(string categoryId, string optionId)
+        {
+            var options = _settingsService.GetAdvancedOptions(categoryId);
+            var option = options.FirstOrDefault(o => o.Id == optionId);
+
+            _settingsService.DeleteValue(string.Format(SettingsCategories.ViewportOptionsFormat, categoryId), optionId);
+
+            return option?.Value;
+        }
+
+        public object ResetDcsOption(string categoryId, string optionId)
+        {
+            var categories = _settingsService.GetDcsOptions();
+            var category = categories.FirstOrDefault(c => c.Id == categoryId);
+            var option = category.Options.FirstOrDefault(o => o.Id == optionId);
+
+            _settingsService.DeleteValue(string.Format(SettingsCategories.DcsOptionsFormat, categoryId, "VR"), optionId);
+            _settingsService.DeleteValue(string.Format(SettingsCategories.DcsOptionsFormat, categoryId, "Default"), optionId);
+
+            return option?.Value;
+        }
+
+        public void SaveDcsOptions()
+        {
+            _dcsWorldService.WriteOptionsAsync(false);
+        }
     }
 }

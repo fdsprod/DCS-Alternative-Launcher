@@ -10,15 +10,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
     public static class OptionModelFactory
     { 
-        public static IEnumerable<OptionModel> CreateAll(IEnumerable<Option> options)
+        public static IEnumerable<OptionModelBase> CreateAll(IEnumerable<Option> options)
         {
-            var models = new List<OptionModel>();
+            var models = new List<OptionModelBase>();
 
             foreach (var option in options)
             {
                 var type = option.Value.GetType();
 
-                OptionModel model = null;
+                OptionModelBase model = null;
 
                 if (option.Params.ContainsKey("Items"))
                 {
@@ -32,7 +32,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 else if (type == typeof(long) || type == typeof(double))
                 {
                     model = option.MinMax.Count == 0
-                        ? (OptionModel)new SwitchOptionModel(option, true)
+                        ? (OptionModelBase)new SwitchOptionModel(option, true)
                         : new SliderOptionModel(option);
                 }
                 else if (type == typeof(bool))

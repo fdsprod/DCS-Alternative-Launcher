@@ -307,6 +307,17 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
+        public void DeleteValue(string category, string key)
+        {
+            lock (_settings)
+            {
+                if (_settings.TryGetValue(category, out var keyLookup))
+                {
+                    _settings[category].Remove(key);
+                }
+            }
+        }
+
         public ViewportDevice[] GetViewportDevices(string moduleId)
         {
             const string path = "Resources/ViewportDevices.json";
