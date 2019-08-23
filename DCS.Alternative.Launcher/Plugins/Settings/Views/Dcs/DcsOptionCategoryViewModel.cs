@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
 using Reactive.Bindings;
@@ -120,6 +121,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
         private void OnResetAll()
         {
+            if (MessageBoxEx.Show("Are you sure you want to reset all options to their default values?", "Reset Options", System.Windows.MessageBoxButton.YesNo) != System.Windows.MessageBoxResult.Yes)
+            {
+                return;
+            }
+
             foreach (var model in Options)
             {
                 var value = Controller.ResetDcsOption(_categoryId, model.Id);
