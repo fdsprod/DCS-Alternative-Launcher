@@ -36,7 +36,7 @@
 			"width" : 387,
 			"height" : 374
 		}
-	],
+	],/*
 	"KA-50": [
 		{
 			"viewportName": "SHKVAL",
@@ -68,7 +68,7 @@
 			"width" : 159,
 			"height" : 88
 		}
-	],
+	],*/
 	"A-10C": [
 		{
 			"viewportName": "RIGHT_MFCD",
@@ -156,7 +156,7 @@
 			"width": 300,
 			"height": 150
 		}	
-	],
+	],/*
 	"F14":  [
 		{
 			"viewportName": "HSD",
@@ -182,7 +182,7 @@
 			"width": 400,
 			"height": 400
 		}
-	],
+	],*/
 	"M-2000C" : [
 		{
 			"viewportName": "RADAR",
