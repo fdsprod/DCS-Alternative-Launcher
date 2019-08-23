@@ -62,7 +62,7 @@ namespace DCS.Alternative.Launcher
             GeneralExceptionHandler.Instance.OnError(e.Exception);
         }
 
-        private async void App_Startup(object sender, StartupEventArgs e)
+        private void App_Startup(object sender, StartupEventArgs e)
         {
             UiDispatcher.Initialize();
             GeneralExceptionHandler.Instance = new UserFriendlyExceptionHandler();

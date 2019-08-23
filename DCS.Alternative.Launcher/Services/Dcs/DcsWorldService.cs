@@ -114,7 +114,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             // For whatever reason ED decided the Hornet would have a stupid display name... 
                             // So, we get to add stupid code like this... 
-                            if (displayName.Contains("_hornet")) ;
+                            if (displayName.Contains("_hornet")) 
                             {
                                 displayName = displayName.Split('_')[0];
                             }
