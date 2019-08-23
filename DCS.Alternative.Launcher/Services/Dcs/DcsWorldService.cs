@@ -316,7 +316,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                 try
                 {
-                    using (var context = new DcsOptionLuaContext(optionsFile))
+                    using (var context = new DcsOptionLuaContext(install))
                     {
                         foreach (var category in categories)
                         {

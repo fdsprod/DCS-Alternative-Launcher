@@ -268,7 +268,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
             try
             {
-                if (IsDcsOutOfDate.Value && MessageBoxEx.Show("DCS World is not currently up to date.{Environment.NewLine}Would you like to update now?", "Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (IsDcsOutOfDate.Value && MessageBoxEx.Show($"DCS World is not currently up to date.{Environment.NewLine}Would you like to update now?", "Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     window.WindowState = WindowState.Minimized;
                     await _controller.UpdateAsync();

@@ -37,7 +37,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
 
-        private ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
+        private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
 
         public SettingsService()
         {
@@ -49,7 +49,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
             GetInstallations();
 
-            SelectedInstall = _installationCache.FirstOrDefault(i => i == directory);
+            SelectedInstall = _installationCache.FirstOrDefault(i => i.Directory == directory);
 
             if (SelectedInstall == null && _installationCache.Count > 0)
             {

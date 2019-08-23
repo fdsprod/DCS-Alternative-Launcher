@@ -197,17 +197,7 @@ namespace DCS.Alternative.Launcher
 
             return path;
         }
-
-        public static implicit operator string(InstallLocation a)
-        {
-            return a.Directory;
-        }
-
-        public static implicit operator InstallLocation(string a)
-        {
-            return new InstallLocation(a);
-        }
-
+        
         public override string ToString()
         {
             return $"{Version}-{Variant} ({Directory})";

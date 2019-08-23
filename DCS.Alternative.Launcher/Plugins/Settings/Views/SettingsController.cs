@@ -178,23 +178,28 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             for (var i = 0; i < screens.Length; i++)
             {
                 var screen = screens[i];
+                realBounds.Union(screen.Bounds);
+            }
+
+            var xOffset = Math.Abs(Screen.PrimaryScreen.Bounds.X - realBounds.X);
+            var yOffset = Math.Abs(Screen.PrimaryScreen.Bounds.Y - realBounds.Y);
+
+            for (var i = 0; i < screens.Length; i++)
+            {
+                var screen = screens[i];
 
                 screensIndexByName.Add(screen.DeviceName, i + 1);
 
                 sb.AppendLine($"    [{i + 1}] = ");
                 sb.AppendLine("    {");
                 sb.AppendLine($"        -- {screen.DeviceName},");
-                sb.AppendLine($"        x = {screen.Bounds.X},");
-                sb.AppendLine($"        y = {screen.Bounds.Y},");
+                sb.AppendLine($"        x = {xOffset + screen.Bounds.X},");
+                sb.AppendLine($"        y = {yOffset + screen.Bounds.Y},");
                 sb.AppendLine($"        width = {screen.Bounds.Width},");
                 sb.AppendLine($"        height = {screen.Bounds.Height}");
                 sb.AppendLine("    },");
-
-                realBounds.Union(screen.Bounds);
             }
 
-            var xOffset = Math.Abs(Screen.PrimaryScreen.Bounds.X - realBounds.X);
-            var yOffset = Math.Abs(Screen.PrimaryScreen.Bounds.X - realBounds.X);
 
             sb.AppendLine("}");
             sb.AppendLine();
@@ -219,10 +224,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             usedScreens.Add(Screen.PrimaryScreen);
 
             var viewportTemplates = _settingsService.GetViewportTemplates();
-            var resolutionWidth = Screen.PrimaryScreen.Bounds.Width;
-            var resolutionHeight = Screen.PrimaryScreen.Bounds.Height;
-
             var installedModules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+
+            realBounds = Screen.PrimaryScreen.Bounds;
 
             foreach (var template in viewportTemplates)
             {
@@ -254,8 +258,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     var w = (int)Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
                     var h = (int)Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
 
-                    resolutionWidth = Math.Max(resolutionWidth, screen.Bounds.X + x + w);
-                    resolutionHeight = Math.Max(resolutionHeight, screen.Bounds.Y + y + h);
+                    realBounds.Union(screen.Bounds);
 
                     sb.AppendLine($"--{viewport.RelativeInitFilePath}");
                     sb.AppendLine($"{module.ViewportPrefix}_{viewport.ViewportName} =");
@@ -299,10 +302,22 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 File.WriteAllText(monitorConfigPath, contents);
             }
 
-            MessageBoxEx.Show(@"Make sure you setup the proper Monitor config in DCS once it is started.
-
-To do this go to Options -> System -> Monitors and change the drop down to ""monitor_config_DAL""
-Then make sure you change your monitor resolution to " + resolutionWidth + "x" + resolutionHeight + ".");
+            if (MessageBoxEx.Show($"Do you want DCS Alternative Launcher to adjust your Game Resolution and Monitor Config?", "Update DCS", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                using (var context = new DcsOptionLuaContext(install))
+                {
+                    context.SetValue("graphics", "multiMonitorSetup", "monitor_config_DAL");
+                    context.SetValue("graphics", "width", realBounds.Width);
+                    context.SetValue("graphics", "height", realBounds.Height);
+                    context.Save();
+                }
+            }
+            else
+            {
+                MessageBoxEx.Show(@"Make sure you setup the proper Monitor config in DCS once it is started." + Environment.NewLine +
+                                  @"To do this go to Options -> System -> Monitors and change the drop down to ""monitor_config_DAL""" + Environment.NewLine +
+                                  $"Then make sure you change your monitor resolution to at least {realBounds.Width}x{realBounds.Height}.");
+            }
         }
 
         public string[] GetDeviceViewportMonitorIds()
@@ -367,9 +382,8 @@ Then make sure you change your monitor resolution to " + resolutionWidth + "x" +
         public DcsOptionsCategory[] GetDcsCategoryOptionForInstall(InstallLocation install, bool isVr)
         {
             var categories = _settingsService.GetDcsOptions();
-            var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 
-            using (var context = new DcsOptionLuaContext(optionsFile))
+            using (var context = new DcsOptionLuaContext(install))
             {
                 foreach (var category in categories)
                 {

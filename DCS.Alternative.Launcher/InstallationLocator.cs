@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using Microsoft.Win32;
 
@@ -28,10 +29,10 @@ namespace DCS.Alternative.Launcher
             {
                 var path = GetPath(KnownInstallationRegistryKeys[i]);
 
-                if (!string.IsNullOrEmpty(path) && !installations.Contains(path))
+                if (!string.IsNullOrEmpty(path) && installations.All(ins => ins.Directory != path))
                 {
                     Tracer.Info($"Found DCS path ({path}) from registry key {KnownInstallationRegistryKeys[i]}");
-                    installations.Add(path);
+                    installations.Add(new InstallLocation(path));
                 }
             }
 

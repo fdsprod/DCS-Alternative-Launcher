@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,11 +10,11 @@ namespace DCS.Alternative.Launcher.Lua
     {
         private readonly string _optionsPath;
 
-        public DcsOptionLuaContext(string optionsPath)
+        public DcsOptionLuaContext(InstallLocation install)
         {
-            _optionsPath = optionsPath;
+            _optionsPath = Path.Combine(install.SavedGamesPath, "Config", "options.lua"); ;
 
-            DoFile(optionsPath);
+            DoFile(_optionsPath);
         }
 
         public void SetValue(string categoryId, string id, object value)
