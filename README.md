@@ -1,12 +1,22 @@
 # DCS Alternative Launcher  
   
 ![DCS Alternative Launcher](https://cdn.discordapp.com/attachments/415664512981794818/611242983978827802/dal-icon-256.png)  
-  
+
+**Want to help support the project?**
+Never required but always appreciated.  Donations and Patreon subscriptions help motivate continued ehancements, feature request and support.   If you choose.  Please only subscribe or dontate if you feel that I deserve it or have earned it, and are financially able to do so (make sure you're taken care of first!).
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9RRKTB5QZBKDS&source=url)
+
+[![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=8451589)
+
+**About The Project**
+
 The DCS Alternative Launcher was initially created to get around the setup process of viewports in DCS in conjunction with application called Helios.   The primary focus was to have the launcher make edits to stock DCS files to allow the name change of the standard viewport names (LEFT_MFCD, RIGHT_MFCD, etc) that are shared across modules so that viewports were uniquely named per module (F_18_LEFT_MFCD, A_10C_LEFT_MFCD) and no longer shared.  The issue here is that the edits go away each time DCS World updates, requiring external solutions like OVGME to re-apply the edits.   The process of using OVGME inherently has issues as well, for instance, if the files that were replaced are edited by Eagle Dynamics, you would wipe out those edits by using old versions of the files stored in OVGME.
 DCS Alternative Launcher gets around this by verifying the proper edits (single, or multiple lines of code) exist or are made to each of the files when luanching DCS World from this application.  
   
 The application has quickly grown into an idea haven for features either sought after or "nice-to-have" that are missing from DCS at present day.   Most games these days have a launcher, the launcher typically has news updates or video content about new features/patches/etc.   Most launchers have the ability to edit the game settings prior to launching the game, and some even have the ability to sync these settings to the cloud in order to be restored at a later time in necessary.  DCS Alternative Laucher aims to do as much of this as possible (with some extra ideas/feedback from you guys)  
-  
+
+**Roadmap**
 The current planned and WIP feature list is as follows:  
   
 **Handles Multiple Install** (Complete)  
@@ -29,7 +39,7 @@ The current planned and WIP feature list is as follows:
 *-Various Terrain Mirror Overrides (currently over 100)*  
 *-Various Terrain Reflections (currently over 100)*  
 *-Various Terrain MFD Options*  
-**Sound** (Planned)  
+**Sound** (WIP)  
 *-Per module Cockpit World Gain/Lowpass*  
 *-Ambient Samples, Radius, Distnace, Time, Height*  
 *-Doppler Warp*  
