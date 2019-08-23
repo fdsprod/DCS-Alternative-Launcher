@@ -1,5 +1,8 @@
-﻿using DCS.Alternative.Launcher.ComponentModel;
+﻿using System;
+using System.Diagnostics;
+using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.ServiceModel;
+using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.About.Views
 {
@@ -12,6 +15,18 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
         {
             _container = container;
             _controller = container.Resolve<AboutController>();
+
+            OpenUrlCommand.Subscribe(OnOpenUrl);
+        }
+
+        public ReactiveCommand<string> OpenUrlCommand
+        {
+            get;
+        } = new ReactiveCommand<string>();
+
+        private void OnOpenUrl(string value)
+        {
+            Process.Start(value);
         }
     }
 }

@@ -780,6 +780,10 @@
     <Resource Include="Images\lauch-background-mask.png" />
     <Resource Include="Images\lauch-background.jpg" />
     <Resource Include="Images\lauch-background-mask-2.png" />
+    <Resource Include="Images\patreon-button.png" />
+    <Resource Include="Images\paypal-dontation.png" />
+    <Resource Include="Images\discord.png" />
+    <Resource Include="Images\GitHub-logo-header.png" />
     <Content Include="Images\Wallpaper\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -36,7 +36,7 @@ namespace DCS.Alternative.Launcher.Plugins.About
 
         protected override void RegisterUISiteItems(IPluginNavigationSite site)
         {
-           // site.RegisterPluginNavigation<AboutView, ManualsViewModel>("ABOUT", this);
+            site.RegisterPluginNavigation<AboutView, ManualsViewModel>("ABOUT", this);
 
             base.RegisterUISiteItems(site);
         }
