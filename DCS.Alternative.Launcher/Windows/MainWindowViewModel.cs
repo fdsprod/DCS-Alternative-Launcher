@@ -13,8 +13,11 @@ namespace DCS.Alternative.Launcher.Windows
     {
         private readonly IContainer _container;
         private readonly INavigationService _navigationService;
+        private readonly IAutoUpdateService _autoUpdateService;
 
-        private readonly DispatcherTimer _timer = new DispatcherTimer();
+        private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
+        private readonly DispatcherTimer _autoUpdateCheckTimer = new DispatcherTimer();
+
         private readonly List<string> _images = new List<string>();
 
         private int _nextIndex;
@@ -23,6 +26,8 @@ namespace DCS.Alternative.Launcher.Windows
         {
             _container = container;
             _navigationService = container.Resolve<INavigationService>();
+            _autoUpdateService = container.Resolve<IAutoUpdateService>();
+
             var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
             ShowPluginCommand.Subscribe(OnShowPlugin);
 
@@ -41,12 +46,18 @@ namespace DCS.Alternative.Launcher.Windows
 
             if (_images.Count > 0)
             {
-                _timer.Interval = TimeSpan.FromMinutes(1);
-                _timer.Tick += _timer_Tick;
-                _timer.Start();
+                _slideShowTimer.Interval = TimeSpan.FromMinutes(1);
+                _slideShowTimer.Tick += _timer_Tick;
+                _slideShowTimer.Start();
 
                 NextImage();
             }
+
+            _autoUpdateCheckTimer.Interval = TimeSpan.FromMinutes(30);
+            _autoUpdateCheckTimer.Tick += _autoUpdateCheckTimer_Tick;
+            _autoUpdateCheckTimer.Start();
+
+            CheckForUpdate();
         }
 
         public ReactiveProperty<string> ImageUrl
@@ -67,6 +78,16 @@ namespace DCS.Alternative.Launcher.Windows
         private void _timer_Tick(object sender, EventArgs e)
         {
             NextImage();
+        }
+
+        private void _autoUpdateCheckTimer_Tick(object sender, EventArgs e)
+        {
+            CheckForUpdate();
+        }
+
+        private async void CheckForUpdate()
+        {
+            await _autoUpdateService.CheckAsync();
         }
 
         private void NextImage()

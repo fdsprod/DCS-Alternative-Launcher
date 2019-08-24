@@ -70,6 +70,9 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DCS.Alternative.Launcher.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentWPF, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentWPF.0.7.0\lib\net45\FluentWPF.dll</HintPath>
@@ -79,6 +82,9 @@
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="KeraLua, Version=1.0.19.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\KeraLua.1.0.19\lib\net45\KeraLua.dll</HintPath>
@@ -178,10 +184,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
+    <Compile Include="Services\IAutoUpdateService.cs" />
+    <Compile Include="Background\Update\AutoUpdateVersionInfo.cs" />
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />
     <Compile Include="Controls\BindingHelper.cs" />
     <Compile Include="Controls\DesignerControl.cs" />
@@ -363,6 +371,7 @@
     <Compile Include="ServiceModel\UnregisteredResolutionActions.cs" />
     <Compile Include="ComponentModel\IActivate.cs" />
     <Compile Include="ComponentModel\IDeactivate.cs" />
+    <Compile Include="Services\AutoUpdate\AutoUpdateService.cs" />
     <Compile Include="Services\Dcs\DcsWorldService.cs" />
     <Compile Include="Services\IDcsWorldService.cs" />
     <Compile Include="Services\IPluginNavigationSite.cs" />

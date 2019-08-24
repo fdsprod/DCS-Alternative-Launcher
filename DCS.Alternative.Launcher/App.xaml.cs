@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CefSharp;
 using CefSharp.Wpf;
+using DCS.Alternative.Launcher.Background.Update;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -30,6 +31,7 @@ using DCS.Alternative.Launcher.Plugins;
 using DCS.Alternative.Launcher.Plugins.Game.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
+using DCS.Alternative.Launcher.Services.AutoUpdate;
 using DCS.Alternative.Launcher.Services.Dcs;
 using DCS.Alternative.Launcher.Services.Navigation;
 using DCS.Alternative.Launcher.Services.Settings;
@@ -47,6 +49,22 @@ namespace DCS.Alternative.Launcher
     /// </summary>
     public partial class App : Application
     {
+        [STAThread]
+        static void Main()
+        {
+            var updateFolder = Path.Combine(Directory.GetCurrentDirectory(), "_update");
+            var autoUpdateExe = Path.Combine(Directory.GetCurrentDirectory(), "AutoUpdate.exe");
+
+            if (Directory.Exists(updateFolder) && Directory.GetFileSystemEntries(updateFolder).Length > 0 && File.Exists(autoUpdateExe))
+            {
+                Process.Start(autoUpdateExe);
+                return;
+            }
+
+            App app = new App();
+            app.Run();
+        }
+
         private static Regex _splitAtUpperRegex =
             new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
 
@@ -58,6 +76,8 @@ namespace DCS.Alternative.Launcher
             Startup += App_Startup;
             Exit += App_Exit;
             DispatcherUnhandledException += onDispatcherUnhandledException;
+            
+            InitializeComponent();
         }
 
         private void onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -78,7 +98,7 @@ namespace DCS.Alternative.Launcher
 #endif
             //DumpAutoexecLua();
             //ShowTestWindow();
-
+            
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
             settings.WindowlessRenderingEnabled = true;
@@ -125,7 +145,6 @@ namespace DCS.Alternative.Launcher
                 
                 lua.DoString($"sendIt(loadfile('{path}'));");
             }
-
         }
 
         private void RecursiveDump(string empty, LuaTable table, List<Option> options)
@@ -269,14 +288,12 @@ namespace DCS.Alternative.Launcher
         private void RegisterServices()
         {
             Tracer.Info("Registering Services.");
-
-            _container.Register<INavigationService, NavigationService>(new NavigationService(_container,
-                _mainWindow.NavigationFrame));
-            _container.Register<ISettingsService, SettingsService>().AsSingleton()
-                .UsingConstructor(() => new SettingsService());
+            
+            _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
+            _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
+            _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
-            _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton()
-                .UsingConstructor(() => new PluginNavigationSite(_container));
+            _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
         }
 
         private void App_Exit(object sender, ExitEventArgs e)

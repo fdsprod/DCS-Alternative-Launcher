@@ -561,25 +561,29 @@
                           Grid.ColumnSpan="3">
                         <TextBlock Margin="0,0,0,0"
                                    VerticalAlignment="Bottom"
-                                   FontSize="10"
+                                   FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
                                    Text="CHECKING LATEST VERSION..."
                                    Visibility="{Binding IsCheckingLatestVersion.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
                         <TextBlock Margin="0,0,0,0"
                                    VerticalAlignment="Bottom"
-                                   FontSize="10"
+                                   FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
                                    Foreground="#FF11AF11"
                                    Opacity="0.75"
                                    Text="{Binding DcsVersion.Value}"
                                    Visibility="{Binding IsDcsUpToDate.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
                         <TextBlock Margin="0,0,0,0"
                                    VerticalAlignment="Bottom"
-                                   FontSize="10"
+                                   FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
                                    Foreground="#FFFF3434"
                                    Text="DCS WORLD IS OUT OF DATE"
                                    Visibility="{Binding IsDcsOutOfDate.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
                         <TextBlock Margin="0,0,0,0"
                                    VerticalAlignment="Bottom"
-                                   FontSize="10"
+                                   FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
                                    Foreground="#FFFF3434"
                                    Text="ERROR: UNABLE TO CHECK DCS VERSION"
                                    Visibility="{Binding FailedVersionCheck.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />

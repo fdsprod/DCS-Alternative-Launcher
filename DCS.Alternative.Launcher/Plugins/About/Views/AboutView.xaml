@@ -74,10 +74,16 @@
                                    FontSize="28"
                                    FontWeight="Bold"
                                    Text="DCS Alternative Launcher" />
-                        <TextBlock Margin="0,10,0,0">
-                            <Run Text="Version:" />
-                            <Run Text="{Binding Version.Value}" />
-                        </TextBlock>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <TextBlock>
+                                <Run Text="Version:" />
+                                <Run Text="{Binding Version.Value}" />
+                            </TextBlock>
+                            <TextBlock Margin="5,0"
+                                       Foreground="#FFAF2222"
+                                       Text="(update available, please restart)"
+                                       Visibility="{Binding IsUpdateAvailable.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
+                        </StackPanel>
                         <TextBlock Text="Created by Jabbers" />
                         <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
 

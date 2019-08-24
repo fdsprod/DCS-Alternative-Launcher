@@ -43,5 +43,26 @@ namespace DCS.Alternative.Launcher
                 }
             }
         }
+
+        public static async Task<T> RunAsync<T>(Func<Task<T>> task, Action<Exception> onError = null)
+        {
+            try
+            {
+                return await task();
+            }
+            catch (Exception e)
+            {
+                if (onError != null)
+                {
+                    onError(e);
+                }
+                else
+                {
+                    GeneralExceptionHandler.Instance.OnError(e);
+                }
+
+                return default(T);
+            }
+        }
     }
 }

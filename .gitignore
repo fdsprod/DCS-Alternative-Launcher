@@ -6,3 +6,5 @@
 /DCS.Alternative.Launcher/bin
 /DCS.Alternative.Launcher/obj
 /packages
+/AutoUpdate/obj/Debug
+/AutoUpdate/bin/Debug
