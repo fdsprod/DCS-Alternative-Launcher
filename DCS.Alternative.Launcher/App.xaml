@@ -14,6 +14,15 @@
                 <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
+            <Color x:Key="MaterialDesignShadow">#AA000000</Color>
+            <DropShadowEffect x:Key="MaterialDesignShadowDepth3"
+                              BlurRadius="14"
+                              Direction="270"
+                              Opacity=".42"
+                              RenderingBias="Performance"
+                              ShadowDepth="4.5"
+                              Color="{StaticResource MaterialDesignShadow}" />
             <FontFamily x:Key="Orbitron">pack://application:,,,/Resources/Fonts/#orbitron</FontFamily>
             <FontFamily x:Key="Prototype">pack://application:,,,/Resources/Fonts/#prototype</FontFamily>
             <Color x:Key="OffColor">#FFFF3434</Color>

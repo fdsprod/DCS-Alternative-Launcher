@@ -18,7 +18,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CefSharp;
 using CefSharp.Wpf;
-using DCS.Alternative.Launcher.Background.Update;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -41,6 +40,7 @@ using DCS.Alternative.Launcher.Wizards;
 using Newtonsoft.Json;
 using NLua;
 using Application = System.Windows.Application;
+using SplashScreen = DCS.Alternative.Launcher.Windows.SplashScreen;
 
 namespace DCS.Alternative.Launcher
 {
@@ -59,6 +59,18 @@ namespace DCS.Alternative.Launcher
             {
                 Process.Start(autoUpdateExe);
                 return;
+            }
+
+            foreach (var file in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.updating", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    File.Delete(file);
+                }
+                catch
+                {
+                    // If this doesnt work, whatever...
+                }
             }
 
             App app = new App();
@@ -85,8 +97,14 @@ namespace DCS.Alternative.Launcher
             GeneralExceptionHandler.Instance.OnError(e.Exception);
         }
 
-        private void App_Startup(object sender, StartupEventArgs e)
+        private SplashScreen _splashScreen;
+
+        private async void App_Startup(object sender, StartupEventArgs e)
         {
+            _splashScreen = new SplashScreen();
+            MainWindow = _splashScreen;
+            _splashScreen.Show();
+
             UiDispatcher.Initialize();
             GeneralExceptionHandler.Instance = new UserFriendlyExceptionHandler();
 
@@ -106,18 +124,20 @@ namespace DCS.Alternative.Launcher
 
             _mainWindow = new MainWindow();
 
-            RegisterServices();
-            CheckSettingsExist();
-            CheckFirstUse();
+            await Task.WhenAll(RegisterServicesAsync(), Task.Delay(1000));
+            await Task.WhenAll(CheckSettingsExistAsync(), Task.Delay(1000));
 
-            MainWindow = _mainWindow;
+            CheckFirstUse();
 
             _mainWindow.DataContext = new MainWindowViewModel(_container);
             _mainWindow.Loaded += _mainWindow_Loaded;
 
-            InitializePlugins();
+            await Task.WhenAll(InitializePluginsAsync(), Task.Delay(1000));
 
+            _splashScreen.Close();
+            MainWindow = _mainWindow;
             _mainWindow.Show();
+
             Tracer.Info("Startup Complete.");
         }
 
@@ -236,8 +256,10 @@ namespace DCS.Alternative.Launcher
             settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, true);
         }
 
-        private void CheckSettingsExist()
+        private Task CheckSettingsExistAsync()
         {
+            _splashScreen.Status = "Checking Settings...";
+
             if (!File.Exists("settings.json"))
             {
                 var settingsService = _container.Resolve<ISettingsService>();
@@ -246,10 +268,13 @@ namespace DCS.Alternative.Launcher
                 settingsService.AddInstalls(installs.Select(i => i.Directory).ToArray());
                 settingsService.SelectedInstall = installs.FirstOrDefault();
             }
+
+            return Task.FromResult(true);
         }
 
-        private void InitializePlugins()
+        private Task InitializePluginsAsync()
         {
+            _splashScreen.Status = "Initializing Plugins...";
             Tracer.Info("Initializing Plugins.");
 
             var assembly = Assembly.GetEntryAssembly();
@@ -257,6 +282,8 @@ namespace DCS.Alternative.Launcher
             LoadPlugins(assembly);
 
             Tracer.Info("Plugins Complete.");
+
+            return Task.FromResult(true);
         }
 
         private void LoadPlugins(Assembly assembly)
@@ -285,8 +312,9 @@ namespace DCS.Alternative.Launcher
             await navigationService.NavigateAsync(typeof(GameView), viewModel);
         }
 
-        private void RegisterServices()
+        private Task RegisterServicesAsync()
         {
+            _splashScreen.Status = "Registering Services...";
             Tracer.Info("Registering Services.");
             
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
@@ -294,6 +322,8 @@ namespace DCS.Alternative.Launcher
             _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
             _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
+
+            return Task.FromResult(true);
         }
 
         private void App_Exit(object sender, ExitEventArgs e)

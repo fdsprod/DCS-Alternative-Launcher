@@ -1,0 +1,80 @@
+﻿<Window x:Class="AutoUpdate.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:local="clr-namespace:AutoUpdate"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="400"
+        Height="500"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
+        <Color x:Key="MaterialDesignShadow">#AA000000</Color>
+        <DropShadowEffect x:Key="MaterialDesignShadowDepth3"
+                          BlurRadius="14"
+                          Direction="270"
+                          Opacity=".42"
+                          RenderingBias="Performance"
+                          ShadowDepth="4.5"
+                          Color="{StaticResource MaterialDesignShadow}" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <Border x:Name="PART_Background"
+                Background="#FF282B30"
+                BorderBrush="{StaticResource BorderAccentBrush}"
+                BorderThickness="1"
+                Effect="{StaticResource MaterialDesignShadowDepth3}">
+            <Border Opacity="0.5">
+                <Border.Background>
+                    <ImageBrush AlignmentX="Right"
+                                ImageSource="/Images/Background.png"
+                                Stretch="UniformToFill" />
+                </Border.Background>
+            </Border>
+        </Border>
+        <fluentWpf:AcrylicPanel NoiseOpacity="0"
+                                Target="{Binding ElementName=PART_Background}"
+                                TintColor="#33000000"
+                                TintOpacity="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image Margin="30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Opacity="0.75"
+                       Source="/Images/dal-icon-256.png"
+                       Stretch="Uniform" />
+                <TextBlock Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           FontFamily="{StaticResource Prototype}"
+                           FontSize="20"
+                           Foreground="#FFFFFFFF"
+                           Text="DCS ALTERNATIVE LAUNCHER" />
+                <TextBlock x:Name="lblStatus"
+                           Grid.Row="2"
+                           Margin="20"
+                           HorizontalAlignment="Center"
+                           FontFamily="{StaticResource Prototype}"
+                           FontSize="12"
+                           FontWeight="Light"
+                           Foreground="#FFFFFFFF"
+                           Text="Updating..." />
+                <ProgressBar x:Name="progress"
+                             Grid.Row="3"
+                             Height="10"
+                             VerticalAlignment="Bottom" />
+            </Grid>
+        </fluentWpf:AcrylicPanel>
+    </Grid>
+</Window>

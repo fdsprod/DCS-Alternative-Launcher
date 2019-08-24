@@ -7,8 +7,8 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using DCS.Alternative.Launcher.Background.Update;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Newtonsoft.Json;
@@ -108,17 +108,9 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
 
                             File.Delete(zipPath);
 
-                            Tracer.Info("Updating AutoUpdate.exe.");
-
-                            var sourceAutoUpdateExe = Path.Combine(extractionPath, "AutoUpdate.exe");
-                            var destAutoUpdateExe = Path.Combine(Directory.GetCurrentDirectory(), "AutoUpdate.exe");
-
-                            if (File.Exists(destAutoUpdateExe))
-                            {
-                                File.Delete(destAutoUpdateExe);
-                            }
-
-                            File.Move(sourceAutoUpdateExe, destAutoUpdateExe);
+                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.exe");
+                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.exe.config");
+                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.pdb");
                         }
                         catch (Exception e)
                         {
@@ -144,6 +136,26 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                     _semaphore.Release(1);
                 }
             });
+        }
+
+        private void MoveFile(string sourcePath, string destinationPath, string file)
+        {
+            Tracer.Info($"Updating {file}.");
+
+            var sourceFile = Path.Combine(sourcePath, file);
+            var destinationFile = Path.Combine(destinationPath, file);
+
+            if (!File.Exists(sourceFile))
+            {
+                return;
+            }
+
+            if (File.Exists(destinationFile))
+            {
+                File.Delete(destinationFile);
+            }
+
+            File.Move(sourceFile, destinationFile);
         }
 
         public void ExtractZipFile(string archivePath, string outFolder)

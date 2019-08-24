@@ -3,15 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Width="600"
-        Height="200"
-        MinWidth="500"
-        MaxWidth="800"
+        xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
+        Width="640"
+        Height="240"
+        MinWidth="540"
+        MaxWidth="840"
+        AllowsTransparency="True"
+        Background="Transparent"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
         mc:Ignorable="d">
     <WindowChrome.WindowChrome>
-        <WindowChrome CornerRadius="0"
+        <WindowChrome CaptionHeight="50"
+                      CornerRadius="0"
                       GlassFrameThickness="0"
                       ResizeBorderThickness="0"
                       UseAeroCaptionButtons="False" />
@@ -59,29 +65,29 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.Background>
-            <RadialGradientBrush GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                <GradientStop Offset="0" Color="#FF353C53" />
-                <GradientStop Offset="0.7" Color="#FF030606" />
-            </RadialGradientBrush>
-        </Grid.Background>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="txtCaption"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Margin="5"
-                       FontSize="16"
-                       Text="[Caption]" />
-            <StackPanel Grid.Row="0"
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                <!--<Button Style="{StaticResource CaptionButtonStyle}">
+    <Grid Margin="20">
+        <Border Background="#FF000000" Effect="{StaticResource MaterialDesignShadowDepth3}" />
+
+        <fluentWpf:AcrylicPanel NoiseOpacity="0"
+                                Target="{x:Static windows:MainWindow.AcrylicSource}"
+                                TintColor="#33000000"
+                                TintOpacity="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="txtCaption"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="5"
+                           FontSize="16"
+                           Text="[Caption]" />
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <!--<Button Style="{StaticResource CaptionButtonStyle}">
                     <Path Width="10"
                           Height="10"
                           Data="M0,0L32,0 32,5.3 0,5.3z"
@@ -102,46 +108,46 @@
                           Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                           Stretch="Uniform" />
                 </Button>-->
-            </StackPanel>
-            <Grid Grid.Row="1" Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="imgIcon"
-                       MaxWidth="60"
-                       MaxHeight="60"
-                       Margin="0,0,10,0"
-                       Stretch="Uniform"
-                       Visibility="{Binding Source, RelativeSource={RelativeSource Self}, Converter={x:Static data:VisibilityConverter.Instance}}">
-                    <Image.Effect>
-                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                    </Image.Effect>
-                </Image>
-                <TextBlock x:Name="txtMessage"
-                           Grid.Column="1"
-                           FontSize="14"
-                           Text="[This is where the message box will display it's message]"
-                           TextWrapping="Wrap" />
-            </Grid>
-            <StackPanel Grid.Row="2"
-                        Margin="20"
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="MinWidth" Value="75" />
-                        <Setter Property="Margin" Value="10,0,0,0" />
-                        <Setter Property="Padding" Value="3" />
-                        <Setter Property="HorizontalAlignment" Value="left" />
-                        <Setter Property="VerticalAlignment" Value="Bottom" />
-                        <Setter Property="Background" Value="#FF11AF11" />
-                        <Setter Property="Foreground" Value="#FFFFFFFF" />
-                        <Setter Property="FontFamily" Value="{StaticResource Prototype}" />
-                        <Setter Property="FontSize" Value="16" />
-                    </Style>
-                </StackPanel.Resources>
-                <!--<Button x:Name="btnAbort"
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="imgIcon"
+                           MaxWidth="60"
+                           MaxHeight="60"
+                           Margin="0,0,10,0"
+                           Stretch="Uniform"
+                           Visibility="{Binding Source, RelativeSource={RelativeSource Self}, Converter={x:Static data:VisibilityConverter.Instance}}">
+                        <Image.Effect>
+                            <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                        </Image.Effect>
+                    </Image>
+                    <TextBlock x:Name="txtMessage"
+                               Grid.Column="1"
+                               FontSize="14"
+                               Text="[This is where the message box will display it's message]"
+                               TextWrapping="Wrap" />
+                </Grid>
+                <StackPanel Grid.Row="2"
+                            Margin="20"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="MinWidth" Value="75" />
+                            <Setter Property="Margin" Value="10,0,0,0" />
+                            <Setter Property="Padding" Value="3" />
+                            <Setter Property="HorizontalAlignment" Value="left" />
+                            <Setter Property="VerticalAlignment" Value="Bottom" />
+                            <Setter Property="Background" Value="#FF11AF11" />
+                            <Setter Property="Foreground" Value="#FFFFFFFF" />
+                            <Setter Property="FontFamily" Value="{StaticResource Prototype}" />
+                            <Setter Property="FontSize" Value="16" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <!--<Button x:Name="btnAbort"
                         Background="#6F1C00C6"
                         Click="BtnAbort_Click"
                         Content="IGNORE" />
@@ -152,21 +158,22 @@
                         Background="#6F1C00C6"
                         Click="BtnIgnore_Click"
                         Content="IGNORE" />-->
-                <Button x:Name="btnYes"
-                        Click="BtnYes_Click"
-                        Content="YES" />
-                <Button x:Name="btnNo"
-                        Background="#6F1C00C6"
-                        Click="BtnNo_Click"
-                        Content="NO" />
-                <Button x:Name="btnOK"
-                        Click="BtnOK_Click"
-                        Content="OK" />
-                <Button x:Name="btnCancel"
-                        Background="#6F1C00C6"
-                        Click="BtnCancel_Click"
-                        Content="CANCEL" />
-            </StackPanel>
-        </Grid>
+                    <Button x:Name="btnYes"
+                            Click="BtnYes_Click"
+                            Content="YES" />
+                    <Button x:Name="btnNo"
+                            Background="#6F1C00C6"
+                            Click="BtnNo_Click"
+                            Content="NO" />
+                    <Button x:Name="btnOK"
+                            Click="BtnOK_Click"
+                            Content="OK" />
+                    <Button x:Name="btnCancel"
+                            Background="#6F1C00C6"
+                            Click="BtnCancel_Click"
+                            Content="CANCEL" />
+                </StackPanel>
+            </Grid>
+        </fluentWpf:AcrylicPanel>
     </Grid>
 </Window>

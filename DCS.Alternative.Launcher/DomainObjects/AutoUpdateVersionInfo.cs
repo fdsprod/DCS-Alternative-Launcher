@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DCS.Alternative.Launcher.Background.Update
+namespace DCS.Alternative.Launcher.DomainObjects
 {
     public class AutoUpdateVersionInfo
     {

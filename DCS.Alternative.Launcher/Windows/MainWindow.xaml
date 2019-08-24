@@ -6,13 +6,14 @@
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="DCS Alternative Launcher"
-        Width="1200"
-        Height="760"
-        MinWidth="1200"
-        MinHeight="760"
-        MaxWidth="1200"
-        MaxHeight="760"
-        Background="Black"
+        Width="1240"
+        Height="800"
+        MinWidth="1240"
+        MinHeight="800"
+        MaxWidth="1240"
+        MaxHeight="800"
+        AllowsTransparency="True"
+        Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
@@ -26,8 +27,11 @@
     <Window.Resources>
         <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
     </Window.Resources>
-    <Border BorderBrush="{StaticResource BorderAccentBrush}" BorderThickness="1">
+    <Border Margin="20"
+            BorderBrush="{StaticResource BorderAccentBrush}"
+            BorderThickness="1">
         <Grid>
+            <Border Background="#FF000000" Effect="{StaticResource MaterialDesignShadowDepth3}" />
             <Grid x:Name="BackgroundImage">
                 <controls:TransitionControl Content="{Binding ImageUrl.Value}">
                     <controls:TransitionControl.ContentTemplate>

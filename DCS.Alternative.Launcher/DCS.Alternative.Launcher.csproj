@@ -189,7 +189,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Services\IAutoUpdateService.cs" />
-    <Compile Include="Background\Update\AutoUpdateVersionInfo.cs" />
+    <Compile Include="DomainObjects\AutoUpdateVersionInfo.cs" />
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />
     <Compile Include="Controls\BindingHelper.cs" />
     <Compile Include="Controls\DesignerControl.cs" />
@@ -394,6 +394,9 @@
     </Compile>
     <Compile Include="Views\SettingsViewModel.cs" />
     <Compile Include="WindowAssist.cs" />
+    <Compile Include="Windows\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -551,6 +554,10 @@
     <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
@@ -793,6 +800,7 @@
     <Resource Include="Images\paypal-dontation.png" />
     <Resource Include="Images\discord.png" />
     <Resource Include="Images\GitHub-logo-header.png" />
+    <Resource Include="Images\SplashBackground.png" />
     <Content Include="Images\Wallpaper\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
