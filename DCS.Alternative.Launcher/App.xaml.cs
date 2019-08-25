@@ -200,6 +200,16 @@ namespace DCS.Alternative.Launcher
 
             Tracer.Info("Startup Complete.");
             Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
+
+            var analyticsTicker = new DispatcherTimer {Interval = TimeSpan.FromMinutes(5)};
+
+            analyticsTicker.Tick += AnalyticsTicker_Tick;
+            analyticsTicker.Start();
+        }
+
+        private void AnalyticsTicker_Tick(object sender, EventArgs e)
+        {
+            Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.Ping, Version.ToString());
         }
 
         private void ShowTestWindow()

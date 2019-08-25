@@ -55,8 +55,9 @@ namespace AutoUpdate
             }
 
             Directory.Delete(updateDirectory, true);
+
             Process.Start(exePath);
-            Application.Current.Shutdown();
+            Process.GetCurrentProcess().Kill();
         }
 
         private static int CountFiles(string sourceDirectory)

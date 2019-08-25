@@ -22,6 +22,7 @@ namespace DCS.Alternative.Launcher.Analytics
     public static class AnalyticsEvents
     {
         public const string StartupComplete = "startup_complete";
+        public const string Ping = "ping";
     }
 
     public class Tracker : ITracker
@@ -30,7 +31,7 @@ namespace DCS.Alternative.Launcher.Analytics
         {
             get;
             internal set;
-        } 
+        }
 
         private readonly object _syncRoot = new object();
         private readonly TrackerConfig _config;
@@ -69,7 +70,13 @@ namespace DCS.Alternative.Launcher.Analytics
 
         public void SetCustomDimension(int key, string value)
         {
-            BasePostDataValues[$"cd{key}"] = value;
+            try
+            {
+                BasePostDataValues[$"cd{key}"] = value;
+            }
+            catch
+            {
+            }
         }
 
         public ITrackerBatch CreateBatch()
@@ -79,42 +86,72 @@ namespace DCS.Alternative.Launcher.Analytics
 
         public void SendScreenView(string screenName)
         {
-            var nvc = HitInfoFactory.CreateScreenHit(BasePostDataValues, screenName);
+            try
+            {
+                var nvc = HitInfoFactory.CreateScreenHit(BasePostDataValues, screenName);
 
-            sendImmediately(nvc);
+                sendImmediately(nvc);
+            }
+            catch
+            {
+            }
         }
 
         public void SendEvent(string category, string action, string label, int? value)
         {
-            var nvc = HitInfoFactory.CreateEventHit(BasePostDataValues, category, action, label, value);
+            try
+            {
+                var nvc = HitInfoFactory.CreateEventHit(BasePostDataValues, category, action, label, value);
 
-            sendImmediately(nvc);
+                sendImmediately(nvc);
+            }
+            catch
+            {
+            }
         }
 
         public ITrackerTimingEvent CreateTimingEvent(string categoryName, string action, string label)
         {
-            return TimingEvent.Create(elapsed => SendTiming(categoryName, action, label, (long)elapsed.TotalMilliseconds));
+            return TimingEvent.Create(elapsed => SendTiming(categoryName, action, label, (long) elapsed.TotalMilliseconds));
         }
 
         public void SendTiming(string category, string action, string label, long milliseconds)
         {
-            var nvc = HitInfoFactory.CreateTimingHit(BasePostDataValues, category, action, label, milliseconds);
+            try
+            {
+                var nvc = HitInfoFactory.CreateTimingHit(BasePostDataValues, category, action, label, milliseconds);
 
-            sendImmediately(nvc);
+                sendImmediately(nvc);
+            }
+            catch
+            {
+            }
         }
 
         public void SendException(string description, bool fatal)
         {
-            var nvc = HitInfoFactory.CreateExceptionHit(BasePostDataValues, description, fatal);
+            try
+            {
+                var nvc = HitInfoFactory.CreateExceptionHit(BasePostDataValues, description, fatal);
 
-            sendImmediately(nvc);
+                sendImmediately(nvc);
+            }
+            catch
+            {
+            }
         }
 
         public void SendSocial(string action, string network, string target)
         {
-            var nvc = HitInfoFactory.CreateSocialHit(BasePostDataValues, action, network, target);
+            try
+            {
+                var nvc = HitInfoFactory.CreateSocialHit(BasePostDataValues, action, network, target);
 
-            sendImmediately(nvc);
+                sendImmediately(nvc);
+            }
+            catch
+            {
+            }
         }
 
         private void sendBatch(NameValueCollection[] values)
