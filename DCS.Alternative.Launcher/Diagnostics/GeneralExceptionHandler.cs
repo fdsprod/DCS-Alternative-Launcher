@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 
 namespace DCS.Alternative.Launcher.Diagnostics
@@ -11,32 +12,30 @@ namespace DCS.Alternative.Launcher.Diagnostics
 
         public static GeneralExceptionHandler Instance
         {
-            get => _instance ?? (_instance = new GeneralExceptionHandler());
-            set => _instance = value;
+            get { return _instance ?? (_instance = new GeneralExceptionHandler()); }
+            set { _instance = value; }
         }
 
         public async void OnError(Exception e)
         {
+            Tracker.Instance.SendException(e.ToString(), false);
             Tracer.Error(e);
+
             await OnErrorOverrideAsync(e);
         }
 
         public Task OnErrorAsync(Exception e)
         {
+            Tracker.Instance.SendEvent(AnalyticsCategories.Exceptions, e.GetType().Name, e.Message);
+            Tracker.Instance.SendException(e.ToString(), false);
             Tracer.Error(e);
+
             return OnErrorOverrideAsync(e);
         }
 
-#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-        protected virtual async Task OnErrorOverrideAsync(Exception e)
-#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+        protected virtual Task OnErrorOverrideAsync(Exception e)
         {
-            var dispatcher = Application.Current.Dispatcher;
-            var contents = e.ToString();
-
-            if (dispatcher.CheckAccess())
-            {
-            }
+            return Task.FromResult(true);
         }
     }
 }

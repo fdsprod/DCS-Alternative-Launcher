@@ -188,6 +188,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Analytics\HitInfoFactory.cs" />
+    <Compile Include="Analytics\ITracker.cs" />
+    <Compile Include="Analytics\ITrackerBatch.cs" />
+    <Compile Include="Analytics\ITrackerTimingEvent.cs" />
+    <Compile Include="Analytics\NullTracker.cs" />
+    <Compile Include="Analytics\Tracker.cs" />
+    <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="Services\IAutoUpdateService.cs" />
     <Compile Include="DomainObjects\AutoUpdateVersionInfo.cs" />
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />

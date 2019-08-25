@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CefSharp;
 using CefSharp.Wpf;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
@@ -49,9 +50,20 @@ namespace DCS.Alternative.Launcher
     /// </summary>
     public partial class App : Application
     {
+        public static Version Version
+        {
+            get;
+            private set;
+        }
+
         [STAThread]
         static void Main()
         {
+            var assembly = Assembly.GetAssembly(typeof(App));
+            var assemblyName = assembly.GetName();
+
+            Version = assemblyName.Version;
+
             var updateFolder = Path.Combine(Directory.GetCurrentDirectory(), "_update");
             var autoUpdateExe = Path.Combine(Directory.GetCurrentDirectory(), "AutoUpdate.exe");
 
@@ -73,8 +85,57 @@ namespace DCS.Alternative.Launcher
                 }
             }
 
+            var anonymousUserId = GetUserId();
+
+            if(anonymousUserId != Guid.Empty)
+            {
+                Tracker.Instance = new Tracker(
+                    new TrackerConfig
+                    {
+                        TrackerUrl = "https://ssl.google-analytics.com/collect",
+                        TrackerVersion = "1",
+                        TrackingId = "UA-146413649-1",
+                        AppName = "DCS Alternative Launcher",
+                        AppVersion = Version.ToString(),
+                        ClientId = anonymousUserId.ToString()
+                    });
+            }
+            else
+            {
+                Tracker.Instance = new NullTracker();
+            }
+
             App app = new App();
             app.Run();
+        }
+
+        private static Guid GetUserId()
+        {
+            var id = Guid.NewGuid();
+
+            try
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "ga.id");
+
+                if (File.Exists(path))
+                {
+                    var content = File.ReadAllText(path);
+
+                    if (Guid.TryParse(content, out id))
+                    {
+                        return id;
+                    }
+                }
+
+                id = Guid.NewGuid();
+                File.WriteAllText(path, id.ToString());
+            }
+            catch (Exception e)
+            {
+                Tracer.Error(e);
+            }
+
+            return id;
         }
 
         private static Regex _splitAtUpperRegex =
@@ -116,7 +177,7 @@ namespace DCS.Alternative.Launcher
 #endif
             //DumpAutoexecLua();
             //ShowTestWindow();
-            
+
             var settings = new CefSettings();
             settings.SetOffScreenRenderingBestPerformanceArgs();
             settings.WindowlessRenderingEnabled = true;
@@ -139,6 +200,7 @@ namespace DCS.Alternative.Launcher
             _mainWindow.Show();
 
             Tracer.Info("Startup Complete.");
+            Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
         }
 
         private void ShowTestWindow()
