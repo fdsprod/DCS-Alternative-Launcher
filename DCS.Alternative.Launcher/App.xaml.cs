@@ -56,6 +56,12 @@ namespace DCS.Alternative.Launcher
             private set;
         }
 
+        private static Regex _splitAtUpperRegex = new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
+
+        private IContainer _container;
+        private MainWindow _mainWindow;
+        private SplashScreen _splashScreen;
+
         [STAThread]
         static void Main()
         {
@@ -109,6 +115,15 @@ namespace DCS.Alternative.Launcher
             app.Run();
         }
 
+        public App()
+        {
+            Startup += App_Startup;
+            Exit += App_Exit;
+            DispatcherUnhandledException += onDispatcherUnhandledException;
+            
+            InitializeComponent();
+        }
+
         private static Guid GetUserId()
         {
             var id = Guid.NewGuid();
@@ -138,27 +153,11 @@ namespace DCS.Alternative.Launcher
             return id;
         }
 
-        private static Regex _splitAtUpperRegex =
-            new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
-
-        private IContainer _container;
-        private MainWindow _mainWindow;
-
-        public App()
-        {
-            Startup += App_Startup;
-            Exit += App_Exit;
-            DispatcherUnhandledException += onDispatcherUnhandledException;
-            
-            InitializeComponent();
-        }
 
         private void onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             GeneralExceptionHandler.Instance.OnError(e.Exception);
         }
-
-        private SplashScreen _splashScreen;
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
