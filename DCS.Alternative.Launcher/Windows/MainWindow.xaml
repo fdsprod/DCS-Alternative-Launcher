@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Interactions="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Behaviors"
         Title="DCS Alternative Launcher"
         Width="1240"
         Height="800"
@@ -24,6 +26,9 @@
                       ResizeBorderThickness="0"
                       UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
+    <Interactions:Interaction.Behaviors>
+        <behaviors:WindowDisableContextMenulBehavior />
+    </Interactions:Interaction.Behaviors>
     <Window.Resources>
         <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
     </Window.Resources>

@@ -1,9 +1,11 @@
 ﻿<Window x:Class="DCS.Alternative.Launcher.Windows.FirstUse.FirstUseWizard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:DCS.Alternative.Launcher.Windows.FirstUse"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:steps="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
@@ -22,6 +24,9 @@
                       ResizeBorderThickness="0"
                       UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
+    <interactions:Interaction.Behaviors>
+        <behaviors:WindowDisableContextMenulBehavior />
+    </interactions:Interaction.Behaviors>
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FFFFFFFF" />
