@@ -48,6 +48,8 @@
                 Background="#40000000"
                 BorderBrush="#FF2F2F2F"
                 BorderThickness="1" />
-        <controls:OptionsControl Grid.Row="1" />
+        <controls:OptionsControl Grid.Row="1"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>
