@@ -41,7 +41,6 @@ namespace AutoUpdate
         {
             var directory = Directory.GetCurrentDirectory();
             var updateDirectory = System.IO.Path.Combine(directory, "_update");
-            var exePath = System.IO.Path.Combine(directory, "DCS Alternative Launcher.exe");
 
             updateStatus("Gathering data...");
 
@@ -56,7 +55,7 @@ namespace AutoUpdate
 
             Directory.Delete(updateDirectory, true);
 
-            Process.Start(exePath);
+            App.StartLauncher();
             Process.GetCurrentProcess().Kill();
         }
 

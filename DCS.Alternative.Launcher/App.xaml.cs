@@ -75,7 +75,7 @@ namespace DCS.Alternative.Launcher
 
             if (Directory.Exists(updateFolder) && Directory.GetFileSystemEntries(updateFolder).Length > 0 && File.Exists(autoUpdateExe))
             {
-                Process.Start(autoUpdateExe);
+                Process.Start(autoUpdateExe, "--launcher");
                 return;
             }
 
