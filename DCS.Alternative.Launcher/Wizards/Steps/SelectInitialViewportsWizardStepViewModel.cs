@@ -42,7 +42,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             foreach (var template in templates)
             {
                 var module = installedModules.First(m => m.ModuleId == template.ModuleId);
-                var model = new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Monitors, template.Viewports);
+                var model = new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Viewports);
 
                 ModuleViewports.Add(model);
             }

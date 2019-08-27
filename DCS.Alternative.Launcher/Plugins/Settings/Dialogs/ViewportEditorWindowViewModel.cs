@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reactive;
@@ -103,6 +104,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             }
         }
 
+        public List<string> ConsumedViewports
+        {
+            get;
+        } = new List<string>();
+
         private void OnAddViewport()
         {
             var window = WindowAssist.GetWindow(this);
@@ -111,7 +117,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
             foreach (var device in _devices)
             {
-                if (Viewports.Any(v => v.Name.Value == device.ViewportName))
+                if (ConsumedViewports.Any(v => v == device.ViewportName))
                 {
                     continue;
                 }

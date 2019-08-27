@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
+             xmlns:viewports="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports"
+             d:DataContext="{d:DesignInstance viewports:ViewportSettingsViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
@@ -56,13 +59,41 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Margin="0,0,0,0"
-                                       FontFamily="{StaticResource Prototype}"
-                                       FontSize="16"
-                                       Foreground="#FFFFFFFF">
-                                <Run Text="{Binding Module.Value.DisplayName, Mode=OneWay}" />
-                            </TextBlock>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,0,0"
+                                           FontFamily="{StaticResource Prototype}"
+                                           FontSize="16"
+                                           Foreground="#FFFFFFFF">
+                                    <Run Text="{Binding Module.Value.DisplayName, Mode=OneWay}" />
+                                </TextBlock>
+                                <Grid Margin="10,2,0,2">
+                                    <Border Padding="5,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Background="#FF006F00"
+                                            Visibility="{Binding IsValidSetup.Value, Converter={x:Static data:VisibilityConverter.Instance}}">
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource Prototype}"
+                                                   FontSize="12"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="VALID"
+                                                   TextAlignment="Center" />
+                                    </Border>
+                                    <Border Padding="5,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Background="#FFCF0000"
+                                            ToolTip="This viewport will not be applied when generating the monitor config.  Either run the monitor config wizard to fix your monitor setup, or edit the template and fix the errors."
+                                            Visibility="{Binding IsValidSetup.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource Prototype}"
+                                                   FontSize="12"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="Invalid"
+                                                   TextAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
                             <ItemsControl Grid.Row="1"
                                           Grid.Column="0"
                                           Margin="0"
@@ -104,32 +135,48 @@
                             </ItemsControl>
                             <StackPanel Grid.Row="0"
                                         Grid.RowSpan="2"
-                                        Grid.Column="1">
-                                <Button
-                                    Command="{Binding DataContext.EditViewportsCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                    CommandParameter="{Binding}"
-                                    Content="EDIT" />
+                                        Grid.Column="1"
+                                        Margin="0,0,10,0">
+                                <Button Padding="10,3"
+                                        Command="{Binding DataContext.EditViewportsCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                        CommandParameter="{Binding}"
+                                        Content="EDIT" />
                             </StackPanel>
                         </Grid>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="2"
-                Height="30"
-                Padding="3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Background="#FF006F00"
-                Command="{Binding GenerateMonitorConfigCommand}">
-            <TextBlock FontFamily="{StaticResource Prototype}"
-                       FontSize="16"
-                       Text="GENERATE MONITOR CONFIG">
-                <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                </TextBlock.Effect>
-            </TextBlock>
-        </Button>
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Height="30"
+                    Padding="3"
+                    Background="#FF006F00"
+                    Command="{Binding GenerateMonitorConfigCommand}">
+                <TextBlock FontFamily="{StaticResource Prototype}"
+                           FontSize="16"
+                           Text="GENERATE MONITOR CONFIG">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Height="30"
+                    Margin="10,0,0,0"
+                    Padding="3"
+                    Background="#FF006F00"
+                    Command="{Binding MonitorSetupWizardCommand}">
+                <TextBlock FontFamily="{StaticResource Prototype}"
+                           FontSize="16"
+                           Text="MONITOR SETUP WIZARD">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </StackPanel>
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,9 @@ using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Threading;
+using DCS.Alternative.Launcher.Windows.FirstUse;
+using DCS.Alternative.Launcher.Wizards;
+using DCS.Alternative.Launcher.Wizards.Steps;
 using WpfScreenHelper;
 using IContainer = DCS.Alternative.Launcher.ServiceModel.IContainer;
 
@@ -34,13 +38,19 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public async Task<Viewport[]> EditViewportsAsync(ModuleViewportModel value)
         {
+            if (!IsValidViewports(value.Viewports.ToArray()))
+            {
+                MessageBoxEx.Show($"One or more viewports were defined on a monitor that is no longer configured, they have been removed.{Environment.NewLine}Make sure you add any missing viewports before saving.", "Invalid Viewport");
+            }
+
             var tasks = new List<Task>();
+            var screenIds = GetDeviceViewportMonitorIds();
             var devices = _container.Resolve<ISettingsService>().GetViewportDevices(value.Module.Value.ModuleId);
             var windows = new List<Window>();
             var viewModels = new List<ViewportEditorWindowViewModel>();
 
-            var editorScreens = Screen.AllScreens.Where(s => value.MonitorIds.Contains(s.DeviceName));
-            var overlayScreens = Screen.AllScreens.Where(s => !value.MonitorIds.Contains(s.DeviceName));
+            var editorScreens = Screen.AllScreens.Where(s => screenIds.Contains(s.DeviceName));
+            var overlayScreens = Screen.AllScreens.Where(s => !screenIds.Contains(s.DeviceName) && !value.Viewports.Select(v => v.MonitorId).Contains(s.DeviceName));
 
             foreach (var screen in editorScreens)
             {
@@ -48,6 +58,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                 foreach (var viewport in value.Viewports.Where(v => v.MonitorId == screen.DeviceName))
                 {
+                    if (!screenIds.Contains(viewport.MonitorId))
+                    {
+                        continue;
+                    }
+
                     var model = new ViewportModel();
 
                     model.Height.Value = viewport.Height;
@@ -64,6 +79,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 var window = new ViewportEditorWindow();
                 var vm = new ViewportEditorWindowViewModel(_container, false, screen.DeviceName, value.Module.Value, devices, viewportModels.ToArray());
 
+                vm.Viewports.CollectionChanged += (sender, args) => 
+                {
+                    OnViewportsChanged(vm, viewModels);
+                };
+                
                 window.Screen = screen;
                 window.DataContext = vm;
                 window.Show();
@@ -132,9 +152,23 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                             });
                     }
                 }
+                return viewports.ToArray();
             }
+            else
+            {
+                return value.Viewports.ToArray();
+            }
+        }
 
-            return viewports.ToArray();
+        private void OnViewportsChanged(ViewportEditorWindowViewModel sender, List<ViewportEditorWindowViewModel> allViewModels)
+        {
+            var viewports = allViewModels.SelectMany(vm => vm.Viewports.Select(v => v.Name.Value)).ToArray();
+
+            foreach (var vm in allViewModels)
+            {
+                vm.ConsumedViewports.Clear();
+                vm.ConsumedViewports.AddRange(viewports);
+            }
         }
 
         public IEnumerable<InstallLocation> GetInstallations()
@@ -225,6 +259,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             foreach (var template in viewportTemplates)
             {
+                if (!IsValidViewports(template.Viewports.ToArray()))
+                {
+                    continue;
+                }
+
                 var module = installedModules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
 
                 if (module == null)
@@ -342,6 +381,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public void SaveViewports(string name, string moduleId, Viewport[] viewports)
         {
+            _settingsService.ClearViewports(name, moduleId);
+
             foreach (var viewport in viewports)
             {
                 var screen = Screen.AllScreens.First(s => s.DeviceName == viewport.MonitorId);
@@ -475,6 +516,34 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         public void SaveDcsOptions()
         {
             _dcsWorldService.WriteOptionsAsync(false);
+        }
+
+        public void ShowMonitorSetupWizard()
+        {
+            using (var container = _container.GetChildContainer())
+            {
+                var firstUseWizard = new FirstUseWizard();
+                var viewModel = new FirstUseWizardViewModel(container,
+                    new SelectGameViewportScreensStepViewModel(container),
+                    new SelectUIViewportScreensStepViewModel(container),
+                    new SelectDeviceViewportScreensStepViewModel(container));
+
+                firstUseWizard.DataContext = viewModel;
+                firstUseWizard.ShowDialog();
+            }
+        }
+
+        public bool IsValidViewports(Viewport[] viewports)
+        {
+            var screenIds = GetDeviceViewportMonitorIds();
+            var isValid = true;
+
+            for (var i = 0; i < viewports.Length && isValid; i++)
+            {
+                isValid = screenIds.Contains(viewports[i].MonitorId);
+            }
+
+            return isValid;
         }
     }
 }

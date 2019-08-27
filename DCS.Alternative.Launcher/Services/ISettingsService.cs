@@ -49,5 +49,7 @@ namespace DCS.Alternative.Launcher.Services
         void SetValue(string category, string key, object value);
 
         void DeleteValue(string category, string key);
+
+        void ClearViewports(string name, string moduleId);
     }
 }

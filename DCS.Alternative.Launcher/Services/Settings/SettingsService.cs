@@ -134,10 +134,23 @@ namespace DCS.Alternative.Launcher.Services.Settings
             SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
 
+        public void ClearViewports(string name, string moduleId)
+        {
+            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
+            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId && m.TemplateName == name);
+
+            if (mv != null)
+            {
+                mv.Viewports.Clear();
+            }
+
+            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
+        }
+
         public void UpsertViewport(string name, string moduleId, Screen screen, Viewport viewport)
         {
             var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
+            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId && m.TemplateName == name);
 
             if (mv == null)
             {
@@ -148,6 +161,10 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 };
 
                 moduleViewports.Add(mv);
+            }
+            else
+            {
+                mv.TemplateName = name;
             }
 
             var monitor = mv.Monitors.FirstOrDefault(m => m.MonitorId == screen.DeviceName);
@@ -306,7 +323,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 }
             }
         }
-
+        
         public ViewportDevice[] GetViewportDevices(string moduleId)
         {
             const string path = "Resources/ViewportDevices.json";

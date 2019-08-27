@@ -29,6 +29,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
             AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
             EditViewportsCommand.Subscribe(OnEditViewports);
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
+            MonitorSetupWizardCommand.Subscribe(OnMonitorSetupWizard);
         }
 
         public ReactiveCollection<ModuleViewportModel> ModuleViewports
@@ -44,7 +45,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
         public ReactiveCommand GenerateMonitorConfigCommand
         {
             get;
-        } = new ReactiveCommand();
+        } = new ReactiveCommand(); 
+
+        public ReactiveCommand MonitorSetupWizardCommand
+        {
+            get;
+        } = new ReactiveCommand(); 
 
         public ReactiveCommand RemoveModuleViewportCommand
         {
@@ -132,7 +138,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                             module.DisplayName,
                             null,
                             module,
-                            monitorDefinitions,
                             new Viewport[0]);
 
                     var viewports = await Controller.EditViewportsAsync(model);
@@ -156,7 +161,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                                 templates[0].TemplateName,
                                 templates[0].ExampleImageUrl,
                                 module,
-                                monitorDefinitions,
                                 viewports);
 
                         viewports = await Controller.EditViewportsAsync(model);
@@ -170,7 +174,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                                 module.DisplayName,
                                 null,
                                 module,
-                                monitorDefinitions,
                                 new Viewport[0]);
 
                         var viewports = await Controller.EditViewportsAsync(model);
@@ -187,12 +190,20 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
             }
         }
 
+        private async void OnMonitorSetupWizard()
+        {
+            Controller.ShowMonitorSetupWizard();
+
+            await PopulateViewportsAsync();
+        }
+
         private async void OnEditViewports(ModuleViewportModel value)
         {
             try
             {
                 var viewports = await Controller.EditViewportsAsync(value);
                 Controller.SaveViewports(value.Name.Value, value.Module.Value.ModuleId, viewports);
+                await PopulateViewportsAsync();
             }
             catch (Exception e)
             {
@@ -224,7 +235,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                         foreach (var template in viewportTemplates)
                         {
                             var module = installedModules.First(m => m.ModuleId == template.ModuleId);
-                            ModuleViewports.Add(new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Monitors, template.Viewports.ToArray()));
+                            var model = new ModuleViewportModel(template.TemplateName, template.ExampleImageUrl, module, template.Viewports.ToArray());
+
+                            model.IsValidSetup.Value = Controller.IsValidViewports(model.Viewports.ToArray());
+
+                            ModuleViewports.Add(model);
                         }
                     });
                 }
