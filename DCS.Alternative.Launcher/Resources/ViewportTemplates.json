@@ -1,5 +1,5 @@
 ﻿[
-	{
+	/*{
 		"templateName" : "F-14B Pilot (Helios 16/9)",
 		"moduleId" : "HEATBLUR_F-14",
 		"viewports" : [
@@ -112,7 +112,7 @@
 				"height" : 170
 			}
 		]
-	},
+	},*/
 	{
 		"templateName" : "F/A-18C (Helios 16/9)",
 		"moduleId" : "FA-18C",
@@ -179,7 +179,7 @@
 			}
 		]
 	},
-	{
+	/*{
 		"templateName" : "KA-50 (Helios 16/9)",
 		"moduleId" : "KA-50",
 		"viewports" : [
@@ -234,7 +234,7 @@
 				"height" : 88
 			}
 		]
-	},
+	},*/
 	{
 		"templateName": "A-10C (Helios 16/9)",
 		"moduleId": "A-10C",
