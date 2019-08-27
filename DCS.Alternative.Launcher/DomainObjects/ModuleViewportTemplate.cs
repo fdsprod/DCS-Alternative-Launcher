@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DCS.Alternative.Launcher.DomainObjects
 {
@@ -43,7 +39,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             get;
             set;
         }
-        
+
         public List<MonitorDefinition> Monitors
         {
             get;

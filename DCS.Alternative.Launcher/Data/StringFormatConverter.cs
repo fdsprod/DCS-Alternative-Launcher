@@ -48,13 +48,14 @@ namespace DCS.Alternative.Launcher.Data
 
                 targetType = nullableUnderlyingType;
             }
+
             try
             {
                 var parsedValue = TryParse(value, targetType, culture);
 
                 return parsedValue != DependencyProperty.UnsetValue
-                    ? new[] { parsedValue }
-                    : new[] { System.Convert.ChangeType(value, targetType, culture) };
+                    ? new[] {parsedValue}
+                    : new[] {System.Convert.ChangeType(value, targetType, culture)};
             }
             catch
             {
@@ -79,25 +80,25 @@ namespace DCS.Alternative.Launcher.Data
                 if (culture != null
                     && (mi = targetType.GetMethod("Parse",
                         BindingFlags.Public | BindingFlags.Static, null,
-                        new[] { typeof(string), typeof(NumberStyles), typeof(IFormatProvider) }, null))
+                        new[] {typeof(string), typeof(NumberStyles), typeof(IFormatProvider)}, null))
                     != null)
                 {
-                    result = mi.Invoke(null, new object[] { stringValue, NumberStyles.Any, culture });
+                    result = mi.Invoke(null, new object[] {stringValue, NumberStyles.Any, culture});
                 }
                 else if (culture != null
                          && (mi = targetType.GetMethod("Parse",
                              BindingFlags.Public | BindingFlags.Static, null,
-                             new[] { typeof(string), typeof(IFormatProvider) }, null))
+                             new[] {typeof(string), typeof(IFormatProvider)}, null))
                          != null)
                 {
-                    result = mi.Invoke(null, new object[] { stringValue, culture });
+                    result = mi.Invoke(null, new object[] {stringValue, culture});
                 }
                 else if ((mi = targetType.GetMethod("Parse",
                              BindingFlags.Public | BindingFlags.Static, null,
-                             new[] { typeof(string) }, null))
+                             new[] {typeof(string)}, null))
                          != null)
                 {
-                    result = mi.Invoke(null, new object[] { stringValue });
+                    result = mi.Invoke(null, new object[] {stringValue});
                 }
             }
             catch (TargetInvocationException)

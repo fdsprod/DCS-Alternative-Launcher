@@ -49,11 +49,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             {
                 var str = value.ToString();
                 var index = str.LastIndexOf(".", StringComparison.Ordinal);
-                
+
                 decimalCount = index == -1 ? 0 : str.Length - (index + 1);
             }
 
-            return new []
+            return new[]
             {
                 Math.Round(Value1.Value, decimalCount, MidpointRounding.AwayFromZero),
                 Math.Round(Value2.Value, decimalCount, MidpointRounding.AwayFromZero)

@@ -7,7 +7,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         public TerrainMirrorSettingsViewModel(SettingsController controller)
             : base("TERRAIN MIRRORS", OptionCategory.TerrainMirror, controller)
         {
-
         }
     }
 }

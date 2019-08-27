@@ -7,17 +7,17 @@ namespace DCS.Alternative.Launcher.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static FrameworkElement AcrylicSource
-        {
-            get;
-            private set;
-        }
-
         public MainWindow()
         {
             InitializeComponent();
 
-            AcrylicSource = this.BackgroundImage;
+            AcrylicSource = BackgroundImage;
+        }
+
+        public static FrameworkElement AcrylicSource
+        {
+            get;
+            private set;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

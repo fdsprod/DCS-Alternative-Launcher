@@ -21,6 +21,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             });
         }
 
+        public ReactiveProperty<T> Value
+        {
+            get;
+            set;
+        } = new ReactiveProperty<T>(mode: ReactivePropertyMode.DistinctUntilChanged);
+
         protected IDisposable SuspendValueChangeNotification()
         {
             _isValueChangeSuspended = true;
@@ -31,11 +37,5 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
         {
             return value;
         }
-
-        public ReactiveProperty<T> Value
-        {
-            get;
-            set;
-        } = new ReactiveProperty<T>(mode: ReactivePropertyMode.DistinctUntilChanged);
     }
 }

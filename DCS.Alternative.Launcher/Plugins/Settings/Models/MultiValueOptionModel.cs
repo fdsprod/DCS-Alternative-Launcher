@@ -29,6 +29,4 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             }
         }
     }
-
-    
 }

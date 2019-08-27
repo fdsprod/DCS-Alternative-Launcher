@@ -12,6 +12,7 @@ namespace DCS.Alternative.Launcher.Data
             get;
             set;
         }
+
         public Thickness FalseThickness
         {
             get;

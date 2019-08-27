@@ -5,7 +5,7 @@
         void SetCustomDimension(int key, string value);
 
         ITrackerBatch CreateBatch();
-        
+
         void SendScreenView(string screenName);
 
         void SendEvent(string category, string action, string label = "", int? value = null);

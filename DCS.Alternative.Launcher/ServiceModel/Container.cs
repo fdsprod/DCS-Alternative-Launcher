@@ -3,7 +3,6 @@
 #define UNBOUND_GENERICS_GETCONSTRUCTORS
 #define GETPARAMETERS_OPEN_GENERICS
 #define RESOLVE_OPEN_GENERICS
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +43,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
         /// <summary>
         ///     Lazy created Singleton instance of the container for simple scenarios
         /// </summary>
-        public static Container Current { get; } = new Container();
+        public static Container Current
+        {
+            get;
+        } = new Container();
 
         public Container GetChildContainer()
         {
@@ -2454,52 +2456,41 @@ namespace DCS.Alternative.Launcher.ServiceModel
             /// </summary>
             public virtual bool AssumeConstruction
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             /// <summary>
             ///     The type the factory instantiates
             /// </summary>
-            public abstract Type CreatesType { get; }
+            public abstract Type CreatesType
+            {
+                get;
+            }
 
             /// <summary>
             ///     Constructor to use, if specified
             /// </summary>
-            public ConstructorInfo Constructor { get; protected set; }
+            public ConstructorInfo Constructor
+            {
+                get;
+                protected set;
+            }
 
             public virtual ObjectFactoryBase SingletonVariant
             {
-                get
-                {
-                    throw new IoCRegistrationException(GetType(), "singleton");
-                }
+                get { throw new IoCRegistrationException(GetType(), "singleton"); }
             }
-
             public virtual ObjectFactoryBase MultiInstanceVariant
             {
-                get
-                {
-                    throw new IoCRegistrationException(GetType(), "multi-instance");
-                }
+                get { throw new IoCRegistrationException(GetType(), "multi-instance"); }
             }
-
             public virtual ObjectFactoryBase StrongReferenceVariant
             {
-                get
-                {
-                    throw new IoCRegistrationException(GetType(), "strong reference");
-                }
+                get { throw new IoCRegistrationException(GetType(), "strong reference"); }
             }
-
             public virtual ObjectFactoryBase WeakReferenceVariant
             {
-                get
-                {
-                    throw new IoCRegistrationException(GetType(), "weak reference");
-                }
+                get { throw new IoCRegistrationException(GetType(), "weak reference"); }
             }
 
             /// <summary>
@@ -2556,26 +2547,15 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override Type CreatesType
             {
-                get
-                {
-                    return registerImplementation;
-                }
+                get { return registerImplementation; }
             }
-
             public override ObjectFactoryBase SingletonVariant
             {
-                get
-                {
-                    return new SingletonFactory(registerType, registerImplementation);
-                }
+                get { return new SingletonFactory(registerType, registerImplementation); }
             }
-
             public override ObjectFactoryBase MultiInstanceVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             public override object GetObject(Type requestedType, Container container,
@@ -2622,34 +2602,19 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override bool AssumeConstruction
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
-
             public override Type CreatesType
             {
-                get
-                {
-                    return registerType;
-                }
+                get { return registerType; }
             }
-
             public override ObjectFactoryBase WeakReferenceVariant
             {
-                get
-                {
-                    return new WeakDelegateFactory(registerType, _factory);
-                }
+                get { return new WeakDelegateFactory(registerType, _factory); }
             }
-
             public override ObjectFactoryBase StrongReferenceVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             public override object GetObject(Type requestedType, Container container,
@@ -2695,20 +2660,12 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override bool AssumeConstruction
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
-
             public override Type CreatesType
             {
-                get
-                {
-                    return registerType;
-                }
+                get { return registerType; }
             }
-
             public override ObjectFactoryBase StrongReferenceVariant
             {
                 get
@@ -2723,13 +2680,9 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     return new DelegateFactory(registerType, factory);
                 }
             }
-
             public override ObjectFactoryBase WeakReferenceVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             public override object GetObject(Type requestedType, Container container,
@@ -2782,42 +2735,23 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override bool AssumeConstruction
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
-
             public override Type CreatesType
             {
-                get
-                {
-                    return registerImplementation;
-                }
+                get { return registerImplementation; }
             }
-
             public override ObjectFactoryBase MultiInstanceVariant
             {
-                get
-                {
-                    return new MultiInstanceFactory(registerType, registerImplementation);
-                }
+                get { return new MultiInstanceFactory(registerType, registerImplementation); }
             }
-
             public override ObjectFactoryBase WeakReferenceVariant
             {
-                get
-                {
-                    return new WeakInstanceFactory(registerType, registerImplementation, _instance);
-                }
+                get { return new WeakInstanceFactory(registerType, registerImplementation, _instance); }
             }
-
             public override ObjectFactoryBase StrongReferenceVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             public void Dispose()
@@ -2867,28 +2801,16 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override Type CreatesType
             {
-                get
-                {
-                    return registerImplementation;
-                }
+                get { return registerImplementation; }
             }
-
             public override ObjectFactoryBase MultiInstanceVariant
             {
-                get
-                {
-                    return new MultiInstanceFactory(registerType, registerImplementation);
-                }
+                get { return new MultiInstanceFactory(registerType, registerImplementation); }
             }
-
             public override ObjectFactoryBase WeakReferenceVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
-
             public override ObjectFactoryBase StrongReferenceVariant
             {
                 get
@@ -2962,26 +2884,15 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override Type CreatesType
             {
-                get
-                {
-                    return registerImplementation;
-                }
+                get { return registerImplementation; }
             }
-
             public override ObjectFactoryBase SingletonVariant
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
-
             public override ObjectFactoryBase MultiInstanceVariant
             {
-                get
-                {
-                    return new MultiInstanceFactory(registerType, registerImplementation);
-                }
+                get { return new MultiInstanceFactory(registerType, registerImplementation); }
             }
 
             public void Dispose()
@@ -3071,12 +2982,8 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
             public override Type CreatesType
             {
-                get
-                {
-                    return registerImplementation;
-                }
+                get { return registerImplementation; }
             }
-
             public override ObjectFactoryBase SingletonVariant
             {
                 get
@@ -3085,7 +2992,6 @@ namespace DCS.Alternative.Launcher.ServiceModel
                     return new SingletonFactory(registerType, registerImplementation);
                 }
             }
-
             public override ObjectFactoryBase MultiInstanceVariant
             {
                 get
@@ -3153,9 +3059,15 @@ namespace DCS.Alternative.Launcher.ServiceModel
                 _hashCode = string.Concat(Type.FullName, "|", Name).GetHashCode();
             }
 
-            public Type Type { get; }
+            public Type Type
+            {
+                get;
+            }
 
-            public string Name { get; }
+            public string Name
+            {
+                get;
+            }
 
             public override bool Equals(object obj)
             {

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Modules;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reactive.Bindings;
@@ -18,6 +15,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
     internal class SettingsService : ISettingsService
     {
         private static readonly object _syncRoot = new object();
+
         private static readonly string[] _optionsCategories =
         {
             OptionCategory.TerrainReflection,
@@ -29,15 +27,14 @@ namespace DCS.Alternative.Launcher.Services.Settings
             OptionCategory.Sound
         };
 
-        private InstallLocation _selectedInstall;
-        private List<InstallLocation> _installationCache;
+        private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
         private Dictionary<string, Option[]> _advancedOptionCache;
         private DcsOptionsCategory[] _dcsOptions;
+        private List<InstallLocation> _installationCache;
+        private InstallLocation _selectedInstall;
 
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
-
-        private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
 
         public SettingsService()
         {
@@ -59,10 +56,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public InstallLocation SelectedInstall
         {
-            get
-            {
-                return _selectedInstall;
-            }
+            get { return _selectedInstall; }
             set
             {
                 if (_selectedInstall != value)
@@ -75,7 +69,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     }
                     else
                     {
-                        Tracer.Warn($"Selected Install set to (null)");
+                        Tracer.Warn("Selected Install set to (null)");
                     }
 
                     SetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, value.Directory);
@@ -118,11 +112,6 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return _dcsOptions;
         }
 
-        private string GetCategory(string id)
-        {
-            return _optionsCategories.First(id.Contains);
-        }
-
         public ModuleViewportTemplate[] GetViewportTemplates()
         {
             return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
@@ -137,7 +126,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
             var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
-            
+
             viewport = mv?.Viewports.FirstOrDefault(v => v.ViewportName == viewport.ViewportName);
 
             mv?.Viewports.Remove(viewport);
@@ -154,7 +143,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             {
                 mv = new ModuleViewportTemplate
                 {
-                    TemplateName = name, 
+                    TemplateName = name,
                     ModuleId = moduleId
                 };
 
@@ -199,8 +188,8 @@ namespace DCS.Alternative.Launcher.Services.Settings
         public void RemoveInstalls(params string[] directories)
         {
             _installationCache.RemoveAll(i => directories.Contains(i.Directory));
-            
-            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i=>i.Directory).ToArray());
+
+            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i => i.Directory).ToArray());
         }
 
         public void AddInstalls(params string[] directories)
@@ -289,7 +278,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     return token.ToObject<T>();
                 }
 
-                return (T)result;
+                return (T) result;
             }
         }
 
@@ -387,6 +376,11 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return new AdditionalResource[0];
         }
 
+        private string GetCategory(string id)
+        {
+            return _optionsCategories.First(id.Contains);
+        }
+
         private void Save()
         {
             lock (_syncRoot)
@@ -401,7 +395,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 }
             }
         }
-        
+
         private void Load()
         {
             lock (_syncRoot)

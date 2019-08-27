@@ -31,7 +31,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
         private void UpdateValue(object value)
         {
-            Value.Value = (string)value;
+            Value.Value = (string) value;
         }
     }
 }

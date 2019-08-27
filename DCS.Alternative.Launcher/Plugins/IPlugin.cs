@@ -4,7 +4,10 @@ namespace DCS.Alternative.Launcher.Plugins
 {
     public interface IPlugin
     {
-        string Name { get; }
+        string Name
+        {
+            get;
+        }
 
         int LoadOrder
         {

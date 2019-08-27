@@ -77,21 +77,27 @@
                                         <VisualState x:Name="Normal" />
                                         <VisualState x:Name="MouseOver">
                                             <Storyboard>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <DoubleAnimationUsingKeyFrames
+                                                    Storyboard.TargetName="PART_BackgroundOverlay"
+                                                    Storyboard.TargetProperty="(UIElement.Opacity)">
                                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="0.2" />
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="Pressed">
                                             <Storyboard>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <DoubleAnimationUsingKeyFrames
+                                                    Storyboard.TargetName="PART_BackgroundOverlay"
+                                                    Storyboard.TargetProperty="(UIElement.Opacity)">
                                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="0.4" />
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="Disabled">
                                             <Storyboard>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundOverlay" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <DoubleAnimationUsingKeyFrames
+                                                    Storyboard.TargetName="PART_BackgroundOverlay"
+                                                    Storyboard.TargetProperty="(UIElement.Opacity)">
                                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="0.5" />
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -144,7 +150,8 @@
                 <Setter Property="Cursor" Value="Hand" />
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -291,19 +298,23 @@
                                        IsDirectionReversed="true"
                                        IsEnabled="{TemplateBinding IsMouseOver}">
                                     <Track.DecreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}" />
+                                        <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}"
+                                                      Style="{StaticResource VerticalScrollBarPageButton}" />
                                     </Track.DecreaseRepeatButton>
                                     <Track.IncreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}" />
+                                        <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}"
+                                                      Style="{StaticResource VerticalScrollBarPageButton}" />
                                     </Track.IncreaseRepeatButton>
                                     <Track.Thumb>
-                                        <Thumb themes:ScrollChrome.ScrollGlyph="VerticalGripper" Style="{StaticResource ScrollBarThumb}" />
+                                        <Thumb themes:ScrollChrome.ScrollGlyph="VerticalGripper"
+                                               Style="{StaticResource ScrollBarThumb}" />
                                     </Track.Thumb>
                                 </Track>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="false">
-                                    <Setter TargetName="Bg" Property="Background" Value="{StaticResource ScrollBarDisabledBackground}" />
+                                    <Setter TargetName="Bg" Property="Background"
+                                            Value="{StaticResource ScrollBarDisabledBackground}" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -326,19 +337,23 @@
                                                Grid.Column="1"
                                                IsEnabled="{TemplateBinding IsMouseOver}">
                                             <Track.DecreaseRepeatButton>
-                                                <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource HorizontalScrollBarPageButton}" />
+                                                <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}"
+                                                              Style="{StaticResource HorizontalScrollBarPageButton}" />
                                             </Track.DecreaseRepeatButton>
                                             <Track.IncreaseRepeatButton>
-                                                <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource HorizontalScrollBarPageButton}" />
+                                                <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}"
+                                                              Style="{StaticResource HorizontalScrollBarPageButton}" />
                                             </Track.IncreaseRepeatButton>
                                             <Track.Thumb>
-                                                <Thumb themes:ScrollChrome.ScrollGlyph="HorizontalGripper" Style="{StaticResource ScrollBarThumb}" />
+                                                <Thumb themes:ScrollChrome.ScrollGlyph="HorizontalGripper"
+                                                       Style="{StaticResource ScrollBarThumb}" />
                                             </Track.Thumb>
                                         </Track>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsEnabled" Value="false">
-                                            <Setter TargetName="Bg" Property="Background" Value="{StaticResource ScrollBarDisabledBackground}" />
+                                            <Setter TargetName="Bg" Property="Background"
+                                                    Value="{StaticResource ScrollBarDisabledBackground}" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

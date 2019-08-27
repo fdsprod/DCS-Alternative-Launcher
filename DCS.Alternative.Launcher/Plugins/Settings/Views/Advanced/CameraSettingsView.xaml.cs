@@ -3,7 +3,7 @@
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 {
     /// <summary>
-    /// Interaction logic for CameraSettingsView.xaml
+    ///     Interaction logic for CameraSettingsView.xaml
     /// </summary>
     public partial class CameraSettingsView : UserControl
     {

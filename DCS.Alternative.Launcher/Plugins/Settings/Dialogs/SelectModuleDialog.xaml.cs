@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Modules;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
@@ -13,20 +12,18 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
         public static readonly DependencyProperty ModulesProperty =
             DependencyProperty.Register("ModulesProperty", typeof(ReactiveCollection<Module>), typeof(SelectModuleDialog), new PropertyMetadata(new ReactiveCollection<Module>()));
 
-
         public SelectModuleDialog()
         {
             InitializeComponent();
 
             Modules = new ReactiveCollection<Module>();
         }
-        
+
         public Module SelectedModule
         {
             get { return (Module) GetValue(SelectedModuleProperty); }
             set { SetValue(SelectedModuleProperty, value); }
         }
-        
         public ReactiveCollection<Module> Modules
         {
             get { return (ReactiveCollection<Module>) GetValue(ModulesProperty); }

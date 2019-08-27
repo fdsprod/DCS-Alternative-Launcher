@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
@@ -17,7 +13,7 @@ namespace DCS.Alternative.Launcher.Controls
 
         private void OnDragDelta(object sender, DragDeltaEventArgs e)
         {
-            var designerItem = this.DataContext as Control;
+            var designerItem = DataContext as Control;
             var host = ItemsControl.ItemsControlFromItemContainer(designerItem);
 
             if (designerItem != null)

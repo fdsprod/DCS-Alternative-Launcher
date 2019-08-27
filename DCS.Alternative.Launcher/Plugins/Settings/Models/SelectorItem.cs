@@ -2,7 +2,16 @@
 {
     public class SelectorItem
     {
-        public string DisplayName { get; set; }
-        public object Value { get; set; }
+        public string DisplayName
+        {
+            get;
+            set;
+        }
+
+        public object Value
+        {
+            get;
+            set;
+        }
     }
 }

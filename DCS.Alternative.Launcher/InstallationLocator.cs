@@ -19,7 +19,10 @@ namespace DCS.Alternative.Launcher
                 };
         }
 
-        public static List<string> KnownInstallationRegistryKeys { get; }
+        public static List<string> KnownInstallationRegistryKeys
+        {
+            get;
+        }
 
         public static IEnumerable<InstallLocation> Locate()
         {

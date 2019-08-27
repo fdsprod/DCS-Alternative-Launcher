@@ -8,22 +8,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=60&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"AJS37": [
@@ -35,22 +39,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=431&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"RAZBAM_AV8BNA": [
@@ -62,22 +70,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=501&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"BF-109K4": [
@@ -89,22 +101,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=149&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"AVIODEV_C-101": [
@@ -116,22 +132,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=151&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"F-5E": [
@@ -143,22 +163,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=393&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"F-86F": [
@@ -170,22 +194,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=150&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"HEATBLUR_F-14": [
@@ -197,22 +225,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=545&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"FA-18C": [
@@ -224,22 +256,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=535&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"FW-190A8": [
@@ -258,22 +294,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=148&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"I-16": [
@@ -285,22 +325,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=560&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"KA-50": [
@@ -312,22 +356,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=31&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"L-39": [
@@ -339,22 +387,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=247&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"RAZBAM_M-2000C": [
@@ -366,22 +418,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=313&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"MI-8MTV2": [
@@ -393,22 +449,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=93&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"MIG-15BIS": [
@@ -420,22 +480,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=153&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"RAZBAM_MIG19P": [
@@ -447,22 +511,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=543&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"MIG-21BIS": [
@@ -474,22 +542,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=154&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"P-51D": [
@@ -501,22 +573,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=85&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"POLYCHOPSIM_SA342": [
@@ -528,22 +604,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=376&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"SPITFIRE-MKIX": [
@@ -555,22 +635,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=430&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"UH-1H": [
@@ -582,22 +666,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=90&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	],
 	"YAK-52": [
@@ -609,22 +697,26 @@
 		{
 			"Name": "Single Player Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Multiplayer Missions",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=2&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Campaigns",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=3&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		},
 		{
 			"Name": "Liveries",
 			"IconPath": "/Resources/Icons/external-link.png",
-			"Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
+			"Url":
+				"https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=6&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=537&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
 		}
 	]
 }

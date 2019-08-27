@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -24,7 +23,7 @@ namespace DCS.Alternative.Launcher.Data
         {
             if (value is bool)
             {
-                return (bool)value ? TrueString : FalseString;
+                return (bool) value ? TrueString : FalseString;
             }
 
             return DependencyProperty.UnsetValue;

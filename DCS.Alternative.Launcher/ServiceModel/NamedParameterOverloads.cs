@@ -16,7 +16,10 @@ namespace DCS.Alternative.Launcher.ServiceModel
         {
         }
 
-        public static NamedParameterOverloads Default { get; } = new NamedParameterOverloads();
+        public static NamedParameterOverloads Default
+        {
+            get;
+        } = new NamedParameterOverloads();
 
         public static NamedParameterOverloads FromIDictionary(IDictionary<string, object> data)
         {

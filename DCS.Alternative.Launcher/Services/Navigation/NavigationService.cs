@@ -20,7 +20,6 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             _frame = frame;
         }
 
-
         public async Task<bool> NavigateAsync(Type viewType, INavigationAware viewModel)
         {
             Tracer.Info($"Trying to navigate to {viewType.FullName}.");
@@ -30,7 +29,7 @@ namespace DCS.Alternative.Launcher.Services.Navigation
 
             if (!success)
             {
-                Tracer.Info($"Navigation failed.");
+                Tracer.Info("Navigation failed.");
                 return false;
             }
 
@@ -216,7 +215,10 @@ namespace DCS.Alternative.Launcher.Services.Navigation
                 beginAction?.Invoke();
             }
 
-            public override Task<object> Task => _tcs.Task;
+            public override Task<object> Task
+            {
+                get { return _tcs.Task; }
+            }
 
             private void EventCompleted(object sender, NavigatedEventArgs args)
             {

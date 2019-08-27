@@ -7,7 +7,7 @@
             get;
             set;
         }
-        
+
         public int DisplayWidth
         {
             get;
@@ -19,6 +19,5 @@
             get;
             set;
         }
-
     }
 }

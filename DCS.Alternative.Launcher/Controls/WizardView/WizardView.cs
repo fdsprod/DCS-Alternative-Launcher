@@ -64,67 +64,56 @@ namespace DCS.Alternative.Launcher.Controls
             get { return (Storyboard) GetValue(EnterTransitionNextProperty); }
             set { SetValue(EnterTransitionNextProperty, value); }
         }
-
         public Storyboard ExitTransitionNext
         {
             get { return (Storyboard) GetValue(ExitTransitionNextProperty); }
             set { SetValue(ExitTransitionNextProperty, value); }
         }
-
         public Storyboard EnterTransitionBack
         {
             get { return (Storyboard) GetValue(EnterTransitionBackProperty); }
             set { SetValue(EnterTransitionBackProperty, value); }
         }
-
         public Storyboard ExitTransitionBack
         {
             get { return (Storyboard) GetValue(ExitTransitionBackProperty); }
             set { SetValue(ExitTransitionBackProperty, value); }
         }
-
         public bool IsBackEnabled
         {
             get { return (bool) GetValue(IsBackEnabledProperty); }
             set { SetValue(IsBackEnabledProperty, value); }
         }
-
         public bool IsNextEnabled
         {
             get { return (bool) GetValue(IsNextEnabledProperty); }
             set { SetValue(IsNextEnabledProperty, value); }
         }
-
         public object CurrentStep
         {
             get { return GetValue(CurrentStepProperty); }
             set { SetValue(CurrentStepProperty, value); }
         }
-
         public WizardController Controller
         {
             get { return GetValue(ControllerProperty) as WizardController; }
             set { SetValue(ControllerProperty, value); }
         }
-
         public object NextButtonContent
         {
             get { return GetValue(NextButtonContentProperty); }
             set { SetValue(NextButtonContentProperty, value); }
         }
-
         public Visibility BackButtonVisibility
         {
             get { return (Visibility) GetValue(BackButtonVisibilityProperty); }
             set { SetValue(BackButtonVisibilityProperty, value); }
         }
-
         public Visibility NextButtonVisibility
         {
             get { return (Visibility) GetValue(NextButtonVisibilityProperty); }
             set { SetValue(NextButtonVisibilityProperty, value); }
         }
-
         public object BackButtonContent
         {
             get { return GetValue(BackButtonContentProperty); }

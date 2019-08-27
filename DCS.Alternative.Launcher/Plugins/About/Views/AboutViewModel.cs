@@ -11,8 +11,8 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 {
     public class AboutViewModel : NavigationAwareBase
     {
-        private readonly AboutController _controller;
         private readonly IAutoUpdateService _autoUpdateService;
+        private readonly AboutController _controller;
 
         public AboutViewModel(IContainer container)
         {

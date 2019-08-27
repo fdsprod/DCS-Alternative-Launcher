@@ -12,10 +12,6 @@ namespace DCS.Alternative.Launcher.Data
     {
         private static RectangleHeightToRadiusConverter _instance;
 
-        static RectangleHeightToRadiusConverter()
-        {
-        }
-
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return _instance ?? (_instance = new RectangleHeightToRadiusConverter());

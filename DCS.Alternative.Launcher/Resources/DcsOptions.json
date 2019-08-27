@@ -24,7 +24,7 @@
 						"max": 2.5
 					}
 				],
-				
+
 			},
 			{
 				"id": "use_mouse",
@@ -32,7 +32,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "box_mouse_cursor",
@@ -61,9 +61,10 @@
 				"value": "63.5",
 				"minMax": [
 					{
-						"min":  1,
-						"max":  5
-					}],
+						"min": 1,
+						"max": 5
+					}
+				],
 			},
 			{
 				"id": "prefer_built_in_audio",
@@ -71,7 +72,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 		]
 	},
@@ -85,7 +86,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			/*  //I believe these are MAC options
 			{
@@ -121,7 +122,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "birds",
@@ -137,7 +138,7 @@
 						"max": 1000
 					}
 				],
-				
+
 			},
 			{
 				"id": "cockpitStatusBarAllowed",
@@ -145,7 +146,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "cockpitVisualRM",
@@ -153,7 +154,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			/*  //I believe these are MAC options
 			{
@@ -178,7 +179,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "easyFlight",
@@ -186,7 +187,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			/*
 			{
@@ -211,7 +212,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "geffect",
@@ -233,7 +234,7 @@
 						}
 					]
 				},
-				
+
 			},
 			{
 				"id": "hideStick",
@@ -241,7 +242,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "iconsTheme",
@@ -257,9 +258,10 @@
 							"DisplayName": "Russian",
 							"Value": "russian"
 						}
-					]},
+					]
+				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "immortal",
@@ -267,7 +269,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "labels",
@@ -294,8 +296,8 @@
 					]
 				},
 				"minMax": [],
-				
-			},/* // Unknown
+
+			}, /* // Unknown
 			{
 				"id": "map",
 				"displayName": "Allow Map",
@@ -310,7 +312,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "optionsView",
@@ -338,9 +340,10 @@
 							"DisplayName": "Allies Only",
 							"Value": "optview_onlyallies"
 						}
-					]},
+					]
+				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "padlock",
@@ -348,7 +351,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "permitCrash",
@@ -356,7 +359,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "radio",
@@ -364,7 +367,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "reports",
@@ -372,7 +375,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "setGlobal",
@@ -380,8 +383,8 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
-			},/*
+
+			}, /*
 			{
 				"id": "spectatorExternalViews",
 				"displayName": "Spectatorexternalviews",
@@ -396,7 +399,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "units",
@@ -415,7 +418,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "userMarks",
@@ -423,7 +426,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "userSnapView",
@@ -431,7 +434,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "wakeTurbulence",
@@ -439,7 +442,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "weapons",
@@ -447,7 +450,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			}
 		]
 	},
@@ -806,7 +809,7 @@
 						"Max": 1
 					}
 				],
-				
+
 			},
 			{
 				"id": "preloadRadius",
@@ -822,7 +825,7 @@
 						"Max": 150000
 					}
 				],
-				
+
 			},
 			{
 				"id": "chimneySmokeDensity",
@@ -838,7 +841,7 @@
 						"Max": 10
 					}
 				],
-				
+
 			},
 			{
 				"id": "outputGamma",
@@ -854,7 +857,7 @@
 						"Max": 3.5
 					}
 				],
-				
+
 			},
 			{
 				"id": "messagesFontScale",
@@ -870,8 +873,8 @@
 						"Max": 2
 					}
 				],
-				
-			},/*
+
+			}, /*
 			{
 				"id": "SSAO",
 				"displayName": "Ssao",
@@ -928,7 +931,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "flatTerrainShadows",
@@ -951,7 +954,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "cockpitGI",
@@ -970,8 +973,8 @@
 					]
 				},
 				"minMax": [],
-				
-			},/*
+
+			}, /*
 			{
 				"id": "aspect",
 				"displayName": "Aspect Ratio",
@@ -1002,7 +1005,7 @@
 				},
 				"minMax": [],
 				
-			},*//*
+			},*/ /*
 			{
 				"id": "clouds",
 				"displayName": "Clouds",
@@ -1026,7 +1029,7 @@
 					}
 				],
 				
-			},*//*
+			},*/ /*
 			{
 				"id": "height",
 				"displayName": "Height",
@@ -1057,7 +1060,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "sync",
@@ -1065,7 +1068,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "fullScreen",
@@ -1073,7 +1076,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "scaleGui",
@@ -1081,8 +1084,8 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
-			},/*
+
+			}, /*
 			{
 				"id": "shadowTree",
 				"displayName": "Tree Self-Shadow?",
@@ -1150,7 +1153,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "F2_view_effects",
@@ -1173,7 +1176,7 @@
 					]
 				},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "TrackIR_external_views",
@@ -1181,7 +1184,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "accidental_failures",
@@ -1189,7 +1192,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "allow_server_screenshots",
@@ -1197,7 +1200,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "autologin",
@@ -1205,7 +1208,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "chat_window_at_start",
@@ -1213,7 +1216,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "collect_stat",
@@ -1221,7 +1224,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "f10_awacs",
@@ -1229,7 +1232,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "f11_free_camera",
@@ -1237,7 +1240,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "f5_nearest_ac",
@@ -1245,7 +1248,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "force_feedback_enabled",
@@ -1253,7 +1256,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "headmove",
@@ -1261,7 +1264,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "show_pilot_body",
@@ -1269,7 +1272,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "synchronize_controls",
@@ -1277,7 +1280,7 @@
 				"value": false,
 				"Params": {},
 				"minMax": [],
-				
+
 			}
 		]
 	},
@@ -1314,7 +1317,7 @@
 						"Max": 100
 					}
 				],
-				
+
 			},
 			{
 				"id": "world",
@@ -1345,7 +1348,7 @@
 						"Max": 100
 					}
 				],
-				
+
 			},
 			{
 				"id": "headphones",
@@ -1361,7 +1364,7 @@
 						"Max": 100
 					}
 				],
-				
+
 			},
 			{
 				"id": "music",
@@ -1391,7 +1394,7 @@
 				"value": true,
 				"Params": {},
 				"minMax": [],
-				
+
 			},
 			{
 				"id": "radioSpeech",

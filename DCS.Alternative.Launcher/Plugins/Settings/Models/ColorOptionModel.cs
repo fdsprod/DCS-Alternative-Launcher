@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using System.Reactive.Disposables;
 using System.Windows.Media;
 using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json.Linq;

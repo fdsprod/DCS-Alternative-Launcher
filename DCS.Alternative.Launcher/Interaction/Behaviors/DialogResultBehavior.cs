@@ -16,7 +16,6 @@ namespace DCS.Alternative.Launcher.Interaction.Behaviors
             get { return (bool) GetValue(IsDialogProperty); }
             set { SetValue(IsDialogProperty, value); }
         }
-
         public bool? Value
         {
             get { return (bool?) GetValue(ValueProperty); }

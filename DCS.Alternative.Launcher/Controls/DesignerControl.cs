@@ -1,14 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DCS.Alternative.Launcher.Controls;
 
 namespace DCS.Alternative.Launcher.Controls
 {
@@ -18,7 +9,6 @@ namespace DCS.Alternative.Launcher.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DesignerControl), new FrameworkPropertyMetadata(typeof(DesignerControl)));
         }
-
 
         protected override void ClearContainerForItemOverride(DependencyObject element, object item)
         {

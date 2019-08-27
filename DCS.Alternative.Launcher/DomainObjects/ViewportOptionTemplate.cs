@@ -4,12 +4,14 @@
     {
         public string FilePath
         {
-            get; set;
+            get;
+            set;
         }
 
         public string Regex
         {
-            get; set;
+            get;
+            set;
         }
     }
 }

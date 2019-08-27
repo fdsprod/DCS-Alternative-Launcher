@@ -7,12 +7,10 @@ namespace DCS.Alternative.Launcher.Controls
     {
         private static Dispatcher _current;
         private static Application _application;
-
         public static Dispatcher Current
         {
             get { return _current ?? (_current = Application.Dispatcher); }
         }
-
         public static Application Application
         {
             get { return _application ?? (_application = Application.Current) ?? (_application = new Application()); }

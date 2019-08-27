@@ -13,8 +13,10 @@ namespace DCS.Alternative.Launcher
     {
         private const string Kernel32_DllName = "kernel32.dll";
         private static readonly Stack<ConsoleColor> _consoleColors = new Stack<ConsoleColor>();
-
-        public static bool HasConsole => GetConsoleWindow() != IntPtr.Zero;
+        public static bool HasConsole
+        {
+            get { return GetConsoleWindow() != IntPtr.Zero; }
+        }
 
         public static void PushColor(ConsoleColor color)
         {

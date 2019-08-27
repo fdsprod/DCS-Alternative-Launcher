@@ -7,13 +7,11 @@ using System.Windows;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
-using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Navigation;
-using DCS.Alternative.Launcher.Services.Settings;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Game.Views
@@ -21,9 +19,9 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
     public class GameViewModel : NavigationAwareBase
     {
         private readonly IContainer _container;
+        private readonly GameController _controller;
         private readonly IDcsWorldService _dcsWorldService;
         private readonly ISettingsService _settingsService;
-        private readonly GameController _controller;
 
         public GameViewModel(IContainer container)
         {
@@ -41,7 +39,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                             IsLoading.AsObservable().Merge(
                                 FailedVersionCheck.AsObservable()))).Select(_ => IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value && !FailedVersionCheck.Value)
                     .ToReactiveProperty();
-            
+
             SelectInstallCommand.Subscribe(OnSelectInstall);
             UpdateDcsCommand.Subscribe(OnUpdateDcs);
             RepairDcsCommand.Subscribe(OnRepairDcs);
@@ -136,7 +134,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             get;
         } = new ReactiveProperty<string>();
-        
+
         public ReactiveProperty<NewsArticleModel> LatestNewsArticle
         {
             get;
@@ -152,7 +150,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             get;
         } = new ReactiveCommand<NewsArticleModel>();
 
-
         private void OnSelectInstall(InstallLocation install)
         {
             SelectedInstall.Value = install;
@@ -162,6 +159,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             Process.Start(model.Url.Value);
         }
+
         private async void OnCheckForUpdates()
         {
             try
@@ -191,8 +189,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     var variant = install.Variant;
 
                     IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
-                    PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" :"PLAY";
-                    DcsVersion.Value = IsDcsOutOfDate.Value ? "DCS WORLD IS OUT OF DATE" : $"DCS WORLD IS UP TO DATE";
+                    PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" : "PLAY";
+                    DcsVersion.Value = IsDcsOutOfDate.Value ? "DCS WORLD IS OUT OF DATE" : "DCS WORLD IS UP TO DATE";
                 }
                 catch (Exception e)
                 {
@@ -228,13 +226,13 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             Task.Run(async () =>
 #pragma warning restore 4014
             {
-                    IsLoading.Value = true;
+                IsLoading.Value = true;
 
-                    await Task.WhenAll(
-                        SafeAsync.RunAsync(FetchNewsAsync),
-                        SafeAsync.RunAsync(FetchLatestYouTubeAsync));
+                await Task.WhenAll(
+                    SafeAsync.RunAsync(FetchNewsAsync),
+                    SafeAsync.RunAsync(FetchLatestYouTubeAsync));
 
-                    IsLoading.Value = false;
+                IsLoading.Value = false;
 
                 await CheckForUpdatesAsync();
             });
@@ -301,7 +299,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 window.WindowState = WindowState.Normal;
             }
         }
-    
+
         private async void OnRepairDcs()
         {
             var window = Application.Current.MainWindow;

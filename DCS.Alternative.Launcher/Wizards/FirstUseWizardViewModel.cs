@@ -4,6 +4,7 @@ using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Wizards.Steps;
 using Reactive.Bindings;
+using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Wizards
 {
@@ -24,7 +25,7 @@ namespace DCS.Alternative.Launcher.Wizards
             {
                 Controller.Steps.Add(new InstallationsWizardStepViewModel(container));
 
-                if (WpfScreenHelper.Screen.AllScreens.Count() > 1)
+                if (Screen.AllScreens.Count() > 1)
                 {
                     Controller.Steps.Add(new QueryViewportSetupWizardStepViewModel(container));
                 }

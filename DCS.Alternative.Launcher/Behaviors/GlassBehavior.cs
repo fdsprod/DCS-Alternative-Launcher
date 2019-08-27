@@ -40,14 +40,13 @@ namespace DCS.Alternative.Launcher.Behaviors
 
         public Visual Visual
         {
-            get => (Visual) GetValue(VisualProperty);
-            set => SetValue(VisualProperty, value);
+            get { return (Visual) GetValue(VisualProperty); }
+            set { SetValue(VisualProperty, value); }
         }
-
         public Effect Effect
         {
-            get => (Effect) GetValue(EffectProperty);
-            set => SetValue(EffectProperty, value);
+            get { return (Effect) GetValue(EffectProperty); }
+            set { SetValue(EffectProperty, value); }
         }
 
         private static void OnVisualChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

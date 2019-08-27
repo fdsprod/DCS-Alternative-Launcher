@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,7 +8,6 @@ using System.Windows.Media.Animation;
 
 namespace DCS.Alternative.Launcher.Controls
 {
-
     [ContentProperty("Content")]
     [TemplatePart(Name = PART_Content1, Type = typeof(ContentControl))]
     [TemplatePart(Name = PART_Content2, Type = typeof(ContentControl))]
@@ -33,12 +28,12 @@ namespace DCS.Alternative.Launcher.Controls
         public static readonly DependencyProperty ExitTransitionFactoryProperty =
             DependencyProperty.Register("ExitTransitionFactory", typeof(Func<object, Storyboard>), typeof(TransitionControl), new PropertyMetadata(default(Func<object, Storyboard>)));
 
+        private Grid _transitionContainer;
+
         static TransitionControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(typeof(TransitionControl)));
         }
-
-        private Grid _transitionContainer;
 
         private ContentControl LastChild
         {
@@ -57,28 +52,24 @@ namespace DCS.Alternative.Launcher.Controls
                 return _transitionContainer.Children[_transitionContainer.Children.Count - 1] as ContentControl;
             }
         }
-
         public Func<object, Storyboard> ExitTransitionFactory
         {
-            get { return (Func<object, Storyboard>)GetValue(ExitTransitionFactoryProperty); }
+            get { return (Func<object, Storyboard>) GetValue(ExitTransitionFactoryProperty); }
             set { SetValue(ExitTransitionFactoryProperty, value); }
         }
-
         public Func<object, Storyboard> EnterTransitionFactory
         {
-            get { return (Func<object, Storyboard>)GetValue(EnterTransitionFactoryProperty); }
+            get { return (Func<object, Storyboard>) GetValue(EnterTransitionFactoryProperty); }
             set { SetValue(EnterTransitionFactoryProperty, value); }
         }
-
         public Storyboard EnterTransition
         {
-            get { return (Storyboard)GetValue(EnterTransitionProperty); }
+            get { return (Storyboard) GetValue(EnterTransitionProperty); }
             set { SetValue(EnterTransitionProperty, value); }
         }
-
         public Storyboard ExitTransition
         {
-            get { return (Storyboard)GetValue(ExitTransitionProperty); }
+            get { return (Storyboard) GetValue(ExitTransitionProperty); }
             set { SetValue(ExitTransitionProperty, value); }
         }
 
@@ -86,7 +77,7 @@ namespace DCS.Alternative.Launcher.Controls
         {
             base.OnApplyTemplate();
 
-            _transitionContainer = (Grid)GetTemplateChild("PART_TransitionContainer");
+            _transitionContainer = (Grid) GetTemplateChild("PART_TransitionContainer");
 
             var currentContentPresenter = LastChild;
             var nextContentPresenter = createNext(Content);
@@ -165,7 +156,7 @@ namespace DCS.Alternative.Launcher.Controls
 
             if (exitingContentPresenter != null)
             {
-                void onExitTransitionCompleted(object sender, System.EventArgs e)
+                void onExitTransitionCompleted(object sender, EventArgs e)
                 {
                     var storyboard = sender as Storyboard;
 

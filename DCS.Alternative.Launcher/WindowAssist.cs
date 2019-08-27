@@ -6,7 +6,7 @@ namespace DCS.Alternative.Launcher
 {
     public static class WindowAssist
     {
-        private static Dictionary<WeakReference<object>, WeakReference<Window>> _windowLookup = new Dictionary<WeakReference<object>, WeakReference<Window>>();
+        private static readonly Dictionary<WeakReference<object>, WeakReference<Window>> _windowLookup = new Dictionary<WeakReference<object>, WeakReference<Window>>();
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.RegisterAttached("ViewModel", typeof(object), typeof(WindowAssist), new PropertyMetadata(OnViewModelPropertyChanged));
@@ -28,7 +28,7 @@ namespace DCS.Alternative.Launcher
 
         public static object GetViewModel(Window window)
         {
-            return (object)window.GetValue(ViewModelProperty);
+            return window.GetValue(ViewModelProperty);
         }
 
         public static void SetViewModel(Window window, object value)

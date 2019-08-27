@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
@@ -55,8 +53,8 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                     Tracer.Info("Downloading version file.");
 
                     var file = await SafeAsync.RunAsync(
-                            () => DownloadFileAsync("https://drive.google.com/open?id=1Njnp1Zy_Ed4hzQ5DVStTJG88BjvMLbpm", versionPath),
-                            e => { Tracer.Error("An error occured while trying to download the version file.", e); });
+                        () => DownloadFileAsync("https://drive.google.com/open?id=1Njnp1Zy_Ed4hzQ5DVStTJG88BjvMLbpm", versionPath),
+                        e => { Tracer.Error("An error occured while trying to download the version file.", e); });
 
                     if (!(file?.Exists ?? false))
                     {
@@ -202,12 +200,14 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
 
                 // Sometimes Drive returns an NID cookie instead of a download_warning cookie at first attempt,
                 // but works in the second attempt
-                for (int i = 0; i < 2; i++)
+                for (var i = 0; i < 2; i++)
                 {
                     downloadedFile = await DownloadFileAsync(url, path, webClient);
 
                     if (downloadedFile == null)
+                    {
                         return null;
+                    }
 
                     // Confirmation page is around 50KB, shouldn't be larger than 60KB
                     if (downloadedFile.Length > 60000)
@@ -224,7 +224,7 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                         var header = new char[20];
                         var readCount = reader.ReadBlock(header, 0, 20);
 
-                        if (readCount < 20 || !(new string(header).Contains("<!DOCTYPE html>")))
+                        if (readCount < 20 || !new string(header).Contains("<!DOCTYPE html>"))
                         {
                             return downloadedFile;
                         }
@@ -232,7 +232,7 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                         content = reader.ReadToEnd();
                     }
 
-                    int linkIndex = content.LastIndexOf("href=\"/uc?");
+                    var linkIndex = content.LastIndexOf("href=\"/uc?");
                     if (linkIndex < 0)
                     {
                         return downloadedFile;
@@ -278,7 +278,7 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
             {
                 index = url.IndexOf("file/d/");
                 if (index < 0) // url is not in any of the supported forms
-                { 
+                {
                     return string.Empty;
                 }
 
@@ -326,38 +326,9 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
         // Web client used for Google Drive
         public class CookieAwareWebClient : WebClient
         {
-            private class CookieContainer
-            {
-                readonly Dictionary<string, string> _cookies;
+            private readonly CookieContainer cookies;
 
-                public string this[Uri url]
-                {
-                    get
-                    {
-                        string cookie;
-
-                        if (_cookies.TryGetValue(url.Host, out cookie))
-                        {
-                            return cookie;
-                        }
-
-                        return null;
-                    }
-                    set
-                    {
-                        _cookies[url.Host] = value;
-                    }
-                }
-
-                public CookieContainer()
-                {
-                    _cookies = new Dictionary<string, string>();
-                }
-            }
-
-            private CookieContainer cookies;
-
-            public CookieAwareWebClient() : base()
+            public CookieAwareWebClient()
             {
                 cookies = new CookieContainer();
             }
@@ -386,9 +357,9 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
 
                 if (cookies != null && cookies.Length > 0)
                 {
-                    string cookie = "";
+                    var cookie = "";
 
-                    foreach (string c in cookies)
+                    foreach (var c in cookies)
                     {
                         cookie += c;
                     }
@@ -401,14 +372,14 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
 
             protected override WebResponse GetWebResponse(WebRequest request)
             {
-                var  response = base.GetWebResponse(request);
+                var response = base.GetWebResponse(request);
                 var cookies = response.Headers.GetValues("Set-Cookie");
 
                 if (cookies != null && cookies.Length > 0)
                 {
-                    string cookie = "";
+                    var cookie = "";
 
-                    foreach (string c in cookies)
+                    foreach (var c in cookies)
                     {
                         cookie += c;
                     }
@@ -417,6 +388,32 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                 }
 
                 return response;
+            }
+
+            private class CookieContainer
+            {
+                private readonly Dictionary<string, string> _cookies;
+
+                public CookieContainer()
+                {
+                    _cookies = new Dictionary<string, string>();
+                }
+
+                public string this[Uri url]
+                {
+                    get
+                    {
+                        string cookie;
+
+                        if (_cookies.TryGetValue(url.Host, out cookie))
+                        {
+                            return cookie;
+                        }
+
+                        return null;
+                    }
+                    set { _cookies[url.Host] = value; }
+                }
             }
         }
     }

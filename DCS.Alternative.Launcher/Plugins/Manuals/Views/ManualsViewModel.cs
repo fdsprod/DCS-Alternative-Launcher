@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Plugins.Game.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using Reactive.Bindings;
 
@@ -25,6 +24,26 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
             OpenDocumentCommand.Subscribe(OnOpenDocument);
             OpenUrlCommand.Subscribe(OnOpenUrl);
         }
+
+        public ReactiveCommand<FileModel> OpenDocumentCommand
+        {
+            get;
+        } = new ReactiveCommand<FileModel>();
+
+        public ReactiveCommand<string> OpenUrlCommand
+        {
+            get;
+        } = new ReactiveCommand<string>();
+
+        public ReactiveProperty<bool> IsLoading
+        {
+            get;
+        } = new ReactiveProperty<bool>();
+
+        public ReactiveCollection<ModuleDocumentModel> ModuleDocuments
+        {
+            get;
+        } = new ReactiveCollection<ModuleDocumentModel>();
 
         private void OnOpenUrl(string value)
         {
@@ -46,7 +65,7 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
                 {
                     var modules = await _controller.GetModulesAsync();
 
-                    foreach (var module in modules.GroupBy(m=>m.DocumentationPath).Select(g=>g.First()))
+                    foreach (var module in modules.GroupBy(m => m.DocumentationPath).Select(g => g.First()))
                     {
                         var model = new ModuleDocumentModel();
 
@@ -78,26 +97,6 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 
             await base.InitializeAsync();
         }
-        
-        public ReactiveCommand<FileModel> OpenDocumentCommand
-        {
-            get;
-        } = new ReactiveCommand<FileModel>();
-
-        public ReactiveCommand<string> OpenUrlCommand
-        {
-            get;
-        } = new ReactiveCommand<string>();
-
-        public ReactiveProperty<bool> IsLoading
-        {
-            get;
-        } = new ReactiveProperty<bool>();
-
-        public ReactiveCollection<ModuleDocumentModel> ModuleDocuments
-        {
-            get;
-        } = new ReactiveCollection<ModuleDocumentModel>();
     }
 
     public class ModuleDocumentModel
@@ -119,7 +118,7 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
         } = new List<AdditionalResource>();
     }
 
-    public class  FileModel
+    public class FileModel
     {
         public string Name
         {
@@ -132,6 +131,5 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
             get;
             set;
         }
-
     }
 }

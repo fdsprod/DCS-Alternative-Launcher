@@ -31,7 +31,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
         private void UpdateValue(object value)
         {
-            Value.Value = _isNumericOutput ? (long)value == 1 : (bool)value;
+            Value.Value = _isNumericOutput ? (long) value == 1 : (bool) value;
         }
     }
 }

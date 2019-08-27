@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows;
 using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 
@@ -9,7 +8,6 @@ namespace DCS.Alternative.Launcher.Diagnostics
     public class GeneralExceptionHandler
     {
         private static GeneralExceptionHandler _instance;
-
         public static GeneralExceptionHandler Instance
         {
             get { return _instance ?? (_instance = new GeneralExceptionHandler()); }

@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CefSharp;
 using CefSharp.Wpf;
@@ -24,8 +18,6 @@ using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Extensions;
-using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.Plugins;
 using DCS.Alternative.Launcher.Plugins.Game.Views;
@@ -40,7 +32,6 @@ using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
 using Newtonsoft.Json;
 using NLua;
-using Application = System.Windows.Application;
 using SplashScreen = DCS.Alternative.Launcher.Windows.SplashScreen;
 
 namespace DCS.Alternative.Launcher
@@ -50,20 +41,28 @@ namespace DCS.Alternative.Launcher
     /// </summary>
     public partial class App : Application
     {
+        private static readonly Regex _splitAtUpperRegex = new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
+        private IContainer _container;
+        private MainWindow _mainWindow;
+        private SplashScreen _splashScreen;
+
+        public App()
+        {
+            Startup += App_Startup;
+            Exit += App_Exit;
+            DispatcherUnhandledException += onDispatcherUnhandledException;
+
+            InitializeComponent();
+        }
+
         public static Version Version
         {
             get;
             private set;
         }
 
-        private static Regex _splitAtUpperRegex = new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
-
-        private IContainer _container;
-        private MainWindow _mainWindow;
-        private SplashScreen _splashScreen;
-
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             var assembly = Assembly.GetAssembly(typeof(App));
             var assemblyName = assembly.GetName();
@@ -93,7 +92,7 @@ namespace DCS.Alternative.Launcher
 
             var anonymousUserId = GetUserId();
 
-            if(anonymousUserId != Guid.Empty)
+            if (anonymousUserId != Guid.Empty)
             {
                 Tracker.Instance = new Tracker(
                     new TrackerConfig
@@ -111,17 +110,8 @@ namespace DCS.Alternative.Launcher
                 Tracker.Instance = new NullTracker();
             }
 
-            App app = new App();
+            var app = new App();
             app.Run();
-        }
-
-        public App()
-        {
-            Startup += App_Startup;
-            Exit += App_Exit;
-            DispatcherUnhandledException += onDispatcherUnhandledException;
-            
-            InitializeComponent();
         }
 
         private static Guid GetUserId()
@@ -152,7 +142,6 @@ namespace DCS.Alternative.Launcher
 
             return id;
         }
-
 
         private void onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -214,7 +203,7 @@ namespace DCS.Alternative.Launcher
 
         private void ShowTestWindow()
         {
-            TestWindow window = new TestWindow();
+            var window = new TestWindow();
             window.Show();
         }
 
@@ -227,13 +216,13 @@ namespace DCS.Alternative.Launcher
 
                 var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
 
-                lua["sendIt"] = new Action<LuaTable>((table) =>
+                lua["sendIt"] = new Action<LuaTable>(table =>
                 {
                     var options = new List<Option>();
                     RecursiveDump("options", table, options);
-                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c=>c=='.')).ThenBy(o=>o.Id), Formatting.Indented);
+                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
                 });
-                
+
                 lua.DoString($"sendIt(loadfile('{path}'));");
             }
         }
@@ -250,7 +239,7 @@ namespace DCS.Alternative.Launcher
                     id.Replace("options.graphics.", string.Empty)
                         .Replace("options.sound.", string.Empty)
                         .Replace("terrainreflection", "terrain_reflection")
-                    .Replace("terrainmirror", "terrain_mirror");
+                        .Replace("terrainmirror", "terrain_mirror");
 
                 displayName =
                     ti.ToTitleCase(
@@ -266,7 +255,7 @@ namespace DCS.Alternative.Launcher
 
                     if (firstKey is string)
                     {
-                        RecursiveDump(id, (LuaTable)table[key], options);
+                        RecursiveDump(id, (LuaTable) table[key], options);
                     }
                     else
                     {
@@ -368,8 +357,8 @@ namespace DCS.Alternative.Launcher
                 var plugin = (IPlugin) Activator.CreateInstance(type);
                 plugins.Add(plugin);
             }
-            
-            foreach (var plugin in plugins.OrderBy(plugin=>plugin.LoadOrder))
+
+            foreach (var plugin in plugins.OrderBy(plugin => plugin.LoadOrder))
             {
                 plugin.OnLoad(_container.GetChildContainer());
             }
@@ -387,7 +376,7 @@ namespace DCS.Alternative.Launcher
         {
             _splashScreen.Status = "Registering Services...";
             Tracer.Info("Registering Services.");
-            
+
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
             _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());

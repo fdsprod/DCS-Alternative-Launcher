@@ -3,7 +3,6 @@ using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
-
     public abstract class OptionModelBase
     {
         protected OptionModelBase(string id, string displayName, string description, Dictionary<string, object> @params)
@@ -11,13 +10,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             Id = id;
             DisplayName = displayName;
             Description = description;
-            Params = @params ?? new Dictionary<string, object>(); 
+            Params = @params ?? new Dictionary<string, object>();
         }
 
         public Dictionary<string, object> Params
         {
             get;
-        } 
+        }
 
         public string Description
         {

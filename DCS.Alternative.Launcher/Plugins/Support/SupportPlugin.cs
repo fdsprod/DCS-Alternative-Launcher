@@ -1,5 +1,4 @@
-﻿using DCS.Alternative.Launcher.Plugins.Manuals.Views;
-using DCS.Alternative.Launcher.Plugins.Support.Views;
+﻿using DCS.Alternative.Launcher.Plugins.Support.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
@@ -11,17 +10,14 @@ namespace DCS.Alternative.Launcher.Plugins.Support
         {
             get { return "Support Plugin"; }
         }
-
         public override int LoadOrder
         {
             get { return 3; }
         }
-
         public override string Author
         {
             get { return "Jabbers"; }
         }
-
         public override string SupportUrl
         {
             get { return "https://github.com/jeffboulanger/DCS-Alternative-Launcher"; }

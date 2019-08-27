@@ -4,22 +4,26 @@
     {
         public string ViewportName
         {
-            get; set;
+            get;
+            set;
         }
 
         public string RelativeInitFilePath
         {
-            get; set;
+            get;
+            set;
         }
 
         public int Width
         {
-            get; set;
+            get;
+            set;
         }
 
         public int Height
         {
-            get; set;
+            get;
+            set;
         }
     }
 }

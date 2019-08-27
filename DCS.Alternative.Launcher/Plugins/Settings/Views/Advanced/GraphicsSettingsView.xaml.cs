@@ -3,7 +3,7 @@
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 {
     /// <summary>
-    /// Interaction logic for GraphicsSettingsView.xaml
+    ///     Interaction logic for GraphicsSettingsView.xaml
     /// </summary>
     public partial class GraphicsSettingsView : UserControl
     {

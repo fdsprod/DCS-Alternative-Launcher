@@ -13,7 +13,6 @@ using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Models;
-using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.ServiceModel.Syndication;
 using HtmlAgilityPack;
@@ -93,7 +92,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 SA342FM = {}
                                 " + $"__DCS_VERSION__ = \"{install.Version}\"");
 
-
                         lua.DoString($"current_mod_path = \"{folder.Replace("\\", "\\\\")}\"");
 
                         var moduleId = string.Empty;
@@ -107,21 +105,21 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             }
 
                             moduleId = description["update_id"].ToString();
-                            skinsPath = ((LuaTable)((LuaTable)description["Skins"])[1])["dir"].ToString();
+                            skinsPath = ((LuaTable) ((LuaTable) description["Skins"])[1])["dir"].ToString();
                         });
 
                         lua["make_flyable"] = new Action<string, string, LuaTable, string>((displayName, b, c, d) =>
                         {
                             // For whatever reason ED decided the Hornet would have a stupid display name... 
                             // So, we get to add stupid code like this... 
-                            if (displayName.Contains("_hornet")) 
+                            if (displayName.Contains("_hornet"))
                             {
                                 displayName = displayName.Split('_')[0];
                             }
 
                             if (!string.IsNullOrEmpty(moduleId) && autoupdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
-                                var module = new Module()
+                                var module = new Module
                                 {
                                     ModuleId = moduleId,
                                     DisplayName = displayName,
@@ -157,7 +155,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             {
                 using (var client = new HttpClient())
                 {
-                    Tracer.Info($"Retrieving latest verions from http://updates.digitalcombatsimulator.com/");
+                    Tracer.Info("Retrieving latest verions from http://updates.digitalcombatsimulator.com/");
 
                     var html = await client.GetStringAsync("http://updates.digitalcombatsimulator.com/");
                     var doc = new HtmlDocument();
@@ -192,7 +190,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             return Task.Run(async () =>
             {
-                Tracer.Info($"Retrieving latest news from https://www.digitalcombatsimulator.com/en/news/");
+                Tracer.Info("Retrieving latest news from https://www.digitalcombatsimulator.com/en/news/");
 
                 var articles = new List<NewsArticleModel>();
 
@@ -237,55 +235,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-
         public Task<string> GetLatestYoutubeVideoUrlAsync()
         {
             return GetLatestYouTubeVideoAsync(
                 "https://www.youtube.com/feeds/videos.xml?channel_id=UCgJRhtnqA-67pKmQ3A2GsgA",
                 "https://www.youtube.com/feeds/videos.xml?channel_id=UCHa9LMylydkT0T3qSzAVrlw");
-        }
-
-        public Task<string> GetLatestWagsYoutubeVideoUrlAsync()
-        {
-            return GetLatestYouTubeVideoAsync();
-        }
-
-        private Task<string> GetLatestYouTubeVideoAsync(params string[] youtubeFeedUrls)
-        {
-            return Task.Run(async () =>
-            {
-                var syndicationItems = new List<SyndicationItem>();
-                var tasks = new List<Task<SyndicationFeed>>();
-
-                foreach (var url in youtubeFeedUrls)
-                {
-                    Tracer.Info($"Retrieving latest youtube videos from {url}");
-                    tasks.Add(SyndicationHelper.GetFeedAsync(url));
-                }
-
-                await Task.WhenAll(tasks);
-
-                foreach (var feed in tasks.Select(t => t.Result))
-                {
-                    syndicationItems.AddRange(feed.Items);
-                }
-
-                var ordered = syndicationItems.OrderByDescending(i => i.PublishDate);
-                var latestFeed = ordered.FirstOrDefault();
-
-                if (latestFeed == null)
-                {
-                    return string.Empty;
-                }
-
-                var link = latestFeed.Links[0].Uri.ToString();
-                var result = link.Replace("watch?v=", "embed/") + "?rel=0&disablekb=1&fs=0&modestbranding=1";
-
-                Tracer.Info($"Found video {link}");
-
-                return result;
-
-            });
         }
 
         public Task WriteOptionsAsync(bool isVr)
@@ -436,6 +390,48 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
+        public Task<string> GetLatestWagsYoutubeVideoUrlAsync()
+        {
+            return GetLatestYouTubeVideoAsync();
+        }
+
+        private Task<string> GetLatestYouTubeVideoAsync(params string[] youtubeFeedUrls)
+        {
+            return Task.Run(async () =>
+            {
+                var syndicationItems = new List<SyndicationItem>();
+                var tasks = new List<Task<SyndicationFeed>>();
+
+                foreach (var url in youtubeFeedUrls)
+                {
+                    Tracer.Info($"Retrieving latest youtube videos from {url}");
+                    tasks.Add(SyndicationHelper.GetFeedAsync(url));
+                }
+
+                await Task.WhenAll(tasks);
+
+                foreach (var feed in tasks.Select(t => t.Result))
+                {
+                    syndicationItems.AddRange(feed.Items);
+                }
+
+                var ordered = syndicationItems.OrderByDescending(i => i.PublishDate);
+                var latestFeed = ordered.FirstOrDefault();
+
+                if (latestFeed == null)
+                {
+                    return string.Empty;
+                }
+
+                var link = latestFeed.Links[0].Uri.ToString();
+                var result = link.Replace("watch?v=", "embed/") + "?rel=0&disablekb=1&fs=0&modestbranding=1";
+
+                Tracer.Info($"Found video {link}");
+
+                return result;
+            });
+        }
+
         private async Task WriteViewportOptionsAsync(InstallLocation install)
         {
             var modules = await GetInstalledAircraftModulesAsync();
@@ -549,10 +545,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
         {
-            var optionPaths = path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            var optionPaths = path.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
             var table = string.Empty;
 
-            for (int i = 0; i < optionPaths.Length - 1; i++)
+            for (var i = 0; i < optionPaths.Length - 1; i++)
             {
                 table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);
 
@@ -568,7 +564,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             if (!(value is string) && value is IEnumerable)
             {
-                var enumerable = (IEnumerable)value;
+                var enumerable = (IEnumerable) value;
                 var values =
                     (value is JArray
                         ? enumerable.OfType<JValue>().Select(j => j.Value)
@@ -581,7 +577,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             }
             else
             {
-                sb.AppendLine($"{id} = {((value is bool) ? value.ToString().ToLower() : value.ToString())}");
+                sb.AppendLine($"{id} = {(value is bool ? value.ToString().ToLower() : value.ToString())}");
             }
         }
     }

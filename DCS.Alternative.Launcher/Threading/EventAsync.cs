@@ -69,7 +69,10 @@ namespace DCS.Alternative.Launcher.Threading
                 }
             }
 
-            public override Task<object> Task => _tcs.Task;
+            public override Task<object> Task
+            {
+                get { return _tcs.Task; }
+            }
 
             private void EventCompleted(object sender, EventArgs args)
             {
@@ -109,7 +112,10 @@ namespace DCS.Alternative.Launcher.Threading
                 }
             }
 
-            public override Task<object> Task => _tcs.Task;
+            public override Task<object> Task
+            {
+                get { return _tcs.Task; }
+            }
 
             private void EventCompleted(object sender, TEventArgs args)
             {
@@ -149,7 +155,10 @@ namespace DCS.Alternative.Launcher.Threading
                 }
             }
 
-            public override Task<RoutedEventArgs> Task => _tcs.Task;
+            public override Task<RoutedEventArgs> Task
+            {
+                get { return _tcs.Task; }
+            }
 
             private void EventCompleted(object sender, RoutedEventArgs args)
             {
@@ -189,7 +198,10 @@ namespace DCS.Alternative.Launcher.Threading
                 }
             }
 
-            public override Task<SizeChangedEventArgs> Task => _tcs.Task;
+            public override Task<SizeChangedEventArgs> Task
+            {
+                get { return _tcs.Task; }
+            }
 
             private void EventCompleted(object sender, SizeChangedEventArgs args)
             {

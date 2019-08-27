@@ -13,7 +13,6 @@ namespace DCS.Alternative.Launcher
         private const string _exePath = "bin\\dcs.exe";
         private const string _updaterPath = "bin\\dcs_updater.exe";
         private const string _updaterConfigPath = "autoupdate.cfg";
-
         private AutoUpdaterConfig _config;
 
         public InstallLocation(string directory)
@@ -25,41 +24,27 @@ namespace DCS.Alternative.Launcher
 
         public string[] Modules
         {
-            get
-            {
-                return _config?.Modules ?? new string[0];
-            }
+            get { return _config?.Modules ?? new string[0]; }
         }
 
         public string Name
         {
-            get;set;
+            get;
+            set;
         }
 
         public bool IsValidInstall
         {
-            get
-            {
-                return File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath);
-            }
+            get { return File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath); }
         }
-
         public string ExePath
         {
-            get
-            {
-                return GetPath(_exePath);
-            }
+            get { return GetPath(_exePath); }
         }
-
         public string UpdaterPath
         {
-            get
-            {
-                return GetPath(_updaterPath);
-            }
+            get { return GetPath(_updaterPath); }
         }
-
         public string SavedGamesPath
         {
             get
@@ -77,31 +62,18 @@ namespace DCS.Alternative.Launcher
                 return Path.Combine(userProfilePath, "Saved Games", "DCS" + variant);
             }
         }
-
         public string UpdaterConfigPath
         {
-            get
-            {
-                return GetPath(_updaterConfigPath);
-            }
+            get { return GetPath(_updaterConfigPath); }
         }
-
         public string Variant
         {
-            get
-            {
-                return _config?.Branch ?? "stable";
-            }
+            get { return _config?.Branch ?? "stable"; }
         }
-
         public string DirectoryName
         {
-            get
-            {
-                return new DirectoryInfo(Directory).Name;
-            }
+            get { return new DirectoryInfo(Directory).Name; }
         }
-
         public Version Version
         {
             get
@@ -115,7 +87,10 @@ namespace DCS.Alternative.Launcher
             }
         }
 
-        public string Directory { get; }
+        public string Directory
+        {
+            get;
+        }
 
         public void RefreshInfo()
         {
@@ -197,7 +172,7 @@ namespace DCS.Alternative.Launcher
 
             return path;
         }
-        
+
         public override string ToString()
         {
             return $"{Version}-{Variant} ({Directory})";
@@ -206,18 +181,46 @@ namespace DCS.Alternative.Launcher
 
     public class AutoUpdaterConfig
     {
-        public string Branch { get; set; }
+        public string Branch
+        {
+            get;
+            set;
+        }
 
-        public string Version { get; set; }
+        public string Version
+        {
+            get;
+            set;
+        }
 
-        public string Timestamp { get; set; }
+        public string Timestamp
+        {
+            get;
+            set;
+        }
 
-        public string Arch { get; set; }
+        public string Arch
+        {
+            get;
+            set;
+        }
 
-        public string Lang { get; set; }
+        public string Lang
+        {
+            get;
+            set;
+        }
 
-        public string Launch { get; set; }
+        public string Launch
+        {
+            get;
+            set;
+        }
 
-        public string[] Modules { get; set; }
+        public string[] Modules
+        {
+            get;
+            set;
+        }
     }
 }

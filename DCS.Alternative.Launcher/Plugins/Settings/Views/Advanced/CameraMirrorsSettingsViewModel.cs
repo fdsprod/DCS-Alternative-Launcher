@@ -7,7 +7,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         public CameraMirrorsSettingsViewModel(SettingsController controller)
             : base("CAMERA MIRRORS", OptionCategory.CameraMirrors, controller)
         {
-
         }
     }
 }

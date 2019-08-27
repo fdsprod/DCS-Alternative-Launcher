@@ -15,11 +15,22 @@ namespace DCS.Alternative.Launcher.Data
             ReverseParameterName = "Reverse";
         }
 
-        public static VisibilityConverter Instance { get; } = new VisibilityConverter();
+        public static VisibilityConverter Instance
+        {
+            get;
+        } = new VisibilityConverter();
 
-        public string HiddenParameterName { get; set; }
+        public string HiddenParameterName
+        {
+            get;
+            set;
+        }
 
-        public string ReverseParameterName { get; set; }
+        public string ReverseParameterName
+        {
+            get;
+            set;
+        }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

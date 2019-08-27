@@ -22,15 +22,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 Options.Add(model);
             }
         }
-        
-        private void OnValueChanged(OptionModelBase model, object value)
-        {
-            Controller.UpsertViewportOption(_module.ModuleId, model.Id, value);
-        }
 
         public ReactiveCollection<OptionModelBase> Options
         {
             get;
         } = new ReactiveCollection<OptionModelBase>();
+
+        private void OnValueChanged(OptionModelBase model, object value)
+        {
+            Controller.UpsertViewportOption(_module.ModuleId, model.Id, value);
+        }
     }
 }

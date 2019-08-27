@@ -3,7 +3,7 @@
 namespace DCS.Alternative.Launcher.Windows
 {
     /// <summary>
-    /// Interaction logic for SplashScreen.xaml
+    ///     Interaction logic for SplashScreen.xaml
     /// </summary>
     public partial class SplashScreen : Window
     {

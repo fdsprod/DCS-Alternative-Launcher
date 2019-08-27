@@ -4,17 +4,20 @@
     {
         public string Name
         {
-            get;set;
+            get;
+            set;
         }
 
         public string IconPath
         {
-            get;set;
+            get;
+            set;
         }
 
         public string Url
         {
-            get; set;
+            get;
+            set;
         }
     }
 }

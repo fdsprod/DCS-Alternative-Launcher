@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Modules;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Models
@@ -30,37 +29,31 @@ namespace DCS.Alternative.Launcher.Models
         public ReactiveProperty<bool> IsSelected
         {
             get;
-
         } = new ReactiveProperty<bool>();
 
         public ReactiveProperty<string> Name
         {
             get;
-
         } = new ReactiveProperty<string>();
 
         public ReactiveProperty<string> ImageUrl
         {
             get;
-
         } = new ReactiveProperty<string>();
 
         public ReactiveProperty<Module> Module
         {
             get;
-
         } = new ReactiveProperty<Module>();
 
         public ReactiveCollection<string> MonitorIds
         {
             get;
-
         } = new ReactiveCollection<string>();
 
         public ReactiveCollection<Viewport> Viewports
         {
             get;
-
         } = new ReactiveCollection<Viewport>();
     }
 }

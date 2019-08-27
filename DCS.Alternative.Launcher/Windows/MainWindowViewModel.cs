@@ -11,15 +11,12 @@ namespace DCS.Alternative.Launcher.Windows
 {
     public class MainWindowViewModel
     {
-        private readonly IContainer _container;
-        private readonly INavigationService _navigationService;
-        private readonly IAutoUpdateService _autoUpdateService;
-
-        private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
         private readonly DispatcherTimer _autoUpdateCheckTimer = new DispatcherTimer();
-
+        private readonly IAutoUpdateService _autoUpdateService;
+        private readonly IContainer _container;
         private readonly List<string> _images = new List<string>();
-
+        private readonly INavigationService _navigationService;
+        private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
         private int _nextIndex;
 
         public MainWindowViewModel(IContainer container)
@@ -130,15 +127,24 @@ namespace DCS.Alternative.Launcher.Windows
             ViewModelType = viewModelType;
         }
 
-        public string Name { get; }
+        public string Name
+        {
+            get;
+        }
 
         public ReactiveProperty<bool> IsSelected
         {
             get;
         } = new ReactiveProperty<bool>();
 
-        public Type ViewType { get; }
+        public Type ViewType
+        {
+            get;
+        }
 
-        public Type ViewModelType { get; }
+        public Type ViewModelType
+        {
+            get;
+        }
     }
 }

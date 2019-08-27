@@ -21,7 +21,7 @@ namespace DCS.Alternative.Launcher.Analytics
             var nvc = new NameValueCollection(baseValues);
 
             nvc.Add("t", "pageview"); // Pageview hit type.
-            nvc.Add("dl", screenName);  // Page.
+            nvc.Add("dl", screenName); // Page.
 
             return nvc;
         }
@@ -30,9 +30,9 @@ namespace DCS.Alternative.Launcher.Analytics
         {
             var nvc = new NameValueCollection(baseValues);
 
-            nvc.Add("t", "event");   // Event hit type
+            nvc.Add("t", "event"); // Event hit type
             nvc.Add("ec", category); // Event Category. Required.
-            nvc.Add("ea", action);   // Event Action. Required.
+            nvc.Add("ea", action); // Event Action. Required.
 
             if (!string.IsNullOrEmpty(label))
             {

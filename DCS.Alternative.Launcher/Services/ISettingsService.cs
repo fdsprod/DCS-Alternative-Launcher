@@ -6,11 +6,15 @@ namespace DCS.Alternative.Launcher.Services
 {
     public interface ISettingsService
     {
+        InstallLocation SelectedInstall
+        {
+            get;
+            set;
+        }
+
         Option[] GetAdvancedOptions(string category);
 
         DcsOptionsCategory[] GetDcsOptions();
-
-        InstallLocation SelectedInstall { get; set; }
 
         void RemoveInstalls(params string[] directory);
 

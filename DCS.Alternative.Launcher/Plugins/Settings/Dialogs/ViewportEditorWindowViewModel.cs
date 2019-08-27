@@ -3,10 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Windows.Media;
+using System.Windows;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.Modules;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
@@ -16,8 +15,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 {
     public class ViewportEditorWindowViewModel
     {
-        private readonly Module _module;
         private readonly ViewportDevice[] _devices;
+        private readonly Module _module;
         private readonly ISettingsService _settingsService;
         public readonly string MonitorId;
 
@@ -49,6 +48,41 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             CancelCommand.Subscribe(OnCancel);
         }
 
+        public ReactiveProperty<bool?> DialogResult
+        {
+            get;
+        } = new ReactiveProperty<bool?>();
+
+        public ReactiveProperty<bool> IsNotPreview
+        {
+            get;
+        } = new ReactiveProperty<bool>();
+
+        public ReactiveCommand SaveCommand
+        {
+            get;
+        }
+
+        public ReactiveCommand CancelCommand
+        {
+            get;
+        }
+
+        public ReactiveCommand AddViewportCommand
+        {
+            get;
+        }
+
+        public ReactiveCommand<ViewportModel> DeleteViewportCommand
+        {
+            get;
+        }
+
+        public ReactiveCollection<ViewportModel> Viewports
+        {
+            get;
+        } = new ReactiveCollection<ViewportModel>();
+
         private void OnCancel()
         {
             DialogResult.Value = false;
@@ -59,21 +93,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             DialogResult.Value = true;
         }
 
-        public ReactiveProperty<bool?> DialogResult
-        {
-            get;
-        } = new ReactiveProperty<bool?>();
-        
-        public ReactiveProperty<bool> IsNotPreview
-        {
-            get;
-        } = new ReactiveProperty<bool>();
-
         private void OnDeleteViewport(ViewportModel value)
         {
             var window = WindowAssist.GetWindow(this);
 
-            if (MessageBoxEx.Show($"Are you sure you want to delete viewport {value.Name.Value}?", "Delete Viewport", System.Windows.MessageBoxButton.YesNo, parent: window) == System.Windows.MessageBoxResult.Yes)
+            if (MessageBoxEx.Show($"Are you sure you want to delete viewport {value.Name.Value}?", "Delete Viewport", MessageBoxButton.YesNo, parent: window) == MessageBoxResult.Yes)
             {
                 Viewports.Remove(value);
             }
@@ -93,7 +117,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 }
 
                 var model = new ViewportModel();
-                
+
                 model.Height.Value = device.Height;
                 model.InitFile.Value = device.RelativeInitFilePath;
                 model.ImageUrl.Value = Path.Combine(Directory.GetCurrentDirectory(), $"Resources/Images/Viewports/{_module.ModuleId}/{device.ViewportName}.jpg");
@@ -115,30 +139,5 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 Viewports.Add(viewport);
             }
         }
-
-        public ReactiveCommand SaveCommand
-        {
-            get;
-        } 
-
-        public ReactiveCommand CancelCommand
-        {
-            get;
-        } 
-
-        public ReactiveCommand AddViewportCommand
-        {
-            get;
-        }
-
-        public ReactiveCommand<ViewportModel> DeleteViewportCommand
-        {
-            get;
-        } 
-
-        public ReactiveCollection<ViewportModel> Viewports
-        {
-            get;
-        } = new ReactiveCollection<ViewportModel>();
     }
 }

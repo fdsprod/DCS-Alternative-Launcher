@@ -2,7 +2,6 @@
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
-using DCS.Alternative.Launcher.Services.Settings;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Wizards.Steps
@@ -15,7 +14,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             : base(container)
         {
             _settingsService = container.Resolve<ISettingsService>();
-            }
+        }
 
         public ReactiveProperty<bool> IsSingleDisplaySetup
         {

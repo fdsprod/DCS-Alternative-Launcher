@@ -7,7 +7,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         public CameraSettingsViewModel(SettingsController controller)
             : base("CAMERA", OptionCategory.Camera, controller)
         {
-
         }
     }
 }

@@ -6,7 +6,8 @@ namespace DCS.Alternative.Launcher.DomainObjects
     {
         public string Version
         {
-            get;set;
+            get;
+            set;
         }
 
         public string Url
@@ -17,10 +18,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
 
         internal Version ConcreteVersion
         {
-            get
-            {
-                return new Version(Version);
-            }
+            get { return new Version(Version); }
         }
     }
 }

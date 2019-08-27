@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Plugins.Settings.Models;
@@ -36,6 +37,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         {
             get;
         } = new ReactiveProperty<InstallLocation>();
+
         public ReactiveCommand<OptionModelBase> ResetCommand
         {
             get;
@@ -107,7 +109,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
                 }
             });
         }
-        
+
         private void OnValueChanged(OptionModelBase model, object value)
         {
             Controller.UpsertDcsOption(_categoryId, model.Id, value, false);
@@ -121,7 +123,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
         private void OnResetAll()
         {
-            if (MessageBoxEx.Show("Are you sure you want to reset all options to their default values?", "Reset Options", System.Windows.MessageBoxButton.YesNo) != System.Windows.MessageBoxResult.Yes)
+            if (MessageBoxEx.Show("Are you sure you want to reset all options to their default values?", "Reset Options", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
             {
                 return;
             }

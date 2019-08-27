@@ -8,7 +8,6 @@ namespace DCS.Alternative.Launcher.Collections
     {
         private readonly Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
         private readonly object _padlock = new object();
-
         public TValue this[TKey key]
         {
             set
@@ -30,8 +29,10 @@ namespace DCS.Alternative.Launcher.Collections
                 }
             }
         }
-
-        public IEnumerable<TKey> Keys => _dictionary.Keys;
+        public IEnumerable<TKey> Keys
+        {
+            get { return _dictionary.Keys; }
+        }
 
         public void Dispose()
         {

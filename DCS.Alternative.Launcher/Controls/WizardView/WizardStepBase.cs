@@ -5,6 +5,8 @@ namespace DCS.Alternative.Launcher.Controls
 {
     public abstract class WizardStepBase : IWizardStep
     {
+        private bool _isInitialized;
+
         protected WizardStepBase(IContainer container)
         {
             Container = container;
@@ -15,6 +17,7 @@ namespace DCS.Alternative.Launcher.Controls
         {
             get;
         }
+
         public WizardController Controller
         {
             get;
@@ -50,8 +53,6 @@ namespace DCS.Alternative.Launcher.Controls
             return true;
         }
 
-        private bool _isInitialized;
-
         public virtual async Task ActivateAsync()
         {
             if (!_isInitialized)
@@ -63,11 +64,6 @@ namespace DCS.Alternative.Launcher.Controls
             IsActivated = true;
         }
 
-        protected virtual Task InitializeAsync()
-        {
-            return Task.FromResult(true);
-        }
-
         public virtual Task DeactivateAsync()
         {
             return Task.FromResult(true);
@@ -77,6 +73,11 @@ namespace DCS.Alternative.Launcher.Controls
         {
             get;
             set;
+        }
+
+        protected virtual Task InitializeAsync()
+        {
+            return Task.FromResult(true);
         }
     }
 }

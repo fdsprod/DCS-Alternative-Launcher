@@ -5,6 +5,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 {
     public partial class MonitorOverlay : Window
     {
+        private Screen _screen;
+
         public MonitorOverlay()
         {
             InitializeComponent();
@@ -14,8 +16,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             Loaded += OnLoaded;
         }
 
-        private Screen _screen;
-
         public Screen Screen
         {
             get { return _screen; }
@@ -24,7 +24,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 Guard.RequireIsNotNull(value, nameof(value));
                 _screen = value;
             }
-        } 
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

@@ -8,7 +8,11 @@ namespace DCS.Alternative.Launcher.Data
     [ValueConversion(typeof(Thickness), typeof(double), ParameterType = typeof(ThicknessSideType))]
     public class ThicknessToDoubleConverter : IValueConverter
     {
-        public ThicknessSideType TakeThicknessSide { get; set; }
+        public ThicknessSideType TakeThicknessSide
+        {
+            get;
+            set;
+        }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -17,10 +21,11 @@ namespace DCS.Alternative.Launcher.Data
                 // yes, we can override it with the parameter value
                 if (parameter is ThicknessSideType)
                 {
-                    this.TakeThicknessSide = (ThicknessSideType)parameter;
+                    TakeThicknessSide = (ThicknessSideType) parameter;
                 }
-                var orgThickness = (Thickness)value;
-                switch (this.TakeThicknessSide)
+
+                var orgThickness = (Thickness) value;
+                switch (TakeThicknessSide)
                 {
                     case ThicknessSideType.Left:
                         return orgThickness.Left;

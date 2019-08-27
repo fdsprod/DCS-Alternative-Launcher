@@ -7,8 +7,8 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 {
     public class ManualsController
     {
-        private readonly ISettingsService _settingsService;
         private readonly IDcsWorldService _dcsWorldService;
+        private readonly ISettingsService _settingsService;
 
         public ManualsController(IContainer container)
         {

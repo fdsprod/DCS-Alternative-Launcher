@@ -13,10 +13,9 @@ namespace DCS.Alternative.Launcher.Behaviors
 
         public string BindableSource
         {
-            get => (string) GetValue(BindableSourceProperty);
-            set => SetValue(BindableSourceProperty, value);
+            get { return (string) GetValue(BindableSourceProperty); }
+            set { SetValue(BindableSourceProperty, value); }
         }
-
 
         public static void OnBindableSourcePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {

@@ -14,7 +14,8 @@ namespace DCS.Alternative.Launcher.Models
 
         public string DisplayName
         {
-            get;set;
+            get;
+            set;
         }
 
         public double RelativeX

@@ -14,7 +14,7 @@ namespace DCS.Alternative.Launcher.Controls
 
         public static void BindProperty(object source, FrameworkElement target, DependencyProperty dp, string propertyName, BindingMode mode = BindingMode.TwoWay, IValueConverter converter = null)
         {
-            Binding binding = new Binding
+            var binding = new Binding
             {
                 Source = source,
                 Path = new PropertyPath(propertyName),

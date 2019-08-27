@@ -1,14 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
+﻿using System.Windows;
 using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 {
     public partial class ViewportEditorWindow : Window
     {
+        private Screen _screen;
+
         public ViewportEditorWindow()
         {
             InitializeComponent();
@@ -18,8 +16,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             Loaded += OnLoaded;
         }
 
-        private Screen _screen;
-
         public Screen Screen
         {
             get { return _screen; }
@@ -28,7 +24,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 Guard.RequireIsNotNull(value, nameof(value));
                 _screen = value;
             }
-        } 
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

@@ -74,7 +74,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
         private void UpdateValue(object value)
         {
-            var enumerable = (IEnumerable)value;
+            var enumerable = (IEnumerable) value;
             var values =
                 (value is JArray
                     ? enumerable.OfType<JValue>().Select(j => j.Value)

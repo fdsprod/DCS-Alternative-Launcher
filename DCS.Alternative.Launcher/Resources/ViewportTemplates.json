@@ -114,68 +114,71 @@
 		]
 	},*/
 	{
-		"templateName" : "F/A-18C (Helios 16/9)",
-		"moduleId" : "FA-18C",
-		"viewports" : [
+		"templateName": "F/A-18C (Helios 16/9)",
+		"moduleId": "FA-18C",
+		"viewports": [
 			{
-				"viewportName" : "IFEI",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 152,
-				"y" : 756,
-				"width" : 528,
-				"height" : 200
+				"viewportName": "IFEI",
+				"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 152,
+				"y": 756,
+				"width": 528,
+				"height": 200
 			},
 			{
-				"viewportName" : "UFC",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 743,
-				"y" : 30,
-				"width" : 451,
-				"height" : 258
+				"viewportName": "UFC",
+				"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 743,
+				"y": 30,
+				"width": 451,
+				"height": 258
 			},
 			{
-				"viewportName" : "CENTER_MFCD",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 770,
-				"y" : 688,
-				"width" : 376,
-				"height" : 358
+				"viewportName": "CENTER_MFCD",
+				"relativeInitFilePath":
+					"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 770,
+				"y": 688,
+				"width": 376,
+				"height": 358
 			},
 			{
-				"viewportName" : "RWR",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 1493,
-				"y" : 720,
-				"width" : 178,
-				"height" : 177
+				"viewportName": "RWR",
+				"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 1493,
+				"y": 720,
+				"width": 178,
+				"height": 177
 			},
 			{
-				"viewportName" : "RIGHT_MFCD",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 1258,
-				"y" : 197,
-				"width" : 387,
-				"height" : 374
+				"viewportName": "RIGHT_MFCD",
+				"relativeInitFilePath":
+					"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 1258,
+				"y": 197,
+				"width": 387,
+				"height": 374
 			},
 			{
-				"viewportName" : "LEFT_MFCD",
-				"relativeInitFilePath" : "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
-				"originalDisplayWidth" : 1920,
-				"originalDisplayHeight" : 1080,
-				"x" : 280,
-				"y" : 197,
-				"width" : 387,
-				"height" : 374
+				"viewportName": "LEFT_MFCD",
+				"relativeInitFilePath":
+					"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
+				"originalDisplayWidth": 1920,
+				"originalDisplayHeight": 1080,
+				"x": 280,
+				"y": 197,
+				"width": 387,
+				"height": 374
 			}
 		]
 	},

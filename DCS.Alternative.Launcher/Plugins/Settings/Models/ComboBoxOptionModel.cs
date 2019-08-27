@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Reactive.Disposables;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json.Linq;
@@ -23,7 +21,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
             Items.Clear();
 
-            var array = (JArray)items;
+            var array = (JArray) items;
 
             foreach (var item in array)
             {
@@ -38,7 +36,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
             UpdateValue(value);
         }
-        
+
+        public ReactiveCollection<SelectorItem> Items
+        {
+            get;
+        } = new ReactiveCollection<SelectorItem>();
+
         private void UpdateValue(object value)
         {
             Value.Value = Items.FirstOrDefault(i => i.Value.Equals(value));
@@ -49,19 +52,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
             }
 
             Value.Value = Items.FirstOrDefault();
-            Tracer.Warn($"Unable to select default value {value} for option {this.Id}");
+            Tracer.Warn($"Unable to select default value {value} for option {Id}");
         }
-
 
         protected override object ConvertOutputValue(SelectorItem value)
         {
             return value.Value;
         }
-
-        public ReactiveCollection<SelectorItem> Items
-        {
-            get;
-        } = new ReactiveCollection<SelectorItem>();
 
         public override void ResetValue(object value)
         {

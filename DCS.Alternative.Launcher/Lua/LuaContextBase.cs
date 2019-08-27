@@ -21,6 +21,12 @@ namespace DCS.Alternative.Launcher.Lua
             DoFile(Path.Combine(Directory.GetCurrentDirectory(), "Resources/Lua/IO.lua"));
         }
 
+        public void Dispose()
+        {
+            _lua?.Dispose();
+            _lua = null;
+        }
+
         protected LuaFunction RegisterFunction(string path, MethodBase function)
         {
             return RegisterFunction(path, null, function);
@@ -39,12 +45,6 @@ namespace DCS.Alternative.Launcher.Lua
         protected object DoString(string lua)
         {
             return _lua.DoString(lua);
-        }
-
-        public void Dispose()
-        {
-            _lua?.Dispose();
-            _lua = null;
         }
 
         private void Print(object text)

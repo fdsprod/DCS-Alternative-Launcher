@@ -114,28 +114,35 @@
                                                                                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                                                                 <ItemsControl.ItemsPanel>
                                                                                     <ItemsPanelTemplate>
-                                                                                        <WrapPanel Orientation="Horizontal" />
+                                                                                        <WrapPanel
+                                                                                            Orientation="Horizontal" />
                                                                                     </ItemsPanelTemplate>
                                                                                 </ItemsControl.ItemsPanel>
                                                                                 <ItemsControl.ItemContainerStyle>
-                                                                                    <Style TargetType="ContentPresenter">
-                                                                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                                                                        <Setter Property="Margin" Value="0,5,10,5" />
+                                                                                    <Style
+                                                                                        TargetType="ContentPresenter">
+                                                                                        <Setter
+                                                                                            Property="HorizontalAlignment"
+                                                                                            Value="Stretch" />
+                                                                                        <Setter Property="Margin"
+                                                                                                Value="0,5,10,5" />
                                                                                     </Style>
                                                                                 </ItemsControl.ItemContainerStyle>
                                                                                 <ItemsControl.ItemTemplate>
                                                                                     <DataTemplate>
-                                                                                        <StackPanel Orientation="Horizontal">
+                                                                                        <StackPanel
+                                                                                            Orientation="Horizontal">
                                                                                             <Border Height="20"
                                                                                                     Padding="4,2"
                                                                                                     HorizontalAlignment="Center"
                                                                                                     VerticalAlignment="Center"
                                                                                                     Background="#FF1C1C1C"
                                                                                                     Cursor="Hand">
-                                                                                                <TextBlock FontFamily="{StaticResource Prototype}"
-                                                                                                           FontSize="12"
-                                                                                                           Foreground="White"
-                                                                                                           Text="{Binding ViewportName}" />
+                                                                                                <TextBlock
+                                                                                                    FontFamily="{StaticResource Prototype}"
+                                                                                                    FontSize="12"
+                                                                                                    Foreground="White"
+                                                                                                    Text="{Binding ViewportName}" />
                                                                                             </Border>
                                                                                         </StackPanel>
                                                                                     </DataTemplate>

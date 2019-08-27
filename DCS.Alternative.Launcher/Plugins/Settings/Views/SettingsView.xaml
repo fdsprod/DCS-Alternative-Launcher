@@ -47,14 +47,15 @@
 
                         <DataTemplate x:Key="TabItemHeaderTemplate">
                             <Border Background="#01000000">
-                                <TextBlock Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           FontFamily="{StaticResource Prototype}"
-                                           FontSize="14"
-                                           Foreground="#FFFFFFFF"
-                                           Text="{Binding Name}"
-                                           TextAlignment="Right" />
+                                <TextBlock
+                                    Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{StaticResource Prototype}"
+                                    FontSize="14"
+                                    Foreground="#FFFFFFFF"
+                                    Text="{Binding Name}"
+                                    TextAlignment="Right" />
                             </Border>
                         </DataTemplate>
 

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
-using DCS.Alternative.Launcher.Services.Settings;
 using Reactive.Bindings;
 using WpfScreenHelper;
 
@@ -16,8 +12,8 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 {
     public class SelectInitialViewportsWizardStepViewModel : WizardStepBase
     {
-        private readonly ISettingsService _settingsService;
         private readonly IDcsWorldService _dcsWorldService;
+        private readonly ISettingsService _settingsService;
 
         public SelectInitialViewportsWizardStepViewModel(IContainer container)
             : base(container)
@@ -25,6 +21,11 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             _settingsService = container.Resolve<ISettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
         }
+
+        public ReactiveCollection<ModuleViewportModel> ModuleViewports
+        {
+            get;
+        } = new ReactiveCollection<ModuleViewportModel>();
 
         public override async Task ActivateAsync()
         {
@@ -54,7 +55,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             var deviceScreenId = _settingsService.GetValue<string[]>(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays).First();
             var screen = Screen.AllScreens.First(s => s.DeviceName == deviceScreenId);
 
-            foreach (var selected in ModuleViewports.Where(mv=>mv.IsSelected.Value))
+            foreach (var selected in ModuleViewports.Where(mv => mv.IsSelected.Value))
             {
                 foreach (var viewport in selected.Viewports)
                 {
@@ -64,10 +65,5 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
             return base.Commit();
         }
-
-        public ReactiveCollection<ModuleViewportModel> ModuleViewports
-        {
-            get;
-        } = new ReactiveCollection<ModuleViewportModel>();
     }
 }

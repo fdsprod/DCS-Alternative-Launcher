@@ -29,8 +29,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
             AddModuleViewportCommand.Subscribe(OnAddModuleViewport);
             EditViewportsCommand.Subscribe(OnEditViewports);
             GenerateMonitorConfigCommand.Subscribe(OnGenerateMonitorConfig);
-
         }
+
         public ReactiveCollection<ModuleViewportModel> ModuleViewports
         {
             get;
@@ -121,7 +121,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 var module = selectModuleDialog.SelectedModule;
                 var templates = Controller.GetDefaultViewportTemplatesForModule(module.ModuleId);
                 var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
-                var monitorDefinitions = screens.Select(s => new MonitorDefinition { MonitorId = s.DeviceName, DisplayWidth = (int)s.Bounds.Width, DisplayHeight = (int)s.Bounds.Height });
+                var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
 
                 if (templates.Length == 0)
                 {
@@ -186,7 +186,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 GeneralExceptionHandler.Instance.OnError(e);
             }
         }
-        
+
         private async void OnEditViewports(ModuleViewportModel value)
         {
             try
@@ -234,6 +234,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 }
             });
         }
+
         private void OnRemoveModuleViewport()
         {
             try
@@ -265,6 +266,5 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 GeneralExceptionHandler.Instance.OnError(e);
             }
         }
-
     }
 }

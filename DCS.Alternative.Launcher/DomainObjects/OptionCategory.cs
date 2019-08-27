@@ -9,6 +9,5 @@
         public const string Camera = "options.graphics.Camera";
         public const string Graphics = "options.graphics";
         public const string Sound = "options.sound";
-
     }
 }

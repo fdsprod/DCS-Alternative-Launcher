@@ -5,8 +5,8 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 {
     public class AboutController
     {
-        private readonly ISettingsService _settingsService;
         private readonly IDcsWorldService _dcsWorldService;
+        private readonly ISettingsService _settingsService;
 
         public AboutController(IContainer container)
         {

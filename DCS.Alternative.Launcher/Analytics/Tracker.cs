@@ -27,20 +27,19 @@ namespace DCS.Alternative.Launcher.Analytics
 
     public class Tracker : ITracker
     {
-        public static ITracker Instance
-        {
-            get;
-            internal set;
-        }
-
-        private readonly object _syncRoot = new object();
         private readonly TrackerConfig _config;
-
+        private readonly object _syncRoot = new object();
         private NameValueCollection _basePostDataValues;
 
         public Tracker(TrackerConfig config)
         {
             _config = config;
+        }
+
+        public static ITracker Instance
+        {
+            get;
+            internal set;
         }
 
         protected NameValueCollection BasePostDataValues
@@ -209,9 +208,9 @@ namespace DCS.Alternative.Launcher.Analytics
 
         private class TrackerBatch : ITrackerBatch
         {
-            private readonly Tracker _tracker;
-            private readonly object _syncRoot = new object();
             private readonly List<NameValueCollection> _cache = new List<NameValueCollection>();
+            private readonly object _syncRoot = new object();
+            private readonly Tracker _tracker;
 
             public TrackerBatch(Tracker tracker)
             {
@@ -312,17 +311,10 @@ namespace DCS.Alternative.Launcher.Analytics
 
         private class TimingEvent : ITrackerTimingEvent
         {
-            public static ITrackerTimingEvent Create(Action<TimeSpan> action)
-            {
-                return new TimingEvent(action);
-            }
-
             private readonly Action<TimeSpan> _action;
             private readonly Stopwatch _stopwatch;
-
-            private TimeSpan _totalSuspendTime;
-
             private Stopwatch _suspendStopwatch;
+            private TimeSpan _totalSuspendTime;
 
             private TimingEvent(Action<TimeSpan> action)
             {
@@ -368,6 +360,11 @@ namespace DCS.Alternative.Launcher.Analytics
                 var elapsed = _stopwatch.Elapsed - _totalSuspendTime;
 
                 _action(elapsed);
+            }
+
+            public static ITrackerTimingEvent Create(Action<TimeSpan> action)
+            {
+                return new TimingEvent(action);
             }
         }
     }

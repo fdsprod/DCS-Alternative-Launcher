@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
@@ -6,7 +7,7 @@ namespace DCS.Alternative.Launcher.Data
 {
     public class UriToBitmapConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var bi = new BitmapImage();
             bi.BeginInit();
@@ -17,7 +18,7 @@ namespace DCS.Alternative.Launcher.Data
             return bi;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new Exception("The method or operation is not implemented.");
         }

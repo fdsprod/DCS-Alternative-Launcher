@@ -196,6 +196,7 @@
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
+    <Compile Include="Extensions\ScreenExtensions.cs" />
     <Compile Include="Services\IAutoUpdateService.cs" />
     <Compile Include="DomainObjects\AutoUpdateVersionInfo.cs" />
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />

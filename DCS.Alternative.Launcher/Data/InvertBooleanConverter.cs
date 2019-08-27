@@ -6,7 +6,10 @@ namespace DCS.Alternative.Launcher.Data
 {
     public class InvertBooleanConverter : IValueConverter
     {
-        public static InvertBooleanConverter Instance { get; } = new InvertBooleanConverter();
+        public static InvertBooleanConverter Instance
+        {
+            get;
+        } = new InvertBooleanConverter();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -4,11 +4,6 @@ namespace DCS.Alternative.Launcher.Controls
 {
     public static class EmptyStoryboard
     {
-        internal static Storyboard Value
-        {
-            get;
-        }
-
         static EmptyStoryboard()
         {
             Value = new Storyboard
@@ -20,6 +15,11 @@ namespace DCS.Alternative.Launcher.Controls
             {
                 Value.Freeze();
             }
+        }
+
+        internal static Storyboard Value
+        {
+            get;
         }
     }
 }

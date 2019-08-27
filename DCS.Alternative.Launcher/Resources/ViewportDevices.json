@@ -3,40 +3,43 @@
 		{
 			"viewportName": "IFEI",
 			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
-			"width" : 528,
-			"height" : 200
+			"width": 528,
+			"height": 200
 		},
 		{
 			"viewportName": "UFC",
 			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
-			"width" : 451,
-			"height" : 258
+			"width": 451,
+			"height": 258
 		},
 		{
 			"viewportName": "CENTER_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
-			"width" : 376,
-			"height" : 358
+			"relativeInitFilePath":
+				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
+			"width": 376,
+			"height": 358
 		},
 		{
 			"viewportName": "RWR",
 			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
-			"width" : 178,
-			"height" : 177
+			"width": 178,
+			"height": 177
 		},
 		{
 			"viewportName": "RIGHT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
-			"width" : 387,
-			"height" : 374
+			"relativeInitFilePath":
+				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
+			"width": 387,
+			"height": 374
 		},
 		{
 			"viewportName": "LEFT_MFCD",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
-			"width" : 387,
-			"height" : 374
+			"relativeInitFilePath":
+				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
+			"width": 387,
+			"height": 374
 		}
-	],/*
+	], /*
 	"KA-50": [
 		{
 			"viewportName": "SHKVAL",
@@ -125,7 +128,7 @@
 			"height": 30
 		}
 	],
-	"AV8BNA":  [
+	"AV8BNA": [
 		{
 			"viewportName": "LEFT_MFCD",
 			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/MPCD/indicator/MPCD_init.lua",
@@ -155,8 +158,8 @@
 			"relativeInitFilePath": "Mods/aircraft/AV8BNA/Cockpit/UVHF/indicator/UVHF_init.lua",
 			"width": 300,
 			"height": 150
-		}	
-	],/*
+		}
+	], /*
 	"F14":  [
 		{
 			"viewportName": "HSD",
@@ -183,7 +186,7 @@
 			"height": 400
 		}
 	],*/
-	"M-2000C" : [
+	"M-2000C": [
 		{
 			"viewportName": "RADAR",
 			"relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/VTB/VTB_init.lua",

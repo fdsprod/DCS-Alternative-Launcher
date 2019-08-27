@@ -7,7 +7,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
         public TerrainReflectionSettingsViewModel(SettingsController controller)
             : base("TERRAIN REFLECTION", OptionCategory.TerrainReflection, controller)
         {
-
         }
     }
 }

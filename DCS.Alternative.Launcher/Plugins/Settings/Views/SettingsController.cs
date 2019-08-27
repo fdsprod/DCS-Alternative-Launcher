@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
@@ -105,7 +103,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 }
                 catch
                 {
-
                 }
             }
 
@@ -131,10 +128,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                                 ViewportName = viewportModel.Name.Value,
                                 Width = (int) viewportModel.Width.Value,
                                 X = (int) viewportModel.X.Value,
-                                Y = (int) viewportModel.Y.Value,
+                                Y = (int) viewportModel.Y.Value
                             });
                     }
-
                 }
             }
 
@@ -200,7 +196,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 sb.AppendLine("    },");
             }
 
-
             sb.AppendLine("}");
             sb.AppendLine();
 
@@ -246,17 +241,17 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 {
                     var screen = screens.Single(s => s.DeviceName == viewport.MonitorId);
                     var displayIndex = screensIndexByName[screen.DeviceName];
-                    var originalWidth = (double)viewport.OriginalDisplayWidth;
-                    var originalHeight = (double)viewport.OriginalDisplayHeight;
+                    var originalWidth = (double) viewport.OriginalDisplayWidth;
+                    var originalHeight = (double) viewport.OriginalDisplayHeight;
                     var ratioX = viewport.X / originalWidth;
                     var ratioY = viewport.Y / originalHeight;
                     var ratioW = viewport.Width / originalWidth;
                     var ratioH = viewport.Height / originalHeight;
 
-                    var x = (int)Math.Round(screen.Bounds.Width * ratioX, 0, MidpointRounding.AwayFromZero);
-                    var y = (int)Math.Round(screen.Bounds.Height * ratioY, 0, MidpointRounding.AwayFromZero);
-                    var w = (int)Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
-                    var h = (int)Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
+                    var x = (int) Math.Round(screen.Bounds.Width * ratioX, 0, MidpointRounding.AwayFromZero);
+                    var y = (int) Math.Round(screen.Bounds.Height * ratioY, 0, MidpointRounding.AwayFromZero);
+                    var w = (int) Math.Round(screen.Bounds.Width * ratioW, 0, MidpointRounding.AwayFromZero);
+                    var h = (int) Math.Round(screen.Bounds.Height * ratioH, 0, MidpointRounding.AwayFromZero);
 
                     realBounds.Union(screen.Bounds);
 
@@ -302,7 +297,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 File.WriteAllText(monitorConfigPath, contents);
             }
 
-            if (MessageBoxEx.Show($"Do you want DCS Alternative Launcher to adjust your Game Resolution and Monitor Config?", "Update DCS", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBoxEx.Show("Do you want DCS Alternative Launcher to adjust your Game Resolution and Monitor Config?", "Update DCS", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new DcsOptionLuaContext(install))
                 {

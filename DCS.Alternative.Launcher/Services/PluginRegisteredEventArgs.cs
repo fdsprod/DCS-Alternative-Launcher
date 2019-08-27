@@ -11,10 +11,19 @@ namespace DCS.Alternative.Launcher.Services
             ViewModelType = viewModelType;
         }
 
-        public string Name { get; }
+        public string Name
+        {
+            get;
+        }
 
-        public Type ViewType { get; }
+        public Type ViewType
+        {
+            get;
+        }
 
-        public Type ViewModelType { get; }
+        public Type ViewModelType
+        {
+            get;
+        }
     }
 }

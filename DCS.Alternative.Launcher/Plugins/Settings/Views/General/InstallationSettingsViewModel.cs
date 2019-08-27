@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
-using DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
@@ -140,6 +139,5 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                 GeneralExceptionHandler.Instance.OnError(e);
             }
         }
-
     }
 }

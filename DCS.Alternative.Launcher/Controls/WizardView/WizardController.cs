@@ -50,7 +50,6 @@ namespace DCS.Alternative.Launcher.Controls
             get;
         } = new ReactiveProperty<bool>();
 
-
         public ReactiveProperty<bool> IsBackVisible
         {
             get;
@@ -122,7 +121,6 @@ namespace DCS.Alternative.Launcher.Controls
         public event EventHandler BeforeNext;
 
         public event EventHandler BeforeBack;
-
 
         private void OnCurrentStepChanged(IWizardStep obj)
         {

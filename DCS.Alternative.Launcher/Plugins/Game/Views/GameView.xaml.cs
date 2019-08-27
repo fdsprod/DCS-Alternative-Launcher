@@ -26,7 +26,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
             Process.Start(request.Url);
             return true;
-
         }
     }
 }

@@ -41,23 +41,29 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
         bool CanResolve(Type resolveType, string name, ResolveOptions options);
 
-        bool CanResolve<TResolveType>() where TResolveType : class;
+        bool CanResolve<TResolveType>()
+            where TResolveType : class;
 
-        bool CanResolve<TResolveType>(NamedParameterOverloads parameters) where TResolveType : class;
+        bool CanResolve<TResolveType>(NamedParameterOverloads parameters)
+            where TResolveType : class;
 
         bool CanResolve<TResolveType>(NamedParameterOverloads parameters, ResolveOptions options)
             where TResolveType : class;
 
-        bool CanResolve<TResolveType>(ResolveOptions options) where TResolveType : class;
+        bool CanResolve<TResolveType>(ResolveOptions options)
+            where TResolveType : class;
 
-        bool CanResolve<TResolveType>(string name) where TResolveType : class;
+        bool CanResolve<TResolveType>(string name)
+            where TResolveType : class;
 
-        bool CanResolve<TResolveType>(string name, NamedParameterOverloads parameters) where TResolveType : class;
+        bool CanResolve<TResolveType>(string name, NamedParameterOverloads parameters)
+            where TResolveType : class;
 
         bool CanResolve<TResolveType>(string name, NamedParameterOverloads parameters, ResolveOptions options)
             where TResolveType : class;
 
-        bool CanResolve<TResolveType>(string name, ResolveOptions options) where TResolveType : class;
+        bool CanResolve<TResolveType>(string name, ResolveOptions options)
+            where TResolveType : class;
 
         Container GetChildContainer();
 
@@ -100,21 +106,25 @@ namespace DCS.Alternative.Launcher.ServiceModel
             where TRegisterType : class
             where TRegisterImplementation : class, TRegisterType;
 
-        Container.RegisterOptions Register<TRegisterType>() where TRegisterType : class;
+        Container.RegisterOptions Register<TRegisterType>()
+            where TRegisterType : class;
 
-        Container.RegisterOptions Register<TRegisterType>(TRegisterType instance) where TRegisterType : class;
+        Container.RegisterOptions Register<TRegisterType>(TRegisterType instance)
+            where TRegisterType : class;
 
         Container.RegisterOptions Register<TRegisterType>(TRegisterType instance, string name)
             where TRegisterType : class;
 
         Container.RegisterOptions Register<TRegisterType>(
-            Func<Container, NamedParameterOverloads, TRegisterType> factory) where TRegisterType : class;
+            Func<Container, NamedParameterOverloads, TRegisterType> factory)
+            where TRegisterType : class;
 
         Container.RegisterOptions Register<TRegisterType>(
             Func<Container, NamedParameterOverloads, TRegisterType> factory, string name)
             where TRegisterType : class;
 
-        Container.RegisterOptions Register<TRegisterType>(string name) where TRegisterType : class;
+        Container.RegisterOptions Register<TRegisterType>(string name)
+            where TRegisterType : class;
 
         Container.MultiRegisterOptions RegisterMultiple(Type registrationType, IEnumerable<Type> implementationTypes);
 
@@ -136,31 +146,39 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
         object Resolve(Type resolveType, string name, ResolveOptions options);
 
-        TResolveType Resolve<TResolveType>() where TResolveType : class;
+        TResolveType Resolve<TResolveType>()
+            where TResolveType : class;
 
-        TResolveType Resolve<TResolveType>(NamedParameterOverloads parameters) where TResolveType : class;
+        TResolveType Resolve<TResolveType>(NamedParameterOverloads parameters)
+            where TResolveType : class;
 
         TResolveType Resolve<TResolveType>(NamedParameterOverloads parameters, ResolveOptions options)
             where TResolveType : class;
 
-        TResolveType Resolve<TResolveType>(ResolveOptions options) where TResolveType : class;
+        TResolveType Resolve<TResolveType>(ResolveOptions options)
+            where TResolveType : class;
 
-        TResolveType Resolve<TResolveType>(string name) where TResolveType : class;
+        TResolveType Resolve<TResolveType>(string name)
+            where TResolveType : class;
 
-        TResolveType Resolve<TResolveType>(string name, NamedParameterOverloads parameters) where TResolveType : class;
+        TResolveType Resolve<TResolveType>(string name, NamedParameterOverloads parameters)
+            where TResolveType : class;
 
         TResolveType Resolve<TResolveType>(string name, NamedParameterOverloads parameters, ResolveOptions options)
             where TResolveType : class;
 
-        TResolveType Resolve<TResolveType>(string name, ResolveOptions options) where TResolveType : class;
+        TResolveType Resolve<TResolveType>(string name, ResolveOptions options)
+            where TResolveType : class;
 
         IEnumerable<object> ResolveAll(Type resolveType);
 
         IEnumerable<object> ResolveAll(Type resolveType, bool includeUnnamed);
 
-        IEnumerable<TResolveType> ResolveAll<TResolveType>() where TResolveType : class;
+        IEnumerable<TResolveType> ResolveAll<TResolveType>()
+            where TResolveType : class;
 
-        IEnumerable<TResolveType> ResolveAll<TResolveType>(bool includeUnnamed) where TResolveType : class;
+        IEnumerable<TResolveType> ResolveAll<TResolveType>(bool includeUnnamed)
+            where TResolveType : class;
 
         bool TryResolve(Type resolveType, NamedParameterOverloads parameters, ResolveOptions options,
             out object resolvedType);
@@ -187,9 +205,11 @@ namespace DCS.Alternative.Launcher.ServiceModel
         bool TryResolve<TResolveType>(NamedParameterOverloads parameters, out TResolveType resolvedType)
             where TResolveType : class;
 
-        bool TryResolve<TResolveType>(ResolveOptions options, out TResolveType resolvedType) where TResolveType : class;
+        bool TryResolve<TResolveType>(ResolveOptions options, out TResolveType resolvedType)
+            where TResolveType : class;
 
-        bool TryResolve<TResolveType>(out TResolveType resolvedType) where TResolveType : class;
+        bool TryResolve<TResolveType>(out TResolveType resolvedType)
+            where TResolveType : class;
 
         bool TryResolve<TResolveType>(string name, NamedParameterOverloads parameters, ResolveOptions options,
             out TResolveType resolvedType)
@@ -201,6 +221,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
         bool TryResolve<TResolveType>(string name, ResolveOptions options, out TResolveType resolvedType)
             where TResolveType : class;
 
-        bool TryResolve<TResolveType>(string name, out TResolveType resolvedType) where TResolveType : class;
+        bool TryResolve<TResolveType>(string name, out TResolveType resolvedType)
+            where TResolveType : class;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
@@ -87,7 +88,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         {
             if (Installations.Count(i => i.IsValidInstall) == 0)
             {
-                return MessageBoxEx.Show("No valid DCS World installations were found.   Are you sure you want to continue?", "Installations", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes;
+                return MessageBoxEx.Show("No valid DCS World installations were found.   Are you sure you want to continue?", "Installations", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
             }
 
             return base.Validate();

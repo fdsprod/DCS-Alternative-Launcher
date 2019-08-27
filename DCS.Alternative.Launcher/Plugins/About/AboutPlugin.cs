@@ -11,17 +11,14 @@ namespace DCS.Alternative.Launcher.Plugins.About
         {
             get { return "About Plugin"; }
         }
-
         public override int LoadOrder
         {
             get { return 4; }
         }
-
         public override string Author
         {
             get { return "Jabbers"; }
         }
-
         public override string SupportUrl
         {
             get { return "https://github.com/jeffboulanger/DCS-Alternative-Launcher"; }

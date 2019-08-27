@@ -1,15 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
-
-namespace DCS.Alternative.Launcher.Controls
+﻿namespace DCS.Alternative.Launcher.Controls
 {
     //public delegate void RangeSelectionChangedEventHandler(object sender, RangeSelectionChangedEventArgs e);
     //public delegate void RangeParameterChangedEventHandler(object sender, RangeParameterChangedEventArgs e);
@@ -53,13 +42,11 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return Maximum - Minimum - MinRange; }
     //    }
 
-
     //    protected override void OnMinimumChanged(double oldMinimum, double newMinimum)
     //    {
     //        CoerceValue(SelectionStartProperty);
     //        ReCalculateSize();
     //    }
-
 
     //    protected override void OnMaximumChanged(double oldMaximum, double newMaximum)
     //    {
@@ -227,7 +214,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        }
     //    }
 
-
     //    private void ReCalculateSize()
     //    {
     //        if (_leftButton != null && _rightButton != null && _centerThumb != null)
@@ -282,7 +268,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            _density = _movableWidth / MovableRange;
     //        }
     //    }
-
 
     //    private void ReCalculateRangeSelected(bool reCalculateLowerValue, bool reCalculateUpperValue, Direction direction)
     //    {
@@ -346,7 +331,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        RaiseValueChangedEvents(this, reCalculateLowerValue, reCalculateUpperValue);
     //    }
 
-
     //    private void ReCalculateRangeSelected(bool reCalculateLowerValue, bool reCalculateUpperValue, double value, Direction direction)
     //    {
     //        _internalUpdate = true;
@@ -395,7 +379,6 @@ namespace DCS.Alternative.Launcher.Controls
 
     //        RaiseValueChangedEvents(this, reCalculateLowerValue, reCalculateUpperValue);
     //    }
-
 
     //    private void ReCalculateRangeSelected(double newLower, double newUpper, Direction direction)
     //    {
@@ -502,7 +485,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        ReCalculateSize();
     //    }
 
-
     //    private void InitializeVisualElementsContainer()
     //    {
     //        if (_visualElementsContainer != null
@@ -516,7 +498,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            _rightThumb.DragStarted -= RightThumbDragStart;
     //            _centerThumb.DragStarted -= CenterThumbDragStarted;
     //            _centerThumb.DragCompleted -= CenterThumbDragCompleted;
-
 
     //            _centerThumb.DragDelta -= CenterThumbDragDelta;
     //            _leftThumb.DragDelta -= LeftThumbDragDelta;
@@ -534,7 +515,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            _centerThumb.DragStarted += CenterThumbDragStarted;
     //            _centerThumb.DragCompleted += CenterThumbDragCompleted;
 
-
     //            _centerThumb.DragDelta += CenterThumbDragDelta;
     //            _leftThumb.DragDelta += LeftThumbDragDelta;
     //            _rightThumb.DragDelta += RightThumbDragDelta;
@@ -545,7 +525,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            _visualElementsContainer.MouseDown += VisualElementsContainerMouseDown;
     //        }
     //    }
-
 
     //    private void VisualElementsContainerPreviewMouseDown(object sender, MouseButtonEventArgs e)
     //    {
@@ -592,14 +571,12 @@ namespace DCS.Alternative.Launcher.Controls
     //        }
     //    }
 
-
     //    private enum ButtonType
     //    {
     //        BottomLeft,
     //        TopRight,
     //        Both
     //    }
-
 
     //    private enum Direction
     //    {
@@ -778,16 +755,13 @@ namespace DCS.Alternative.Launcher.Controls
     //        DependencyProperty.Register("Orientation", typeof(Orientation), typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(Orientation.Horizontal));
 
-
     //    public static readonly DependencyProperty TickPlacementProperty =
     //        DependencyProperty.Register("TickPlacement", typeof(TickPlacement), typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(TickPlacement.None));
 
-
     //    public static readonly DependencyProperty TickFrequencyProperty =
     //        DependencyProperty.Register("TickFrequency", typeof(double), typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(1.0), IsValidDoubleValue);
-
 
     //    public static readonly DependencyProperty TicksProperty
     //        = DependencyProperty.Register("Ticks",
@@ -799,9 +773,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        DependencyProperty.Register("IsMoveToPointEnabled", typeof(bool), typeof(RangeSlider),
     //            new PropertyMetadata(false));
 
-
     //    public static readonly DependencyProperty AutoToolTipPlacementProperty = DependencyProperty.Register(nameof(AutoToolTipPlacement), typeof(AutoToolTipPlacement), typeof(RangeSlider), new FrameworkPropertyMetadata(AutoToolTipPlacement.None));
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -811,9 +783,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(AutoToolTipPlacementProperty, value); }
     //    }
 
-
     //    public static readonly DependencyProperty AutoToolTipPrecisionProperty = DependencyProperty.Register(nameof(AutoToolTipPrecision), typeof(int), typeof(RangeSlider), new FrameworkPropertyMetadata(0), IsValidPrecision);
-
 
     //    [Bindable(true)]
     //    [Category("Appearance")]
@@ -823,9 +793,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(AutoToolTipPrecisionProperty, value); }
     //    }
 
-
     //    public static readonly DependencyProperty AutoToolTipLowerValueTemplateProperty = DependencyProperty.Register(nameof(AutoToolTipLowerValueTemplate), typeof(DataTemplate), typeof(RangeSlider), new FrameworkPropertyMetadata(null));
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -835,9 +803,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(AutoToolTipLowerValueTemplateProperty, value); }
     //    }
 
-
     //    public static readonly DependencyProperty AutoToolTipUpperValueTemplateProperty = DependencyProperty.Register(nameof(AutoToolTipUpperValueTemplate), typeof(DataTemplate), typeof(RangeSlider), new FrameworkPropertyMetadata(null));
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -847,9 +813,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(AutoToolTipUpperValueTemplateProperty, value); }
     //    }
 
-
     //    public static readonly DependencyProperty AutoToolTipRangeValuesTemplateProperty = DependencyProperty.Register(nameof(AutoToolTipRangeValuesTemplate), typeof(DataTemplate), typeof(RangeSlider), new FrameworkPropertyMetadata(null));
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -863,13 +827,11 @@ namespace DCS.Alternative.Launcher.Controls
     //        DependencyProperty.Register("Interval", typeof(int), typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(100, IntervalChangedCallback), IsValidPrecision);
 
-
     //    public static readonly DependencyProperty IsSelectionRangeEnabledProperty
     //        = DependencyProperty.Register("IsSelectionRangeEnabled",
     //            typeof(bool),
     //            typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(false));
-
 
     //    public static readonly DependencyProperty SelectionStartProperty
     //        = DependencyProperty.Register("SelectionStart",
@@ -878,14 +840,12 @@ namespace DCS.Alternative.Launcher.Controls
     //            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectionStartChanged, CoerceSelectionStart),
     //            IsValidDoubleValue);
 
-
     //    public static readonly DependencyProperty SelectionEndProperty
     //        = DependencyProperty.Register("SelectionEnd",
     //            typeof(double),
     //            typeof(RangeSlider),
     //            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectionEndChanged, CoerceSelectionEnd),
     //            IsValidDoubleValue);
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -895,7 +855,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(IntervalProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Appearance")]
     //    public TickPlacement TickPlacement
@@ -903,7 +862,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (TickPlacement) GetValue(TickPlacementProperty); }
     //        set { SetValue(TickPlacementProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Appearance")]
@@ -913,7 +871,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(TickFrequencyProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Appearance")]
     //    public DoubleCollection Ticks
@@ -921,7 +878,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (DoubleCollection) GetValue(TicksProperty); }
     //        set { SetValue(TicksProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -931,7 +887,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(IsMoveToPointEnabledProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Common")]
     //    public Orientation Orientation
@@ -939,7 +894,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (Orientation) GetValue(OrientationProperty); }
     //        set { SetValue(OrientationProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Appearance")]
@@ -949,7 +903,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(IsSnapToTickEnabledProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Behavior")]
     //    public bool ExtendedMode
@@ -957,7 +910,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (bool) GetValue(ExtendedModeProperty); }
     //        set { SetValue(ExtendedModeProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Behavior")]
@@ -967,7 +919,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(MoveWholeRangeProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Common")]
     //    public double MinRangeWidth
@@ -975,7 +926,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (double) GetValue(MinRangeWidthProperty); }
     //        set { SetValue(MinRangeWidthProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Common")]
@@ -985,7 +935,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(LowerValueProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Common")]
     //    public double UpperValue
@@ -993,7 +942,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (double) GetValue(UpperValueProperty); }
     //        set { SetValue(UpperValueProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Common")]
@@ -1003,7 +951,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        set { SetValue(MinRangeProperty, value); }
     //    }
 
-
     //    [Bindable(true)]
     //    [Category("Appearance")]
     //    public bool IsSelectionRangeEnabled
@@ -1011,7 +958,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        get { return (bool) GetValue(IsSelectionRangeEnabledProperty); }
     //        set { SetValue(IsSelectionRangeEnabledProperty, value); }
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Appearance")]
@@ -1045,7 +991,6 @@ namespace DCS.Alternative.Launcher.Controls
 
     //        return value;
     //    }
-
 
     //    [Bindable(true)]
     //    [Category("Appearance")]
@@ -1578,7 +1523,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        return Math.Max(width + increment, 0) - width;
     //    }
 
-
     //    private double UpdateEndPoint(ButtonType type, Direction dir)
     //    {
     //        double d = 0;
@@ -1619,7 +1563,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        return Orientation == Orientation.Horizontal && currentPoint < endPoint || Orientation == Orientation.Vertical && currentPoint > endPoint;
     //    }
 
-
     //    private void MoveToNextValue(object sender, EventArgs e)
     //    {
     //        _position = Mouse.GetPosition(_visualElementsContainer);
@@ -1646,7 +1589,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            {
     //                _precision = 0;
     //            }
-
 
     //            widthChange = Orientation == Orientation.Horizontal ? widthChange : -widthChange;
 
@@ -1723,7 +1665,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        _tickCount++;
     //    }
 
-
     //    private void SnapToTickHandle(ButtonType type, Direction direction, double difference)
     //    {
     //        var value = difference;
@@ -1791,7 +1732,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        }
     //    }
 
-
     //    private double CalculateNextTick(Direction direction, double checkingValue, double distance, bool moveDirectlyToNextTick)
     //    {
     //        var checkingValuePos = checkingValue - Minimum;
@@ -1812,7 +1752,6 @@ namespace DCS.Alternative.Launcher.Controls
     //                return Math.Abs(distance);
     //            }
     //        }
-
 
     //        if (moveDirectlyToNextTick)
     //        {
@@ -1840,10 +1779,8 @@ namespace DCS.Alternative.Launcher.Controls
     //            }
     //        }
 
-
     //        return Math.Abs(distance);
     //    }
-
 
     //    private void JumpToNextTick(Direction direction, ButtonType type, double distance, double checkingValue, bool jumpDirectlyToTick)
     //    {
@@ -1898,14 +1835,12 @@ namespace DCS.Alternative.Launcher.Controls
     //        }
     //    }
 
-
     //    private void RelocateAutoToolTip()
     //    {
     //        var offset = _autoToolTip.HorizontalOffset;
     //        _autoToolTip.HorizontalOffset = offset + 0.001;
     //        _autoToolTip.HorizontalOffset = offset;
     //    }
-
 
     //    private bool ApproximatelyEquals(double value1, double value2)
     //    {
@@ -1924,7 +1859,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        return value.ToString("N", numberFormatInfo);
     //    }
 
-
     //    private CustomPopupPlacement[] PopupPlacementCallback(Size popupSize, Size targetSize, Point offset)
     //    {
     //        switch (AutoToolTipPlacement)
@@ -1935,7 +1869,6 @@ namespace DCS.Alternative.Launcher.Controls
     //                    return new[] {new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, -popupSize.Height), PopupPrimaryAxis.Horizontal)};
     //                }
 
-
     //                return new[] {new CustomPopupPlacement(new Point(-popupSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical)};
 
     //            case AutoToolTipPlacement.BottomRight:
@@ -1943,7 +1876,6 @@ namespace DCS.Alternative.Launcher.Controls
     //                {
     //                    return new[] {new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, targetSize.Height), PopupPrimaryAxis.Horizontal)};
     //                }
-
 
     //                return new[] {new CustomPopupPlacement(new Point(targetSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical)};
 
@@ -2089,7 +2021,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        dependencyObject.CoerceValue(LowerValueProperty);
     //    }
 
-
     //    private static void RangesChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     //    {
     //        var slider = (RangeSlider) dependencyObject;
@@ -2145,7 +2076,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        rs._timer.Interval = TimeSpan.FromMilliseconds((int) e.NewValue);
     //    }
 
-
     //    private static void RaiseValueChangedEvents(DependencyObject dependencyObject, bool lowerValueReCalculated = true, bool upperValueReCalculated = true)
     //    {
     //        var slider = (RangeSlider) dependencyObject;
@@ -2181,7 +2111,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        UpdateValues(rangeSlider);
     //    }
 
-
     //    public string LowerValue
     //    {
     //        get
@@ -2199,7 +2128,6 @@ namespace DCS.Alternative.Launcher.Controls
     //            OnPropertyChanged();
     //        }
     //    }
-
 
     //    public string UpperValue
     //    {
@@ -2227,7 +2155,6 @@ namespace DCS.Alternative.Launcher.Controls
     //        UpperValue = rangeSlider.GetToolTipNumber(rangeSlider.UpperValue);
     //    }
 
-
     //    public override string ToString()
     //    {
     //        return LowerValue + " - " + UpperValue;
@@ -2239,7 +2166,6 @@ namespace DCS.Alternative.Launcher.Controls
     //    }
     //}
 
-
     //public class RangeSelectionChangedEventArgs : RoutedEventArgs
     //{
     //    internal RangeSelectionChangedEventArgs(double newLowerValue, double newUpperValue, double oldLowerValue, double oldUpperValue)
@@ -2250,9 +2176,7 @@ namespace DCS.Alternative.Launcher.Controls
     //        OldUpperValue = oldUpperValue;
     //    }
 
-
     //    public double NewLowerValue { get; set; }
-
 
     //    public double NewUpperValue { get; set; }
 

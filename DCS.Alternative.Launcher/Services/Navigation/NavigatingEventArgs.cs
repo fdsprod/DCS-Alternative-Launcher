@@ -10,10 +10,20 @@ namespace DCS.Alternative.Launcher.Services.Navigation
             NavigatingFrom = from;
         }
 
-        public Type NavigatingTo { get; }
+        public Type NavigatingTo
+        {
+            get;
+        }
 
-        public Type NavigatingFrom { get; }
+        public Type NavigatingFrom
+        {
+            get;
+        }
 
-        public bool Cancel { get; set; }
+        public bool Cancel
+        {
+            get;
+            set;
+        }
     }
 }

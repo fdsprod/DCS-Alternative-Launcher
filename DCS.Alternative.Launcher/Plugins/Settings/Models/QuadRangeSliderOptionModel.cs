@@ -81,20 +81,19 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 
         private void UpdateValue(object value)
         {
-                var enumerable = (IEnumerable)value;
-                var values =
-                    (value is JArray
-                        ? enumerable.OfType<JValue>().Select(j => j.Value)
-                        : enumerable)
-                    .Cast<object>()
-                    .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
-                    .ToArray();
+            var enumerable = (IEnumerable) value;
+            var values =
+                (value is JArray
+                    ? enumerable.OfType<JValue>().Select(j => j.Value)
+                    : enumerable)
+                .Cast<object>()
+                .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
+                .ToArray();
 
-
-                Value1.Value = values[0];
-                Value2.Value = values[1];
-                Value3.Value = values[2];
-                Value4.Value = values[3];
+            Value1.Value = values[0];
+            Value2.Value = values[1];
+            Value3.Value = values[2];
+            Value4.Value = values[3];
         }
     }
 }

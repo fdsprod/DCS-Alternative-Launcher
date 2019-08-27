@@ -25,6 +25,16 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             _settingsService = container.Resolve<ISettingsService>();
         }
 
+        public ReactiveCollection<SettingsCategoryViewModelBase> Categories
+        {
+            get;
+        } = new ReactiveCollection<SettingsCategoryViewModelBase>();
+
+        public ReactiveProperty<SettingsCategoryViewModelBase> SelectedCategory
+        {
+            get;
+        } = new ReactiveProperty<SettingsCategoryViewModelBase>();
+
         protected override async Task InitializeAsync()
         {
             Categories.Add(new CategoryHeaderSettingsViewModel("GENERAL"));
@@ -79,16 +89,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 await value.ActivateAsync();
             }
         }
-
-        public ReactiveCollection<SettingsCategoryViewModelBase> Categories
-        {
-            get;
-        } = new ReactiveCollection<SettingsCategoryViewModelBase>();
-
-        public ReactiveProperty<SettingsCategoryViewModelBase> SelectedCategory
-        {
-            get;
-        } = new ReactiveProperty<SettingsCategoryViewModelBase>();
 
         public override async Task ActivateAsync()
         {

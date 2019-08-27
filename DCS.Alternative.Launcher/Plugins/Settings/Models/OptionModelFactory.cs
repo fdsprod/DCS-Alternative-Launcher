@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json.Linq;
@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace DCS.Alternative.Launcher.Plugins.Settings.Models
 {
     public static class OptionModelFactory
-    { 
+    {
         public static IEnumerable<OptionModelBase> CreateAll(IEnumerable<Option> options)
         {
             var models = new List<OptionModelBase>();
@@ -26,13 +26,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 }
                 else if (type == typeof(string))
                 {
-
                     model = new TextOptionModel(option);
                 }
                 else if (type == typeof(long) || type == typeof(double))
                 {
                     model = option.MinMax.Count == 0
-                        ? (OptionModelBase)new SwitchOptionModel(option, true)
+                        ? (OptionModelBase) new SwitchOptionModel(option, true)
                         : new SliderOptionModel(option);
                 }
                 else if (type == typeof(bool))
@@ -45,7 +44,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Models
                 }
                 else if (type.GetInterfaces().Contains(typeof(IEnumerable)))
                 {
-                    var enumerable = (IEnumerable)option.Value;
+                    var enumerable = (IEnumerable) option.Value;
                     var count = enumerable.OfType<object>().Count();
 
                     switch (count)

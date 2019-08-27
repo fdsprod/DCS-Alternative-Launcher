@@ -9,15 +9,6 @@ namespace DCS.Alternative.Launcher.Data
     [MarkupExtensionReturnType(typeof(IValueConverter))]
     public abstract class MarkupConverter : MarkupExtension, IValueConverter
     {
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-
-        protected abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
-
-        protected abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
-
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -41,5 +32,14 @@ namespace DCS.Alternative.Launcher.Data
                 return DependencyProperty.UnsetValue;
             }
         }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        protected abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+
+        protected abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
     }
 }

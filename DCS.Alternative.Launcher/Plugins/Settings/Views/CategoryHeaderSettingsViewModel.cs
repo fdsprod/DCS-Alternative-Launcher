@@ -1,5 +1,4 @@
-﻿
-namespace DCS.Alternative.Launcher.Plugins.Settings.Views
+﻿namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
     public class CategoryHeaderSettingsViewModel : SettingsCategoryViewModelBase
     {

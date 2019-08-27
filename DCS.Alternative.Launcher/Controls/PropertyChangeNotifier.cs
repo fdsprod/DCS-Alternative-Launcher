@@ -60,22 +60,14 @@ namespace DCS.Alternative.Launcher.Controls
                 }
             }
         }
-
         [Description("Returns/sets the value of the property")]
         [Category("Behavior")]
         [Bindable(true)]
         public object Value
         {
-            get
-            {
-                return GetValue(ValueProperty);
-            }
-            set
-            {
-                SetValue(ValueProperty, value);
-            }
+            get { return GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
-
 
         public void Dispose()
         {

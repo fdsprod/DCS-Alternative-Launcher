@@ -3,7 +3,7 @@
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
 {
     /// <summary>
-    /// Interaction logic for ViewportOptionsView.xaml
+    ///     Interaction logic for ViewportOptionsView.xaml
     /// </summary>
     public partial class ViewportOptionsView : UserControl
     {

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DCS.Alternative.Launcher.Analytics
+﻿namespace DCS.Alternative.Launcher.Analytics
 {
     public class TrackerConfig
     {

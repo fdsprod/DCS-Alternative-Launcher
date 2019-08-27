@@ -74,7 +74,8 @@
                                                     <MultiTrigger.Setters>
                                                         <Setter Property="BorderBrush" Value="#FFbcff8b" />
                                                         <Setter Property="BorderThickness" Value="8" />
-                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity" Value="0.5" />
+                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity"
+                                                                Value="0.5" />
                                                     </MultiTrigger.Setters>
                                                 </MultiTrigger>
                                                 <MultiTrigger>
@@ -83,7 +84,8 @@
                                                         <Condition Property="IsChecked" Value="False" />
                                                     </MultiTrigger.Conditions>
                                                     <MultiTrigger.Setters>
-                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity" Value="0.1" />
+                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity"
+                                                                Value="0.1" />
                                                         <Setter Property="BorderThickness" Value="8" />
                                                     </MultiTrigger.Setters>
                                                 </MultiTrigger>
@@ -94,7 +96,8 @@
                                                     </MultiTrigger.Conditions>
                                                     <MultiTrigger.Setters>
                                                         <Setter Property="BorderBrush" Value="#FFbcff8b" />
-                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity" Value="0.5" />
+                                                        <Setter TargetName="PART_TintOverlay" Property="Opacity"
+                                                                Value="0.5" />
                                                     </MultiTrigger.Setters>
                                                 </MultiTrigger>
                                             </ControlTemplate.Triggers>

@@ -13,6 +13,9 @@ namespace DCS.Alternative.Launcher.Views
             ModuleName.Value = moduleName;
         }
 
-        public ReactiveProperty<string> ModuleName { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<string> ModuleName
+        {
+            get;
+        } = new ReactiveProperty<string>();
     }
 }

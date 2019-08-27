@@ -8,8 +8,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 {
     public class GameController
     {
-        public readonly ISettingsService _settingsService;
         public readonly IDcsWorldService _dcsWorldService;
+        public readonly ISettingsService _settingsService;
 
         public GameController(IContainer container)
         {
@@ -53,7 +53,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
                 process?.WaitForExit();
             });
-
         }
 
         public async Task LaunchDcsAsync(bool isVREnabled)

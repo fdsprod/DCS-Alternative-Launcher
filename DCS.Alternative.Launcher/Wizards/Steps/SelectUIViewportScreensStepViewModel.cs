@@ -9,8 +9,8 @@ using DCS.Alternative.Launcher.Drawing;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
-using DCS.Alternative.Launcher.Services.Settings;
 using Reactive.Bindings;
+using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Wizards.Steps
 {
@@ -44,7 +44,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             var selectedDisplays = _settingsService.GetValue<string[]>(SettingsCategories.Viewports, SettingsKeys.GameDisplays);
             var selectedUIViewports = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, new string[0]);
 
-            var screens = WpfScreenHelper.Screen.AllScreens.ToArray();
+            var screens = Screen.AllScreens.ToArray();
             var boundingBox = Rect.Empty;
 
             foreach (var screen in screens)
@@ -68,7 +68,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
             var nonNegativeOffsetX = 0.0;
             var nonNegativeOffsetY = 0.0;
-            
+
             if (boundingBox.X < 0)
             {
                 nonNegativeOffsetX = Math.Abs(boundingBox.X);

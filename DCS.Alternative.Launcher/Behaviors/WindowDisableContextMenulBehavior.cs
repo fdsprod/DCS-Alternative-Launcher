@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using Microsoft.Xaml.Behaviors;
@@ -26,10 +25,9 @@ namespace DCS.Alternative.Launcher.Behaviors
             hwndSource.AddHook(WndProc);
         }
 
-
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (((msg == WM_SYSTEMMENU) && (wParam.ToInt32() == WP_SYSTEMMENU)) || msg == 165)
+            if (msg == WM_SYSTEMMENU && wParam.ToInt32() == WP_SYSTEMMENU || msg == 165)
             {
                 handled = true;
             }
