@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Threading;
 using CefSharp;
 using CefSharp.Wpf;
+using CommandLine;
 using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Diagnostics;
@@ -61,9 +62,23 @@ namespace DCS.Alternative.Launcher
             private set;
         }
 
-        [STAThread]
-        private static void Main()
+        public class CommandLineOptions
         {
+            [Option("no-analytics", Required = false, HelpText = "Turns off analytics tracking.")]
+            public bool NoAnalytics { get; set; }
+        }
+
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(Start)
+                .WithNotParsed(_ => Start(new CommandLineOptions()));
+        }
+
+        private static void Start(CommandLineOptions options)
+        {
+
             var assembly = Assembly.GetAssembly(typeof(App));
             var assemblyName = assembly.GetName();
 
@@ -92,7 +107,7 @@ namespace DCS.Alternative.Launcher
 
             var anonymousUserId = GetUserId();
 
-            if (anonymousUserId != Guid.Empty)
+            if (!options.NoAnalytics && anonymousUserId != Guid.Empty)
             {
                 Tracker.Instance = new Tracker(
                     new TrackerConfig
@@ -112,6 +127,7 @@ namespace DCS.Alternative.Launcher
 
             var app = new App();
             app.Run();
+
         }
 
         private static Guid GetUserId()
