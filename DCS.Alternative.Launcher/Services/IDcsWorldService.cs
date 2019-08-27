@@ -21,5 +21,7 @@ namespace DCS.Alternative.Launcher.Services
         Task UpdateAdvancedOptionsAsync();
 
         Task WriteOptionsAsync(bool isVREnabled);
+
+        Task WriteViewportOptionsAsync();
     }
 }

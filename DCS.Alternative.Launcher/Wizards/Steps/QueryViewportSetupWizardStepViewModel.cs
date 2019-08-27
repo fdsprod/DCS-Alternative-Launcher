@@ -1,4 +1,5 @@
-﻿using DCS.Alternative.Launcher.Controls;
+﻿using DCS.Alternative.Launcher.Analytics;
+using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
@@ -32,9 +33,15 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
             if (IsMultipleDisplaySetup.Value)
             {
+                Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.ViewportSetup, "multi");
+
                 Controller.Steps.Add(new SelectGameViewportScreensStepViewModel(Container));
                 Controller.Steps.Add(new SelectUIViewportScreensStepViewModel(Container));
                 Controller.Steps.Add(new SelectDeviceViewportScreensStepViewModel(Container));
+            }
+            else
+            {
+                Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.ViewportSetup, "single");
             }
 
             return base.Commit();

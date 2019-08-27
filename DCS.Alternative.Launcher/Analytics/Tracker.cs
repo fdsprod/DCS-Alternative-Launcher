@@ -13,6 +13,10 @@ namespace DCS.Alternative.Launcher.Analytics
         public const string Exceptions = "exceptions";
         public const string AppLifecycle = "app_lifecycle";
         public const string Navigation = "navigation";
+        public const string Configuration = "configuration";
+        public const string DcsOptions = "dcs_options";
+        public const string Viewports = "viewports";
+        public const string DcsAdvancedOptions = "dcs_advanced_options";
     }
 
     public static class AnalyticsTimingActions
@@ -23,6 +27,10 @@ namespace DCS.Alternative.Launcher.Analytics
     {
         public const string StartupComplete = "startup_complete";
         public const string Ping = "ping";
+        public const string ViewportSetup = "viewport_setup";
+        public const string TotalGameDisplayCount = "total_game_display_count";
+        public const string TotalUiDisplayCount = "total_ui_display_count";
+        public const string TotalViewportDisplayCount = "total_viewport_display_count";
     }
 
     public class Tracker : ITracker

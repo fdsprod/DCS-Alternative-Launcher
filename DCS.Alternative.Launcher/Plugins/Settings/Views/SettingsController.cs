@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -271,6 +272,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
                     continue;
                 }
+
+                Tracker.Instance.SendEvent(AnalyticsCategories.Viewports, "generating_viewports", module.ModuleId);
 
                 sb.AppendLine($"-- *************** {module.DisplayName} ***************");
                 sb.AppendLine();

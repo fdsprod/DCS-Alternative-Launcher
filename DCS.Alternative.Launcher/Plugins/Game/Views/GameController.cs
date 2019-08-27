@@ -72,6 +72,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 await _dcsWorldService.WriteOptionsAsync(isVREnabled);
                 await _dcsWorldService.PatchViewportsAsync();
                 await _dcsWorldService.UpdateAdvancedOptionsAsync();
+                await _dcsWorldService.WriteViewportOptionsAsync();
 
                 var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.ExePath);
                 processInfo.Arguments = isVREnabled ? "--force_enable_VR" : "--force_disable_VR";

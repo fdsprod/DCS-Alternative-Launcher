@@ -78,7 +78,6 @@ namespace DCS.Alternative.Launcher
 
         private static void Start(CommandLineOptions options)
         {
-
             var assembly = Assembly.GetAssembly(typeof(App));
             var assemblyName = assembly.GetName();
 
@@ -206,107 +205,98 @@ namespace DCS.Alternative.Launcher
             Tracer.Info("Startup Complete.");
             Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
 
-            var analyticsTicker = new DispatcherTimer {Interval = TimeSpan.FromMinutes(5)};
-
-            analyticsTicker.Tick += AnalyticsTicker_Tick;
-            analyticsTicker.Start();
         }
 
-        private void AnalyticsTicker_Tick(object sender, EventArgs e)
-        {
-            Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.Ping, Version.ToString());
-        }
+        //private void ShowTestWindow()
+        //{
+        //    var window = new TestWindow();
+        //    window.Show();
+        //}
 
-        private void ShowTestWindow()
-        {
-            var window = new TestWindow();
-            window.Show();
-        }
+        //private void DumpAutoexecLua()
+        //{
+        //    using (var lua = new NLua.Lua())
+        //    {
+        //        lua.State.Encoding = Encoding.UTF8;
+        //        lua.RegisterFunction("print", typeof(App).GetMethod("print"));
 
-        private void DumpAutoexecLua()
-        {
-            using (var lua = new NLua.Lua())
-            {
-                lua.State.Encoding = Encoding.UTF8;
-                lua.RegisterFunction("print", typeof(App).GetMethod("print"));
+        //        var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
 
-                var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
+        //        lua["sendIt"] = new Action<LuaTable>(table =>
+        //        {
+        //            var options = new List<Option>();
+        //            RecursiveDump("options", table, options);
+        //            var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
+        //        });
 
-                lua["sendIt"] = new Action<LuaTable>(table =>
-                {
-                    var options = new List<Option>();
-                    RecursiveDump("options", table, options);
-                    var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
-                });
+        //        lua.DoString($"sendIt(loadfile('{path}'));");
+        //    }
+        //}
 
-                lua.DoString($"sendIt(loadfile('{path}'));");
-            }
-        }
+        //private void RecursiveDump(string empty, LuaTable table, List<Option> options)
+        //{
+        //    var ti = new CultureInfo("en-US", false).TextInfo;
 
-        private void RecursiveDump(string empty, LuaTable table, List<Option> options)
-        {
-            var ti = new CultureInfo("en-US", false).TextInfo;
+        //    foreach (var key in table.Keys)
+        //    {
+        //        var subTable = table[key] as LuaTable;
+        //        var id = string.Join(".", empty, key.ToString());
+        //        var displayName =
+        //            id.Replace("options.graphics.", string.Empty)
+        //                .Replace("options.sound.", string.Empty)
+        //                .Replace("terrainreflection", "terrain_reflection")
+        //                .Replace("terrainmirror", "terrain_mirror");
 
-            foreach (var key in table.Keys)
-            {
-                var subTable = table[key] as LuaTable;
-                var id = string.Join(".", empty, key.ToString());
-                var displayName =
-                    id.Replace("options.graphics.", string.Empty)
-                        .Replace("options.sound.", string.Empty)
-                        .Replace("terrainreflection", "terrain_reflection")
-                        .Replace("terrainmirror", "terrain_mirror");
+        //        displayName =
+        //            ti.ToTitleCase(
+        //                    _splitAtUpperRegex
+        //                        .Replace(displayName, " ")
+        //                        .Replace("_", " "))
+        //                .Replace(".", " ")
+        //                .Replace("  ", " ");
 
-                displayName =
-                    ti.ToTitleCase(
-                            _splitAtUpperRegex
-                                .Replace(displayName, " ")
-                                .Replace("_", " "))
-                        .Replace(".", " ")
-                        .Replace("  ", " ");
+        //        if (subTable != null)
+        //        {
+        //            var firstKey = subTable.Keys.OfType<object>().First();
 
-                if (subTable != null)
-                {
-                    var firstKey = subTable.Keys.OfType<object>().First();
+        //            if (firstKey is string)
+        //            {
+        //                RecursiveDump(id, (LuaTable) table[key], options);
+        //            }
+        //            else
+        //            {
+        //                var values = new List<object>();
+        //                var option = new Option
+        //                {
+        //                    Id = id,
+        //                    DisplayName = displayName
+        //                };
 
-                    if (firstKey is string)
-                    {
-                        RecursiveDump(id, (LuaTable) table[key], options);
-                    }
-                    else
-                    {
-                        var values = new List<object>();
-                        var option = new Option
-                        {
-                            Id = id,
-                            DisplayName = displayName
-                        };
+        //                foreach (var k in subTable.Keys)
+        //                {
+        //                    values.Add(subTable[k]);
+        //                    option.MinMax.Add(new OptionMinMax());
+        //                }
 
-                        foreach (var k in subTable.Keys)
-                        {
-                            values.Add(subTable[k]);
-                            option.MinMax.Add(new OptionMinMax());
-                        }
+        //                option.Value = values.ToArray();
 
-                        option.Value = values.ToArray();
+        //                options.Add(option);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            var option = new Option
+        //            {
+        //                Id = id,
+        //                DisplayName = displayName,
+        //                Value = table[key]
+        //            };
 
-                        options.Add(option);
-                    }
-                }
-                else
-                {
-                    var option = new Option
-                    {
-                        Id = id,
-                        DisplayName = displayName,
-                        Value = table[key]
-                    };
-
-                    option.MinMax.Add(new OptionMinMax());
-                    options.Add(option);
-                }
-            }
-        }
+        //            option.MinMax.Add(new OptionMinMax());
+        //            options.Add(option);
+        //        }
+        //    }
+        //}
 
         private void CheckFirstUse()
         {

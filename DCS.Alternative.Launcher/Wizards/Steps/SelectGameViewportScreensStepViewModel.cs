@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -133,7 +134,11 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
         public override bool Commit()
         {
-            _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.GameDisplays, Screens.Where(s => s.IsSelected.Value).Select(s => s.Id).ToArray());
+            var selectedScreens = Screens.Where(s => s.IsSelected.Value).ToArray();
+
+            Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalGameDisplayCount, selectedScreens.Length.ToString());
+
+            _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.GameDisplays, selectedScreens.Select(s => s.Id).ToArray());
 
             return base.Commit();
         }

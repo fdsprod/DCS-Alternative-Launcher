@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Drawing;
@@ -149,7 +150,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         public override bool Commit()
         {
             var screens = Screens.Where(s => s.IsSelected.Value).Select(s => s.Id).ToArray();
-
+            Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalViewportDisplayCount, screens.Length.ToString());
             _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, screens);
 
             if (screens.Length == 1)

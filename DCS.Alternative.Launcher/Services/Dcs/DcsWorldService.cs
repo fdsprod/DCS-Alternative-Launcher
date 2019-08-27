@@ -9,6 +9,7 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Lua;
@@ -278,6 +279,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             {
                                 if (_settingsService.TryGetValue<object>(string.Format(SettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
                                 {
+                                    Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
                                     context.SetValue(category.Id, option.Id, value);
                                 }
                             }
@@ -317,6 +319,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
                         return;
                     }
+
+                    Tracker.Instance.SendEvent(AnalyticsCategories.Viewports, "patching_viewports", module.ModuleId);
 
                     foreach (var viewport in template.Viewports)
                     {
@@ -373,20 +377,19 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public Task UpdateAdvancedOptionsAsync()
         {
-            return Task.Run(async () =>
+            return Task.Run(() =>
             {
                 var install = _settingsService.SelectedInstall;
-                var createdTables = new Dictionary<string, bool>();
-                var sb = new StringBuilder();
 
-                WriteGraphicsOptions(sb, createdTables);
-                WriteCameraOptions(sb, createdTables);
-                WriteCameraMirrorsOptions(sb, createdTables);
-                WriteTerrainOptions(sb, createdTables);
+                using (var context = new AutoexecLuaContext(install))
+                {
+                    WriteOptions(OptionCategory.Graphics, context);
+                    WriteRangedOptions(OptionCategory.Camera, context);
+                    WriteRangedOptions(OptionCategory.CameraMirrors, context);
+                    WriteOptions(OptionCategory.Terrain, context);
 
-                File.WriteAllText(Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg"), sb.ToString());
-
-                await WriteViewportOptionsAsync(install);
+                    context.Save();
+                }
             });
         }
 
@@ -432,8 +435,9 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-        private async Task WriteViewportOptionsAsync(InstallLocation install)
+        public async Task WriteViewportOptionsAsync()
         {
+            var install = _settingsService.SelectedInstall;
             var modules = await GetInstalledAircraftModulesAsync();
 
             foreach (var module in modules)
@@ -473,21 +477,20 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             }
         }
 
-        private void WriteTerrainOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        private void WriteOptions(string category, AutoexecLuaContext context)
         {
-            var options = _settingsService.GetAdvancedOptions(OptionCategory.Terrain);
+            var options = _settingsService.GetAdvancedOptions(category);
 
             foreach (var option in options)
             {
                 if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                 {
-                    EnsureTableCreated(sb, option.Id, createdTables);
-                    WriteOptionValue(sb, option.Id, value);
+                    context.SetValue(option.Id, value);
                 }
             }
         }
 
-        private void WriteCameraMirrorsOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
+        private void WriteRangedOptions(string category, AutoexecLuaContext context)
         {
             var options = _settingsService.GetAdvancedOptions(OptionCategory.CameraMirrors);
 
@@ -500,65 +503,28 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         continue;
                     }
 
-                    var table = option.Id.Replace("Extreme", range);
-
-                    EnsureTableCreated(sb, table, createdTables);
-                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
+                    context.SetValue(option.Id.Replace("Extreme", range), value);
                 }
             }
         }
+        
 
-        private void WriteCameraOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
-        {
-            var options = _settingsService.GetAdvancedOptions(OptionCategory.Camera);
+        //private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
+        //{
+        //    var optionPaths = path.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
+        //    var table = string.Empty;
 
-            foreach (var range in CameraRangeSettings)
-            {
-                foreach (var option in options)
-                {
-                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                    {
-                        continue;
-                    }
+        //    for (var i = 0; i < optionPaths.Length - 1; i++)
+        //    {
+        //        table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);
 
-                    var table = option.Id.Replace("Extreme", range);
-
-                    EnsureTableCreated(sb, table, createdTables);
-                    WriteOptionValue(sb, option.Id.Replace("Extreme", range), value);
-                }
-            }
-        }
-
-        private void WriteGraphicsOptions(StringBuilder sb, Dictionary<string, bool> createdTables)
-        {
-            var options = _settingsService.GetAdvancedOptions(OptionCategory.Graphics);
-
-            foreach (var option in options)
-            {
-                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
-                {
-                    EnsureTableCreated(sb, option.Id, createdTables);
-                    WriteOptionValue(sb, option.Id, value);
-                }
-            }
-        }
-
-        private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
-        {
-            var optionPaths = path.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
-            var table = string.Empty;
-
-            for (var i = 0; i < optionPaths.Length - 1; i++)
-            {
-                table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);
-
-                if (!createdTables.ContainsKey(table))
-                {
-                    createdTables.Add(table, true);
-                    sb.AppendLine($"{table} = {table} or {{}}");
-                }
-            }
-        }
+        //        if (!createdTables.ContainsKey(table))
+        //        {
+        //            createdTables.Add(table, true);
+        //            sb.AppendLine($"{table} = {table} or {{}}");
+        //        }
+        //    }
+        //}
 
         private void WriteOptionValue(StringBuilder sb, string id, object value)
         {
@@ -570,14 +536,22 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         ? enumerable.OfType<JValue>().Select(j => j.Value)
                         : enumerable)
                     .Cast<object>()
-                    .Select(Convert.ToDouble) // Fucking .Net doesn't like Cast<double>() in this instance
+                    .Select(Convert.ToDouble)
                     .ToArray();
+
+                for (var i = 0; i < values.Length; i++)
+                {
+                    var v = values[i];
+                    Tracker.Instance.SendEvent(AnalyticsCategories.DcsAdvancedOptions, $"{id}_{i}", v.ToString());
+                }
 
                 sb.AppendLine($"{id} = {{ {string.Join(",", values.Select(i => i.ToString()).ToArray())} }}");
             }
             else
             {
-                sb.AppendLine($"{id} = {(value is bool ? value.ToString().ToLower() : value.ToString())}");
+                var valueStr = value is bool ? value.ToString().ToLower() : value.ToString();
+                Tracker.Instance.SendEvent(AnalyticsCategories.DcsAdvancedOptions, $"{id}", valueStr);
+                sb.AppendLine($"{id} = {valueStr}");
             }
         }
     }
