@@ -25,16 +25,11 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingWave.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingThreeDots.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingFlipPlane.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingPulse.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingDoubleBounce.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingWave.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingThreeDots.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingFlipPlane.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingPulse.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingDoubleBounce.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="#FFFFFFFF" />
@@ -45,8 +40,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid
-            Visibility="{Binding IsLoading.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
+        <Grid Visibility="{Binding IsLoading.Value, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
             <Grid Margin="50,125,50,50">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -161,8 +155,7 @@
                                     <Setter Property="Padding" Value="20" />
                                     <Setter Property="MinWidth" Value="110" />
                                     <Setter Property="Cursor" Value="Hand" />
-                                    <Setter Property="Visibility"
-                                            Value="{Binding IsCheckingLatestVersion.Value, Converter={x:Static data:InvertBooleanConverter.Instance}, ConverterParameter=reverse}" />
+                                    <Setter Property="Visibility" Value="{Binding IsCheckingLatestVersion.Value, Converter={x:Static data:InvertBooleanConverter.Instance}, ConverterParameter=reverse}" />
                                     <Setter Property="Foreground" Value="#FFFFFFFF" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
@@ -188,37 +181,22 @@
                                                             CornerRadius="4"
                                                             Opacity="0">
                                                         <Grid ClipToBounds="True">
-                                                            <Border x:Name="hoverLight"
-                                                                    Background="{fluentWpf:RevealBrush Color=White, Size=200, Opacity=0.6}" />
+                                                            <Border x:Name="hoverLight" Background="{fluentWpf:RevealBrush Color=White, Size=200, Opacity=0.6}" />
                                                             <Rectangle x:Name="pressLight" Opacity="0">
                                                                 <Rectangle.Fill>
-                                                                    <RadialGradientBrush x:Name="brush"
-                                                                                         MappingMode="Absolute"
-                                                                                         RadiusX="5" RadiusY="5">
+                                                                    <RadialGradientBrush x:Name="brush" MappingMode="Absolute" RadiusX="5" RadiusY="5">
                                                                         <RadialGradientBrush.Center>
-                                                                            <MultiBinding
-                                                                                Converter="{StaticResource relativePositionConverter}">
-                                                                                <Binding
-                                                                                    Path="(fluentWpf:PointerTracker.RootObject)"
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
-                                                                                <Binding
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
-                                                                                <Binding
-                                                                                    Path="(fluentWpf:PointerTracker.Position)"
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                            <MultiBinding Converter="{StaticResource relativePositionConverter}">
+                                                                                <Binding Path="(fluentWpf:PointerTracker.RootObject)" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                                <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                                <Binding Path="(fluentWpf:PointerTracker.Position)" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
                                                                             </MultiBinding>
                                                                         </RadialGradientBrush.Center>
                                                                         <RadialGradientBrush.GradientOrigin>
-                                                                            <MultiBinding
-                                                                                Converter="{StaticResource relativePositionConverter}">
-                                                                                <Binding
-                                                                                    Path="(fluentWpf:PointerTracker.RootObject)"
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
-                                                                                <Binding
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
-                                                                                <Binding
-                                                                                    Path="(fluentWpf:PointerTracker.Position)"
-                                                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                            <MultiBinding Converter="{StaticResource relativePositionConverter}">
+                                                                                <Binding Path="(fluentWpf:PointerTracker.RootObject)" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                                <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
+                                                                                <Binding Path="(fluentWpf:PointerTracker.Position)" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Rectangle}}" />
                                                                             </MultiBinding>
                                                                         </RadialGradientBrush.GradientOrigin>
                                                                         <GradientStop Offset="0" Color="Transparent" />
@@ -231,8 +209,7 @@
                                                     </Border>
 
                                                     <!--  Content  -->
-                                                    <Border BorderBrush="{x:Null}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <Border BorderBrush="{x:Null}" BorderThickness="{TemplateBinding BorderThickness}">
                                                         <ContentPresenter x:Name="contentPresenter"
                                                                           Margin="{TemplateBinding Padding}"
                                                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -256,20 +233,18 @@
                                                         <VisualStateGroup x:Name="CommonStates">
                                                             <VisualState x:Name="Normal">
                                                                 <Storyboard>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="backgroundBorder"
-                                                                        Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                        To="0"
-                                                                        Duration="0:0:0.600">
+                                                                    <DoubleAnimation Storyboard.TargetName="backgroundBorder"
+                                                                                     Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                                     To="0"
+                                                                                     Duration="0:0:0.600">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <CubicEase EasingMode="EaseOut" />
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="contentPresenter"
-                                                                        Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
-                                                                        To="0"
-                                                                        Duration="0:0:0.2">
+                                                                    <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
+                                                                                     To="0"
+                                                                                     Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <QuadraticEase EasingMode="EaseInOut" />
                                                                         </DoubleAnimation.EasingFunction>
@@ -278,20 +253,18 @@
                                                             </VisualState>
                                                             <VisualState x:Name="MouseOver">
                                                                 <Storyboard>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="backgroundBorder"
-                                                                        Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                        To="0.5"
-                                                                        Duration="0:0:0.600">
+                                                                    <DoubleAnimation Storyboard.TargetName="backgroundBorder"
+                                                                                     Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                                     To="0.5"
+                                                                                     Duration="0:0:0.600">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <CubicEase EasingMode="EaseOut" />
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="contentPresenter"
-                                                                        Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
-                                                                        To="60"
-                                                                        Duration="0:0:0.2">
+                                                                    <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
+                                                                                     To="60"
+                                                                                     Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <QuadraticEase EasingMode="EaseInOut" />
                                                                         </DoubleAnimation.EasingFunction>
@@ -300,20 +273,18 @@
                                                             </VisualState>
                                                             <VisualState x:Name="Pressed">
                                                                 <Storyboard>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="backgroundBorder"
-                                                                        Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                        To="0.5"
-                                                                        Duration="0:0:0.600">
+                                                                    <DoubleAnimation Storyboard.TargetName="backgroundBorder"
+                                                                                     Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                                     To="0.5"
+                                                                                     Duration="0:0:0.600">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <CubicEase EasingMode="EaseOut" />
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
-                                                                    <DoubleAnimation
-                                                                        Storyboard.TargetName="contentPresenter"
-                                                                        Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
-                                                                        To="60"
-                                                                        Duration="0:0:0.2">
+                                                                    <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
+                                                                                     To="60"
+                                                                                     Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <QuadraticEase EasingMode="EaseInOut" />
                                                                         </DoubleAnimation.EasingFunction>
@@ -415,8 +386,7 @@
 
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="root" Property="Background"
-                                                                Value="#BB808080" />
+                                                        <Setter TargetName="root" Property="Background" Value="#BB808080" />
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
@@ -486,8 +456,7 @@
                                                       WindowChrome.IsHitTestVisibleInChrome="True">
                                                 <MenuItem.ItemContainerStyle>
                                                     <Style TargetType="MenuItem">
-                                                        <Setter Property="Command"
-                                                                Value="{Binding DataContext.SelectInstallCommand, RelativeSource={RelativeSource AncestorType={x:Type views:GameView}}}" />
+                                                        <Setter Property="Command" Value="{Binding DataContext.SelectInstallCommand, RelativeSource={RelativeSource AncestorType={x:Type views:GameView}}}" />
                                                         <Setter Property="CommandParameter" Value="{Binding}" />
                                                         <Setter Property="HorizontalAlignment" Value="Stretch" />
                                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -583,8 +552,7 @@
                                                       FontSize="11"
                                                       IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}"
                                                       Style="{StaticResource ToggleSwitchStyle}">
-                                            <TextBlock
-                                                Text="{Binding IsVREnabled.Value, Converter={StaticResource BooleanToStringConverter}}" />
+                                            <TextBlock Text="{Binding IsVREnabled.Value, Converter={StaticResource BooleanToStringConverter}}" />
                                         </ToggleButton>
 
                                     </Grid>

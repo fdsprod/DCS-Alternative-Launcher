@@ -11,7 +11,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             InitializeComponent();
 
-            Browser.RequestHandler = new RequestOverrideHandler();
+            //Browser.RequestHandler = new RequestOverrideHandler();
+            Browser.LifeSpanHandler = new ChromiumLifeSpanHandler();
         }
     }
 
@@ -25,6 +26,37 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             }
 
             Process.Start(request.Url);
+            return true;
+        }
+
+        public override bool OnOpenUrlFromTab(IWebBrowser browserControl, IBrowser browser, IFrame frame, string targetUrl,
+            WindowOpenDisposition targetDisposition, bool userGesture)
+        {
+            return false;
+        }
+    }
+
+    public class ChromiumLifeSpanHandler : ILifeSpanHandler
+    {
+        public bool DoClose(IWebBrowser chromiumWebBrowser, IBrowser browser)
+        {
+            return false;
+        }
+
+        public void OnAfterCreated(IWebBrowser chromiumWebBrowser, IBrowser browser)
+        {
+
+        }
+
+        public void OnBeforeClose(IWebBrowser chromiumWebBrowser, IBrowser browser)
+        {
+
+        }
+
+        public bool OnBeforePopup(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName, WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo, IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser)
+        {
+            newBrowser = null;
+            Process.Start(targetUrl);
             return true;
         }
     }
