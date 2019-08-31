@@ -127,5 +127,10 @@ namespace AutoUpdate
         {
                Dispatcher.Invoke(() => progress.Value = count);
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

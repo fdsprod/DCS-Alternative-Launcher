@@ -8,6 +8,7 @@
         Width="400"
         Height="500"
         AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -41,7 +42,9 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Opacity="0.75"
-                       Source="/Images/dal-icon-256.png"
+                       RenderOptions.EdgeMode="Aliased"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       Source="/Images/dal-icon-white.png"
                        Stretch="Uniform" />
                 <TextBlock Grid.Row="1"
                            HorizontalAlignment="Center"

@@ -199,7 +199,9 @@
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
+    <Compile Include="DomainObjects\SettingsProfile.cs" />
     <Compile Include="Extensions\ScreenExtensions.cs" />
+    <Compile Include="Lua\AutoexecLuaContext.cs" />
     <Compile Include="Services\IAutoUpdateService.cs" />
     <Compile Include="DomainObjects\AutoUpdateVersionInfo.cs" />
     <Compile Include="ComponentModel\NavigationAwareBase.cs" />
@@ -813,6 +815,7 @@
     <Resource Include="Images\discord.png" />
     <Resource Include="Images\GitHub-logo-header.png" />
     <Resource Include="Images\SplashBackground.png" />
+    <Resource Include="Images\dal-icon-white.png" />
     <Content Include="Images\Wallpaper\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

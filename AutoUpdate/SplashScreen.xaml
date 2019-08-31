@@ -10,6 +10,7 @@
         Height="500"
         AllowsTransparency="True"
         Background="Transparent"
+        MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
@@ -53,7 +54,9 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Opacity="0.75"
-                       Source="/Images/dal-icon-256.png"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       RenderOptions.EdgeMode="Aliased"
+                       Source="/Images/dal-icon-white.png"
                        Stretch="Uniform" />
                 <TextBlock Grid.Row="1"
                            HorizontalAlignment="Center"
@@ -73,7 +76,8 @@
                 <ProgressBar x:Name="progress"
                              Grid.Row="3"
                              Height="10"
-                             VerticalAlignment="Bottom" />
+                             VerticalAlignment="Bottom"
+                             Background="Transparent" />
             </Grid>
         </fluentWpf:AcrylicPanel>
     </Grid>

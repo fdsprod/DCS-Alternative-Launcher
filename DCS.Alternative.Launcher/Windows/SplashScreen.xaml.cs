@@ -17,5 +17,10 @@ namespace DCS.Alternative.Launcher.Windows
             get { return lblStatus.Text; }
             set { lblStatus.Text = value; }
         }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
