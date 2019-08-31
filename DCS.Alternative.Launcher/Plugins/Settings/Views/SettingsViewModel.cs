@@ -47,7 +47,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 Categories.Add(new CategoryHeaderSettingsViewModel("DCS"));
             }
 
-            foreach (var category in optionsCategories)
+            foreach (var category in optionsCategories.OrderBy(c=>c.DisplayOrder))
             {
                 Categories.Add(new DcsOptionCategoryViewModel(category.DisplayName.ToUpper(), category.Id, _controller));
             }

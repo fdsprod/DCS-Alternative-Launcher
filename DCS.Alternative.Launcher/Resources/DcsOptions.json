@@ -2,6 +2,7 @@
 	{
 		"Id": "VR",
 		"DisplayName": "VR",
+		"DisplayOrder":  6,
 		"Options": [
 			{
 				"id": "enable",
@@ -78,7 +79,8 @@
 	},
 	{
 		"Id": "difficulty",
-		"DisplayName": "Difficulty",
+		"DisplayName": "GAMEPLAY",
+		"DisplayOrder":  2,
 		"Options": [
 			{
 				"id": "RBDAI",
@@ -456,7 +458,8 @@
 	},
 	{
 		"Id": "graphics",
-		"DisplayName": "Graphics",
+		"DisplayName": "SYSTEM",
+		"DisplayOrder":  0,
 		"Options": [
 			{
 				"id": "textures",
@@ -1122,7 +1125,8 @@
 	},
 	{
 		"Id": "miscellaneous",
-		"DisplayName": "Miscellaneous",
+		"DisplayName": "MISC.",
+		"DisplayOrder":  3,
 		"Options": [
 			{
 				"id": "Coordinate_Display",
@@ -1286,7 +1290,8 @@
 	},
 	{
 		"Id": "sound",
-		"DisplayName": "Sound",
+		"DisplayName": "AUDIO",
+		"DisplayOrder":  4,
 		"Options": [
 			{
 				"id": "volume",

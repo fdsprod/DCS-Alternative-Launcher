@@ -60,7 +60,7 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 
         private void OnOpenUrl(string value)
         {
-            Process.Start(value);
+            Process.Start(value.Replace("$amp;", "&"));
         }
     }
 }
