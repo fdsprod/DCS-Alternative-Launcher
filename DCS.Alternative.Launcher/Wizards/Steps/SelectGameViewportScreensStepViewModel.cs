@@ -121,17 +121,6 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             return base.InitializeAsync();
         }
 
-        public override bool Validate()
-        {
-            if (Screens.Count(s => s.IsSelected.Value) < 2)
-            {
-                MessageBoxEx.Show("You must select at least 2 monitors for a multi-monitor setup.", "Select Monitors");
-                return false;
-            }
-
-            return base.Validate();
-        }
-
         public override bool Commit()
         {
             var selectedScreens = Screens.Where(s => s.IsSelected.Value).ToArray();
