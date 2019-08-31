@@ -1562,7 +1562,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.01",
-			"FormatString": "N2"
+			"FormatString": "P0"
 		}
 	}, /*
     {
@@ -2347,7 +2347,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -2364,7 +2364,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -3305,7 +3305,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.01",
-			"FormatString": "N2"
+			"FormatString": "P0"
 		}
 	}, /*
     {
@@ -4090,7 +4090,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -4107,7 +4107,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -4984,7 +4984,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.01",
-			"FormatString": "N2"
+			"FormatString": "P0"
 		}
 	}, /*
     {
@@ -5769,7 +5769,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -5786,7 +5786,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7049,7 +7049,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7066,7 +7066,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7083,7 +7083,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7117,7 +7117,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.001",
-			"FormatString": "N3"
+			"FormatString": "P1"
 		}
 	},
 	{
@@ -7282,7 +7282,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7299,7 +7299,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7310,7 +7310,7 @@
 		"MinMax": [
 			{
 				"Min": 0,
-				"Max": 1
+				"FormatString": "P0"
 			}
 		],
 		"Params": {
@@ -7350,7 +7350,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.001",
-			"FormatString": "N3"
+			"FormatString": "P1"
 		}
 	},
 	{
@@ -7515,7 +7515,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7532,7 +7532,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7549,7 +7549,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.1",
-			"FormatString": "N1"
+			"FormatString": "P0"
 		}
 	},
 	{
@@ -7583,7 +7583,7 @@
 		"Params": {
 			"IsSnapToTickEnabled": "true",
 			"TickFrequency": "0.001",
-			"FormatString": "N3"
+			"FormatString": "P1"
 		}
 	},
 	{
@@ -7602,5 +7602,5 @@
 			"TickFrequency": "0.1",
 			"FormatString": "N1"
 		}
-	},
+	}
 ]

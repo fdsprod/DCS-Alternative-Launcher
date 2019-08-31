@@ -801,7 +801,7 @@
 				"value": 0.5,
 				"Params": {
 					"TickFrequency": "0.01",
-					"FormatString": "N0"
+					"FormatString": "P0"
 				},
 				"minMax": [
 					{
