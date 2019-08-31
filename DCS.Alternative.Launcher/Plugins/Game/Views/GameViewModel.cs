@@ -188,6 +188,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     var latestVersions = await _dcsWorldService.GetLatestVersionsAsync();
                     var variant = install.Variant;
 
+                    install.RefreshInfo();
+
                     IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
                     PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" : "PLAY";
                     DcsVersion.Value = IsDcsOutOfDate.Value ? "DCS WORLD IS OUT OF DATE" : "DCS WORLD IS UP TO DATE";
