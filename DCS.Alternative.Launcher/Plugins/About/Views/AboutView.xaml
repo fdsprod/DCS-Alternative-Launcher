@@ -130,7 +130,7 @@
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Command="{Binding OpenUrlCommand}"
-                                    CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick$amp;hosted_button_id=9RRKTB5QZBKDS$amp;source=url"
+                                    CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2H8KFHQMEYQP6&source=url"
                                     Cursor="Hand">
                                 <Image RenderOptions.BitmapScalingMode="HighQuality"
                                        Source="/Images/paypal-dontation.png"
