@@ -12,24 +12,15 @@ namespace DCS.Alternative.Launcher.Lua
 
         public AutoexecLuaContext(InstallLocation install)
         {
-            _autoexecPath = Path.Combine(install.SavedGamesPath, "Config", "autoexec.cfg");
+            _autoexecPath = install.AutoexecCfg;
 
-            if (File.Exists(_autoexecPath))
-            {
-                DoFile(_autoexecPath);
-            }
+            DoString("options = options or {}");
         }
 
         public void SetValue(string id, object value)
         {
-            if (id.StartsWith("options."))
-            {
-                id = id.Substring("options.".Length);
-            }
-
             var optionPaths = id.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             var table = string.Empty;
-            var optionName = optionPaths[optionPaths.Length - 1];
 
             for (var i = 0; i < optionPaths.Length - 1; i++)
             {
@@ -60,9 +51,9 @@ namespace DCS.Alternative.Launcher.Lua
             DoString($"{id} = {valueStr}");
         }
 
-        public void Save()
+        public void Save(string optionId)
         {
-            DoString($"print(options) {Environment.NewLine} serializeToFile(\'{_autoexecPath.Replace("\\", "\\\\")}\', \'options\', options)");
+            DoString($"serializeToFile(\'{_autoexecPath.Replace("\\", "\\\\")}\', \'{optionId}\', {optionId}, 'a')");
         }
     }
 }

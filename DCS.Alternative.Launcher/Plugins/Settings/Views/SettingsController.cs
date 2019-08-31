@@ -496,12 +496,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public object ResetAdvancedOptionValue(string categoryId, string optionId)
         {
-            var options = _settingsService.GetAdvancedOptions(categoryId);
-            var option = options.FirstOrDefault(o => o.Id == optionId);
+            var defaultValue = _settingsService.GetAdvancedOptionDefaultValue(categoryId, optionId);
 
-            _settingsService.DeleteValue(string.Format(SettingsCategories.ViewportOptionsFormat, categoryId), optionId);
+            _settingsService.DeleteValue(SettingsCategories.AdvancedOptions, optionId);
 
-            return option?.Value;
+            return defaultValue;
         }
 
         public object ResetDcsOption(string categoryId, string optionId)

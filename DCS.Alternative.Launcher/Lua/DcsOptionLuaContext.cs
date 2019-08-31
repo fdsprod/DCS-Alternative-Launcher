@@ -29,7 +29,7 @@ namespace DCS.Alternative.Launcher.Lua
 
         public void Save()
         {
-            DoString($"print(options) {Environment.NewLine} serializeToFile(\'{_optionsPath.Replace("\\", "\\\\")}\', \'options\', options)");
+            DoString($"serializeToFile(\'{_optionsPath.Replace("\\", "\\\\")}\', \'options\', options)");
         }
 
         public object GetValue(string categoryId, string id)

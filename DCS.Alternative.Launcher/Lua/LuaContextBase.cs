@@ -49,6 +49,11 @@ namespace DCS.Alternative.Launcher.Lua
 
         private void Print(object text)
         {
+            if (text == null)
+            {
+                return;
+            }
+
             Tracer.Info(text?.ToString());
         }
     }

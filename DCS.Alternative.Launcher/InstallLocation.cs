@@ -45,6 +45,12 @@ namespace DCS.Alternative.Launcher
         {
             get { return GetPath(_updaterPath); }
         }
+
+        public string AutoexecCfg
+        {
+            get { return Path.Combine(SavedGamesPath, "Config", "autoexec.cfg"); }
+        }
+
         public string SavedGamesPath
         {
             get

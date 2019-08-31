@@ -1,7 +1,6 @@
-﻿
-function serializeToFile(path, name, t)
+﻿function serializeToFile(path, name, t, mode)
 	if t then
-		local file, err = io.open(path, 'w')
+		local file, err = io.open(path, mode or 'w')
 		
 		if file then
 			local s = Serializer:new(file)

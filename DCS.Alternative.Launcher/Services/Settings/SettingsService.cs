@@ -29,6 +29,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
         private Dictionary<string, Option[]> _advancedOptionCache;
+        private Dictionary<string, Option[]> _defaultAdvancedOptionCache;
         private DcsOptionsCategory[] _dcsOptions;
         private List<InstallLocation> _installationCache;
         private InstallLocation _selectedInstall;
@@ -81,20 +82,22 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             if (_advancedOptionCache == null)
             {
-                const string path = "Resources/AdvancedOptions.json";
-
-                var contents = File.ReadAllText(path);
-                var allOptions = JsonConvert.DeserializeObject<Option[]>(contents);
-
-                _advancedOptionCache = new Dictionary<string, Option[]>();
-
-                foreach (var group in allOptions.GroupBy(o => GetCategory(o?.Id)))
-                {
-                    _advancedOptionCache.Add(group.Key, group.ToArray());
-                }
+                _advancedOptionCache = CreateAdvancedOptions();
+                _defaultAdvancedOptionCache = CreateAdvancedOptions();
             }
 
             return _advancedOptionCache[category];
+        }
+
+        public object GetAdvancedOptionDefaultValue(string category, string optionId)
+        {
+            if (_advancedOptionCache == null)
+            {
+                _advancedOptionCache = CreateAdvancedOptions();
+                _defaultAdvancedOptionCache = CreateAdvancedOptions();
+            }
+
+            return _defaultAdvancedOptionCache[category].FirstOrDefault(o => o.Id == optionId)?.Value;
         }
 
         public DcsOptionsCategory[] GetDcsOptions()
@@ -431,6 +434,23 @@ namespace DCS.Alternative.Launcher.Services.Settings
                     _settings = new Dictionary<string, Dictionary<string, object>>();
                 }
             }
+        }
+
+        private Dictionary<string, Option[]> CreateAdvancedOptions()
+        {
+            const string path = "Resources/AdvancedOptions.json";
+
+            var contents = File.ReadAllText(path);
+            var allOptions = JsonConvert.DeserializeObject<Option[]>(contents);
+
+            var advancedOptions = new Dictionary<string, Option[]>();
+
+            foreach (var group in allOptions.GroupBy(o => GetCategory(o?.Id)))
+            {
+                advancedOptions.Add(group.Key, group.ToArray());
+            }
+
+            return advancedOptions;
         }
     }
 }

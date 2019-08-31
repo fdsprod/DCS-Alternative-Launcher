@@ -12,6 +12,8 @@ namespace DCS.Alternative.Launcher.Services
             set;
         }
 
+        object GetAdvancedOptionDefaultValue(string category, string optionId);
+
         Option[] GetAdvancedOptions(string category);
 
         DcsOptionsCategory[] GetDcsOptions();

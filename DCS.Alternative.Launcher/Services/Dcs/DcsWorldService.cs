@@ -381,14 +381,17 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             {
                 var install = _settingsService.SelectedInstall;
 
+                File.WriteAllText(install.AutoexecCfg, "");
+
                 using (var context = new AutoexecLuaContext(install))
                 {
                     WriteOptions(OptionCategory.Graphics, context);
                     WriteRangedOptions(OptionCategory.Camera, context);
                     WriteRangedOptions(OptionCategory.CameraMirrors, context);
                     WriteOptions(OptionCategory.Terrain, context);
-
-                    context.Save();
+                    WriteOptions(OptionCategory.TerrainMirror, context);
+                    WriteOptions(OptionCategory.TerrainReflection, context);
+                    WriteOptions(OptionCategory.Sound, context);
                 }
             });
         }
@@ -486,13 +489,14 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
                 {
                     context.SetValue(option.Id, value);
+                    context.Save(option.Id);
                 }
             }
         }
 
         private void WriteRangedOptions(string category, AutoexecLuaContext context)
         {
-            var options = _settingsService.GetAdvancedOptions(OptionCategory.CameraMirrors);
+            var options = _settingsService.GetAdvancedOptions(category);
 
             foreach (var range in CameraRangeSettings)
             {
@@ -504,10 +508,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     }
 
                     context.SetValue(option.Id.Replace("Extreme", range), value);
+                    context.Save(option.Id.Replace("Extreme", range));
                 }
             }
         }
-        
+
 
         //private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
         //{
