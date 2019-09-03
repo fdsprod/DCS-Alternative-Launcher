@@ -47,6 +47,45 @@
                                    Stretch="UniformToFill" />
                         </DataTemplate>
                     </controls:TransitionControl.ContentTemplate>
+                    <controls:TransitionControl.EnterTransition>
+                        <Storyboard Duration="0:0:0.25">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0"
+                                             To="1"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0"
+                                             To="1"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </controls:TransitionControl.EnterTransition>
+                    <controls:TransitionControl.ExitTransition>
+                        <Storyboard Duration="0:0:0.25">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="1"
+                                             To="0"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             To="0"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </controls:TransitionControl.ExitTransition>
                 </controls:TransitionControl>
                 <Image HorizontalAlignment="Center"
                        VerticalAlignment="Center"
