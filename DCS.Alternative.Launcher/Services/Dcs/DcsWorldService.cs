@@ -52,7 +52,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 var settingsService = _container.Resolve<ISettingsService>();
                 var modules = new List<Module>();
                 var install = settingsService.SelectedInstall;
-                var autoupdateModules = install.Modules;
+                var autoupdateModules = new List<string>(install.Modules);
+
+                autoupdateModules.Add("Su-25T");
+                autoupdateModules.Add("TF-51D");
 
                 if (!install.IsValidInstall)
                 {
@@ -93,31 +96,36 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 SA342FM = {}
                                 " + $"__DCS_VERSION__ = \"{install.Version}\"");
 
+                        var directoryName = Path.GetDirectoryName(folder);
+
                         lua.DoString($"current_mod_path = \"{folder.Replace("\\", "\\\\")}\"");
 
                         var moduleId = string.Empty;
                         var skinsPath = string.Empty;
+                        var displayName = string.Empty;
 
                         lua["declare_plugin"] = new Action<string, LuaTable>((id, description) =>
                         {
-                            if (description.Keys.OfType<string>().All(k => k != "update_id"))
+                            if (description.Keys.OfType<string>().All(k => k != "installed"))
                             {
                                 return;
                             }
 
-                            moduleId = description["update_id"].ToString();
-                            skinsPath = ((LuaTable) ((LuaTable) description["Skins"])[1])["dir"].ToString();
-                        });
-
-                        lua["make_flyable"] = new Action<string, string, LuaTable, string>((displayName, b, c, d) =>
-                        {
-                            // For whatever reason ED decided the Hornet would have a stupid display name... 
-                            // So, we get to add stupid code like this... 
-                            if (displayName.Contains("_hornet"))
+                            if (description.Keys.OfType<string>().All(k => k != "update_id"))
                             {
-                                displayName = displayName.Split('_')[0];
+                                moduleId = description["fileMenuName"]?.ToString();
+                            }
+                            else
+                            {
+                                moduleId = description["update_id"]?.ToString();
                             }
 
+                            skinsPath = ((LuaTable)((LuaTable)description["Skins"])[1])["dir"].ToString();
+                            displayName = ((LuaTable)((LuaTable)description["Missions"])[1])["name"].ToString();
+                        });
+
+                        lua["make_flyable"] = new Action<string, string, LuaTable, string>((a, b, c, d) =>
+                        {
                             if (!string.IsNullOrEmpty(moduleId) && autoupdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
                                 var module = new Module
