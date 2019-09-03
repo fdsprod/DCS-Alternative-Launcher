@@ -121,8 +121,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                     return;
                 }
 
-                Installations.Remove(installation);
-                Controller.RemoveInstalls(installation.ConcreteInstall.Directory);
+                if (MessageBoxEx.Show($"Are you sure you want to remove the {installation.ConcreteInstall.Name} install", "Remove Install", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
+                {
+                    Installations.Remove(installation);
+                    Controller.RemoveInstalls(installation.ConcreteInstall.Directory);
+                }
             }
             catch (Exception e)
             {
