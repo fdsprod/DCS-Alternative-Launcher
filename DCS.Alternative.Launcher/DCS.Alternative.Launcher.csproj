@@ -199,6 +199,7 @@
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
+    <Compile Include="Diagnostics\AdobeAcrobatHelper.cs" />
     <Compile Include="DomainObjects\SettingsProfile.cs" />
     <Compile Include="Extensions\ScreenExtensions.cs" />
     <Compile Include="Lua\AutoexecLuaContext.cs" />

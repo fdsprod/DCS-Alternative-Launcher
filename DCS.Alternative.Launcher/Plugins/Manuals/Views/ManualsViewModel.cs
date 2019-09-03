@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.ComponentModel;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
+using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.ServiceModel;
 using Reactive.Bindings;
@@ -52,6 +54,16 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 
         private void OnOpenDocument(FileModel value)
         {
+            if (AdobeAcrobatHelper.IsDCVersionInstalled() && !AdobeAcrobatHelper.IsProtectedModeDisabled())
+            {
+                if(MessageBoxEx.Show($"The version of Acrobat Reader you have installed requires a registry change to allow this application to launch PDFs.{Environment.NewLine}Do you want to allow DCS Alternative Launcher to make this change?", "Disable Protected Mode", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                AdobeAcrobatHelper.ApplyProtectedModeFix();
+            }
+
             Process.Start(value.Path);
         }
 
