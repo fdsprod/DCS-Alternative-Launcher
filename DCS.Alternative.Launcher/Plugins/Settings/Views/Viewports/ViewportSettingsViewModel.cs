@@ -113,7 +113,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                         continue;
                     }
 
-                    selectModuleDialog.Modules.Add(i);
+                    var devices = Controller.GetViewportDevices(i.ModuleId);
+
+                    if (devices.Any())
+                    {
+                        selectModuleDialog.Modules.Add(i);
+                    }
                 }
 
                 selectModuleDialog.SelectedModule = selectModuleDialog.Modules.First();

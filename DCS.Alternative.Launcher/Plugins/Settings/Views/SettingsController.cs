@@ -547,5 +547,10 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             return isValid;
         }
+
+        public ViewportDevice[] GetViewportDevices(string moduleId)
+        {
+            return _settingsService.GetViewportDevices(moduleId);
+        }
     }
 }
