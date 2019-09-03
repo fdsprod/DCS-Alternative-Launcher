@@ -37,6 +37,7 @@ namespace DCS.Alternative.Launcher
         {
             get { return File.Exists(ExePath) && File.Exists(UpdaterPath) && File.Exists(UpdaterConfigPath); }
         }
+
         public string ExePath
         {
             get { return GetPath(_exePath); }

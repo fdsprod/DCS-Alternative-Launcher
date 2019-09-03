@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using Reactive.Bindings;
@@ -20,7 +21,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             DetectInstallationsCommand.Subscribe(OnDetectInstallations);
             RemoveInstallationCommand.Subscribe(OnRemoveInstallation);
             AddInstallationCommand.Subscribe(OnAddInstallation);
+            VerifyInstallationsCommand.Subscribe(OnVerifyInstallations);
         }
+
+        public ReactiveCommand VerifyInstallationsCommand
+        {
+            get;
+        } = new ReactiveCommand();
 
         public ReactiveCommand RemoveInstallationCommand
         {
@@ -37,15 +44,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             get;
         } = new ReactiveCommand();
 
-        public ReactiveCollection<InstallLocation> Installations
+        public ReactiveCollection<InstallLocationModel> Installations
         {
             get;
-        } = new ReactiveCollection<InstallLocation>();
+        } = new ReactiveCollection<InstallLocationModel>();
 
-        public ReactiveProperty<InstallLocation> SelectedInstall
+        public ReactiveProperty<InstallLocationModel> SelectedInstall
         {
             get;
-        } = new ReactiveProperty<InstallLocation>();
+        } = new ReactiveProperty<InstallLocationModel>();
 
         public override Task ActivateAsync()
         {
@@ -55,7 +62,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
 
                 foreach (var install in Controller.GetInstallations())
                 {
-                    Installations.Add(install);
+                    Installations.Add(new InstallLocationModel(install));
                 }
             }
             catch (Exception e)
@@ -82,7 +89,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                     var selectedFolder = folderBrowser.SelectedPath;
                     var installation = new InstallLocation(selectedFolder);
 
-                    Installations.Add(installation);
+                    Installations.Add(new InstallLocationModel(installation));
 
                     Controller.AddInstalls(installation.Directory);
                 }
@@ -91,6 +98,16 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             {
                 GeneralExceptionHandler.Instance.OnError(e);
             }
+        }
+
+        private void OnVerifyInstallations()
+        {
+            foreach (var install in Installations)
+            {
+                install.Verify();
+            }
+
+            MessageBoxEx.Show("Verification complete.");
         }
 
         private void OnRemoveInstallation()
@@ -105,7 +122,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                 }
 
                 Installations.Remove(installation);
-                Controller.RemoveInstalls(installation.Directory);
+                Controller.RemoveInstalls(installation.ConcreteInstall.Directory);
             }
             catch (Exception e)
             {
@@ -124,7 +141,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                 {
                     if (Installations.All(i => i.ToString() != installation.ToString()))
                     {
-                        Installations.Add(installation);
+                        Installations.Add(new InstallLocationModel(installation));
                         addedInstallations.Add(installation.Directory);
                     }
                 }
@@ -138,6 +155,31 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             {
                 GeneralExceptionHandler.Instance.OnError(e);
             }
+        }
+    }
+
+    public class InstallLocationModel
+    {
+        public InstallLocationModel(InstallLocation install)
+        {
+            ConcreteInstall = install;
+
+            Verify();
+        }
+
+        public InstallLocation ConcreteInstall
+        {
+            get;
+        }
+
+        public ReactiveProperty<bool> IsValidInstall
+        {
+            get;
+        } = new ReactiveProperty<bool>();
+
+        public void Verify()
+        {
+            IsValidInstall.Value = ConcreteInstall.IsValidInstall;
         }
     }
 }
