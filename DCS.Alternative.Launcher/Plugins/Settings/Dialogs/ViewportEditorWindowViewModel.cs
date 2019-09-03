@@ -117,7 +117,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
             foreach (var device in _devices)
             {
-                if (ConsumedViewports.Any(v => v == device.ViewportName))
+                if (ConsumedViewports.Any(v => v == device.ViewportName) || 
+                    Viewports.Any(v=>v.Name.Value == device.ViewportName))
                 {
                     continue;
                 }

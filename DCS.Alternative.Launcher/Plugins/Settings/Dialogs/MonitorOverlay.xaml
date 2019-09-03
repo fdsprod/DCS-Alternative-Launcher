@@ -1,6 +1,8 @@
 ﻿<Window x:Class="DCS.Alternative.Launcher.Plugins.Settings.Dialogs.MonitorOverlay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Interactions="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Behaviors"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Viewport Editor"
@@ -18,6 +20,9 @@
                       ResizeBorderThickness="0"
                       UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
+    <Interactions:Interaction.Behaviors>
+        <behaviors:WindowDisableContextMenulBehavior />
+    </Interactions:Interaction.Behaviors>
     <Grid>
         <Border Background="#AF000000" />
     </Grid>
