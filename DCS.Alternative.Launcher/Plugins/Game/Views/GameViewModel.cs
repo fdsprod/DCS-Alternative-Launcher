@@ -7,6 +7,7 @@ using System.Windows;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
+using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
@@ -224,9 +225,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             IsVREnabled.Value = _settingsService.GetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, false);
 
-#pragma warning disable 4014
-            Task.Run(async () =>
-#pragma warning restore 4014
+            SafeAsync.Run(() => Task.Run(async () =>
             {
                 IsLoading.Value = true;
 
@@ -237,7 +236,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 IsLoading.Value = false;
 
                 await CheckForUpdatesAsync();
-            });
+            }), Tracer.Error);
 
             await base.InitializeAsync();
         }
