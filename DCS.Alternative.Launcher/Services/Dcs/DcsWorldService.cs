@@ -106,7 +106,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                         lua["declare_plugin"] = new Action<string, LuaTable>((id, description) =>
                         {
-                            if (description.Keys.OfType<string>().All(k => k != "installed"))
+                            if (description.Keys.OfType<string>().All(k => k != "installed" && k != "update_id"))
                             {
                                 return;
                             }
@@ -126,6 +126,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                         lua["make_flyable"] = new Action<string, string, LuaTable, string>((a, b, c, d) =>
                         {
+                            if (displayName.Contains("_hornet"))
+                            {
+                                displayName = displayName.Split('_')[0];
+                            }
+
                             if (!string.IsNullOrEmpty(moduleId) && autoupdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
                                 var module = new Module
