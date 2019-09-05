@@ -200,7 +200,9 @@
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
     <Compile Include="Diagnostics\AdobeAcrobatHelper.cs" />
+    <Compile Include="Diagnostics\DcsProcessMonitor.cs" />
     <Compile Include="DomainObjects\SettingsProfile.cs" />
+    <Compile Include="DomainObjects\SettingsProfileType.cs" />
     <Compile Include="Extensions\ScreenExtensions.cs" />
     <Compile Include="Lua\AutoexecLuaContext.cs" />
     <Compile Include="Services\IAutoUpdateService.cs" />

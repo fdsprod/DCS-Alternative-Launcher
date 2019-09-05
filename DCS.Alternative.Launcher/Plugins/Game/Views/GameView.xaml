@@ -215,10 +215,11 @@
                                                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                                           Focusable="False"
+                                                                          RenderTransformOrigin="0.5, 0.5"
                                                                           RecognizesAccessKey="True"
                                                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                                             <ContentPresenter.RenderTransform>
-                                                                <TranslateTransform X="0" Y="0" />
+                                                                <ScaleTransform ScaleX="1" ScaleY="1" />
                                                             </ContentPresenter.RenderTransform>
                                                         </ContentPresenter>
                                                     </Border>
@@ -242,8 +243,16 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
-                                                                                     To="0"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                     To="1"
+                                                                                     Duration="0:0:0.2">
+                                                                        <DoubleAnimation.EasingFunction>
+                                                                            <QuadraticEase EasingMode="EaseInOut" />
+                                                                        </DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     To="1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
                                                                             <QuadraticEase EasingMode="EaseInOut" />
@@ -262,11 +271,19 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
-                                                                                     To="60"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                     To="1.1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
-                                                                            <QuadraticEase EasingMode="EaseInOut" />
+                                                                            <BounceEase EasingMode="EaseInOut" />
+                                                                        </DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     To="1.1"
+                                                                                     Duration="0:0:0.2">
+                                                                        <DoubleAnimation.EasingFunction>
+                                                                            <BounceEase EasingMode="EaseInOut" />
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                 </Storyboard>
@@ -388,6 +405,9 @@
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter TargetName="root" Property="Background" Value="#BB808080" />
                                                     </Trigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="root" Property="Background" Value="#BBBFBFBF" />
+                                                    </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -461,7 +481,6 @@
                                                         <Setter Property="HorizontalAlignment" Value="Stretch" />
                                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                                         <Setter Property="VerticalAlignment" Value="Stretch" />
-                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                                         <Setter Property="Background" Value="#FF11171D" />
                                                         <Setter Property="BorderBrush" Value="#FF11171D" />
                                                         <Setter Property="Padding" Value="0" />

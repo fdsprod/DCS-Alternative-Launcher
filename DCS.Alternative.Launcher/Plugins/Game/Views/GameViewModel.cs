@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
@@ -24,12 +26,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         private readonly IDcsWorldService _dcsWorldService;
         private readonly ISettingsService _settingsService;
 
+        private DispatcherTimer _checkPlayingTimer;
+
         public GameViewModel(IContainer container)
         {
+            DcsProcessMonitor.Instance.DcsProcessExited += OnDcsProcessExited;
+
             _container = container;
             _controller = container.Resolve<GameController>();
-
-            PlayButtonText.Value = "PLAY";
 
             _settingsService = _container.Resolve<ISettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
@@ -41,6 +45,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                                 FailedVersionCheck.AsObservable()))).Select(_ => IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value && !FailedVersionCheck.Value)
                     .ToReactiveProperty();
 
+            var canPlayObservable =
+                SelectedInstall
+                    .Select(_ => Unit.Default)
+                    .Merge(IsPlayingDcs.Select(_ => Unit.Default))
+                    .Merge(IsUpdateAvailable.Select(_ => Unit.Default)).Select(_ => CanLaunchDcs());
+
+            LaunchDcsCommand = canPlayObservable.ToReactiveCommand();
+
             SelectInstallCommand.Subscribe(OnSelectInstall);
             UpdateDcsCommand.Subscribe(OnUpdateDcs);
             RepairDcsCommand.Subscribe(OnRepairDcs);
@@ -49,7 +61,46 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             ShowNewsArticleCommand.Subscribe(OnShowNewsArticle);
 
             IsVREnabled.Subscribe(OnIsVREnabledChanged);
+
+            _checkPlayingTimer = new DispatcherTimer();
+            _checkPlayingTimer.Interval = TimeSpan.FromSeconds(1);
+            _checkPlayingTimer.Tick += OnCheckPlayingTimerTick;
+            _checkPlayingTimer.Start();
         }
+
+        private void OnDcsProcessExited(object sender, EventArgs e)
+        {
+            Application.Current.MainWindow?.Show();
+            Application.Current.MainWindow?.BringIntoView();
+        }
+
+        private void OnCheckPlayingTimerTick(object sender, EventArgs e)
+        {
+            CheckDcsStatus();
+        }
+
+        private void CheckDcsStatus()
+        {
+            IsPlayingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallRunning(SelectedInstall.Value);
+            IsUpdatingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallUpdating(SelectedInstall.Value);
+
+            UpdatePlayButtonText();
+        }
+
+        private bool CanLaunchDcs()
+        {
+            return SelectedInstall.Value != null && !IsUpdatingDcs.Value && !IsPlayingDcs.Value;
+        }
+
+        public ReactiveProperty<bool> IsPlayingDcs
+        {
+            get;
+        } = new ReactiveProperty<bool>();
+
+        public ReactiveProperty<bool> IsUpdatingDcs
+        {
+            get;
+        } = new ReactiveProperty<bool>();
 
         public ReactiveProperty<bool> IsVREnabled
         {
@@ -124,7 +175,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         public ReactiveCommand LaunchDcsCommand
         {
             get;
-        } = new ReactiveCommand();
+        }
 
         public ReactiveCommand CheckForUpdatesCommand
         {
@@ -192,8 +243,9 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     install.RefreshInfo();
 
                     IsDcsUpToDate.Value = !(IsDcsOutOfDate.Value = install.Version < latestVersions[variant]);
-                    PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" : "PLAY";
                     DcsVersion.Value = IsDcsOutOfDate.Value ? "DCS WORLD IS OUT OF DATE" : "DCS WORLD IS UP TO DATE";
+
+                    UpdatePlayButtonText();
                 }
                 catch (Exception e)
                 {
@@ -207,6 +259,26 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             }
         }
 
+        private void UpdatePlayButtonText()
+        {
+            if (SelectedInstall.Value == null)
+            {
+                PlayButtonText.Value = "NOT INSTALLED";
+            }
+            else if (IsUpdatingDcs.Value)
+            {
+                PlayButtonText.Value = "UPDATING...";
+            }
+            else if (IsPlayingDcs.Value)
+            {
+                PlayButtonText.Value = "RUNNING...";
+            }
+            else
+            {
+                PlayButtonText.Value = IsDcsOutOfDate.Value ? "UPDATE / PLAY" : "PLAY";
+            }
+        }
+
         public override Task ActivateAsync()
         {
             Installations.Clear();
@@ -217,6 +289,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             }
 
             SelectedInstall.Value = _settingsService.SelectedInstall;
+
+            CheckDcsStatus();
 
             return base.ActivateAsync();
         }
