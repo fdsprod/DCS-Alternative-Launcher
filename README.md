@@ -39,7 +39,7 @@ The current planned and WIP feature list is as follows:
 *-Various Terrain Mirror Overrides (currently over 100)*  
 *-Various Terrain Reflections (currently over 100)*  
 *-Various Terrain MFD Options*  
-**Sound** (WIP)  
+**Sound**  (Complete)   
 *-Per module Cockpit World Gain/Lowpass*  
 *-Ambient Samples, Radius, Distnace, Time, Height*  
 *-Doppler Warp*  
