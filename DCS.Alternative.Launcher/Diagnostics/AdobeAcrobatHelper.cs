@@ -58,24 +58,14 @@ namespace DCS.Alternative.Launcher.Diagnostics
 
         public static bool IsProtectedModeDisabled()
         {
-            var software = Registry.LocalMachine.OpenSubKey("Software");
+            var software = Registry.CurrentUser.OpenSubKey("Software");
 
             if (software == null)
             {
                 return false;
             }
 
-            RegistryKey adobe = null;
-
-            if (Environment.Is64BitOperatingSystem)
-            {
-                var software64 = software.OpenSubKey("Wow6432Node");
-
-                if (software64 != null)
-                {
-                    adobe = software64.OpenSubKey("Adobe");
-                }
-            }
+            var adobe = software.OpenSubKey("Adobe");
 
             if (adobe == null)
             {
