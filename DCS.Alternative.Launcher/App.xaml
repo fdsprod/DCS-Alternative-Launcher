@@ -5,7 +5,12 @@
              xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingWave.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingThreeDots.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingFlipPlane.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingPulse.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles/LoadingDoubleBounce.xaml" />
                 <!--  FluentWPF Controls  -->
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
 
@@ -16,6 +21,9 @@
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
             <Color x:Key="MaterialDesignShadow">#AA000000</Color>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFFFFFFF" />
+            </Style>
             <DropShadowEffect x:Key="MaterialDesignShadowDepth3"
                               BlurRadius="14"
                               Direction="270"
