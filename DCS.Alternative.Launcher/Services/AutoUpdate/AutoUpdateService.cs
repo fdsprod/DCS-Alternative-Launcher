@@ -30,8 +30,8 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                 {
                     Tracer.Info("Checking for application updates.");
 
-                    var extractionPath = Path.Combine(Directory.GetCurrentDirectory(), "_update");
-                    var downloadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "_downloads");
+                    var extractionPath = Path.Combine(ApplicationPaths.ApplicationPath, "_update");
+                    var downloadDirectory = Path.Combine(ApplicationPaths.ApplicationPath, "_downloads");
                     var versionPath = Path.Combine(downloadDirectory, "version.json");
 
                     if (Directory.Exists(extractionPath) && Directory.GetFileSystemEntries(extractionPath).Length > 0)
@@ -106,9 +106,9 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
 
                             File.Delete(zipPath);
 
-                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.exe");
-                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.exe.config");
-                            MoveFile(extractionPath, Directory.GetCurrentDirectory(), "AutoUpdate.pdb");
+                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe");
+                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe.config");
+                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.pdb");
                         }
                         catch (Exception e)
                         {

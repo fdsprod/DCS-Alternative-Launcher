@@ -17,12 +17,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 {
     public class SelectGameViewportScreensStepViewModel : WizardStepBase
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileSettingsService _profileSettingsService;
 
         public SelectGameViewportScreensStepViewModel(IContainer container)
             : base(container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _profileSettingsService = container.Resolve<IProfileSettingsService>();
         }
 
         public ReactiveCollection<ScreenModel> Screens
@@ -42,7 +42,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
         public override Task ActivateAsync()
         {
-            var selectedDisplays = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.GameDisplays, new string[0]);
+            var selectedDisplays = _profileSettingsService.GetValue(ProfileSettingsCategories.Viewports, SettingsKeys.GameDisplays, new string[0]);
 
             var screens = Screen.AllScreens.ToArray();
             var boundingBox = Rect.Empty;
@@ -127,7 +127,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
             Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalGameDisplayCount, selectedScreens.Length.ToString());
 
-            _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.GameDisplays, selectedScreens.Select(s => s.Id).ToArray());
+            _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.GameDisplays, selectedScreens.Select(s => s.Id).ToArray());
 
             return base.Commit();
         }

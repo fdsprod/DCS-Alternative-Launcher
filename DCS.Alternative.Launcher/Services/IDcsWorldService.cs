@@ -23,5 +23,8 @@ namespace DCS.Alternative.Launcher.Services
         Task WriteOptionsAsync(bool isVREnabled);
 
         Task WriteViewportOptionsAsync();
+        
+        AdditionalResource[] GetAdditionalResourcesByModule(string moduleId);
+
     }
 }

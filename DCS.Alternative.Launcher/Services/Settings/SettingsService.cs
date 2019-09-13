@@ -8,7 +8,6 @@ using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reactive.Bindings;
-using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
@@ -16,21 +15,8 @@ namespace DCS.Alternative.Launcher.Services.Settings
     {
         private static readonly object _syncRoot = new object();
 
-        private static readonly string[] _optionsCategories =
-        {
-            OptionCategory.TerrainReflection,
-            OptionCategory.TerrainMirror,
-            OptionCategory.Terrain,
-            OptionCategory.CameraMirrors,
-            OptionCategory.Camera,
-            OptionCategory.Graphics,
-            OptionCategory.Sound
-        };
-
         private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
-        private Dictionary<string, Option[]> _advancedOptionCache;
-        private Dictionary<string, Option[]> _defaultAdvancedOptionCache;
-        private DcsOptionsCategory[] _dcsOptions;
+
         private List<InstallLocation> _installationCache;
         private InstallLocation _selectedInstall;
 
@@ -78,131 +64,115 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
         }
 
-        public Option[] GetAdvancedOptions(string category)
+        public bool TryGetValue<T>(string category, string key, out T value)
         {
-            if (_advancedOptionCache == null)
+            lock (_settings)
             {
-                _advancedOptionCache = CreateAdvancedOptions();
-                _defaultAdvancedOptionCache = CreateAdvancedOptions();
-            }
+                value = default(T);
 
-            return _advancedOptionCache[category];
-        }
-
-        public object GetAdvancedOptionDefaultValue(string category, string optionId)
-        {
-            if (_advancedOptionCache == null)
-            {
-                _advancedOptionCache = CreateAdvancedOptions();
-                _defaultAdvancedOptionCache = CreateAdvancedOptions();
-            }
-
-            return _defaultAdvancedOptionCache[category].FirstOrDefault(o => o.Id == optionId)?.Value;
-        }
-
-        public DcsOptionsCategory[] GetDcsOptions()
-        {
-            if (_advancedOptionCache == null)
-            {
-                const string path = "Resources/DcsOptions.json";
-
-                var contents = File.ReadAllText(path);
-                var allOptions = JsonConvert.DeserializeObject<DcsOptionsCategory[]>(contents);
-
-                _dcsOptions = allOptions;
-            }
-
-            return _dcsOptions;
-        }
-
-        public ModuleViewportTemplate[] GetViewportTemplates()
-        {
-            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
-        }
-
-        public ModuleViewportTemplate GetViewportTemplateByModule(string moduleId)
-        {
-            return GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]).FirstOrDefault(mv => mv.ModuleId == moduleId);
-        }
-
-        public void RemoveViewport(string moduleId, Viewport viewport)
-        {
-            var moduleViewports = GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]);
-            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
-
-            viewport = mv?.Viewports.FirstOrDefault(v => v.ViewportName == viewport.ViewportName);
-
-            mv?.Viewports.Remove(viewport);
-
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
-        }
-
-        public void ClearViewports(string name, string moduleId)
-        {
-            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId && m.TemplateName == name);
-
-            if (mv != null)
-            {
-                mv.Viewports.Clear();
-            }
-
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
-        }
-
-        public void UpsertViewport(string name, string moduleId, Screen screen, Viewport viewport)
-        {
-            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId && m.TemplateName == name);
-
-            if (mv == null)
-            {
-                mv = new ModuleViewportTemplate
+                if (!_settings.TryGetValue(category, out var keyLookup))
                 {
-                    TemplateName = name,
-                    ModuleId = moduleId
-                };
+                    return false;
+                }
 
-                moduleViewports.Add(mv);
-            }
-            else
-            {
-                mv.TemplateName = name;
-            }
-
-            var monitor = mv.Monitors.FirstOrDefault(m => m.MonitorId == screen.DeviceName);
-
-            if (monitor == null)
-            {
-                monitor = new MonitorDefinition
+                if (!keyLookup.TryGetValue(key, out var result))
                 {
-                    MonitorId = screen.DeviceName
-                };
+                    return false;
+                }
 
-                mv.Monitors.Add(monitor);
+                if (result is JToken token)
+                {
+                    value = token.ToObject<T>();
+                }
+                else
+                {
+                    value = (T)result;
+                }
+
+                return true;
             }
-
-            monitor.DisplayWidth = (int) screen.Bounds.Width;
-            monitor.DisplayHeight = (int) screen.Bounds.Height;
-
-            var vp = mv.Viewports.FirstOrDefault(v => v.ViewportName == viewport.ViewportName);
-
-            viewport.MonitorId = screen.DeviceName;
-
-            mv.Viewports.Remove(vp);
-            mv.Viewports.Add(viewport);
-
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
 
-        public void RemoveViewportTemplate(string moduleId)
+        public T GetValue<T>(string category, string key, T defaultValue = default(T))
         {
-            var moduleViewports = new List<ModuleViewportTemplate>(GetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
-            var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId);
+            lock (_settings)
+            {
+                if (!_settings.TryGetValue(category, out var keyLookup))
+                {
+                    _settings[category] = keyLookup = new Dictionary<string, object>();
+                }
 
-            moduleViewports.Remove(mv);
+                if (!keyLookup.TryGetValue(key, out var result))
+                {
+                    keyLookup[key] = result = defaultValue;
+                }
 
-            SetValue(SettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
+                if (result is JToken token)
+                {
+                    return token.ToObject<T>();
+                }
+
+                return (T)result;
+            }
+        }
+
+        public void SetValue(string category, string key, object value)
+        {
+            lock (_settings)
+            {
+                if (!_settings.TryGetValue(category, out var keyLookup))
+                {
+                    _settings[category] = keyLookup = new Dictionary<string, object>();
+                }
+
+                keyLookup[key] = value;
+                _isDirty.Value = true;
+            }
+        }
+
+        public void DeleteValue(string category, string key)
+        {
+            lock (_settings)
+            {
+                if (_settings.TryGetValue(category, out var keyLookup))
+                {
+                    _settings[category].Remove(key);
+                    _isDirty.Value = true;
+                }
+            }
+        }
+
+        private void Save()
+        {
+            lock (_syncRoot)
+            {
+                if (_isDirty.Value)
+                {
+                    _isDirty.Value = false;
+                    
+                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings, Formatting.Indented));
+                }
+            }
+        }
+
+        private void Load()
+        {
+            lock (_syncRoot)
+            {
+                if (File.Exists("settings.json"))
+                {
+                    Tracer.Info("Loading settings.json");
+
+                    var json = File.ReadAllText("settings.json");
+                    _settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
+                }
+                else
+                {
+                    Tracer.Info("settings.json was not found.");
+
+                    _settings = new Dictionary<string, Dictionary<string, object>>();
+                }
+            }
         }
 
         public void RemoveInstalls(params string[] directories)
@@ -248,209 +218,6 @@ namespace DCS.Alternative.Launcher.Services.Settings
             }
 
             return _installationCache.ToArray();
-        }
-
-        public bool TryGetValue<T>(string category, string key, out T value)
-        {
-            lock (_settings)
-            {
-                value = default(T);
-
-                if (!_settings.TryGetValue(category, out var keyLookup))
-                {
-                    return false;
-                }
-
-                if (!keyLookup.TryGetValue(key, out var result))
-                {
-                    return false;
-                }
-
-                if (result is JToken token)
-                {
-                    value = token.ToObject<T>();
-                }
-                else
-                {
-                    value = (T) result;
-                }
-
-                return true;
-            }
-        }
-
-        public T GetValue<T>(string category, string key, T defaultValue = default(T))
-        {
-            lock (_settings)
-            {
-                if (!_settings.TryGetValue(category, out var keyLookup))
-                {
-                    _settings[category] = keyLookup = new Dictionary<string, object>();
-                }
-
-                if (!keyLookup.TryGetValue(key, out var result))
-                {
-                    keyLookup[key] = result = defaultValue;
-                }
-
-                if (result is JToken token)
-                {
-                    return token.ToObject<T>();
-                }
-
-                return (T) result;
-            }
-        }
-
-        public void SetValue(string category, string key, object value)
-        {
-            lock (_settings)
-            {
-                if (!_settings.TryGetValue(category, out var keyLookup))
-                {
-                    _settings[category] = keyLookup = new Dictionary<string, object>();
-                }
-
-                keyLookup[key] = value;
-                _isDirty.Value = true;
-            }
-        }
-
-        public void DeleteValue(string category, string key)
-        {
-            lock (_settings)
-            {
-                if (_settings.TryGetValue(category, out var keyLookup))
-                {
-                    _settings[category].Remove(key);
-                }
-            }
-        }
-        
-        public ViewportDevice[] GetViewportDevices(string moduleId)
-        {
-            const string path = "Resources/ViewportDevices.json";
-
-            var contents = File.ReadAllText(path);
-            var devices = JsonConvert.DeserializeObject<Dictionary<string, List<ViewportDevice>>>(contents);
-            var customDevices = GetValue<Dictionary<string, List<ViewportDevice>>>(SettingsCategories.Viewports, SettingsKeys.ViewportDevices);
-            var results = new List<ViewportDevice>();
-
-            if (devices.ContainsKey(moduleId))
-            {
-                results.AddRange(devices[moduleId]);
-            }
-
-            if (customDevices != null && customDevices.ContainsKey(moduleId))
-            {
-                results.AddRange(customDevices[moduleId]);
-            }
-
-            return results.ToArray();
-        }
-
-        public ModuleViewportTemplate[] GetDefaultViewportTemplates()
-        {
-            const string path = "Resources/ViewportTemplates.json";
-
-            var contents = File.ReadAllText(path);
-            var templates = JsonConvert.DeserializeObject<ModuleViewportTemplate[]>(contents);
-
-            return templates;
-        }
-
-        public ViewportOption[] GetViewportOptionsByModuleId(string moduleId)
-        {
-            var optionsLookup = GetAllViewportOptions();
-
-            if (optionsLookup.TryGetValue(moduleId, out var options))
-            {
-                return options;
-            }
-
-            return new ViewportOption[0];
-        }
-
-        public Dictionary<string, ViewportOption[]> GetAllViewportOptions()
-        {
-            const string path = "Resources/ViewportOptions.json";
-
-            var contents = File.ReadAllText(path);
-            var optionsLookup = JsonConvert.DeserializeObject<Dictionary<string, ViewportOption[]>>(contents);
-
-            return optionsLookup;
-        }
-
-        public AdditionalResource[] GetAdditionalResourcesByModule(string moduleId)
-        {
-            const string path = "Resources/AdditionalResources.json";
-
-            var contents = File.ReadAllText(path);
-            var chucksGuides = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
-
-            if (chucksGuides.TryGetValue(moduleId, out var resources))
-            {
-                return resources;
-            }
-
-            return new AdditionalResource[0];
-        }
-
-        private string GetCategory(string id)
-        {
-            return _optionsCategories.First(id.Contains);
-        }
-
-        private void Save()
-        {
-            lock (_syncRoot)
-            {
-                if (_isDirty.Value)
-                {
-                    _isDirty.Value = false;
-
-                    Tracer.Info("Saving settings.json");
-
-                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings, Formatting.Indented));
-                }
-            }
-        }
-
-        private void Load()
-        {
-            lock (_syncRoot)
-            {
-                if (File.Exists("settings.json"))
-                {
-                    Tracer.Info("Loading settings.json");
-
-                    var json = File.ReadAllText("settings.json");
-                    _settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
-                }
-                else
-                {
-                    Tracer.Info("settings.json was not found.");
-
-                    _settings = new Dictionary<string, Dictionary<string, object>>();
-                }
-            }
-        }
-
-        private Dictionary<string, Option[]> CreateAdvancedOptions()
-        {
-            const string path = "Resources/AdvancedOptions.json";
-
-            var contents = File.ReadAllText(path);
-            var allOptions = JsonConvert.DeserializeObject<Option[]>(contents);
-
-            var advancedOptions = new Dictionary<string, Option[]>();
-
-            foreach (var group in allOptions.GroupBy(o => GetCategory(o?.Id)))
-            {
-                advancedOptions.Add(group.Key, group.ToArray());
-            }
-
-            return advancedOptions;
         }
     }
 }

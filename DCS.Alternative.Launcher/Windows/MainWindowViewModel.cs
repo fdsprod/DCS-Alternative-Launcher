@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Threading;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
@@ -19,6 +20,8 @@ namespace DCS.Alternative.Launcher.Windows
         private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
         private int _nextIndex;
 
+        private string _supportedExtensions = "*.jpg,*.png";
+
         public MainWindowViewModel(IContainer container)
         {
             _container = container;
@@ -30,7 +33,19 @@ namespace DCS.Alternative.Launcher.Windows
 
             pluginNavigationSite.PluginRegistered += PluginNavigationSite_PluginRegistered;
 
-            var files = new List<string>(Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Images", "Wallpaper"), "*.jpg"));
+            var files = 
+                new List<string>(
+                    Directory.GetFiles(ApplicationPaths.WallpaperPath)
+                .Where(s => string.IsNullOrEmpty(_supportedExtensions) || _supportedExtensions.Contains(Path.GetExtension(s))));
+
+            if (files.Count == 0)
+            {
+                files.AddRange(
+                    Directory.GetFiles(
+                            Path.Combine(ApplicationPaths.ApplicationPath, "Resources", "Images", "Wallpaper"))
+                        .Where(s => string.IsNullOrEmpty(_supportedExtensions) || _supportedExtensions.Contains(Path.GetExtension(s))));
+            }
+
             var rand = new Random();
 
             while (files.Count > 0)

@@ -17,12 +17,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 {
     public class SelectUIViewportScreensStepViewModel : WizardStepBase
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileSettingsService _profileSettingsService;
 
         public SelectUIViewportScreensStepViewModel(IContainer container)
             : base(container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _profileSettingsService = container.Resolve<IProfileSettingsService>();
         }
 
         public ReactiveCollection<ScreenModel> Screens
@@ -42,8 +42,8 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
         public override Task ActivateAsync()
         {
-            var selectedDisplays = _settingsService.GetValue<string[]>(SettingsCategories.Viewports, SettingsKeys.GameDisplays);
-            var selectedUIViewports = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, new string[0]);
+            var selectedDisplays = _profileSettingsService.GetValue<string[]>(ProfileSettingsCategories.Viewports, SettingsKeys.GameDisplays);
+            var selectedUIViewports = _profileSettingsService.GetValue(ProfileSettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, new string[0]);
 
             var screens = Screen.AllScreens.ToArray();
             var boundingBox = Rect.Empty;
@@ -149,7 +149,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         {
             var selectedScreens = Screens.Where(s => s.IsSelected.Value).ToArray();
             Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalUiDisplayCount, selectedScreens.Length.ToString());
-            _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, selectedScreens.Select(s => s.Id).ToArray());
+            _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, selectedScreens.Select(s => s.Id).ToArray());
 
             return base.Commit();
         }

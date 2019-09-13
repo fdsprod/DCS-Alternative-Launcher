@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
+             xmlns:launcher="clr-namespace:DCS.Alternative.Launcher"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
@@ -61,7 +63,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="general:InstallLocationModel">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20" SharedSizeGroup="Spacer0" />
@@ -78,17 +80,17 @@
                                    HorizontalAlignment="Left"
                                    FontSize="16"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Version}" />
+                                   Text="{Binding ConcreteInstall.Version}" />
                         <TextBlock Grid.Column="3"
                                    HorizontalAlignment="Left"
                                    FontSize="16"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Variant}" />
+                                   Text="{Binding ConcreteInstall.Variant}" />
                         <TextBlock Grid.Column="5"
                                    HorizontalAlignment="Left"
                                    FontSize="16"
                                    Foreground="#FFFFFFFF"
-                                   Text="{Binding Directory}" />
+                                   Text="{Binding ConcreteInstall.Directory}" />
                         <Border Grid.Column="7"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"

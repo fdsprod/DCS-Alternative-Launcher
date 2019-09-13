@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props')" />
-  <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props')" />
-  <Import Project="..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props')" />
-  <Import Project="..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -113,6 +109,9 @@
     <Reference Include="NLua, Version=1.4.20.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.20\lib\net45\NLua.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="ReactiveProperty, Version=5.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.dll</HintPath>
@@ -166,7 +165,6 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="WpfScreenHelper, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
     </Reference>
@@ -198,11 +196,14 @@
     <Compile Include="Analytics\NullTracker.cs" />
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
+    <Compile Include="ApplicationPaths.cs" />
     <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
+    <Compile Include="CommandLineOptions.cs" />
     <Compile Include="Diagnostics\AdobeAcrobatHelper.cs" />
     <Compile Include="Diagnostics\DcsProcessMonitor.cs" />
     <Compile Include="DomainObjects\SettingsProfile.cs" />
     <Compile Include="DomainObjects\SettingsProfileType.cs" />
+    <Compile Include="DomainObjects\VersionResource.cs" />
     <Compile Include="Extensions\ScreenExtensions.cs" />
     <Compile Include="Lua\AutoexecLuaContext.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -267,109 +268,111 @@
     <Compile Include="DomainObjects\ModuleIds.cs" />
     <Compile Include="Lua\DcsOptionLuaContext.cs" />
     <Compile Include="Lua\LuaContextBase.cs" />
-    <Compile Include="Plugins\About\AboutPlugin.cs" />
-    <Compile Include="Plugins\About\Views\AboutController.cs" />
-    <Compile Include="Plugins\About\Views\AboutView.xaml.cs">
+    <Compile Include="Services\IProfileSettingsService.cs" />
+    <Compile Include="Services\Settings\ProfileSettingsService.cs" />
+    <Compile Include="Views\About\AboutPlugin.cs" />
+    <Compile Include="Views\About\Views\AboutController.cs" />
+    <Compile Include="Views\About\Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\About\Views\AboutViewModel.cs" />
-    <Compile Include="Plugins\Game\GamePlugin.cs" />
-    <Compile Include="Plugins\Game\Views\GameController.cs" />
-    <Compile Include="Plugins\Game\Views\GameViewModel.cs" />
+    <Compile Include="Views\About\Views\AboutViewModel.cs" />
+    <Compile Include="Views\Game\GamePlugin.cs" />
+    <Compile Include="Views\Game\Views\GameController.cs" />
+    <Compile Include="Views\Game\Views\GameViewModel.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Plugins\Manuals\ManualsPlugin.cs" />
-    <Compile Include="Plugins\Manuals\Views\ManualsController.cs" />
-    <Compile Include="Plugins\Manuals\Views\ManualsView.xaml.cs">
+    <Compile Include="Views\Manuals\ManualsPlugin.cs" />
+    <Compile Include="Views\Manuals\Views\ManualsController.cs" />
+    <Compile Include="Views\Manuals\Views\ManualsView.xaml.cs">
       <DependentUpon>ManualsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Manuals\Views\ManualsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Controls\OptionsControl.xaml.cs">
+    <Compile Include="Views\Manuals\Views\ManualsViewModel.cs" />
+    <Compile Include="Views\Settings\Controls\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml.cs">
+    <Compile Include="Views\Settings\Dialogs\SelectViewportDialog.xaml.cs">
       <DependentUpon>SelectViewportDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml.cs">
+    <Compile Include="Views\Settings\Dialogs\SelectModuleDialog.xaml.cs">
       <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Dialogs\MonitorOverlay.xaml.cs">
+    <Compile Include="Views\Settings\Dialogs\MonitorOverlay.xaml.cs">
       <DependentUpon>MonitorOverlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
+    <Compile Include="Views\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
       <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ModuleViewportModel.cs" />
-    <Compile Include="Plugins\Settings\Dialogs\ViewportModel.cs" />
-    <Compile Include="Plugins\Settings\Models\ComboBoxOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\OptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\ColorOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\DoubleRangeSliderOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\MultiValueOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\QuadRangeSliderOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SelectorItem.cs" />
-    <Compile Include="Plugins\Settings\Models\SingleValueOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SliderOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\SwitchOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\TextOptionModel.cs" />
-    <Compile Include="Plugins\Settings\Models\TripleRangeSliderOptionModel.cs" />
-    <Compile Include="Plugins\Settings\SettingsPlugin.cs" />
-    <Compile Include="Plugins\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
-    <Compile Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml.cs">
+    <Compile Include="Views\Settings\Dialogs\ViewportModel.cs" />
+    <Compile Include="Views\Settings\Models\ComboBoxOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\OptionModel.cs" />
+    <Compile Include="Views\Settings\Models\ColorOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\DoubleRangeSliderOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\MultiValueOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\QuadRangeSliderOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\SelectorItem.cs" />
+    <Compile Include="Views\Settings\Models\SingleValueOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\SliderOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\SwitchOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\TextOptionModel.cs" />
+    <Compile Include="Views\Settings\Models\TripleRangeSliderOptionModel.cs" />
+    <Compile Include="Views\Settings\SettingsPlugin.cs" />
+    <Compile Include="Views\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
+    <Compile Include="Views\Settings\Controls\ViewportsSettingsControl.xaml.cs">
       <DependentUpon>ViewportsSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Models\OptionModelFactory.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\AdvancedOptionSettingsViewModelBase.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Models\OptionModelFactory.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\AdvancedOptionSettingsViewModelBase.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml.cs">
       <DependentUpon>CameraMirrorsSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml.cs">
       <DependentUpon>TerrainReflectionSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml.cs">
       <DependentUpon>TerrainMirrorSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\SoundSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\SoundSettingsView.xaml.cs">
       <DependentUpon>SoundSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\SoundSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\SoundSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\TerrainSettingsView.xaml.cs">
       <DependentUpon>TerrainSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\CameraSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\CategoryHeaderSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\CameraSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\CameraSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\CategoryHeaderSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\CameraSettingsView.xaml.cs">
       <DependentUpon>CameraSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\GraphicsSettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\GraphicsSettingsView.xaml.cs">
       <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Advanced\GraphicsSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Advanced\GraphicsSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Dcs\DcsOptionCategoryView.xaml.cs">
       <DependentUpon>DcsOptionCategoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\General\InstallationSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\SettingsCategoryViewModelBase.cs" />
-    <Compile Include="Plugins\Settings\Views\Advanced\TerrainSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Viewports\ViewportOptionsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Dcs\DcsOptionCategoryViewModel.cs" />
+    <Compile Include="Views\Settings\Views\General\InstallationSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\SettingsCategoryViewModelBase.cs" />
+    <Compile Include="Views\Settings\Views\Advanced\TerrainSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Viewports\ViewportOptionsView.xaml.cs">
       <DependentUpon>ViewportOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\Viewports\ViewportOptionsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\Viewports\ViewportSettingsViewModel.cs" />
-    <Compile Include="Plugins\Settings\Views\SettingsController.cs" />
-    <Compile Include="Plugins\Settings\Views\SettingsView.xaml.cs">
+    <Compile Include="Views\Settings\Views\Viewports\ViewportOptionsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\Viewports\ViewportSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\Views\SettingsController.cs" />
+    <Compile Include="Views\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Settings\Views\SettingsViewModel.cs" />
-    <Compile Include="Plugins\Support\SupportPlugin.cs" />
-    <Compile Include="Plugins\Support\Views\SupportViewModel.cs" />
-    <Compile Include="Plugins\Support\Views\SupportView.xaml.cs">
+    <Compile Include="Views\Settings\Views\SettingsViewModel.cs" />
+    <Compile Include="Views\Support\SupportPlugin.cs" />
+    <Compile Include="Views\Support\Views\SupportViewModel.cs" />
+    <Compile Include="Views\Support\Views\SupportView.xaml.cs">
       <DependentUpon>SupportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Support\Views\SupportController.cs" />
+    <Compile Include="Views\Support\Views\SupportController.cs" />
     <Compile Include="SafeAsync.cs" />
     <Compile Include="ServiceModel\Container.cs" />
     <Compile Include="ServiceModel\IContainer.cs" />
@@ -379,10 +382,10 @@
     <Compile Include="ServiceModel\IoCRegistrationTypeException.cs" />
     <Compile Include="ServiceModel\IoCResolutionException.cs" />
     <Compile Include="ServiceModel\IoCWeakReferenceException.cs" />
-    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="Views\IPlugin.cs" />
     <Compile Include="ServiceModel\NamedParameterOverloads.cs" />
     <Compile Include="ServiceModel\NamedResolutionFailureActions.cs" />
-    <Compile Include="Plugins\PluginBase.cs" />
+    <Compile Include="Views\PluginBase.cs" />
     <Compile Include="ServiceModel\ResolveOptions.cs" />
     <Compile Include="Collections\SafeDictionary.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
@@ -407,10 +410,6 @@
     <Compile Include="Threading\HandlerTaskSourceBase.cs" />
     <Compile Include="Models\NewsArticleModel.cs" />
     <Compile Include="UserFriendlyExceptionHandler.cs" />
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingsViewModel.cs" />
     <Compile Include="WindowAssist.cs" />
     <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
@@ -489,89 +488,93 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\About\Views\AboutView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Manuals\Views\ManualsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Controls\OptionsControl.xaml">
+    <Page Include="Themes\ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Dialogs\SelectViewportDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Dialogs\SelectModuleDialog.xaml">
+    <Page Include="Themes\TextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Dialogs\MonitorOverlay.xaml">
+    <Page Include="Views\About\Views\AboutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Dialogs\ViewportEditorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Plugins\Settings\Controls\ViewportsSettingsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml">
+    <Page Include="Views\Manuals\Views\ManualsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\SoundSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\TerrainSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\CameraSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Plugins\Settings\Views\Advanced\GraphicsSettingsView.xaml">
+    <Page Include="Views\Settings\Controls\OptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Views\Dcs\DcsOptionCategoryView.xaml">
+    <Page Include="Views\Settings\Dialogs\SelectViewportDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Settings\Views\SettingsView.xaml">
+    <Page Include="Views\Settings\Dialogs\SelectModuleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Plugins\Settings\Views\Viewports\ViewportOptionsView.xaml">
+    <Page Include="Views\Settings\Dialogs\MonitorOverlay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Plugins\Support\Views\SupportView.xaml">
+    <Page Include="Views\Settings\Dialogs\ViewportEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Controls\ViewportsSettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\SoundSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\TerrainSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\CameraSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\Advanced\GraphicsSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Views\Dcs\DcsOptionCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Views\Viewports\ViewportOptionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Support\Views\SupportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -613,7 +616,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Plugins\Game\Views\GameView.xaml">
+    <Page Include="Views\Game\Views\GameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -647,7 +650,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plugins\Game\Views\GameView.xaml.cs">
+    <Compile Include="Views\Game\Views\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -676,13 +679,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\DcsOptions.json">
+    <None Include="Data\Options\GameOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\AdvancedOptions.json">
+    <None Include="Data\Options\AutoexecOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\AdditionalResources.json">
+    <None Include="Data\Resources\AdditionalResources.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Lua\Utils.lua">
@@ -694,10 +697,28 @@
     <None Include="Resources\Lua\Serializer.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\ViewportOptions.json">
+    <None Include="Data\Viewports\ViewportOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\ViewportDevices.json">
+    <None Include="Data\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Options\AutoexecOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Options\GameOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Resources\AdditionalResources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Viewports\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Viewports\ViewportTemplates.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Resource Include="Resources\Fonts\Prototype.ttf" />
@@ -741,9 +762,12 @@
     <Resource Include="Images\Backgrounds\background %289%29.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugins\Manuals\Models\" />
-    <Folder Include="Resources\Images\Viewports\HEATBLUR_F14\" />
-    <Folder Include="Resources\Images\Viewports\KA-50\" />
+    <Folder Include="Data\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Data\Viewports\Images\KA-50\" />
+    <Folder Include="Plugins\" />
+    <Folder Include="Resources\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Resources\Viewports\Images\KA-50\" />
+    <Folder Include="Views\Manuals\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\dal-icon-256.png" />
@@ -755,58 +779,58 @@
     <Resource Include="Images\viewports-screenshot.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ViewportTemplates.json">
+    <None Include="Data\Viewports\ViewportTemplates.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\Viewports\A-10C\CMSC_SCREEN.jpg">
+    <None Include="Data\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\CMSP_SCREEN.jpg">
+    <None Include="Data\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\DIGIT_CLOCK.jpg">
+    <None Include="Data\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\LEFT_MFCD.jpg">
+    <None Include="Data\Viewports\Images\A-10C\LEFT_MFCD.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\RIGHT_MFCD.jpg">
+    <None Include="Data\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\RWR_SCREEN.jpg">
+    <None Include="Data\Viewports\Images\A-10C\RWR_SCREEN.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\UHF_FREQUENCY_STATUS.jpg">
+    <None Include="Data\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\UHF_PRESET_CHANNEL.jpg">
+    <None Include="Data\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\Viewports\A-10C\UHF_REPEATER.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Images\Viewports\FA-18C\CENTER_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Images\Viewports\FA-18C\IFEI.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Images\Viewports\FA-18C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Images\Viewports\FA-18C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Images\Viewports\FA-18C\UFC.jpg">
+    <None Include="Data\Viewports\Images\A-10C\UHF_REPEATER.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\Viewports\FA-18C\RWR.jpg">
+    <None Include="Data\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Viewports\Images\FA-18C\RWR.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -814,6 +838,51 @@
     <Resource Include="Images\Overlay.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RWR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\lauch-background-mask.png" />
     <Resource Include="Images\lauch-background.jpg" />
     <Resource Include="Images\lauch-background-mask-2.png" />
@@ -824,67 +893,67 @@
     <Resource Include="Images\SplashBackground.png" />
     <Resource Include="Images\dal-icon-white.png" />
     <Resource Include="Images\Backgrounds\background %2821%29.jpg" />
-    <Content Include="Images\Wallpaper\1.jpg">
+    <Content Include="Resources\Images\Wallpaper\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\3.jpg">
+    <Content Include="Resources\Images\Wallpaper\3.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\4.jpg">
+    <Content Include="Resources\Images\Wallpaper\4.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\5.png">
+    <Content Include="Resources\Images\Wallpaper\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\6.jpg">
+    <Content Include="Resources\Images\Wallpaper\6.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\7.jpg">
+    <Content Include="Resources\Images\Wallpaper\7.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\8.jpg">
+    <Content Include="Resources\Images\Wallpaper\8.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\9.jpg">
+    <Content Include="Resources\Images\Wallpaper\9.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\10.jpg">
+    <Content Include="Resources\Images\Wallpaper\10.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\11.jpg">
+    <Content Include="Resources\Images\Wallpaper\11.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\12.jpg">
+    <Content Include="Resources\Images\Wallpaper\12.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\13.png">
+    <Content Include="Resources\Images\Wallpaper\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\14.jpg">
+    <Content Include="Resources\Images\Wallpaper\14.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\15.png">
+    <Content Include="Resources\Images\Wallpaper\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\16.png">
+    <Content Include="Resources\Images\Wallpaper\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\17.png">
+    <Content Include="Resources\Images\Wallpaper\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\18.jpg">
+    <Content Include="Resources\Images\Wallpaper\18.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\19.jpg">
+    <Content Include="Resources\Images\Wallpaper\19.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\20.png">
+    <Content Include="Resources\Images\Wallpaper\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\21.png">
+    <Content Include="Resources\Images\Wallpaper\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Wallpaper\22.png">
+    <Content Include="Resources\Images\Wallpaper\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Wizard\FirstUse.png">
@@ -894,7 +963,7 @@
     <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Wallpaper\2.png">
+    <Content Include="Resources\Images\Wallpaper\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -903,16 +972,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.73.1.13\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.73.1.13\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets'))" />
     <Error Condition="!Exists('..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets'))" />
   </Target>
-  <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" />
-  <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />

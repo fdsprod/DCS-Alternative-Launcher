@@ -16,12 +16,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 {
     public class SelectDeviceViewportScreensStepViewModel : WizardStepBase
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileSettingsService _profileSettingsService;
 
         public SelectDeviceViewportScreensStepViewModel(IContainer container)
             : base(container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _profileSettingsService = container.Resolve<IProfileSettingsService>();
         }
 
         public ReactiveCollection<ScreenModel> Screens
@@ -41,9 +41,9 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
         public override Task ActivateAsync()
         {
-            var selectedDisplays = _settingsService.GetValue<string[]>(SettingsCategories.Viewports, SettingsKeys.GameDisplays);
-            var selectedUIViewports = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, new string[0]);
-            var selectedDeviceViewports = _settingsService.GetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new string[0]);
+            var selectedDisplays = _profileSettingsService.GetValue<string[]>(ProfileSettingsCategories.Viewports, SettingsKeys.GameDisplays);
+            var selectedUIViewports = _profileSettingsService.GetValue(ProfileSettingsCategories.Viewports, SettingsKeys.UIViewportsDisplays, new string[0]);
+            var selectedDeviceViewports = _profileSettingsService.GetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new string[0]);
 
             var screens = Screen.AllScreens.ToArray();
             var boundingBox = Rect.Empty;
@@ -151,7 +151,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         {
             var screens = Screens.Where(s => s.IsSelected.Value).Select(s => s.Id).ToArray();
             Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalViewportDisplayCount, screens.Length.ToString());
-            _settingsService.SetValue(SettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, screens);
+            _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, screens);
 
             if (screens.Length == 1)
             {

@@ -10,8 +10,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using CefSharp;
-using CefSharp.Wpf;
 using CommandLine;
 using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
@@ -31,6 +29,7 @@ using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using NLua;
 using SplashScreen = DCS.Alternative.Launcher.Windows.SplashScreen;
@@ -42,7 +41,6 @@ namespace DCS.Alternative.Launcher
     /// </summary>
     public partial class App : Application
     {
-        private static readonly Regex _splitAtUpperRegex = new Regex(@"(?<!^)(?=[A-Z])", RegexOptions.IgnorePatternWhitespace);
         private IContainer _container;
         private MainWindow _mainWindow;
         private SplashScreen _splashScreen;
@@ -62,12 +60,6 @@ namespace DCS.Alternative.Launcher
             private set;
         }
 
-        public class CommandLineOptions
-        {
-            [Option("no-analytics", Required = false, HelpText = "Turns off analytics tracking.")]
-            public bool NoAnalytics { get; set; }
-        }
-
         [STAThread]
         private static void Main(string[] args)
         {
@@ -78,21 +70,44 @@ namespace DCS.Alternative.Launcher
 
         private static void Start(CommandLineOptions options)
         {
+            if (CheckForUpdate())
+            {
+                return;
+            }
+
+            InitAnalytics(options);
+            InitBrowserEmulation();
+
+            new App().Run();
+        }
+
+        private static void InitBrowserEmulation()
+        {
+            var appName = Process.GetCurrentProcess().ProcessName + ".exe";
+
+            using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", true))
+            {
+                key?.SetValue(appName, 99999, RegistryValueKind.DWord);
+            }
+        }
+
+        private static bool CheckForUpdate()
+        {
             var assembly = Assembly.GetAssembly(typeof(App));
             var assemblyName = assembly.GetName();
 
             Version = assemblyName.Version;
 
-            var updateFolder = Path.Combine(Directory.GetCurrentDirectory(), "_update");
-            var autoUpdateExe = Path.Combine(Directory.GetCurrentDirectory(), "AutoUpdate.exe");
+            var updateFolder = Path.Combine(ApplicationPaths.ApplicationPath, "_update");
+            var autoUpdateExe = Path.Combine(ApplicationPaths.ApplicationPath, "AutoUpdate.exe");
 
             if (Directory.Exists(updateFolder) && Directory.GetFileSystemEntries(updateFolder).Length > 0 && File.Exists(autoUpdateExe))
             {
                 Process.Start(autoUpdateExe, "--launcher");
-                return;
+                return true;
             }
 
-            foreach (var file in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.updating", SearchOption.AllDirectories))
+            foreach (var file in Directory.GetFiles(ApplicationPaths.ApplicationPath, "*.updating", SearchOption.AllDirectories))
             {
                 try
                 {
@@ -104,6 +119,11 @@ namespace DCS.Alternative.Launcher
                 }
             }
 
+            return false;
+        }
+
+        private static void InitAnalytics(CommandLineOptions options)
+        {
             var anonymousUserId = GetUserId();
 
             if (!options.NoAnalytics && anonymousUserId != Guid.Empty)
@@ -123,10 +143,6 @@ namespace DCS.Alternative.Launcher
             {
                 Tracker.Instance = new NullTracker();
             }
-
-            var app = new App();
-            app.Run();
-
         }
 
         private static Guid GetUserId()
@@ -135,7 +151,7 @@ namespace DCS.Alternative.Launcher
 
             try
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "ga.id");
+                var path = Path.Combine(ApplicationPaths.StoragePath, "ga.id");
 
                 if (File.Exists(path))
                 {
@@ -174,19 +190,13 @@ namespace DCS.Alternative.Launcher
 
 #if DEBUG
             Tracer.RegisterListener(new ConsoleOutputEventListener());
-            Tracer.RegisterListener(new FileLogEventListener("trace.log"));
+#endif
+            Tracer.RegisterListener(new FileLogEventListener(Path.Combine(ApplicationPaths.StoragePath, "debug.log")));
 
             _container = new Container();
-#endif
-            //DumpAutoexecLua();
-            //ShowTestWindow();
-
-            var settings = new CefSettings();
-            settings.SetOffScreenRenderingBestPerformanceArgs();
-            settings.WindowlessRenderingEnabled = true;
-            Cef.Initialize(settings);
-
             _mainWindow = new MainWindow();
+
+            await Task.WhenAll(UpdateDefinitionFilesAsync());
 
             await Task.WhenAll(RegisterServicesAsync(), Task.Delay(1000));
             await Task.WhenAll(CheckSettingsExistAsync(), Task.Delay(1000));
@@ -206,120 +216,31 @@ namespace DCS.Alternative.Launcher
             Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
 
         }
-
-        //private void ShowTestWindow()
-        //{
-        //    var window = new TestWindow();
-        //    window.Show();
-        //}
-
-        //private void DumpAutoexecLua()
-        //{
-        //    using (var lua = new NLua.Lua())
-        //    {
-        //        lua.State.Encoding = Encoding.UTF8;
-        //        lua.RegisterFunction("print", typeof(App).GetMethod("print"));
-
-        //        var path = @"C:\\Users\\fdspr\\Saved Games\\DCS.openbeta\\Config\\autoexec.cfg";
-
-        //        lua["sendIt"] = new Action<LuaTable>(table =>
-        //        {
-        //            var options = new List<Option>();
-        //            RecursiveDump("options", table, options);
-        //            var json = JsonConvert.SerializeObject(options.OrderBy(o => o.Id.Count(c => c == '.')).ThenBy(o => o.Id), Formatting.Indented);
-        //        });
-
-        //        lua.DoString($"sendIt(loadfile('{path}'));");
-        //    }
-        //}
-
-        //private void RecursiveDump(string empty, LuaTable table, List<Option> options)
-        //{
-        //    var ti = new CultureInfo("en-US", false).TextInfo;
-
-        //    foreach (var key in table.Keys)
-        //    {
-        //        var subTable = table[key] as LuaTable;
-        //        var id = string.Join(".", empty, key.ToString());
-        //        var displayName =
-        //            id.Replace("options.graphics.", string.Empty)
-        //                .Replace("options.sound.", string.Empty)
-        //                .Replace("terrainreflection", "terrain_reflection")
-        //                .Replace("terrainmirror", "terrain_mirror");
-
-        //        displayName =
-        //            ti.ToTitleCase(
-        //                    _splitAtUpperRegex
-        //                        .Replace(displayName, " ")
-        //                        .Replace("_", " "))
-        //                .Replace(".", " ")
-        //                .Replace("  ", " ");
-
-        //        if (subTable != null)
-        //        {
-        //            var firstKey = subTable.Keys.OfType<object>().First();
-
-        //            if (firstKey is string)
-        //            {
-        //                RecursiveDump(id, (LuaTable) table[key], options);
-        //            }
-        //            else
-        //            {
-        //                var values = new List<object>();
-        //                var option = new Option
-        //                {
-        //                    Id = id,
-        //                    DisplayName = displayName
-        //                };
-
-        //                foreach (var k in subTable.Keys)
-        //                {
-        //                    values.Add(subTable[k]);
-        //                    option.MinMax.Add(new OptionMinMax());
-        //                }
-
-        //                option.Value = values.ToArray();
-
-        //                options.Add(option);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            var option = new Option
-        //            {
-        //                Id = id,
-        //                DisplayName = displayName,
-        //                Value = table[key]
-        //            };
-
-        //            option.MinMax.Add(new OptionMinMax());
-        //            options.Add(option);
-        //        }
-        //    }
-        //}
-
         private void CheckFirstUse()
         {
             var settingsService = _container.Resolve<ISettingsService>();
-            var isFirstUseComplete = settingsService.GetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, false);
+            var profileSettingsService = _container.Resolve<IProfileSettingsService>();
 
-            if (isFirstUseComplete)
+            if (profileSettingsService.SelectedProfile == null)
             {
-                return;
+                var profile = new SettingsProfile {Name = "Default", Path = Path.Combine(ApplicationPaths.ProfilesPath, "Default.json")};
+
+                profile.SetDirty();
+                profileSettingsService.SelectedProfile = profile;
+
+                using (var container = _container.GetChildContainer())
+                {
+                    var firstUseWizard = new FirstUseWizard();
+                    var viewModel = new FirstUseWizardViewModel(container);
+
+                    Current.MainWindow = firstUseWizard;
+
+                    firstUseWizard.DataContext = viewModel;
+                    firstUseWizard.ShowDialog();
+                }
+                
+                settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, true);
             }
-
-            using (var container = _container.GetChildContainer())
-            {
-                var firstUseWizard = new FirstUseWizard();
-                var viewModel = new FirstUseWizardViewModel(container);
-
-                Current.MainWindow = firstUseWizard;
-
-                firstUseWizard.DataContext = viewModel;
-                firstUseWizard.ShowDialog();
-            }
-
-            settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, true);
         }
 
         private Task CheckSettingsExistAsync()
@@ -341,11 +262,25 @@ namespace DCS.Alternative.Launcher
         private Task InitializePluginsAsync()
         {
             _splashScreen.Status = "Initializing Plugins...";
+
             Tracer.Info("Initializing Plugins.");
 
             var assembly = Assembly.GetEntryAssembly();
 
             LoadPlugins(assembly);
+
+            foreach (var pluginPath in Directory.GetFiles(ApplicationPaths.PluginsPath, "*.dll"))
+            {
+                try
+                {
+                    var pluginAssembly = Assembly.LoadFrom(pluginPath);
+                    LoadPlugins(pluginAssembly);
+                }
+                catch (Exception e)
+                {
+                    Tracer.Error($"Unable to load plugin {pluginPath}{Environment.NewLine}{e}");
+                }
+            }
 
             Tracer.Info("Plugins Complete.");
 
@@ -378,14 +313,81 @@ namespace DCS.Alternative.Launcher
             await navigationService.NavigateAsync(typeof(GameView), viewModel);
         }
 
+        private Task UpdateDefinitionFilesAsync()
+        {
+            return Task.Run(() =>
+            {
+                Dispatcher?.Invoke(() => _splashScreen.Status = "Checking Resource Files...");
+
+                CopyFiles(
+                    Path.Combine(ApplicationPaths.ApplicationPath, "Resources", "Images", "Wallpaper"),
+                    ApplicationPaths.WallpaperPath,
+                    "*.jpg,*.png",
+                    true);
+                CopyFiles(
+                    Path.Combine(ApplicationPaths.ApplicationPath, "Resources", "Options"),
+                    ApplicationPaths.OptionsPath,
+                    "*.json");
+                CopyFiles(
+                    Path.Combine(ApplicationPaths.ApplicationPath, "Resources", "Resources"),
+                    ApplicationPaths.ResourcesPath,
+                    "*.json");
+                CopyFiles(
+                    Path.Combine(ApplicationPaths.ApplicationPath, "Resources", "Viewports"),
+                    ApplicationPaths.ViewportPath, 
+                    recursive:true);
+            });
+        }
+
+        private static void CopyFiles(string source, string dest, string supportedExtensions = "", bool onlyIfEmpty = false, bool recursive = false)
+        {
+            var sourceDir = new DirectoryInfo(source);
+            var destDir = new DirectoryInfo(dest);
+
+            var files = sourceDir.GetFiles("*.*").Where(s => string.IsNullOrEmpty(supportedExtensions) || supportedExtensions.Contains(s.Extension)).ToArray();
+            var destFiles = destDir.GetFiles("*.*").Where(s => string.IsNullOrEmpty(supportedExtensions) || supportedExtensions.Contains(s.Extension)).ToArray();
+
+            if (destFiles.Length != 0 && onlyIfEmpty)
+            {
+                return;
+            }
+
+            if (recursive)
+            {
+                foreach (var folder in sourceDir.GetDirectories())
+                {
+                    var destFolder = Path.Combine(destDir.FullName, folder.Name);
+
+                    if (!Directory.Exists(destFolder))
+                    {
+                        Directory.CreateDirectory(destFolder);
+                    }
+
+                    CopyFiles(folder.FullName, destFolder, supportedExtensions, onlyIfEmpty, true);
+                }
+            }
+
+            foreach (var file in files)
+            {
+                var destFile = Path.Combine(dest, file.Name);
+
+                if (!File.Exists(destFile))
+                {
+                    File.Copy(file.FullName, destFile);
+                }
+            }
+        }
+
         private Task RegisterServicesAsync()
         {
             _splashScreen.Status = "Registering Services...";
+
             Tracer.Info("Registering Services.");
 
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
             _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
+            _container.Register<IProfileSettingsService, ProfileSettingsService>().AsSingleton().UsingConstructor(() => new ProfileSettingsService(_container));
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
             _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
 

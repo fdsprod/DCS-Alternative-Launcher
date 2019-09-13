@@ -11,5 +11,6 @@
         public const string DeviceViewportsDisplays = "deviceViewportsDisplays";
         public const string IsFirstUseComplete = "isFirstUseComplete";
         public const string ViewportDevices = "viewportDevices";
+        public const string LastProfileName = "lastProfileName";
     }
 }

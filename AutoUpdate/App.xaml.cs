@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -16,9 +17,20 @@ namespace AutoUpdate
     /// </summary>
     public partial class App : Application
     {
+        private const string AppMutexName = "DCS Alternative Launcher AutoUpdate";
+
+        private static Mutex _appMutex;
+
         [STAThread]
         static void Main(string[] args)
         {
+            _appMutex = new Mutex(true, AppMutexName, out var isNewInstance);
+
+            if (!isNewInstance)
+            {
+                return;
+            }
+
             var directory = Directory.GetCurrentDirectory();
 
             try

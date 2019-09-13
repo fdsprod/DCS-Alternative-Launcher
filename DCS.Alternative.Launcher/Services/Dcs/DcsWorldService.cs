@@ -17,6 +17,7 @@ using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.ServiceModel.Syndication;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLua;
 
@@ -35,11 +36,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         private readonly IContainer _container;
         private readonly ISettingsService _settingsService;
+        private readonly IProfileSettingsService _profileSettingsService;
 
         public DcsWorldService(IContainer container)
         {
             _container = container;
             _settingsService = container.Resolve<ISettingsService>();
+            _profileSettingsService = container.Resolve<IProfileSettingsService>();
         }
 
         public Task<Module[]> GetInstalledAircraftModulesAsync()
@@ -200,6 +203,46 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
+        public AdditionalResource[] GetAdditionalResourcesByModule(string moduleId)
+        {
+            var path = "Resources/Resources/AdditionalResources.json";
+            var contents = File.ReadAllText(path);
+            var resourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
+
+            path = Path.Combine(ApplicationPaths.ResourcesPath, "Resources/AdditionalResources.json");
+            contents = File.ReadAllText(path);
+
+            var customResourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
+
+            foreach (var kvp in customResourceLookup)
+            {
+                var options = new List<AdditionalResource>();
+
+                if (resourceLookup.ContainsKey(kvp.Key))
+                {
+                    options.AddRange(resourceLookup[kvp.Key]);
+                }
+
+                foreach (var option in kvp.Value)
+                {
+                    var existingOption = options.FirstOrDefault(o => o.Name == option.Name);
+
+                    if (existingOption == null)
+                    {
+                        options.Add(option);
+                    }
+                    else
+                    {
+                        options[options.IndexOf(existingOption)] = option;
+                    }
+                }
+
+                resourceLookup[kvp.Key] = options.ToArray();
+            }
+
+            return resourceLookup.TryGetValue(moduleId, out var resources) ? resources : new AdditionalResource[0];
+        }
+
         public Task<NewsArticleModel[]> GetLatestNewsArticlesAsync(int count = 10)
         {
             return Task.Run(async () =>
@@ -261,7 +304,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             return Task.Run(() =>
             {
                 var install = _settingsService.SelectedInstall;
-                var categories = _settingsService.GetDcsOptions();
+                var categories = _profileSettingsService.GetDcsOptions();
                 var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 
                 if (!File.Exists(optionsFile))
@@ -290,7 +333,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             foreach (var option in category.Options)
                             {
-                                if (_settingsService.TryGetValue<object>(string.Format(SettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
+                                if (_profileSettingsService.TryGetValue<object>(string.Format(ProfileSettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
                                 {
                                     Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
                                     context.SetValue(category.Id, option.Id, value);
@@ -320,7 +363,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             return Task.Run(async () =>
             {
                 var install = _settingsService.SelectedInstall;
-                var viewportTemplates = _settingsService.GetViewportTemplates();
+                var viewportTemplates = _profileSettingsService.GetViewportTemplates();
                 var modules = await GetInstalledAircraftModulesAsync();
 
                 foreach (var template in viewportTemplates)
@@ -458,11 +501,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
             foreach (var module in modules)
             {
-                var options = _settingsService.GetViewportOptionsByModuleId(module.ModuleId);
+                var options = _profileSettingsService.GetViewportOptionsByModuleId(module.ModuleId);
 
                 foreach (var option in options)
                 {
-                    if (!_settingsService.TryGetValue<object>(string.Format(SettingsCategories.ViewportOptionsFormat, module.ModuleId), option.Id, out var value))
+                    if (!_profileSettingsService.TryGetValue<object>(string.Format(ProfileSettingsCategories.ViewportOptionsFormat, module.ModuleId), option.Id, out var value))
                     {
                         continue;
                     }
@@ -495,11 +538,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         private void WriteOptions(string category, AutoexecLuaContext context)
         {
-            var options = _settingsService.GetAdvancedOptions(category);
+            var options = _profileSettingsService.GetAdvancedOptions(category);
 
             foreach (var option in options)
             {
-                if (_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                if (_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.AdvancedOptions, option.Id, out var value))
                 {
                     context.SetValue(option.Id, value);
                     context.Save(option.Id);
@@ -509,13 +552,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         private void WriteRangedOptions(string category, AutoexecLuaContext context)
         {
-            var options = _settingsService.GetAdvancedOptions(category);
+            var options = _profileSettingsService.GetAdvancedOptions(category);
 
             foreach (var range in CameraRangeSettings)
             {
                 foreach (var option in options)
                 {
-                    if (!_settingsService.TryGetValue<object>(SettingsCategories.AdvancedOptions, option.Id, out var value))
+                    if (!_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.AdvancedOptions, option.Id, out var value))
                     {
                         continue;
                     }

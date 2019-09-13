@@ -1,57 +1,34 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interactivity;
-using CefSharp.Wpf;
 
 namespace DCS.Alternative.Launcher.Behaviors
 {
-    public class WebBrowserBehavior : Behavior<ChromiumWebBrowser>
+    public static class WebBrowserUtility
     {
-        // Using a DependencyProperty as the backing store for BindableSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BindableSourceProperty =
-            DependencyProperty.Register("BindableSource", typeof(string), typeof(WebBrowserBehavior),
-                new PropertyMetadata(null, OnBindableSourcePropertyChanged));
+            DependencyProperty.RegisterAttached("BindableSource", typeof(string), typeof(WebBrowserUtility), new UIPropertyMetadata(null, BindableSourcePropertyChanged));
 
-        public string BindableSource
+        public static string GetBindableSource(DependencyObject obj)
         {
-            get { return (string) GetValue(BindableSourceProperty); }
-            set { SetValue(BindableSourceProperty, value); }
+            return (string)obj.GetValue(BindableSourceProperty);
         }
 
-        public static void OnBindableSourcePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        public static void SetBindableSource(DependencyObject obj, string value)
         {
-            var behavior = o as WebBrowserBehavior;
-
-            behavior?.OnBindableSourceChanged((string) e.OldValue, (string) e.NewValue);
+            obj.SetValue(BindableSourceProperty, value);
         }
 
-        protected override void OnAttached()
+        public static void BindableSourcePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            base.OnAttached();
-
-            AssociatedObject.Loaded += OnLoaded;
-        }
-
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-
-            AssociatedObject.Loaded -= OnLoaded;
-        }
-
-        private void OnBindableSourceChanged(string oldValue, string newValue)
-        {
-            if (AssociatedObject?.IsLoaded ?? false)
+            WebBrowser browser = o as WebBrowser;
+            if (browser != null)
             {
-                AssociatedObject.Load(newValue);
+                string uri = e.NewValue as string;
+                browser.Source = !String.IsNullOrEmpty(uri) ? new Uri(uri) : null;
             }
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(BindableSource))
-            {
-                AssociatedObject.Load(BindableSource);
-            }
-        }
     }
 }

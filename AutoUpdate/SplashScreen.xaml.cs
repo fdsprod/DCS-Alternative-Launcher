@@ -80,7 +80,7 @@ namespace AutoUpdate
 
                     File.Move(file, destFile);
                 }
-                catch (Exception e)
+                catch 
                 {
                     if (File.Exists(updatingPath))
                     {
@@ -98,7 +98,7 @@ namespace AutoUpdate
 
                         File.Delete(file);
                     }
-                    catch (Exception e)
+                    catch 
                     {
 
                     }
