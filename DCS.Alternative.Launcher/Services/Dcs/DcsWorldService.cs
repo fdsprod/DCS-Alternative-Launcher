@@ -205,11 +205,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public AdditionalResource[] GetAdditionalResourcesByModule(string moduleId)
         {
-            var path = "Resources/Resources/AdditionalResources.json";
+            var path = Path.Combine(ApplicationPaths.ApplicationPath, "Resources/Resources/AdditionalResources.json");
             var contents = File.ReadAllText(path);
             var resourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
 
-            path = Path.Combine(ApplicationPaths.ResourcesPath, "Resources/AdditionalResources.json");
+            path = Path.Combine(ApplicationPaths.ResourcesPath, "AdditionalResources.json");
             contents = File.ReadAllText(path);
 
             var customResourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);

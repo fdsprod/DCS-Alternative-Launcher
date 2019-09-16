@@ -51,6 +51,19 @@ namespace DCS.Alternative.Launcher.Lua
             DoString($"{id} = {valueStr}");
         }
 
+        public object GetValue(string id)
+        {
+            var output = DoString($"return {id}");
+            var array = output as object[];
+
+            if ((array?.Length ?? 0) > 0)
+            {
+                return array[0];
+            }
+
+            return output;
+        }
+
         public void Save(string optionId)
         {
             DoString($"serializeToFile(\'{_autoexecPath.Replace("\\", "\\\\")}\', \'{optionId}\', {optionId}, 'a')");
