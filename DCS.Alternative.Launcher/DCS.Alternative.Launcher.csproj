@@ -421,6 +421,9 @@
       <DependentUpon>FirstUseWizard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wizards\FirstUseWizardViewModel.cs" />
+    <Compile Include="Wizards\Steps\CreateProfileWizardStepView.xaml.cs">
+      <DependentUpon>CreateProfileWizardStepView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\Steps\QueryViewportSetupWizardStepView.xaml.cs">
       <DependentUpon>QueryViewportSetupWizardStepView.xaml</DependentUpon>
     </Compile>
@@ -621,6 +624,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SnipViewportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\Steps\CreateProfileWizardStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

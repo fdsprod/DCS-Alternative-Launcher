@@ -22,6 +22,7 @@ namespace DCS.Alternative.Launcher.Lua
             var optionPaths = id.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             var table = string.Empty;
 
+            // Because we are executing lua and not just building it for a file we need to ensure tables exist.
             for (var i = 0; i < optionPaths.Length - 1; i++)
             {
                 table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);

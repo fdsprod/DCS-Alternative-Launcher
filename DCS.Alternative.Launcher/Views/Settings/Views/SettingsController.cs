@@ -430,7 +430,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 {
                     foreach (var option in category.Options)
                     {
-                        if (!_profileSettingsService.TryGetValue<object>(string.Format(ProfileSettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
+                        if (!_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.GameOptions, option.Id, out var value))
                         {
                             value = context.GetValue(category.Id, option.Id);
                         }
@@ -493,7 +493,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public void UpsertDcsOption(string categoryId, string id, object value, bool isVr)
         {
-            _profileSettingsService.SetValue(string.Format(ProfileSettingsCategories.DcsOptionsFormat, categoryId, isVr ? "VR" : "Default"), id, value);
+            _profileSettingsService.SetValue(ProfileSettingsCategories.GameOptions, id, value);
         }
 
         public object ResetAdvancedOptionValue(string categoryId, string optionId)
@@ -511,8 +511,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             var category = categories.FirstOrDefault(c => c.Id == categoryId);
             var option = category.Options.FirstOrDefault(o => o.Id == optionId);
 
-            _profileSettingsService.DeleteValue(string.Format(ProfileSettingsCategories.DcsOptionsFormat, categoryId, "VR"), optionId);
-            _profileSettingsService.DeleteValue(string.Format(ProfileSettingsCategories.DcsOptionsFormat, categoryId, "Default"), optionId);
+            _profileSettingsService.DeleteValue(ProfileSettingsCategories.GameOptions, optionId);
 
             return option?.Value;
         }

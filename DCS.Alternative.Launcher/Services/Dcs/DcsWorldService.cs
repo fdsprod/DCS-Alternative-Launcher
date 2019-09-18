@@ -333,10 +333,17 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             foreach (var option in category.Options)
                             {
-                                if (_profileSettingsService.TryGetValue<object>(string.Format(ProfileSettingsCategories.DcsOptionsFormat, category.Id, isVr ? "VR" : "Default"), option.Id, out var value))
+                                if (_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.GameOptions, option.Id, out var value))
                                 {
-                                    Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
-                                    context.SetValue(category.Id, option.Id, value);
+                                    if (option.Id == "options.VR.enabled")
+                                    {
+                                        context.SetValue(category.Id, option.Id, isVr);
+                                    }
+                                    else
+                                    {
+                                        //Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
+                                        context.SetValue(category.Id, option.Id, value);
+                                    }
                                 }
                             }
                         }

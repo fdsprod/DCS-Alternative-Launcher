@@ -62,7 +62,11 @@ function Serializer:serialize(name, value, level)
     local valueType = type(value)
 
     if valueType == 'number' or valueType == 'string' or valueType == 'boolean' then
-        self.fout:write(basicSerialize(value), ',\n')
+        if level == '' then
+			self.fout:write(basicSerialize(value), '\n')
+		else
+			self.fout:write(basicSerialize(value), ',\n')
+		end
     elseif valueType == 'table' then
         self.fout:write('{\n')
 
