@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Interactions="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
-        xmlns:behaviors1="clr-namespace:DCS.Alternative.Launcher.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
@@ -21,11 +20,9 @@
         Topmost="True"
         WindowStyle="None"
         mc:Ignorable="d">
-    <i:Interaction.Behaviors>
-        <behaviors:DialogResultBehavior IsDialog="False" Value="{Binding DialogResult.Value}" />
-    </i:Interaction.Behaviors>
     <Interactions:Interaction.Behaviors>
-        <behaviors1:WindowDisableContextMenulBehavior />
+        <behaviors:DialogResultBehavior IsDialog="False" Value="{Binding DialogResult.Value}" />
+        <behaviors:WindowDisableContextMenulBehavior />
     </Interactions:Interaction.Behaviors>
     <Window.Resources>
         <Style TargetType="{x:Type Button}">

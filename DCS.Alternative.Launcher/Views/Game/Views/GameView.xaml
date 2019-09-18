@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:animations="clr-namespace:SourceChord.FluentWPF.Animations;assembly=FluentWPF"
-             xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Behaviors"
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
@@ -12,6 +11,7 @@
              xmlns:views="clr-namespace:DCS.Alternative.Launcher.Plugins.Game.Views"
              xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
              xmlns:wpf="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
+             xmlns:behaviors1="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
              x:Name="RootLayout"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -69,7 +69,7 @@
                         <WebBrowser x:Name="Browser"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    behaviors:WebBrowserUtility.BindableSource="{Binding LatestYouTubeUrl.Value}" />
+                                    behaviors1:WebBrowserUtility.BindableSource="{Binding LatestYouTubeUrl.Value}" />
                         <!--<cef:ChromiumWebBrowser x:Name="Browser"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"

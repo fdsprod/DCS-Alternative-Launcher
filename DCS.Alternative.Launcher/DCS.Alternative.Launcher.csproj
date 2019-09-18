@@ -151,9 +151,6 @@
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -197,7 +194,7 @@
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="ApplicationPaths.cs" />
-    <Compile Include="Behaviors\WindowDisableContextMenulBehavior.cs" />
+    <Compile Include="Interaction\Behaviors\WindowDisableContextMenulBehavior.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="Diagnostics\AdobeAcrobatHelper.cs" />
     <Compile Include="Diagnostics\DcsProcessMonitor.cs" />
@@ -599,8 +596,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Behaviors\GlassBehavior.cs" />
-    <Compile Include="Behaviors\WebBrowserBehavior.cs" />
+    <Compile Include="Interaction\Behaviors\GlassBehavior.cs" />
+    <Compile Include="Interaction\Behaviors\WebBrowserUtility.cs" />
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="Diagnostics\Trace\ConcreteTracer.cs" />
     <Compile Include="Diagnostics\Trace\ITracer.cs" />

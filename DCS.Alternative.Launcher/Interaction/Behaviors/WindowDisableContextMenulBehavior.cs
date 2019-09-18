@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Interop;
 using Microsoft.Xaml.Behaviors;
 
-namespace DCS.Alternative.Launcher.Behaviors
+namespace DCS.Alternative.Launcher.Interaction.Behaviors
 {
     public class WindowDisableContextMenulBehavior : Behavior<Window>
     {

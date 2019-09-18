@@ -6,7 +6,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using Microsoft.Xaml.Behaviors;
 
-namespace DCS.Alternative.Launcher.Behaviors
+namespace DCS.Alternative.Launcher.Interaction.Behaviors
 {
     public class GlassBehavior : Behavior<FrameworkElement>
     {

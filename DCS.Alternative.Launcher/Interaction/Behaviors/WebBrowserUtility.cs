@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
 
-namespace DCS.Alternative.Launcher.Behaviors
+namespace DCS.Alternative.Launcher.Interaction.Behaviors
 {
     public static class WebBrowserUtility
     {
