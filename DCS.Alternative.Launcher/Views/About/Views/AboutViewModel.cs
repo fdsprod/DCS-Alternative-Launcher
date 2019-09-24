@@ -44,7 +44,7 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
             var version = name.Version;
             var buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
 
-            var displayableVersion = $"{version} ({buildDate.ToShortDateString()})";
+            var displayableVersion = $"{version.Major} ({buildDate.ToShortDateString()})";
 
             Version.Value = displayableVersion;
 

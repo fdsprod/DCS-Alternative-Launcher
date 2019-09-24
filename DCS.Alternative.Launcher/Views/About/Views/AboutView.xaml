@@ -67,7 +67,7 @@
                                    Text="DCS Alternative Launcher" />
                         <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                             <TextBlock>
-                                <Run Text="Version:" />
+                                <Run Text="Release" />
                                 <Run Text="{Binding Version.Value}" />
                             </TextBlock>
                             <TextBlock Margin="5,0"
