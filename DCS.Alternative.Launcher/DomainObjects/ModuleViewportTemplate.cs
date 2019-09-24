@@ -16,6 +16,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             set;
         }
 
+        public bool IsHeliosTemplate
+        {
+            get;
+            set;
+        }
+
         public string ModuleId
         {
             get;

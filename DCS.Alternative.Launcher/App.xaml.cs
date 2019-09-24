@@ -29,6 +29,7 @@ using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Windows;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
+using DCS.Alternative.Launcher.Wizards.Steps;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using NLua;
@@ -223,20 +224,29 @@ namespace DCS.Alternative.Launcher
 
             if (profileSettingsService.SelectedProfile == null)
             {
-                var profile = new SettingsProfile {Name = "Default", Path = Path.Combine(ApplicationPaths.ProfilesPath, "Default.json")};
-
-                profile.SetDirty();
-                profileSettingsService.SelectedProfile = profile;
-
                 using (var container = _container.GetChildContainer())
                 {
+                    container.Register<WizardController>().AsSingleton();
+
                     var firstUseWizard = new FirstUseWizard();
-                    var viewModel = new FirstUseWizardViewModel(container);
+
+                    var steps = new WizardStepBase[]
+                    {
+                        new FirstUseWelcomeStepViewModel(container),
+                        new InstallationsWizardStepViewModel(container),
+                        new CreateProfileWizardStepViewModel(container),
+                    };
+
+                    var viewModel = new FirstUseWizardViewModel(container, steps);
 
                     Current.MainWindow = firstUseWizard;
 
+                    _splashScreen.Hide();
+
                     firstUseWizard.DataContext = viewModel;
                     firstUseWizard.ShowDialog();
+
+                    _splashScreen.Show();
                 }
                 
                 settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, true);

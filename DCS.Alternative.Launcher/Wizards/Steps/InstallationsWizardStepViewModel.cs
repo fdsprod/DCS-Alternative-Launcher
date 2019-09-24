@@ -9,6 +9,7 @@ using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.Plugins.Settings.Views.General;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
@@ -36,15 +37,15 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
             get;
         } = new ReactiveCommand();
 
-        public ReactiveCollection<InstallLocation> Installations
+        public ReactiveCollection<InstallLocationModel> Installations
         {
             get;
-        } = new ReactiveCollection<InstallLocation>();
+        } = new ReactiveCollection<InstallLocationModel>();
 
-        public ReactiveProperty<InstallLocation> SelectedInstall
+        public ReactiveProperty<InstallLocationModel> SelectedInstall
         {
             get;
-        } = new ReactiveProperty<InstallLocation>();
+        } = new ReactiveProperty<InstallLocationModel>();
 
         public ReactiveCommand RemoveInstallationCommand
         {
@@ -69,7 +70,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
                 foreach (var install in _settingsService.GetInstallations())
                 {
-                    Installations.Add(install);
+                    Installations.Add(new InstallLocationModel(install));
+                }
+
+                if (Installations.Any())
+                {
+                    Installations[0].IsDefault.Value = true;
                 }
             }
             catch (Exception e)
@@ -86,12 +92,30 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
 
         public override bool Validate()
         {
-            if (Installations.Count(i => i.IsValidInstall) == 0)
+            if (Installations.Any() && Installations.Count(i=>i.IsDefault.Value) == 0)
             {
-                return MessageBoxEx.Show("No valid DCS World installations were found.   Are you sure you want to continue?", "Installations", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+                var window = WindowAssist.GetWindow(Controller);
+                MessageBoxEx.Show("You must set a default installation to continue.", "Default Installations", MessageBoxButton.OK, parent: window);
+                return false;
+            }
+
+            if (Installations.Count(i => i.ConcreteInstall.IsValidInstall) == 0)
+            {
+                var window = WindowAssist.GetWindow(Controller);
+                return MessageBoxEx.Show("No valid DCS World installations were found.   Are you sure you want to continue?", "Installations", MessageBoxButton.YesNo, parent: window) == MessageBoxResult.Yes;
             }
 
             return base.Validate();
+        }
+
+        public override bool Commit()
+        {
+            var defaultInstallation = Installations.First(i => i.IsDefault.Value);
+
+            _settingsService.AddInstalls(Installations.Select(i => i.ConcreteInstall.Directory).ToArray());
+            _settingsService.SelectedInstall = defaultInstallation.ConcreteInstall;
+
+            return base.Commit();
         }
 
         private void OnAddInstallation()
@@ -110,7 +134,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
                     var selectedFolder = folderBrowser.SelectedPath;
                     var installation = new InstallLocation(selectedFolder);
 
-                    Installations.Add(installation);
+                    Installations.Add(new InstallLocationModel(installation));
 
                     _settingsService.AddInstalls(installation.Directory);
                 }
@@ -133,7 +157,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
                 }
 
                 Installations.Remove(installation);
-                _settingsService.RemoveInstalls(installation.Directory);
+                _settingsService.RemoveInstalls(installation.ConcreteInstall.Directory);
             }
             catch (Exception e)
             {
@@ -152,7 +176,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
                 {
                     if (Installations.All(i => i.ToString() != installation.ToString()))
                     {
-                        Installations.Add(installation);
+                        Installations.Add(new InstallLocationModel(installation));
                         addedInstallations.Add(installation.Directory);
                     }
                 }

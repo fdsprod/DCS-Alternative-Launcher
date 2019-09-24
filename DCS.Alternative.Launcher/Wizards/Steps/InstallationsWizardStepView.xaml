@@ -1,35 +1,237 @@
-﻿<UserControl
-    x:Class="DCS.Alternative.Launcher.Wizards.Steps.InstallationsWizardStepView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-    xmlns:local="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.InstallationsWizardStepView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:local="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
+             xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock
-            Margin="30,30,30,0"
-            FontFamily="{StaticResource Prototype}"
-            FontSize="16"
-            Foreground="#FFFFFFFF"
-            Text="DCS Alternative Launcher does it's best to detect all of your DCS World installations.  However, if you have an installation of DCS World that is not shown below, please click the + button to add it.   If for any reason there is an installation of DCS World that you do not was DCS Alternative Launcher to manage select it with the mouse and remove it by clicking the - button below.  Click Next to continue..."
-            TextWrapping="Wrap" />
-        <fluentWpf:AcrylicPanel
-            Grid.Row="1"
-            Margin="30"
-            NoiseOpacity="0"
-            Target="{Binding ElementName=BackgroundElement}"
-            TintColor="#33000000"
-            TintOpacity="0.25">
-            <controls:InstallationControl />
+        <TextBlock Margin="30,30,30,0"
+                   FontFamily="{StaticResource Prototype}"
+                   FontSize="16"
+                   Foreground="#FFFFFFFF"
+                   Text="DCS Alternative Launcher does it's best to detect all of your DCS World installations.  However, if you have an installation of DCS World that is not shown below, please click the + button to add it.   If for any reason there is an installation of DCS World that you do not was DCS Alternative Launcher to manage select it with the mouse and remove it by clicking the - button below.  Click Next to continue..."
+                   TextWrapping="Wrap" />
+        <fluentWpf:AcrylicPanel Grid.Row="1"
+                                Margin="30,30,30,30"
+                                ClipToBounds="False"
+                                NoiseOpacity="0"
+                                Target="{Binding ElementName=BackgroundElement}"
+                                TintColor="#33000000"
+                                TintOpacity="0.25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.RowSpan="2"
+                        Background="#40000000"
+                        BorderBrush="#FF2F2F2F"
+                        BorderThickness="1"
+                        CornerRadius="0" />
+                <Grid Grid.Row="0" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               FontSize="16"
+                               Text="DEFAULT" />
+                    <TextBlock Grid.Column="3"
+                               HorizontalAlignment="Left"
+                               FontSize="16"
+                               Text="VERSION" />
+                    <TextBlock Grid.Column="5"
+                               HorizontalAlignment="Left"
+                               FontSize="16"
+                               Text="BRANCH" />
+                    <TextBlock Grid.Column="7"
+                               HorizontalAlignment="Left"
+                               FontSize="16"
+                               Text="DIRECTORY" />
+                    <TextBlock Grid.Column="9"
+                               HorizontalAlignment="Center"
+                               FontSize="16"
+                               Text="STATUS" />
+                </Grid>
+                <ListView Grid.Row="1"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ItemsSource="{Binding Installations}"
+                          SelectedItem="{Binding SelectedInstall.Value, Mode=TwoWay}">
+                    <ListView.Resources>
+
+                        <Style x:Key="SwitchRadioButtonStyle" TargetType="RadioButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <ToggleButton IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ToggleSwitchStyle}" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Height" Value="40" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="general:InstallLocationModel">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer0" />
+                                    <ColumnDefinition Width="80" SharedSizeGroup="Default" />
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer1" />
+                                    <ColumnDefinition Width="100" SharedSizeGroup="Version" />
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer2" />
+                                    <ColumnDefinition Width="100" SharedSizeGroup="Branch" />
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer3" />
+                                    <ColumnDefinition Width="*" SharedSizeGroup="Location" />
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer4" />
+                                    <ColumnDefinition Width="75" SharedSizeGroup="Valid" />
+                                    <ColumnDefinition Width="20" SharedSizeGroup="Spacer5" />
+                                </Grid.ColumnDefinitions>
+                                <RadioButton Grid.Column="1"
+                                             HorizontalAlignment="Center"
+                                             GroupName="DefaultRadioGroup"
+                                             IsChecked="{Binding IsDefault.Value, Mode=TwoWay}"
+                                             Style="{StaticResource SwitchRadioButtonStyle}" />
+                                <TextBlock Grid.Column="3"
+                                           HorizontalAlignment="Left"
+                                           FontSize="16"
+                                           Foreground="#FFFFFFFF"
+                                           Text="{Binding ConcreteInstall.Version}" />
+                                <TextBlock Grid.Column="5"
+                                           HorizontalAlignment="Left"
+                                           FontSize="16"
+                                           Foreground="#FFFFFFFF"
+                                           Text="{Binding ConcreteInstall.Variant}" />
+                                <TextBlock Grid.Column="7"
+                                           HorizontalAlignment="Left"
+                                           FontSize="16"
+                                           Foreground="#FFFFFFFF"
+                                           Text="{Binding ConcreteInstall.Directory}" />
+                                <Border Grid.Column="9"
+                                        Width="50"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Stretch"
+                                        Background="#FF006F00"
+                                        Visibility="{Binding IsValidInstall, Converter={x:Static data:VisibilityConverter.Instance}}">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="#FFFFFFFF"
+                                               Text="Yes"
+                                               TextAlignment="Center" />
+                                </Border>
+                                <Border Grid.Column="9"
+                                        Width="60"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Stretch"
+                                        Background="#FFCF0000"
+                                        Visibility="{Binding IsValidInstall, Converter={x:Static data:VisibilityConverter.Instance}, ConverterParameter=reverse}">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="#FFFFFFFF"
+                                               Text="No"
+                                               TextAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackPanel Grid.Row="2"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal">
+                    <Button Height="30"
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Background="#6F1C00C6"
+                            Command="{Binding DetectInstallationsCommand}">
+                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
+                                   Text="DETECT">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                    <Button Height="30"
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Background="#FF006F00"
+                            Command="{Binding VerifyInstallationsCommand}">
+                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                   FontSize="12"
+                                   Text="VERIFY">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Width="30"
+                            Height="30"
+                            Padding="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Background="#6F1C00C6"
+                            Command="{Binding AddInstallationCommand}">
+                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                   FontSize="16"
+                                   Text="+">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                    <Button Width="30"
+                            Height="30"
+                            Padding="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Background="#6F1C00C6"
+                            Command="{Binding RemoveInstallationCommand}">
+                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                   FontSize="15"
+                                   Text="-">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </fluentWpf:AcrylicPanel>
     </Grid>
 </UserControl>

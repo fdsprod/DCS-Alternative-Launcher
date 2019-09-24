@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
+using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json.Linq;
 
 namespace DCS.Alternative.Launcher.Lua
@@ -15,6 +16,28 @@ namespace DCS.Alternative.Launcher.Lua
             _autoexecPath = install.AutoexecCfg;
 
             DoString("options = options or {}");
+            DoString($"{OptionCategory.Graphics} = {OptionCategory.Graphics} or {{}}");
+            DoString($"{OptionCategory.Camera} = {OptionCategory.Camera} or {{}}");
+            DoString($"{OptionCategory.CameraMirrors} = {OptionCategory.CameraMirrors} or {{}}");
+            DoString($"{OptionCategory.Terrain} = {OptionCategory.Terrain} or {{}}");
+            DoString($"{OptionCategory.TerrainMirror} = {OptionCategory.TerrainMirror} or {{}}");
+            DoString($"{OptionCategory.TerrainReflection} = {OptionCategory.TerrainReflection} or {{}}");
+            DoString($"{OptionCategory.Sound} = {OptionCategory.Sound} or {{}}");
+
+            foreach (var range in CameraRangeSettings.All)
+            {
+                DoString($"{OptionCategory.Camera}.{range} = {OptionCategory.Camera}.{range} or {{}}");
+                DoString($"{OptionCategory.CameraMirrors}.{range} = {OptionCategory.CameraMirrors}.{range} or {{}}");
+            }
+
+            Reload();
+        }
+        public void Reload()
+        {
+            if (File.Exists(_autoexecPath))
+            {
+                DoFile(_autoexecPath);
+            }
         }
 
         public void SetValue(string id, object value)
@@ -67,7 +90,7 @@ namespace DCS.Alternative.Launcher.Lua
 
         public void Save(string optionId)
         {
-            DoString($"serializeToFile(\'{_autoexecPath.Replace("\\", "\\\\")}\', \'{optionId}\', {optionId}, 'a')");
+            DoString($"serializeToFile(\'{_autoexecPath.Replace("\\", "\\\\")}\', \'{optionId}\', {optionId}, 'a', false)");
         }
     }
 }

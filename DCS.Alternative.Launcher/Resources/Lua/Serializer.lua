@@ -50,14 +50,14 @@ function Serializer:failed_to_serialize(value, name)
     self.fout:write(serialize_failure_message(self, value, name))
 end
 
-function Serializer:serialize(name, value, level)
+function Serializer:serialize(name, value, level, brackets)
     local levelOffset = '\t'
 
     if level == nil then
         level = ''
     end
-
-    self.fout:write(level, name, ' = ')
+	
+	self.fout:write(level, name, ' = ')
 
     local valueType = type(value)
 
@@ -79,10 +79,14 @@ function Serializer:serialize(name, value, level)
             if type(k) == 'number' then
                 key = string.format('[%s]', k)
             else
-                key = string.format('[%q]', k)
+				if brackets then
+					key = string.format('[%q]', k)
+				else
+					key = k
+				end
             end
 
-            self:serialize(key, pair.value, level .. levelOffset)
+            self:serialize(key, pair.value, level .. levelOffset, brackets)
         end
 
         if level == '' then

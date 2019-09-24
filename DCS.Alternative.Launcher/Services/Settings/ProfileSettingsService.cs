@@ -14,14 +14,14 @@ namespace DCS.Alternative.Launcher.Services.Settings
     public class ProfileSettingsService : IProfileSettingsService
     {
         private readonly ISettingsService _settingsService;
+        private readonly List<SettingsProfile> _profiles = new List<SettingsProfile>();
 
         private Dictionary<string, Option[]> _advancedOptionCache;
         private Dictionary<string, Option[]> _defaultAdvancedOptionCache;
 
         private DcsOptionsCategory[] _dcsOptions;
 
-        public List<SettingsProfile> _profiles = new List<SettingsProfile>();
-        public SettingsProfile _selectedProfile;
+        private SettingsProfile _selectedProfile;
 
         public ProfileSettingsService(IContainer container)
         {
@@ -119,10 +119,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             var moduleViewports = new List<ModuleViewportTemplate>(GetValue(ProfileSettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, new ModuleViewportTemplate[0]));
             var mv = moduleViewports.FirstOrDefault(m => m.ModuleId == moduleId && m.TemplateName == name);
 
-            if (mv != null)
-            {
-                mv.Viewports.Clear();
-            }
+            mv?.Viewports.Clear();
 
             SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
         }
@@ -394,19 +391,9 @@ namespace DCS.Alternative.Launcher.Services.Settings
             return new ViewportOption[0];
         }
 
-        private string GetCategory(string id)
+        private static string GetCategory(string id)
         {
-            return _optionsCategories.First(id.Contains);
+            return OptionCategory.All.First(id.Contains);
         }
-        private static readonly string[] _optionsCategories =
-        {
-            OptionCategory.TerrainReflection,
-            OptionCategory.TerrainMirror,
-            OptionCategory.Terrain,
-            OptionCategory.CameraMirrors,
-            OptionCategory.Camera,
-            OptionCategory.Graphics,
-            OptionCategory.Sound
-        };
     }
 }

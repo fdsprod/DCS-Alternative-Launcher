@@ -138,7 +138,9 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         {
             if (!Screens.Any(s => s.IsSelected.Value))
             {
-                MessageBoxEx.Show("You must select at least 1 monitors for the UI Viewport.", "Select Monitor");
+                var window = WindowAssist.GetWindow(Controller);
+
+                MessageBoxEx.Show("You must select at least 1 monitors for the UI Viewport.", "Select Monitor", parent: window);
                 return false;
             }
 

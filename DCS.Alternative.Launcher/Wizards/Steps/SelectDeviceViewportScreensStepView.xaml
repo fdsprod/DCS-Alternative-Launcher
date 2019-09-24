@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource Prototype}"
                    FontSize="16"
                    Foreground="#FFFFFFFF"
-                   Text="Please select monitor you would like the device viewports to display on (ex. MFCD, RWR, CDU, etc)."
+                   Text="Please select the screen(s) you use to display device viewports (ex. MFCD, RWR, CDU, etc)."
                    TextWrapping="Wrap" />
         <fluentWpf:AcrylicPanel Grid.Row="1"
                                 Margin="30"

@@ -1,19 +1,20 @@
 ﻿<Window x:Class="DCS.Alternative.Launcher.Windows.FirstUse.FirstUseWizard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:local="clr-namespace:DCS.Alternative.Launcher.Windows.FirstUse"
+        xmlns:launcher="clr-namespace:DCS.Alternative.Launcher"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:steps="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
-        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         Title="DCS Alternative Launcher - First Use"
         Width="1224"
         Height="800"
         MaxWidth="1224"
         MaxHeight="800"
+        launcher:WindowAssist.ViewModel="{Binding Controller}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
@@ -25,6 +26,7 @@
                       UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
     <interactions:Interaction.Behaviors>
+        <behaviors:WindowBehavior CanClose="{Binding Controller.CanClose.Value}" />
         <behaviors:WindowDisableContextMenulBehavior />
     </interactions:Interaction.Behaviors>
     <Window.Resources>
@@ -71,7 +73,7 @@
                                    VerticalAlignment="Center"
                                    RenderOptions.BitmapScalingMode="HighQuality"
                                    RenderOptions.EdgeMode="Aliased"
-                                   Source="/Images/dal-icon-256.png"
+                                   Source="/Images/dal-icon-white.png"
                                    Stretch="Uniform">
                                 <Image.Effect>
                                     <DropShadowEffect BlurRadius="4" ShadowDepth="0" />
@@ -86,11 +88,14 @@
                                  Controller="{Binding Controller}"
                                  NextButtonContent="NEXT">
                 <controls:WizardView.Resources>
+                    <DataTemplate DataType="{x:Type steps:FirstUseWelcomeStepViewModel}">
+                        <steps:FirstUseWelcomeStepView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type steps:CreateProfileWizardStepViewModel}">
+                        <steps:CreateProfileWizardStepView />
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type steps:InstallationsWizardStepViewModel}">
                         <steps:InstallationsWizardStepView />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:QueryViewportSetupWizardStepViewModel}">
-                        <steps:QueryViewportSetupWizardStepView />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type steps:SelectGameViewportScreensStepViewModel}">
                         <steps:SelectGameViewportScreensStepView />

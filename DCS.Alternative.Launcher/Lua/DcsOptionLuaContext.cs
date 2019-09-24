@@ -4,11 +4,11 @@ using DCS.Alternative.Launcher.Analytics;
 
 namespace DCS.Alternative.Launcher.Lua
 {
-    public class DcsOptionLuaContext : LuaContextBase
+    public class OptionLuaContext : LuaContextBase
     {
         private readonly string _optionsPath;
 
-        public DcsOptionLuaContext(InstallLocation install)
+        public OptionLuaContext(InstallLocation install)
         {
             _optionsPath = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 

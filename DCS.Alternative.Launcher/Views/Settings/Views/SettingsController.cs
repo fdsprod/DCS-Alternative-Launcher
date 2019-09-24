@@ -343,7 +343,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             if (MessageBoxEx.Show("Do you want DCS Alternative Launcher to adjust your Game Resolution and Monitor Config?", "Update DCS", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                using (var context = new DcsOptionLuaContext(install))
+                using (var context = new OptionLuaContext(install))
                 {
                     context.SetValue("graphics", "multiMonitorSetup", "monitor_config_DAL");
                     context.SetValue("graphics", "width", realBounds.Width);
@@ -424,7 +424,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             var categories = _profileSettingsService.GetDcsOptions();
 
-            using (var context = new DcsOptionLuaContext(install))
+            using (var context = new OptionLuaContext(install))
             {
                 foreach (var category in categories)
                 {

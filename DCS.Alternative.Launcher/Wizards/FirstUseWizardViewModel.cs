@@ -12,24 +12,10 @@ namespace DCS.Alternative.Launcher.Wizards
     {
         public FirstUseWizardViewModel(IContainer container, params WizardStepBase[] steps)
         {
-            container.Register<WizardController>().AsSingleton();
-
             Controller = container.Resolve<WizardController>();
             Controller.Complete += Controller_Complete;
 
-            if (steps.Length > 0)
-            {
-                Array.ForEach(steps, step => Controller.Steps.Add(step));
-            }
-            else
-            {
-                Controller.Steps.Add(new InstallationsWizardStepViewModel(container));
-
-                if (Screen.AllScreens.Count() > 1)
-                {
-                    Controller.Steps.Add(new QueryViewportSetupWizardStepViewModel(container));
-                }
-            }
+            Array.ForEach(steps, step => Controller.Steps.Add(step));
 
             Controller.GoNextAsync();
         }

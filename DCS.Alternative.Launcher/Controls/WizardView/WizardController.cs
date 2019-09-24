@@ -385,6 +385,8 @@ namespace DCS.Alternative.Launcher.Controls
 
         protected virtual void OnDone()
         {
+            CanClose.Value = true;
+
             var handler = Complete;
             handler?.Invoke(this, EventArgs.Empty);
 

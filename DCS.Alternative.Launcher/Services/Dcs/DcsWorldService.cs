@@ -25,18 +25,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 {
     public class DcsWorldService : IDcsWorldService
     {
-        private static readonly string[] CameraRangeSettings =
-        {
-            "Low",
-            "Medium",
-            "High",
-            "Ultra",
-            "Extreme"
-        };
-
         private readonly IContainer _container;
         private readonly ISettingsService _settingsService;
         private readonly IProfileSettingsService _profileSettingsService;
+        private readonly AutoexecLuaContext _autoexecContext;
+        private readonly OptionLuaContext _optionsContext;
 
         public DcsWorldService(IContainer container)
         {
@@ -327,7 +320,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                 try
                 {
-                    using (var context = new DcsOptionLuaContext(install))
+                    using (var context = new OptionLuaContext(install))
                     {
                         foreach (var category in categories)
                         {
@@ -561,7 +554,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             var options = _profileSettingsService.GetAdvancedOptions(category);
 
-            foreach (var range in CameraRangeSettings)
+            foreach (var range in CameraRangeSettings.All)
             {
                 foreach (var option in options)
                 {
@@ -575,24 +568,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 }
             }
         }
-
-
-        //private void EnsureTableCreated(StringBuilder sb, string path, Dictionary<string, bool> createdTables)
-        //{
-        //    var optionPaths = path.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
-        //    var table = string.Empty;
-
-        //    for (var i = 0; i < optionPaths.Length - 1; i++)
-        //    {
-        //        table = string.IsNullOrEmpty(table) ? optionPaths[i] : string.Join(".", table, optionPaths[i]);
-
-        //        if (!createdTables.ContainsKey(table))
-        //        {
-        //            createdTables.Add(table, true);
-        //            sb.AppendLine($"{table} = {table} or {{}}");
-        //        }
-        //    }
-        //}
 
         private void WriteOptionValue(StringBuilder sb, string id, object value)
         {

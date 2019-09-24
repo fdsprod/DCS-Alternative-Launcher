@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource Prototype}"
                    FontSize="16"
                    Foreground="#FFFFFFFF"
-                   Text="Please select monitor you would like the UI to be displayed on."
+                   Text="Please select screen(s) you would like the in-game user interface to display on.  This would be the main menu, options screen, multiplayer screen, etc."
                    TextWrapping="Wrap" />
         <fluentWpf:AcrylicPanel Grid.Row="1"
                                 Margin="30"

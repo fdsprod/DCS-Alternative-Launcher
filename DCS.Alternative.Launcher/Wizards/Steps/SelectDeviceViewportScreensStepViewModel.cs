@@ -151,11 +151,24 @@ namespace DCS.Alternative.Launcher.Wizards.Steps
         {
             var screens = Screens.Where(s => s.IsSelected.Value).Select(s => s.Id).ToArray();
             Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.TotalViewportDisplayCount, screens.Length.ToString());
+
             _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, screens);
 
-            if (screens.Length == 1)
+            switch (_profileSettingsService.SelectedProfile.ProfileType)
             {
-                Controller.Steps.Add(new SelectInitialViewportsWizardStepViewModel(Container));
+                case SettingsProfileType.SingleMonitor:
+                    break;
+                case SettingsProfileType.SimPit:
+                case SettingsProfileType.Helios:
+                    if (screens.Length == 1)
+                    {
+                        Controller.Steps.Add(new SelectInitialViewportsWizardStepViewModel(Container));
+                    }
+                    break;
+                case SettingsProfileType.VirtualReality:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             return base.Commit();

@@ -2,9 +2,9 @@
 {
     public enum SettingsProfileType
     {
-        GameOnly,
-        GameWithViewports,
+        SingleMonitor,
+        SimPit,
         Helios,
-        SimPit
+        VirtualReality,
     }
 }

@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource Prototype}"
                    FontSize="16"
                    Foreground="#FFFFFFFF"
-                   Text="Please select all of the screens you wish to use for DCS including screens used for device viewports such as MFCD, RWR, UFC, etc."
+                   Text="Please select all of the screen(s) you use for DCS.  This including screens used for device viewports such as MFCD, RWR, UFC, etc."
                    TextWrapping="Wrap" />
         <fluentWpf:AcrylicPanel Grid.Row="1"
                                 Margin="30"

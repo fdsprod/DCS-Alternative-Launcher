@@ -2,6 +2,17 @@
 {
     public static class OptionCategory
     {
+        public static readonly string[] All =
+        {
+            TerrainReflection,
+            TerrainMirror,
+            Terrain,
+            CameraMirrors,
+            Camera,
+            Graphics,
+            Sound
+        };
+
         public const string TerrainReflection = "options.graphics.terrainreflection";
         public const string TerrainMirror = "options.graphics.terrainmirror";
         public const string Terrain = "options.graphics.terrain";

@@ -175,6 +175,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             get;
         }
 
+        public ReactiveProperty<bool> IsDefault
+        {
+            get;
+        } = new ReactiveProperty<bool>();
+
         public ReactiveProperty<bool> IsValidInstall
         {
             get;
