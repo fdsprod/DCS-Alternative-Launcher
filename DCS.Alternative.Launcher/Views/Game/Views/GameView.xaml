@@ -84,6 +84,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -134,9 +135,30 @@
                                        Text="Check for Updates" />
                         </StackPanel>
                     </Button>
+                    <Button Grid.Row="1"
+                            Grid.Column="2"
+                            Padding="5,3"
+                            Background="#00000000"
+                            BorderThickness="0"
+                            Command="{Binding CleanShadersCommand}"
+                            Cursor="Hand"
+                            Foreground="#AFAFAF">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Width="16"
+                                  Data="M298.012,5.249c-6.996-6.998-18.342-6.998-25.342,0.002l-97.545,97.545l-17.58-17.58c-5.857-5.857-15.355-5.857-21.213,0  L125.758,95.79c-25.597,6.1-51.193,12.2-76.79,18.303l-40.902,9.751c-3.425,0.816-6.213,3.295-7.424,6.601  c-1.212,3.306-0.686,6.999,1.4,9.835c45.266,61.527,99.414,115.675,160.94,160.939c1.83,1.346,4.016,2.042,6.224,2.042  c1.216,0,2.439-0.211,3.612-0.641c3.306-1.212,5.784-4,6.601-7.425l12.213-51.234c5.281-22.153,10.561-44.305,15.839-66.458  l10.574-10.574c5.857-5.857,5.857-15.355,0-21.213l-17.579-17.579l97.546-97.546C305.012,23.591,305.01,12.245,298.012,5.249z   M162.708,274.732c-8.537-6.569-16.908-13.333-25.134-20.258l13.832-38.98l-27.336,27.334c-9.842-8.703-19.438-17.669-28.793-26.881  l13.736-21.701l-21.768,13.668c-8.564-8.699-16.912-17.611-25.036-26.732l27.442-27.441l-39.219,13.916  c-7.506-8.853-14.812-17.886-21.905-27.103l93.503-22.288l62.964,62.964L162.708,274.732z"
+                                  Fill="#F0BC44"
+                                  Stretch="Uniform" />
+                            <TextBlock Margin="10,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="{StaticResource Prototype}"
+                                       FontSize="12"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                       Text="Clean Shaders" />
+                        </StackPanel>
+                    </Button>
                     <Border Grid.Row="2"
                             Grid.Column="0"
-                            Grid.ColumnSpan="3">
+                            Grid.ColumnSpan="4">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                         </Border.Effect>
@@ -573,7 +595,7 @@
                     </Border>
                     <Grid Grid.Row="3"
                           Grid.Column="0"
-                          Grid.ColumnSpan="3">
+                          Grid.ColumnSpan="4">
                         <TextBlock Margin="0,0,0,0"
                                    VerticalAlignment="Bottom"
                                    FontFamily="{StaticResource Prototype}"

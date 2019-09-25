@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -59,6 +60,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             LaunchDcsCommand.Subscribe(OnLaunchDcs);
             CheckForUpdatesCommand.Subscribe(OnCheckForUpdates);
             ShowNewsArticleCommand.Subscribe(OnShowNewsArticle);
+            CleanShadersCommand.Subscribe(OnCleanShaders);
 
             IsVREnabled.Subscribe(OnIsVREnabledChanged);
 
@@ -66,6 +68,27 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             _checkPlayingTimer.Interval = TimeSpan.FromSeconds(1);
             _checkPlayingTimer.Tick += OnCheckPlayingTimerTick;
             _checkPlayingTimer.Start();
+        }
+
+        private void OnCleanShaders()
+        {
+            try
+            {
+                var install = SelectedInstall.Value;
+
+                if(install == null)
+                {
+                    return;
+                }
+
+                Directory.Delete(Path.Combine(install.SavedGamesPath, "fxo"), true);
+                Directory.Delete(Path.Combine(install.SavedGamesPath, "metashaders"), true);
+                Directory.Delete(Path.Combine(install.SavedGamesPath, "metashaders2"), true);
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
         }
 
         private void OnDcsProcessExited(object sender, EventArgs e)
@@ -178,6 +201,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         }
 
         public ReactiveCommand CheckForUpdatesCommand
+        {
+            get;
+        } = new ReactiveCommand();
+
+        public ReactiveCommand CleanShadersCommand
         {
             get;
         } = new ReactiveCommand();
