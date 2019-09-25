@@ -22,6 +22,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             set;
         }
 
+        public int SeatIndex
+        {
+            get;
+            set;
+        }
+
         public string ModuleId
         {
             get;

@@ -189,6 +189,7 @@
     <Compile Include="Analytics\Tracker.cs" />
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="ApplicationPaths.cs" />
+    <Compile Include="Controls\DpiDecorator.cs" />
     <Compile Include="DomainObjects\CameraRangeSettings.cs" />
     <Compile Include="Interaction\Behaviors\PlaceholderService.cs" />
     <Compile Include="Interaction\Behaviors\WindowBehavior.cs" />
@@ -412,44 +413,49 @@
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\FirstUseWizard.xaml.cs">
-      <DependentUpon>FirstUseWizard.xaml</DependentUpon>
+    <Compile Include="Wizards\Wizard.xaml.cs">
+      <DependentUpon>Wizard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\FirstUseWizardViewModel.cs" />
-    <Compile Include="Wizards\Steps\CreateProfileWizardStepView.xaml.cs">
+    <Compile Include="Wizards\WizardViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml.cs">
       <DependentUpon>CreateProfileWizardStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\CreateProfileWizardStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUseWelcomeStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\FirstUse\CreateProfileWizardStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepView.xaml.cs">
       <DependentUpon>FirstUseWelcomeStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\FirstUseWelcomeStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepViewModel.cs" />
     <Compile Include="Models\ScreenModel.cs" />
-    <Compile Include="Wizards\Steps\SelectDeviceViewportScreensStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepView.xaml.cs">
       <DependentUpon>SelectDeviceViewportScreensStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\SelectDeviceViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\SelectGameViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\SelectGameViewportScreensStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepView.xaml.cs">
       <DependentUpon>SelectGameViewportScreensStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\SelectInitialViewportsWizardStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepView.xaml.cs">
+      <DependentUpon>SelectViewportsWizardStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepView.xaml.cs">
       <DependentUpon>SelectInitialViewportsWizardStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\SelectInitialViewportsWizardStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\SelectUIViewportScreensStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepView.xaml.cs">
       <DependentUpon>SelectUIViewportScreensStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\SelectUIViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\InstallationsWizardStepView.xaml.cs">
+    <Compile Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\InstallationsWizardStepView.xaml.cs">
       <DependentUpon>InstallationsWizardStepView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\Steps\InstallationsWizardStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\FirstUse\InstallationsWizardStepViewModel.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="ServiceModel\Syndication\SyndicationHelper.cs" />
     <Compile Include="Windows\SnipViewportWindow.xaml.cs">
       <DependentUpon>SnipViewportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepViewModel.cs" />
+    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportWizardController.cs" />
     <Compile Include="Xml\XmlHelper.cs" />
     <Page Include="Controls\DesignerControl.xaml">
       <SubType>Designer</SubType>
@@ -587,7 +593,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\FirstUseWizard.xaml">
+    <Page Include="Wizards\Wizard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -627,31 +633,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\CreateProfileWizardStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\FirstUseWelcomeStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\InstallationsWizardStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\InstallationsWizardStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\SelectDeviceViewportScreensStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\SelectGameViewportScreensStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\SelectInitialViewportsWizardStepView.xaml">
+    <Page Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wizards\Steps\SelectUIViewportScreensStepView.xaml">
+    <Page Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -695,13 +705,13 @@
     <None Include="Data\Resources\AdditionalResources.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Lua\Utils.lua">
+    <None Include="Data\Lua\Utils.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Lua\IO.lua">
+    <None Include="Data\Lua\IO.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Lua\Serializer.lua">
+    <None Include="Data\Lua\Serializer.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Viewports\ViewportOptions.json">

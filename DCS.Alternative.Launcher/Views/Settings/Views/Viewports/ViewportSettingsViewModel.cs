@@ -13,6 +13,7 @@ using DCS.Alternative.Launcher.Plugins.Settings.Dialogs;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
 using DCS.Alternative.Launcher.Wizards.Steps;
+using DCS.Alternative.Launcher.Wizards.Steps.FirstUse;
 using Reactive.Bindings;
 using WpfScreenHelper;
 
@@ -79,8 +80,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                     {
                         using (var container = Controller.GetChildContainer())
                         {
-                            var firstUseWizard = new FirstUseWizard();
-                            var viewModel = new FirstUseWizardViewModel(container,
+                            var firstUseWizard = new Wizard();
+                            var viewModel = new WizardViewModel(container,
                                 new SelectGameViewportScreensStepViewModel(container),
                                 new SelectUIViewportScreensStepViewModel(container),
                                 new SelectDeviceViewportScreensStepViewModel(container));
@@ -104,21 +105,16 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
                 }
 
                 var selectModuleDialog = new SelectModuleDialog();
-                var viewportTemplates = Controller.GetViewportTemplates();
+                var viewportTemplates = Controller.GetDefaultViewportTemplates();
 
                 foreach (var i in await Controller.GetInstalledAircraftModulesAsync())
                 {
-                    if (viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
+                    if (!viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
                     {
                         continue;
                     }
 
-                    var devices = Controller.GetViewportDevices(i.ModuleId);
-
-                    if (devices.Any())
-                    {
-                        selectModuleDialog.Modules.Add(i);
-                    }
+                    selectModuleDialog.Modules.Add(i);
                 }
 
                 selectModuleDialog.SelectedModule = selectModuleDialog.Modules.First();
@@ -131,58 +127,40 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
 
                 var module = selectModuleDialog.SelectedModule;
                 var templates = Controller.GetDefaultViewportTemplatesForModule(module.ModuleId);
-                var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
-                var monitorDefinitions = screens.Select(s => new MonitorDefinition {MonitorId = s.DeviceName, DisplayWidth = (int) s.Bounds.Width, DisplayHeight = (int) s.Bounds.Height});
 
                 if (templates.Length == 0)
                 {
                     MessageBoxEx.Show($"There are no default templates for the {module.DisplayName}.  An empty template will be created.", "No Template Defined");
 
-                    var model =
-                        new ModuleViewportModel(
-                            module.DisplayName,
-                            null,
-                            module,
-                            new Viewport[0]);
-
-                    var viewports = await Controller.EditViewportsAsync(model);
-
+                    var viewports = await Controller.EditViewportsAsync(module.DisplayName, null, module, new Viewport[0]);
                     Controller.SaveViewports(module.DisplayName, module.ModuleId, viewports);
                 }
-                else if (templates.Length > 1)
+                else if(templates.Length > 1)
                 {
-                    //TODO: Show wizard for selection
+                    var template = Controller.ShowTemplateSelection(templates);
+
+                    if (template != null)
+                    {
+                        var viewports = await Controller.EditViewportsAsync(template.TemplateName, template.ExampleImageUrl, module, template.Viewports.ToArray());
+                        Controller.SaveViewports(template.TemplateName, module.ModuleId, viewports);
+                    }
+                    else
+                    {
+                        var viewports = await Controller.EditViewportsAsync(module.DisplayName, null, module, new Viewport[0]);
+                        Controller.SaveViewports(module.DisplayName, module.ModuleId, viewports);
+                    }
                 }
-                else
+                else 
                 {
                     if (MessageBoxEx.Show($"Would you like to start with the default template {templates[0].TemplateName}?", "Default Template", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var viewports = templates[0].Viewports.ToArray();
-
-                        Array.ForEach(viewports, v => v.MonitorId = screens[0].DeviceName);
-
-                        var model =
-                            new ModuleViewportModel(
-                                templates[0].TemplateName,
-                                templates[0].ExampleImageUrl,
-                                module,
-                                viewports);
-
-                        viewports = await Controller.EditViewportsAsync(model);
-
+                        var viewports = await Controller.EditViewportsAsync(templates[0].TemplateName, templates[0].ExampleImageUrl, module, templates[0].Viewports.ToArray());
                         Controller.SaveViewports(templates[0].TemplateName, module.ModuleId, viewports);
                     }
                     else
                     {
-                        var model =
-                            new ModuleViewportModel(
-                                module.DisplayName,
-                                null,
-                                module,
-                                new Viewport[0]);
 
-                        var viewports = await Controller.EditViewportsAsync(model);
-
+                        var viewports = await Controller.EditViewportsAsync(module.DisplayName, null, module, new Viewport[0]);
                         Controller.SaveViewports(module.DisplayName, module.ModuleId, viewports);
                     }
                 }

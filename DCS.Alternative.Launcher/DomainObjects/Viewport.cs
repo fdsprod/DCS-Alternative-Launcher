@@ -14,6 +14,12 @@
             set;
         }
 
+        public int SeatIndex
+        {
+            get;
+            set;
+        }
+
         public string RelativeInitFilePath
         {
             get;

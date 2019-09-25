@@ -8,9 +8,9 @@ using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Wizards
 {
-    public class FirstUseWizardViewModel
+    public class WizardViewModel
     {
-        public FirstUseWizardViewModel(IContainer container, params WizardStepBase[] steps)
+        public WizardViewModel(IContainer container, params IWizardStep[] steps)
         {
             Controller = container.Resolve<WizardController>();
             Controller.Complete += Controller_Complete;

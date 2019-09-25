@@ -1,13 +1,15 @@
-﻿<Window x:Class="DCS.Alternative.Launcher.Windows.FirstUse.FirstUseWizard"
+﻿<Window x:Class="DCS.Alternative.Launcher.Windows.FirstUse.Wizard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:firstUse="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps.FirstUse"
         xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:launcher="clr-namespace:DCS.Alternative.Launcher"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:selectViewport="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps.Settings.SelectViewport"
         xmlns:steps="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
         Title="DCS Alternative Launcher - First Use"
         Width="1224"
@@ -88,27 +90,34 @@
                                  Controller="{Binding Controller}"
                                  NextButtonContent="NEXT">
                 <controls:WizardView.Resources>
-                    <DataTemplate DataType="{x:Type steps:FirstUseWelcomeStepViewModel}">
-                        <steps:FirstUseWelcomeStepView />
+                    <!--  First Use Wizard Steps  -->
+                    <DataTemplate DataType="{x:Type firstUse:FirstUseWelcomeStepViewModel}">
+                        <firstUse:FirstUseWelcomeStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:CreateProfileWizardStepViewModel}">
-                        <steps:CreateProfileWizardStepView />
+                    <DataTemplate DataType="{x:Type firstUse:CreateProfileWizardStepViewModel}">
+                        <firstUse:CreateProfileWizardStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:InstallationsWizardStepViewModel}">
-                        <steps:InstallationsWizardStepView />
+                    <DataTemplate DataType="{x:Type firstUse:InstallationsWizardStepViewModel}">
+                        <firstUse:InstallationsWizardStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:SelectGameViewportScreensStepViewModel}">
-                        <steps:SelectGameViewportScreensStepView />
+                    <DataTemplate DataType="{x:Type firstUse:SelectGameViewportScreensStepViewModel}">
+                        <firstUse:SelectGameViewportScreensStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:SelectUIViewportScreensStepViewModel}">
-                        <steps:SelectUIViewportScreensStepView />
+                    <DataTemplate DataType="{x:Type firstUse:SelectUIViewportScreensStepViewModel}">
+                        <firstUse:SelectUIViewportScreensStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:SelectDeviceViewportScreensStepViewModel}">
-                        <steps:SelectDeviceViewportScreensStepView />
+                    <DataTemplate DataType="{x:Type firstUse:SelectDeviceViewportScreensStepViewModel}">
+                        <firstUse:SelectDeviceViewportScreensStepView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type steps:SelectInitialViewportsWizardStepViewModel}">
-                        <steps:SelectInitialViewportsWizardStepView />
+                    <DataTemplate DataType="{x:Type firstUse:SelectInitialViewportsWizardStepViewModel}">
+                        <firstUse:SelectInitialViewportsWizardStepView />
                     </DataTemplate>
+
+                    <!--  Select Viewports Wizard Steps  -->
+                    <DataTemplate DataType="{x:Type selectViewport:SelectViewportsWizardStepViewModel}">
+                        <selectViewport:SelectViewportsWizardStepView />
+                    </DataTemplate>
+
                 </controls:WizardView.Resources>
             </controls:WizardView>
         </Grid>

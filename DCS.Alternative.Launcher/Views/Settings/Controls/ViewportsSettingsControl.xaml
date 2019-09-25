@@ -64,7 +64,7 @@
                                            FontFamily="{StaticResource Prototype}"
                                            FontSize="16"
                                            Foreground="#FFFFFFFF">
-                                    <Run Text="{Binding Module.Value.DisplayName, Mode=OneWay}" />
+                                    <Run Text="{Binding Name.Value, Mode=OneWay}" />
                                 </TextBlock>
                                 <Grid Margin="10,2,0,2">
                                     <Border Padding="5,0"

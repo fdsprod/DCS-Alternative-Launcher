@@ -2,7 +2,7 @@
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.ServiceModel;
 
-namespace DCS.Alternative.Launcher.Wizards.Steps
+namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 {
     public class FirstUseWelcomeStepViewModel : WizardStepBase
     {

@@ -30,7 +30,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             Load();
 
             var lastProfileName = _settingsService.GetValue<string>(SettingsCategories.Launcher, SettingsKeys.LastProfileName);
-            var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName);
+            var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName) ?? _profiles.FirstOrDefault();
 
             _selectedProfile = profile;
         }
@@ -359,8 +359,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
 
         public ViewportDevice[] GetViewportDevices(string moduleId)
         {
-            const string path = "Resources/ViewportDevices.json";
-
+            var path = "Data/Viewports/ViewportDevices.json";
             var contents = File.ReadAllText(path);
             var devices = JsonConvert.DeserializeObject<Dictionary<string, List<ViewportDevice>>>(contents);
             var customDevices = GetValue<Dictionary<string, List<ViewportDevice>>>(ProfileSettingsCategories.Viewports, SettingsKeys.ViewportDevices);

@@ -6,11 +6,14 @@ namespace DCS.Alternative.Launcher.Models
 {
     public class ModuleViewportModel
     {
-        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<Viewport> viewports)
+        public readonly ModuleViewportTemplate Template;
+
+        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<Viewport> viewports, ModuleViewportTemplate template = null)
         {
             Name.Value = name;
             ImageUrl.Value = imageUrl;
             Module.Value = module;
+            Template = template;
 
             if (viewports != null)
             {

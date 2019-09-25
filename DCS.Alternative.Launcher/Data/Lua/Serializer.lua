@@ -1,4 +1,4 @@
-﻿-- Taken from DCS to ensure proper serialization - Jabbers
+﻿-- Taken from DCS and slightly modified to ensure proper serialization - Jabbers
 
 local function basicSerialize(o)
     if type(o) == 'number' then

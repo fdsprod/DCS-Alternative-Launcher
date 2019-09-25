@@ -159,33 +159,94 @@
 			"width": 300,
 			"height": 150
 		}
-	], /*
-	"F14":  [
-		{
-			"viewportName": "HSD",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/HorizontalSituationDisplay/Indicator/init.lua",
-			"width": 700,
-			"height": 700
-		},
-		{
-			"viewportName": "VDI",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/VerticalDisplayIndicator/Indicator/init.lua",
-			"width": 700,
-			"height": 700
-		},
-		{
-			"viewportName": "DDD",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/DetailDataDisplay/Indicator/init.lua",
-			"width": 500,
-			"height": 400
-		},
-		{
-			"viewportName": "RWR",
-			"relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/RWR/Indicator/Pilot/init.lua",
-			"width": 400,
-			"height": 400
-		}
-	],*/
+	],
+  "HEATBLUR_F-14": [
+    {
+      "viewportName": "UHF_ARC159_PILOT",
+      "relativeInitFilePath": "",
+      "width": 137,
+      "height": 30
+    },
+    {
+      "viewportName": "UHF_ARC159",
+      "relativeInitFilePath": "Cockpit/Scripts/VHF_Radio/Indicator/RemotePilot/init.lua",
+      "width": 120,
+      "height": 30
+    },
+    {
+      "viewportName": "VHF_ARC182_PILOT",
+      "relativeInitFilePath": "Cockpit/Scripts/VHF_Radio/Indicator/RemotePilot/init.lua",
+      "width": 120,
+      "height": 30
+    },
+    {
+      "viewportName": "ECMD",
+      "relativeInitFilePath": "",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "viewportName": "VDI",
+      "relativeInitFilePath": "",
+      "width": 338,
+      "height": 324
+    },
+    {
+      "viewportName": "RWR_PILOT",
+      "relativeInitFilePath": "Cockpit/Scripts/RWR/Indicator/Pilot/init.lua",
+      "width": 170,
+      "height": 170
+    },
+    {
+      "viewportName": "UHF_ARC159_RIO",
+      "relativeInitFilePath": "Cockpit/Scripts/UHF_Radio/Indicator/RemoteRIO/init.lua",
+      "seatIndex": 1,
+      "width": 108,
+      "height": 24
+    },
+    {
+      "viewportName": "VHF_ARC182",
+      "relativeInitFilePath": "",
+      "seatIndex": 1,
+      "width": 114,
+      "height": 26
+    },
+    {
+      "viewportName": "VHF_ARC182_RIO",
+      "relativeInitFilePath": "Cockpit/Scripts/VHF_Radio/Indicator/RemotePilot/init.lua",
+      "seatIndex": 1,
+      "width": 120,
+      "height": 30
+    },
+    {
+      "viewportName": "TID",
+      "relativeInitFilePath": "",
+      "seatIndex": 1,
+      "width": 114,
+      "height": 26
+    },
+    {
+      "viewportName": "DDD",
+      "relativeInitFilePath": "",
+      "seatIndex": 1,
+      "width": 188,
+      "height": 154
+    },
+    {
+      "viewportName": "ECMD",
+      "relativeInitFilePath": "",
+      "seatIndex": 1,
+      "width": 400,
+      "height": 320
+    },
+    {
+      "viewportName": "RWR_RIO",
+      "relativeInitFilePath": "Cockpit/Scripts/RWR/Indicator/RIO/init.lua",
+      "seatIndex": 1,
+      "width": 142,
+      "height": 142
+    }
+  ],
 	"M-2000C": [
 		{
 			"viewportName": "RADAR",

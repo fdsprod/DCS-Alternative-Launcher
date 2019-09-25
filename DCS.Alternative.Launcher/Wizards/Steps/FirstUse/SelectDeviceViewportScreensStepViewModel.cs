@@ -12,7 +12,7 @@ using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
 using WpfScreenHelper;
 
-namespace DCS.Alternative.Launcher.Wizards.Steps
+namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 {
     public class SelectDeviceViewportScreensStepViewModel : WizardStepBase
     {

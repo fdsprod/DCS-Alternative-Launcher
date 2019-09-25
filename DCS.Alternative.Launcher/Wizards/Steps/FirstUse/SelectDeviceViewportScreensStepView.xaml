@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.SelectDeviceViewportScreensStepView"
+﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.FirstUse.SelectDeviceViewportScreensStepView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"

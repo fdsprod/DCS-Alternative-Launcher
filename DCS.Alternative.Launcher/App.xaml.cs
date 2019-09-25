@@ -30,6 +30,7 @@ using DCS.Alternative.Launcher.Windows;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
 using DCS.Alternative.Launcher.Wizards.Steps;
+using DCS.Alternative.Launcher.Wizards.Steps.FirstUse;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using NLua;
@@ -228,7 +229,7 @@ namespace DCS.Alternative.Launcher
                 {
                     container.Register<WizardController>().AsSingleton();
 
-                    var firstUseWizard = new FirstUseWizard();
+                    var wizard = new Wizard();
 
                     var steps = new WizardStepBase[]
                     {
@@ -237,14 +238,14 @@ namespace DCS.Alternative.Launcher
                         new CreateProfileWizardStepViewModel(container),
                     };
 
-                    var viewModel = new FirstUseWizardViewModel(container, steps);
+                    var viewModel = new WizardViewModel(container, steps);
 
-                    Current.MainWindow = firstUseWizard;
+                    Current.MainWindow = wizard;
 
                     _splashScreen.Hide();
 
-                    firstUseWizard.DataContext = viewModel;
-                    firstUseWizard.ShowDialog();
+                    wizard.DataContext = viewModel;
+                    wizard.ShowDialog();
 
                     _splashScreen.Show();
                 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using DCS.Alternative.Launcher.Analytics;
+using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -19,6 +20,8 @@ using DCS.Alternative.Launcher.Threading;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
 using DCS.Alternative.Launcher.Wizards.Steps;
+using DCS.Alternative.Launcher.Wizards.Steps.FirstUse;
+using DCS.Alternative.Launcher.Wizards.Steps.Settings.SelectViewport;
 using WpfScreenHelper;
 using IContainer = DCS.Alternative.Launcher.ServiceModel.IContainer;
 
@@ -39,6 +42,23 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             _profileSettingsService = container.Resolve<IProfileSettingsService>();
         }
 
+        public async Task<Viewport[]> EditViewportsAsync(string templateName, string exampleImageUrl, Module module, Viewport[] viewports)
+        {
+            var deviceViewportMonitorIds = GetDeviceViewportMonitorIds();
+            var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();
+
+            Array.ForEach(viewports, v => v.MonitorId = screens[0].DeviceName);
+
+            var model =
+                new ModuleViewportModel(
+                    templateName,
+                    exampleImageUrl,
+                    module,
+                    viewports);
+
+            return await EditViewportsAsync(model);
+        }
+
         public async Task<Viewport[]> EditViewportsAsync(ModuleViewportModel value)
         {
             if (!IsValidViewports(value.Viewports.ToArray()))
@@ -48,7 +68,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
             var tasks = new List<Task>();
             var screenIds = GetDeviceViewportMonitorIds();
-            var devices = _profileSettingsService.GetViewportDevices(value.Module.Value.ModuleId);
+            var devices = _profileSettingsService.GetViewportDevices(value.Module.Value.ModuleId).Where(d=>value.Viewports.Any(v=>v.SeatIndex == d.SeatIndex)).ToArray();
             var windows = new List<Window>();
             var viewModels = new List<ViewportEditorWindowViewModel>();
 
@@ -70,7 +90,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
                     model.Height.Value = viewport.Height;
                     model.InitFile.Value = viewport.RelativeInitFilePath;
-                    model.ImageUrl.Value = Path.Combine(ApplicationPaths.ViewportPath, "Images/{value.Module.Value.ModuleId}/{viewport.ViewportName}.jpg");
+                    model.ImageUrl.Value = Path.Combine(ApplicationPaths.ViewportPath, $"Images/{value.Module.Value.ModuleId}/{viewport.ViewportName}.jpg");
                     model.Name.Value = viewport.ViewportName;
                     model.Width.Value = viewport.Width;
                     model.X.Value = viewport.X;
@@ -145,6 +165,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                             {
                                 Height = (int) viewportModel.Height.Value,
                                 MonitorId = screen.DeviceName,
+                                SeatIndex = viewportModel.SeatIndex.Value,
                                 OriginalDisplayHeight = (int) screen.Bounds.Height,
                                 OriginalDisplayWidth = (int) screen.Bounds.Width,
                                 RelativeInitFilePath = viewportModel.InitFile.Value,
@@ -374,11 +395,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             return _profileSettingsService.GetViewportTemplates();
         }
 
+        public ModuleViewportTemplate[] GetDefaultViewportTemplates()
+        {
+            return _profileSettingsService.GetDefaultViewportTemplates();
+        }
+
         public Task<Module[]> GetInstalledAircraftModulesAsync()
         {
             return _dcsWorldService.GetInstalledAircraftModulesAsync();
         }
-
         public ModuleViewportTemplate[] GetDefaultViewportTemplatesForModule(string moduleId)
         {
             return _profileSettingsService.GetDefaultViewportTemplates().Where(t => t.ModuleId == moduleId).ToArray();
@@ -525,8 +550,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             using (var container = _container.GetChildContainer())
             {
-                var firstUseWizard = new FirstUseWizard();
-                var viewModel = new FirstUseWizardViewModel(container,
+                var firstUseWizard = new Wizard();
+                var viewModel = new WizardViewModel(container,
                     new SelectGameViewportScreensStepViewModel(container),
                     new SelectUIViewportScreensStepViewModel(container),
                     new SelectDeviceViewportScreensStepViewModel(container));
@@ -552,6 +577,29 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         public ViewportDevice[] GetViewportDevices(string moduleId)
         {
             return _profileSettingsService.GetViewportDevices(moduleId);
+        }
+
+        public ModuleViewportTemplate ShowTemplateSelection(ModuleViewportTemplate[] templates)
+        {
+            using (var container = _container.GetChildContainer())
+            {
+                container.Register<SelectViewportWizardController>().AsSingleton();
+
+                var controller = container.Resolve<SelectViewportWizardController>();
+                var wizard = new Wizard();
+
+                var steps = new WizardStepBase<SelectViewportWizardController>[]
+                {
+                    new SelectViewportsWizardStepViewModel(container, templates),
+                };
+
+                var viewModel = new WizardViewModel(container, steps);
+
+                wizard.DataContext = viewModel;
+                wizard.ShowDialog();
+
+                return controller.SelectedTemplate;
+            }
         }
     }
 }

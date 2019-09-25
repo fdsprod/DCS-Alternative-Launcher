@@ -17,8 +17,8 @@ namespace DCS.Alternative.Launcher.Lua
 
             RegisterFunction("print", this, typeof(LuaContextBase).GetMethod("Print", BindingFlags.Instance | BindingFlags.NonPublic));
 
-            DoFile(Path.Combine("Resources", "Lua", "Serializer.lua"));
-            DoFile(Path.Combine("Resources", "Lua", "IO.lua"));
+            DoFile(Path.Combine("Data", "Lua", "Serializer.lua"));
+            DoFile(Path.Combine("Data", "Lua", "IO.lua"));
         }
 
         public void Dispose()

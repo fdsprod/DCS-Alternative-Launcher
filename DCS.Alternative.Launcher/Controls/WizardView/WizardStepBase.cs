@@ -3,14 +3,15 @@ using DCS.Alternative.Launcher.ServiceModel;
 
 namespace DCS.Alternative.Launcher.Controls
 {
-    public abstract class WizardStepBase : IWizardStep
+    public abstract class WizardStepBase<TController> : IWizardStep
+        where TController : WizardController
     {
         private bool _isInitialized;
 
         protected WizardStepBase(IContainer container)
         {
             Container = container;
-            Controller = container.Resolve<WizardController>();
+            Controller = container.Resolve<TController>();
         }
 
         public IContainer Container
@@ -18,7 +19,7 @@ namespace DCS.Alternative.Launcher.Controls
             get;
         }
 
-        public WizardController Controller
+        public TController Controller
         {
             get;
             internal set;
@@ -78,6 +79,14 @@ namespace DCS.Alternative.Launcher.Controls
         protected virtual Task InitializeAsync()
         {
             return Task.FromResult(true);
+        }
+    }
+
+    public abstract class WizardStepBase : WizardStepBase<WizardController>
+    {
+        protected WizardStepBase(IContainer container)
+            : base(container)
+        {
         }
     }
 }

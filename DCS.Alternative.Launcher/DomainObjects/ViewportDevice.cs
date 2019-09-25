@@ -20,6 +20,12 @@
             set;
         }
 
+        public int SeatIndex
+        {
+            get;
+            set;
+        } 
+
         public int Height
         {
             get;

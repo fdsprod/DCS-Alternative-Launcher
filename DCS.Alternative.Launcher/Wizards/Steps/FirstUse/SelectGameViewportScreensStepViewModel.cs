@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
-using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Drawing;
 using DCS.Alternative.Launcher.Models;
@@ -13,7 +12,7 @@ using DCS.Alternative.Launcher.Services;
 using Reactive.Bindings;
 using WpfScreenHelper;
 
-namespace DCS.Alternative.Launcher.Wizards.Steps
+namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 {
     public class SelectGameViewportScreensStepViewModel : WizardStepBase
     {

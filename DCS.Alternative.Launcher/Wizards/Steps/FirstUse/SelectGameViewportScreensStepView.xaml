@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.SelectUIViewportScreensStepView"
+﻿<UserControl x:Class="DCS.Alternative.Launcher.Wizards.Steps.FirstUse.SelectGameViewportScreensStepView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource Prototype}"
                    FontSize="16"
                    Foreground="#FFFFFFFF"
-                   Text="Please select screen(s) you would like the in-game user interface to display on.  This would be the main menu, options screen, multiplayer screen, etc."
+                   Text="Please select all of the screen(s) you use for DCS.  This including screens used for device viewports such as MFCD, RWR, UFC, etc."
                    TextWrapping="Wrap" />
         <fluentWpf:AcrylicPanel Grid.Row="1"
                                 Margin="30"

@@ -23,8 +23,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
 
         public ViewportEditorWindowViewModel(IContainer container, bool isPreview, string monitorId, Module module, ViewportDevice[] devices, ViewportModel[] viewports)
         {
-            _module = module;
             MonitorId = monitorId;
+
+            _module = module;
             _settingsService = container.Resolve<ISettingsService>();
             _devices = devices;
 
@@ -39,9 +40,9 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             var canAddViewportObservable = IsNotPreview.Select(v => Unit.Default).Merge(Viewports.Select(v => Unit.Default).ToObservable()).Select(v => canAddViewportPredicate());
 
             AddViewportCommand = new ReactiveCommand(canAddViewportObservable, canAddViewportPredicate());
-            DeleteViewportCommand = new ReactiveCommand<ViewportModel>(IsNotPreview.AsObservable(), isPreview);
-            SaveCommand = new ReactiveCommand(IsNotPreview.AsObservable(), isPreview);
-            CancelCommand = new ReactiveCommand(IsNotPreview.AsObservable(), isPreview);
+            DeleteViewportCommand = new ReactiveCommand<ViewportModel>(IsNotPreview.AsObservable(), !isPreview);
+            SaveCommand = new ReactiveCommand(IsNotPreview.AsObservable(), !isPreview);
+            CancelCommand = new ReactiveCommand(IsNotPreview.AsObservable(), !isPreview);
 
             AddViewportCommand.Subscribe(OnAddViewport);
             DeleteViewportCommand.Subscribe(OnDeleteViewport);
@@ -130,6 +131,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
                 model.ImageUrl.Value = Path.Combine(ApplicationPaths.ViewportPath, "Images/{_module.ModuleId}/{device.ViewportName}.jpg");
                 model.Name.Value = device.ViewportName;
                 model.Width.Value = device.Width;
+                model.SeatIndex.Value = device.SeatIndex;
                 model.X.Value = screen.Bounds.Width / 2 - device.Width / 2;
                 model.Y.Value = screen.Bounds.Height / 2 - device.Height / 2;
 

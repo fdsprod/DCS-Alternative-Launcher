@@ -19,6 +19,11 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
             get;
         } = new ReactiveProperty<double>();
 
+        public ReactiveProperty<int> SeatIndex
+        {
+            get;
+        } = new ReactiveProperty<int>();
+
         public ReactiveProperty<double> Height
         {
             get;
