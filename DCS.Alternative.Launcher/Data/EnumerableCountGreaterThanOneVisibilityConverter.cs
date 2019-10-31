@@ -7,18 +7,18 @@ using System.Windows.Data;
 
 namespace DCS.Alternative.Launcher.Data
 {
-    public class VisibilityConverter : IValueConverter
+    public class EnumerableCountGreaterThanOneVisibilityConverter : IValueConverter
     {
-        public VisibilityConverter()
+        public EnumerableCountGreaterThanOneVisibilityConverter()
         {
             HiddenParameterName = "Hidden";
             ReverseParameterName = "Reverse";
         }
 
-        public static VisibilityConverter Instance
+        public static EnumerableCountGreaterThanOneVisibilityConverter Instance
         {
             get;
-        } = new VisibilityConverter();
+        } = new EnumerableCountGreaterThanOneVisibilityConverter();
 
         public string HiddenParameterName
         {
@@ -42,41 +42,19 @@ namespace DCS.Alternative.Launcher.Data
             }
             else
             {
-                var str = value as string;
+                var list = value as IList;
 
-                if (str != null)
+                if (list != null)
                 {
-                    result = str.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+                    result = list.Cast<object>().Count() > 1 ? Visibility.Visible : Visibility.Collapsed;
                 }
                 else
                 {
-                    var list = value as IList;
+                    var enumerable = value as IEnumerable;
 
-                    if (list != null)
+                    if (enumerable != null)
                     {
-                        result = list.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-                    }
-
-                    else
-                    {
-                        var enumerable = value as IEnumerable;
-
-                        if (enumerable != null)
-                        {
-                            result = enumerable.Cast<object>().Any() ? Visibility.Visible : Visibility.Collapsed;
-                        }
-                        else if (value is int)
-                        {
-                            result = (int)value > 0 ? Visibility.Visible : Visibility.Collapsed;
-                        }
-                        else if (value is double)
-                        {
-                            result = (double)value > 0 ? Visibility.Visible : Visibility.Collapsed;
-                        }
-                        else if (value is bool)
-                        {
-                            result = (bool)value ? Visibility.Visible : Visibility.Collapsed;
-                        }
+                        result = enumerable.Cast<object>().Count() > 1 ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
             }

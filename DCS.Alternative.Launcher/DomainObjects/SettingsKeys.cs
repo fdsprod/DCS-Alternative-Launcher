@@ -12,5 +12,6 @@
         public const string IsFirstUseComplete = "isFirstUseComplete";
         public const string ViewportDevices = "viewportDevices";
         public const string LastProfileName = "lastProfileName";
+        public const string AcknowledgedDisclaimer = "acknowledgedDisclaimer";
     }
 }

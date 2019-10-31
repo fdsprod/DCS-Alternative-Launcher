@@ -190,6 +190,7 @@
     <Compile Include="Analytics\TrackerConfig.cs" />
     <Compile Include="ApplicationPaths.cs" />
     <Compile Include="Controls\DpiDecorator.cs" />
+    <Compile Include="Data\EnumerableCountGreaterThanOneVisibilityConverter.cs" />
     <Compile Include="DomainObjects\CameraRangeSettings.cs" />
     <Compile Include="Interaction\Behaviors\PlaceholderService.cs" />
     <Compile Include="Interaction\Behaviors\WindowBehavior.cs" />

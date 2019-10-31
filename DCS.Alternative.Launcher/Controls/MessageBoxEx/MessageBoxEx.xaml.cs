@@ -29,8 +29,25 @@ namespace DCS.Alternative.Launcher.Controls.MessageBoxEx
             messageBox.txtCaption.Text = caption;
             messageBox.txtMessage.Text = message;
             messageBox.imgIcon.Source = icon;
-            messageBox.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            messageBox.Owner = parent ?? Application.Current.MainWindow;
+
+            var owner = parent ?? Application.Current.MainWindow;
+
+            if (owner == null || owner == messageBox)
+            {
+                messageBox.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+            else
+            {
+                try
+                {
+                    messageBox.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    messageBox.Owner = parent ?? Application.Current.MainWindow;
+                }
+                catch
+                {
+                    messageBox.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
+            }
 
             messageBox.btnOK.Visibility =
                 buttons == MessageBoxButton.OK || buttons == MessageBoxButton.OKCancel

@@ -30,7 +30,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             Load();
 
             var lastProfileName = _settingsService.GetValue<string>(SettingsCategories.Launcher, SettingsKeys.LastProfileName);
-            var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName) ?? _profiles.FirstOrDefault();
+             var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName) ?? _profiles.FirstOrDefault();
 
             _selectedProfile = profile;
         }

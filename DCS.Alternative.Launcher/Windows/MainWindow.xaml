@@ -153,12 +153,15 @@
                                                         <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                                                     </TextBlock.Effect>
                                                 </TextBlock>
-                                            </Button>
+                                            </Button>           
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
 
-                                <Button Width="16"
+                                <Grid HorizontalAlignment="Right" />
+
+                                <Button x:Name="CloseButton"
+                                        Width="16"
                                         Height="16"
                                         Margin="5"
                                         Padding="3"

@@ -467,7 +467,17 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Margin="0,0,15,3"
+                                                   HorizontalAlignment="Right"
+                                                   FontFamily="{StaticResource Prototype}"
+                                                   FontSize="11"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="INSTALL"
+                                                   Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}" />
                                         <Menu Grid.Row="1"
+                                              Grid.Column="0"
                                               Width="100"
                                               Height="Auto"
                                               MinWidth="75"
@@ -475,7 +485,8 @@
                                               Margin="0,0,0,3"
                                               HorizontalAlignment="Right"
                                               VerticalAlignment="Top"
-                                              Background="Transparent">
+                                              Background="Transparent"
+                                              Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}}">
                                             <MenuItem Padding="0"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Stretch"

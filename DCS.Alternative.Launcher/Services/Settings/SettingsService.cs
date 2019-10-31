@@ -38,6 +38,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             if (SelectedInstall == null && _installationCache.Count > 0)
             {
                 Tracer.Warn($"Unable to set selected install to {directory}.  Installation no longer exists in settings. ");
+                SelectedInstall =  _installationCache.FirstOrDefault();
             }
         }
 

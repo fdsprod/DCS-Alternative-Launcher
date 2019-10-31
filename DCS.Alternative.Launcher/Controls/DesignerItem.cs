@@ -15,7 +15,7 @@ namespace DCS.Alternative.Launcher.Controls
         {
             base.OnPreviewKeyDown(e);
 
-            if (IsSelected)
+            if (IsMouseOver)
             {
                 switch (e.Key)
                 {

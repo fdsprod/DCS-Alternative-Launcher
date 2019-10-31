@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using CommandLine;
 using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
+using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Diagnostics.Trace.Listeners;
@@ -200,17 +201,26 @@ namespace DCS.Alternative.Launcher
 
             await Task.WhenAll(UpdateDefinitionFilesAsync());
 
-            await Task.WhenAll(RegisterServicesAsync(), Task.Delay(1000));
-            await Task.WhenAll(CheckSettingsExistAsync(), Task.Delay(1000));
+            await Task.WhenAll(RegisterServicesAsync(), Task.Delay(250));
+            await Task.WhenAll(CheckSettingsExistAsync(), Task.Delay(250));
 
             CheckFirstUse();
 
             _mainWindow.DataContext = new MainWindowViewModel(_container);
             _mainWindow.Loaded += _mainWindow_Loaded;
 
-            await Task.WhenAll(InitializePluginsAsync(), Task.Delay(1000));
+            await Task.WhenAll(InitializePluginsAsync(), Task.Delay(250));
+
+            var settingsService = _container.Resolve<ISettingsService>();
 
             _splashScreen.Close();
+
+            if (!settingsService.GetValue(SettingsCategories.Launcher, SettingsKeys.AcknowledgedDisclaimer, false))
+            {
+                MessageBoxEx.Show("DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder. Please make sure you have backed up your data before using this software. You've been warned.", "DISCLAIMER");
+                settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.AcknowledgedDisclaimer, true);
+            }
+
             MainWindow = _mainWindow;
             _mainWindow.Show();
 

@@ -109,7 +109,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
 
                 foreach (var i in await Controller.GetInstalledAircraftModulesAsync())
                 {
-                    if (!viewportTemplates.Any(vt => vt.ModuleId == i.ModuleId))
+                    if (viewportTemplates.All(vt => vt.ModuleId != i.ModuleId))
                     {
                         continue;
                     }

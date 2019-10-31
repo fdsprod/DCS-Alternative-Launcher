@@ -80,16 +80,19 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 function dofile() end
                                 function plugin_done() end
                                 function make_flyable() end
+                                function turn_on_waypoint_panel() end
                                 AV8BFM = {}
                                 F86FM = {}
                                 F5E = {}
                                 FA18C = {}
                                 F15FM = {}
+                                F16C = {}
                                 FM = {}
                                 M2KFM = {}
                                 Mig15FM = {}
                                 MIG19PFM = {}
                                 SA342FM = {}
+                                function add_plugin_systems() end
                                 " + $"__DCS_VERSION__ = \"{install.Version}\"");
 
                         var directoryName = Path.GetDirectoryName(folder);
@@ -116,8 +119,19 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 moduleId = description["update_id"]?.ToString();
                             }
 
-                            skinsPath = ((LuaTable)((LuaTable)description["Skins"])[1])["dir"].ToString();
-                            displayName = ((LuaTable)((LuaTable)description["Missions"])[1])["name"].ToString();
+                            var skinsTable = description["Skins"] as LuaTable;
+
+                            if (skinsTable != null)
+                            {
+                                skinsPath = ((LuaTable)skinsTable[1])["dir"].ToString();
+                            }
+
+                            var missionsTable = description["Missions"] as LuaTable;
+
+                            if (missionsTable != null)
+                            {
+                                displayName = ((LuaTable) missionsTable[1])["name"].ToString();
+                            }
                         });
 
                         lua["make_flyable"] = new Action<string, string, LuaTable, string>((a, b, c, d) =>
