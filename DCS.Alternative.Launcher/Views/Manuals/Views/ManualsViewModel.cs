@@ -49,7 +49,12 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 
         private void OnOpenUrl(string value)
         {
-            Process.Start(value);
+            var ps = new ProcessStartInfo(value)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
 
         private void OnOpenDocument(FileModel value)

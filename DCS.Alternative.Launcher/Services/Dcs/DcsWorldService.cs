@@ -41,17 +41,16 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         public Task<Module[]> GetInstalledAircraftModulesAsync()
         {
             Tracer.Info("Searching DCS for installed modules.");
-#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-            return Task.Run(async () =>
-#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+
+            return Task.Run(() =>
             {
                 var settingsService = _container.Resolve<ISettingsService>();
                 var modules = new List<Module>();
                 var install = settingsService.SelectedInstall;
-                var autoupdateModules = new List<string>(install.Modules);
+                var autoUpdateModules = new List<string>(install.Modules);
 
-                autoupdateModules.Add("Su-25T");
-                autoupdateModules.Add("TF-51D");
+                autoUpdateModules.Add("Su-25T");
+                autoUpdateModules.Add("TF-51D");
 
                 if (!install.IsValidInstall)
                 {
@@ -141,7 +140,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 displayName = displayName.Split('_')[0];
                             }
 
-                            if (!string.IsNullOrEmpty(moduleId) && autoupdateModules.Contains(moduleId) && moduleId != "FC3")
+                            if (!string.IsNullOrEmpty(moduleId) && autoUpdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
                                 var module = new Module
                                 {
@@ -340,17 +339,19 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             foreach (var option in category.Options)
                             {
-                                if (_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.GameOptions, option.Id, out var value))
+                                if (!_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.GameOptions, option.Id, out var value))
                                 {
-                                    if (option.Id == "options.VR.enabled")
-                                    {
-                                        context.SetValue(category.Id, option.Id, isVr);
-                                    }
-                                    else
-                                    {
-                                        //Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
-                                        context.SetValue(category.Id, option.Id, value);
-                                    }
+                                    continue;
+                                }
+
+                                if (option.Id == "options.VR.enabled")
+                                {
+                                    context.SetValue(category.Id, option.Id, isVr);
+                                }
+                                else
+                                {
+                                    //Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
+                                    context.SetValue(category.Id, option.Id, value);
                                 }
                             }
                         }

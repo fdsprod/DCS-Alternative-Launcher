@@ -86,13 +86,13 @@ namespace DCS.Alternative.Launcher
         {
             var type = typeof(Console);
 
-            _FieldInfo output = type.GetField("_out",
+            FieldInfo output = type.GetField("_out",
                 BindingFlags.Static | BindingFlags.NonPublic);
 
-            _FieldInfo error = type.GetField("_error",
+            FieldInfo error = type.GetField("_error",
                 BindingFlags.Static | BindingFlags.NonPublic);
 
-            _MethodInfo initializeStdOutError = type.GetMethod("InitializeStdOutError",
+            MethodInfo initializeStdOutError = type.GetMethod("InitializeStdOutError",
                 BindingFlags.Static | BindingFlags.NonPublic);
 
             Debug.Assert(output != null);

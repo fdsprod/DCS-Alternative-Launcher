@@ -60,7 +60,12 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 
         private void OnOpenUrl(string value)
         {
-            Process.Start(value.Replace("$amp;", "&"));
+            var ps = new ProcessStartInfo(value.Replace("$amp;", "&"))
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DCS.Alternative.Launcher", "DCS.Alternative.Launcher\DCS.Alternative.Launcher.csproj", "{4EFEBFC2-0181-448F-8D33-96D3B742ABDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdate\AutoUpdate.csproj", "{D964A236-DB21-4AC7-94FC-1BF9254F80C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EFEBFC2-0181-448F-8D33-96D3B742ABDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFEBFC2-0181-448F-8D33-96D3B742ABDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFEBFC2-0181-448F-8D33-96D3B742ABDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFEBFC2-0181-448F-8D33-96D3B742ABDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D964A236-DB21-4AC7-94FC-1BF9254F80C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D964A236-DB21-4AC7-94FC-1BF9254F80C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D964A236-DB21-4AC7-94FC-1BF9254F80C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D964A236-DB21-4AC7-94FC-1BF9254F80C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC332D83-76D1-4A40-AA33-234CE45ABB7C}
+	EndGlobalSection
+EndGlobal

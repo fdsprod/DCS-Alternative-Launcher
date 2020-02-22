@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using SHDocVw;
 using IDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace DCS.Alternative.Launcher.Plugins.Game.Views
@@ -19,20 +20,23 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
             Browser.LoadCompleted += Browser_LoadCompleted;
         }
-
         private void Browser_LoadCompleted(object sender, NavigationEventArgs e)
         {
             Browser.LoadCompleted -= Browser_LoadCompleted;
 
-            dynamic axBrowser = Browser.GetType().GetProperty("AxIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Browser, null);
+            var axBrowser = (DWebBrowserEvents_Event)Browser.GetType().GetProperty("AxIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Browser, null);
 
-            axBrowser.NewWindow += new NewWindowDelegate(OnNewWindow);
+            axBrowser.NewWindow += AxBrowser_NewWindow;
         }
 
-
-        private void OnNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
+        private void AxBrowser_NewWindow(string url, int Flags, string TargetFrameName, ref object PostData, string Headers, ref bool processed)
         {
-            Process.Start(url);
+            var ps = new ProcessStartInfo(url)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
             processed = true;
         }
 
@@ -42,7 +46,12 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
             if (!url.Contains("embed"))
             {
-                Process.Start(e.Uri.ToString());
+                var ps = new ProcessStartInfo(e.Uri.ToString())
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                };
+                Process.Start(ps);
                 e.Cancel = true;
             }
         }

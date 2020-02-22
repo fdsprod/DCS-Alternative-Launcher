@@ -237,7 +237,12 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private void OnShowNewsArticle(NewsArticleModel model)
         {
-            Process.Start(model.Url.Value);
+            var ps = new ProcessStartInfo(model.Url.Value)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
 
         private async void OnCheckForUpdates()

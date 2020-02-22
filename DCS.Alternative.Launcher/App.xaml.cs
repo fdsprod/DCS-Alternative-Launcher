@@ -63,15 +63,7 @@ namespace DCS.Alternative.Launcher
             private set;
         }
 
-        [STAThread]
-        private static void Main(string[] args)
-        {
-            Parser.Default.ParseArguments<CommandLineOptions>(args)
-                .WithParsed(Start)
-                .WithNotParsed(_ => Start(new CommandLineOptions()));
-        }
-
-        private static void Start(CommandLineOptions options)
+        public static void Start(CommandLineOptions options)
         {
             if (CheckForUpdate())
             {

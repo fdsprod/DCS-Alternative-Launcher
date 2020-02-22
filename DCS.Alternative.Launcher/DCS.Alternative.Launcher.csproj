@@ -1,941 +1,126 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{25844062-39A5-434C-B089-8A0588D5E8BA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DCS.Alternative.Launcher</RootNamespace>
-    <AssemblyName>DCS Alternative Launcher</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>false</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>DCS.Alternative.Launcher.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>DCS.Alternative.Launcher.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <StartupObject>DCS.Alternative.Launcher.Program</StartupObject>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>DCS.Alternative.Launcher.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>DCS.Alternative.Launcher.App</StartupObject>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="CommandLine, Version=2.6.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.2.6.0\lib\net461\CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentWPF, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentWPF.0.7.0\lib\net45\FluentWPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="KeraLua, Version=1.0.19.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\KeraLua.1.0.19\lib\net45\KeraLua.dll</HintPath>
-    </Reference>
-    <Reference Include="LoadingIndicators.WPF, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LoadingIndicators.WPF.0.0.1\lib\LoadingIndicators.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLua, Version=1.4.20.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLua.1.4.20\lib\net45\NLua.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="PropertyTools, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyTools.3.0.0\lib\net45\PropertyTools.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyTools.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyTools.Wpf.3.0.0\lib\net45\PropertyTools.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveProperty, Version=5.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveProperty.NET46, Version=5.5.0.0, Culture=neutral, PublicKeyToken=3d1fed915120cbde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveProperty.5.6.0\lib\net461\ReactiveProperty.NET46.dll</HintPath>
-    </Reference>
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.4.1.5\lib\net46\System.Reactive.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="WpfScreenHelper, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+    <Page Remove="obj\**" />
   </ItemGroup>
+
   <ItemGroup>
-    <Page Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Analytics\HitInfoFactory.cs" />
-    <Compile Include="Analytics\ITracker.cs" />
-    <Compile Include="Analytics\ITrackerBatch.cs" />
-    <Compile Include="Analytics\ITrackerTimingEvent.cs" />
-    <Compile Include="Analytics\NullTracker.cs" />
-    <Compile Include="Analytics\Tracker.cs" />
-    <Compile Include="Analytics\TrackerConfig.cs" />
-    <Compile Include="ApplicationPaths.cs" />
-    <Compile Include="Controls\DpiDecorator.cs" />
-    <Compile Include="Data\EnumerableCountGreaterThanOneVisibilityConverter.cs" />
-    <Compile Include="DomainObjects\CameraRangeSettings.cs" />
-    <Compile Include="Interaction\Behaviors\PlaceholderService.cs" />
-    <Compile Include="Interaction\Behaviors\WindowBehavior.cs" />
-    <Compile Include="Interaction\Behaviors\WindowDisableContextMenulBehavior.cs" />
-    <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="Diagnostics\AdobeAcrobatHelper.cs" />
-    <Compile Include="Diagnostics\DcsProcessMonitor.cs" />
-    <Compile Include="DomainObjects\SettingsProfile.cs" />
-    <Compile Include="DomainObjects\SettingsProfileType.cs" />
-    <Compile Include="DomainObjects\VersionResource.cs" />
-    <Compile Include="Extensions\ScreenExtensions.cs" />
-    <Compile Include="Lua\AutoexecLuaContext.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Services\IAutoUpdateService.cs" />
-    <Compile Include="DomainObjects\AutoUpdateVersionInfo.cs" />
-    <Compile Include="ComponentModel\NavigationAwareBase.cs" />
-    <Compile Include="Controls\BindingHelper.cs" />
-    <Compile Include="Controls\DesignerControl.cs" />
-    <Compile Include="Controls\DisplaySelectionControl.xaml.cs">
-      <DependentUpon>DisplaySelectionControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\InstallationControl.xaml.cs">
-      <DependentUpon>InstallationControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MessageBoxEx\MessageBoxEx.xaml.cs">
-      <DependentUpon>MessageBoxEx.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MoveThumb.cs" />
-    <Compile Include="Controls\NewsArticleControl.xaml.cs">
-      <DependentUpon>NewsArticleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DesignerItem.cs" />
-    <Compile Include="Controls\PropertyChangeNotifier.cs" />
-    <Compile Include="Controls\RangeSlider.cs" />
-    <Compile Include="Controls\ResizeThumb.cs" />
-    <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
-    <Compile Include="Controls\EmptyStoryboard.cs" />
-    <Compile Include="Controls\UiDispatcher.cs" />
-    <Compile Include="Controls\WizardView\IWizardStep.cs" />
-    <Compile Include="Controls\WizardView\WizardController.cs" />
-    <Compile Include="Controls\WizardView\WizardStepBase.cs" />
-    <Compile Include="Controls\WizardView\WizardView.cs" />
-    <Compile Include="Data\BooleanToStringConverter.cs" />
-    <Compile Include="Data\BooleanToThicknessConverter.cs" />
-    <Compile Include="Data\DictionaryItemConverter.cs" />
-    <Compile Include="Data\InvertBooleanConverter.cs" />
-    <Compile Include="Data\MarkupConverter.cs" />
-    <Compile Include="Data\MarkupMultiConverter.cs" />
-    <Compile Include="Data\RectangleHeightToRadiusConverter.cs" />
-    <Compile Include="Data\ThicknessSideType.cs" />
-    <Compile Include="Data\ThicknessToDoubleConverter.cs" />
-    <Compile Include="Data\StringFormatConverter.cs" />
-    <Compile Include="Data\UriToBitmapConverter.cs" />
-    <Compile Include="Data\VisibilityConverter.cs" />
-    <Compile Include="Diagnostics\GeneralExceptionHandler.cs" />
-    <Compile Include="Diagnostics\ProcessHelper.cs" />
-    <Compile Include="DomainObjects\AdditionalResource.cs" />
-    <Compile Include="DomainObjects\DcsOptionsCategory.cs" />
-    <Compile Include="DomainObjects\Option.cs" />
-    <Compile Include="DomainObjects\OptionMinMax.cs" />
-    <Compile Include="DomainObjects\OptionCategory.cs" />
-    <Compile Include="DomainObjects\MonitorDefinition.cs" />
-    <Compile Include="DomainObjects\SettingsCategories.cs" />
-    <Compile Include="DomainObjects\SettingsKeys.cs" />
-    <Compile Include="DomainObjects\Viewport.cs" />
-    <Compile Include="DomainObjects\ModuleViewportTemplate.cs" />
-    <Compile Include="DomainObjects\ViewportDevice.cs" />
-    <Compile Include="DomainObjects\ViewportOptionTemplate.cs" />
-    <Compile Include="Drawing\ScreenCapture.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Interaction\Behaviors\DialogResultBehavior.cs" />
-    <Compile Include="DomainObjects\ModuleIds.cs" />
-    <Compile Include="Lua\DcsOptionLuaContext.cs" />
-    <Compile Include="Lua\LuaContextBase.cs" />
-    <Compile Include="Services\IProfileSettingsService.cs" />
-    <Compile Include="Services\Settings\ProfileSettingsService.cs" />
-    <Compile Include="Views\About\AboutPlugin.cs" />
-    <Compile Include="Views\About\Views\AboutController.cs" />
-    <Compile Include="Views\About\Views\AboutView.xaml.cs">
-      <DependentUpon>AboutView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\About\Views\AboutViewModel.cs" />
-    <Compile Include="Views\Game\GamePlugin.cs" />
-    <Compile Include="Views\Game\Views\GameController.cs" />
-    <Compile Include="Views\Game\Views\GameViewModel.cs" />
-    <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Views\Manuals\ManualsPlugin.cs" />
-    <Compile Include="Views\Manuals\Views\ManualsController.cs" />
-    <Compile Include="Views\Manuals\Views\ManualsView.xaml.cs">
-      <DependentUpon>ManualsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Manuals\Views\ManualsViewModel.cs" />
-    <Compile Include="Views\Settings\Controls\OptionsControl.xaml.cs">
-      <DependentUpon>OptionsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Dialogs\SelectViewportDialog.xaml.cs">
-      <DependentUpon>SelectViewportDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Dialogs\SelectModuleDialog.xaml.cs">
-      <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Dialogs\MonitorOverlay.xaml.cs">
-      <DependentUpon>MonitorOverlay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Dialogs\ViewportEditorWindow.xaml.cs">
-      <DependentUpon>ViewportEditorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModuleViewportModel.cs" />
-    <Compile Include="Views\Settings\Dialogs\ViewportModel.cs" />
-    <Compile Include="Views\Settings\Models\ComboBoxOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\OptionModel.cs" />
-    <Compile Include="Views\Settings\Models\ColorOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\DoubleRangeSliderOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\MultiValueOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\QuadRangeSliderOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\SelectorItem.cs" />
-    <Compile Include="Views\Settings\Models\SingleValueOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\SliderOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\SwitchOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\TextOptionModel.cs" />
-    <Compile Include="Views\Settings\Models\TripleRangeSliderOptionModel.cs" />
-    <Compile Include="Views\Settings\SettingsPlugin.cs" />
-    <Compile Include="Views\Settings\Dialogs\ViewportEditorWindowViewModel.cs" />
-    <Compile Include="Views\Settings\Controls\ViewportsSettingsControl.xaml.cs">
-      <DependentUpon>ViewportsSettingsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Models\OptionModelFactory.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\AdvancedOptionSettingsViewModelBase.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml.cs">
-      <DependentUpon>CameraMirrorsSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml.cs">
-      <DependentUpon>TerrainReflectionSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml.cs">
-      <DependentUpon>TerrainMirrorSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\SoundSettingsView.xaml.cs">
-      <DependentUpon>SoundSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\SoundSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\TerrainSettingsView.xaml.cs">
-      <DependentUpon>TerrainSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\CameraSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\CategoryHeaderSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\CameraSettingsView.xaml.cs">
-      <DependentUpon>CameraSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\GraphicsSettingsView.xaml.cs">
-      <DependentUpon>GraphicsSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Advanced\GraphicsSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Dcs\DcsOptionCategoryView.xaml.cs">
-      <DependentUpon>DcsOptionCategoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Dcs\DcsOptionCategoryViewModel.cs" />
-    <Compile Include="Views\Settings\Views\General\InstallationSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\SettingsCategoryViewModelBase.cs" />
-    <Compile Include="Views\Settings\Views\Advanced\TerrainSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Viewports\ViewportOptionsView.xaml.cs">
-      <DependentUpon>ViewportOptionsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\Viewports\ViewportOptionsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\Viewports\ViewportSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\Views\SettingsController.cs" />
-    <Compile Include="Views\Settings\Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Views\SettingsViewModel.cs" />
-    <Compile Include="Views\Support\SupportPlugin.cs" />
-    <Compile Include="Views\Support\Views\SupportViewModel.cs" />
-    <Compile Include="Views\Support\Views\SupportView.xaml.cs">
-      <DependentUpon>SupportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Support\Views\SupportController.cs" />
-    <Compile Include="SafeAsync.cs" />
-    <Compile Include="ServiceModel\Container.cs" />
-    <Compile Include="ServiceModel\IContainer.cs" />
-    <Compile Include="ServiceModel\IoCAutoRegistrationException.cs" />
-    <Compile Include="ServiceModel\IoCConstructorResolutionException.cs" />
-    <Compile Include="ServiceModel\IoCRegistrationException.cs" />
-    <Compile Include="ServiceModel\IoCRegistrationTypeException.cs" />
-    <Compile Include="ServiceModel\IoCResolutionException.cs" />
-    <Compile Include="ServiceModel\IoCWeakReferenceException.cs" />
-    <Compile Include="Views\IPlugin.cs" />
-    <Compile Include="ServiceModel\NamedParameterOverloads.cs" />
-    <Compile Include="ServiceModel\NamedResolutionFailureActions.cs" />
-    <Compile Include="Views\PluginBase.cs" />
-    <Compile Include="ServiceModel\ResolveOptions.cs" />
-    <Compile Include="Collections\SafeDictionary.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="ServiceModel\UnregisteredResolutionActions.cs" />
-    <Compile Include="ComponentModel\IActivate.cs" />
-    <Compile Include="ComponentModel\IDeactivate.cs" />
-    <Compile Include="Services\AutoUpdate\AutoUpdateService.cs" />
-    <Compile Include="Services\Dcs\DcsWorldService.cs" />
-    <Compile Include="Services\IDcsWorldService.cs" />
-    <Compile Include="Services\IPluginNavigationSite.cs" />
-    <Compile Include="Services\Navigation\INavigationAware.cs" />
-    <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
-    <Compile Include="Services\Navigation\NavigatedEventArgs.cs" />
-    <Compile Include="Services\Navigation\NavigatingEventArgs.cs" />
-    <Compile Include="Services\Navigation\NavigationService.cs" />
-    <Compile Include="Services\PluginNavigationSite.cs" />
-    <Compile Include="Services\PluginRegisteredEventArgs.cs" />
-    <Compile Include="Services\Settings\SettingsService.cs" />
-    <Compile Include="Threading\EventAsync.cs" />
-    <Compile Include="DomainObjects\Module.cs" />
-    <Compile Include="Threading\HandlerTaskSourceBase.cs" />
-    <Compile Include="Models\NewsArticleModel.cs" />
-    <Compile Include="UserFriendlyExceptionHandler.cs" />
-    <Compile Include="WindowAssist.cs" />
-    <Compile Include="Windows\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\TestWindow.xaml.cs">
-      <DependentUpon>TestWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Wizard.xaml.cs">
-      <DependentUpon>Wizard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\WizardViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml.cs">
-      <DependentUpon>CreateProfileWizardStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\CreateProfileWizardStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepView.xaml.cs">
-      <DependentUpon>FirstUseWelcomeStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepViewModel.cs" />
-    <Compile Include="Models\ScreenModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepView.xaml.cs">
-      <DependentUpon>SelectDeviceViewportScreensStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepView.xaml.cs">
-      <DependentUpon>SelectGameViewportScreensStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepView.xaml.cs">
-      <DependentUpon>SelectViewportsWizardStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepView.xaml.cs">
-      <DependentUpon>SelectInitialViewportsWizardStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepView.xaml.cs">
-      <DependentUpon>SelectUIViewportScreensStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\FirstUse\InstallationsWizardStepView.xaml.cs">
-      <DependentUpon>InstallationsWizardStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\FirstUse\InstallationsWizardStepViewModel.cs" />
-    <Compile Include="Windows\MainWindowViewModel.cs" />
-    <Compile Include="ServiceModel\Syndication\SyndicationHelper.cs" />
-    <Compile Include="Windows\SnipViewportWindow.xaml.cs">
-      <DependentUpon>SnipViewportWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepViewModel.cs" />
-    <Compile Include="Wizards\Steps\Settings\SelectViewport\SelectViewportWizardController.cs" />
-    <Compile Include="Xml\XmlHelper.cs" />
-    <Page Include="Controls\DesignerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DesignerItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DisplaySelectionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\InstallationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\MessageBoxEx\MessageBoxEx.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\NewsArticleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\RangeSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TransitionControl\TransitionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\WizardView\WizardView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\ComboBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\RadioButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\TextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\About\Views\AboutView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Manuals\Views\ManualsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Controls\OptionsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Dialogs\SelectViewportDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Dialogs\SelectModuleDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Dialogs\MonitorOverlay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Dialogs\ViewportEditorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Controls\ViewportsSettingsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\CameraMirrorsSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\TerrainReflectionSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\TerrainMirrorSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\SoundSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\TerrainSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\CameraSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\Advanced\GraphicsSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Views\Dcs\DcsOptionCategoryView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\Views\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Views\Viewports\ViewportOptionsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Support\Views\SupportView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\TestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Wizard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interaction\Behaviors\GlassBehavior.cs" />
-    <Compile Include="Interaction\Behaviors\WebBrowserUtility.cs" />
-    <Compile Include="ConsoleManager.cs" />
-    <Compile Include="Diagnostics\Trace\ConcreteTracer.cs" />
-    <Compile Include="Diagnostics\Trace\ITracer.cs" />
-    <Compile Include="Diagnostics\Trace\Listeners\ConsoleTraceListener.cs" />
-    <Compile Include="Diagnostics\Trace\Listeners\DebugOutputEventListener.cs" />
-    <Compile Include="Diagnostics\Trace\Listeners\FileLogEventListener.cs" />
-    <Compile Include="Diagnostics\Trace\Listeners\StreamOuputEventListener.cs" />
-    <Compile Include="Diagnostics\Trace\TraceEventId.cs" />
-    <Compile Include="Diagnostics\Trace\Tracer.cs" />
-    <Compile Include="Diagnostics\Trace\TracerEventSource.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="InstallationLocator.cs" />
-    <Compile Include="InstallLocation.cs" />
-    <Compile Include="ComponentModel\InstallLocationTypeConverter.cs" />
-    <Compile Include="Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\Game\Views\GameView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\SnipViewportWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\FirstUseWelcomeStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\InstallationsWizardStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\SelectDeviceViewportScreensStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\SelectGameViewportScreensStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\Settings\SelectViewport\SelectViewportsWizardStepView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\SelectInitialViewportsWizardStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wizards\Steps\FirstUse\SelectUIViewportScreensStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Remove="Images\Backgrounds\background %281%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2810%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2811%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2812%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2813%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2814%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2815%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2816%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2817%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2818%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2819%29.jpg" />
+    <None Remove="Images\Backgrounds\background %282%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2820%29.jpg" />
+    <None Remove="Images\Backgrounds\background %2821%29.jpg" />
+    <None Remove="Images\Backgrounds\background %283%29.jpg" />
+    <None Remove="Images\Backgrounds\background %284%29.jpg" />
+    <None Remove="Images\Backgrounds\background %285%29.jpg" />
+    <None Remove="Images\Backgrounds\background %286%29.jpg" />
+    <None Remove="Images\Backgrounds\background %287%29.jpg" />
+    <None Remove="Images\Backgrounds\background %288%29.jpg" />
+    <None Remove="Images\Backgrounds\background %289%29.jpg" />
+    <None Remove="Images\dal-icon-256.png" />
+    <None Remove="Images\dal-icon-white.png" />
+    <None Remove="Images\dcs-world-logo.png" />
+    <None Remove="Images\discord.png" />
+    <None Remove="Images\GitHub-logo-header.png" />
+    <None Remove="Images\jabbers-logo.png" />
+    <None Remove="Images\lauch-background-mask-2.png" />
+    <None Remove="Images\lauch-background-mask.png" />
+    <None Remove="Images\lauch-background.jpg" />
+    <None Remove="Images\MultiMonitor0.jpg" />
+    <None Remove="Images\MultiMonitor1.png" />
+    <None Remove="Images\Overlay.png" />
+    <None Remove="Images\patreon-button.png" />
+    <None Remove="Images\paypal-dontation.png" />
+    <None Remove="Images\SplashBackground.png" />
+    <None Remove="Images\vanilla-screenshot.jpg" />
+    <None Remove="Images\viewports-screenshot.jpg" />
+    <None Remove="Images\vr.png" />
+    <None Remove="Images\Wizard\FirstUse.png" />
+    <None Remove="Resources\Fonts\orbitron-black.otf" />
+    <None Remove="Resources\Fonts\orbitron-bold.otf" />
+    <None Remove="Resources\Fonts\orbitron-light.otf" />
+    <None Remove="Resources\Fonts\orbitron-medium.otf" />
+    <None Remove="Resources\Fonts\Prototype.ttf" />
+    <None Remove="Resources\Icons\adobe-pdf-icon.png" />
+    <None Remove="Resources\Icons\external-link.png" />
+    <None Remove="Resources\Images\Wallpaper\1.jpg" />
+    <None Remove="Resources\Images\Wallpaper\10.jpg" />
+    <None Remove="Resources\Images\Wallpaper\11.jpg" />
+    <None Remove="Resources\Images\Wallpaper\12.jpg" />
+    <None Remove="Resources\Images\Wallpaper\13.png" />
+    <None Remove="Resources\Images\Wallpaper\14.jpg" />
+    <None Remove="Resources\Images\Wallpaper\15.png" />
+    <None Remove="Resources\Images\Wallpaper\16.png" />
+    <None Remove="Resources\Images\Wallpaper\17.png" />
+    <None Remove="Resources\Images\Wallpaper\18.jpg" />
+    <None Remove="Resources\Images\Wallpaper\19.jpg" />
+    <None Remove="Resources\Images\Wallpaper\2.png" />
+    <None Remove="Resources\Images\Wallpaper\20.png" />
+    <None Remove="Resources\Images\Wallpaper\21.png" />
+    <None Remove="Resources\Images\Wallpaper\22.png" />
+    <None Remove="Resources\Images\Wallpaper\3.jpg" />
+    <None Remove="Resources\Images\Wallpaper\4.jpg" />
+    <None Remove="Resources\Images\Wallpaper\5.png" />
+    <None Remove="Resources\Images\Wallpaper\6.jpg" />
+    <None Remove="Resources\Images\Wallpaper\7.jpg" />
+    <None Remove="Resources\Images\Wallpaper\8.jpg" />
+    <None Remove="Resources\Images\Wallpaper\9.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\IFEI.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\RWR.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\UFC.jpg" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Views\Game\Views\GameView.xaml.cs">
-      <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.manifest">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DCS.Alternative.Launcher.ruleset" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Data\Options\GameOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Options\AutoexecOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Resources\AdditionalResources.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Lua\Utils.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Lua\IO.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Lua\Serializer.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\ViewportOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\ViewportDevices.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Options\AutoexecOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Options\GameOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Resources\AdditionalResources.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Viewports\ViewportDevices.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Viewports\ViewportOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Viewports\ViewportTemplates.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Resource Include="Resources\Fonts\Prototype.ttf" />
-    <Resource Include="Resources\Fonts\orbitron-black.otf" />
-    <Resource Include="Resources\Fonts\orbitron-bold.otf" />
-    <Resource Include="Resources\Fonts\orbitron-light.otf" />
-    <Resource Include="Resources\Fonts\orbitron-medium.otf" />
+    <COMReference Include="SHDocVw.dll">
+      <Guid>eab22ac0-30c1-11cf-a7eb-0000c05bae0b</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\jabbers-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\dcs-world-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\background %281%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2810%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2811%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2812%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2813%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2814%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2815%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2816%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2817%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2818%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2819%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %282%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %2820%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %283%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %284%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %285%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %286%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %287%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %288%29.jpg" />
-    <Resource Include="Images\Backgrounds\background %289%29.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Viewports\Images\HEATBLUR_F14\" />
-    <Folder Include="Data\Viewports\Images\KA-50\" />
-    <Folder Include="Plugins\" />
-    <Folder Include="Resources\Viewports\Images\HEATBLUR_F14\" />
-    <Folder Include="Resources\Viewports\Images\KA-50\" />
-    <Folder Include="Views\Manuals\Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\dal-icon-256.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\vanilla-screenshot.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\viewports-screenshot.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Viewports\ViewportTemplates.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\RWR_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\A-10C\UHF_REPEATER.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\FA-18C\IFEI.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Viewports\Images\FA-18C\UFC.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Viewports\Images\FA-18C\RWR.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Overlay.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Viewports\Images\FA-18C\UFC.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\RWR.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\IFEI.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\lauch-background-mask.png" />
-    <Resource Include="Images\lauch-background.jpg" />
-    <Resource Include="Images\lauch-background-mask-2.png" />
-    <Resource Include="Images\patreon-button.png" />
-    <Resource Include="Images\paypal-dontation.png" />
-    <Resource Include="Images\discord.png" />
-    <Resource Include="Images\GitHub-logo-header.png" />
-    <Resource Include="Images\SplashBackground.png" />
-    <Resource Include="Images\dal-icon-white.png" />
-    <Resource Include="Images\Backgrounds\background %2821%29.jpg" />
-    <Resource Include="Images\MultiMonitor0.jpg" />
-    <Resource Include="Images\MultiMonitor1.png" />
-    <Resource Include="Images\vr.png" />
     <Content Include="Resources\Images\Wallpaper\1.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\3.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\4.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\6.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\7.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\8.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Wallpaper\9.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Wallpaper\10.jpg">
@@ -968,6 +153,9 @@
     <Content Include="Resources\Images\Wallpaper\19.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Wallpaper\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Wallpaper\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -977,32 +165,245 @@
     <Content Include="Resources\Images\Wallpaper\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Wallpaper\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wallpaper\9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Data\Viewports\Images\KA-50\" />
+    <Folder Include="Plugins\" />
+    <Folder Include="Resources\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Resources\Viewports\Images\KA-50\" />
+    <Folder Include="Views\Manuals\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\background (1).jpg" />
+    <Resource Include="Images\Backgrounds\background (10).jpg" />
+    <Resource Include="Images\Backgrounds\background (11).jpg" />
+    <Resource Include="Images\Backgrounds\background (12).jpg" />
+    <Resource Include="Images\Backgrounds\background (13).jpg" />
+    <Resource Include="Images\Backgrounds\background (14).jpg" />
+    <Resource Include="Images\Backgrounds\background (15).jpg" />
+    <Resource Include="Images\Backgrounds\background (16).jpg" />
+    <Resource Include="Images\Backgrounds\background (17).jpg" />
+    <Resource Include="Images\Backgrounds\background (18).jpg" />
+    <Resource Include="Images\Backgrounds\background (19).jpg" />
+    <Resource Include="Images\Backgrounds\background (2).jpg" />
+    <Resource Include="Images\Backgrounds\background (20).jpg" />
+    <Resource Include="Images\Backgrounds\background (21).jpg" />
+    <Resource Include="Images\Backgrounds\background (3).jpg" />
+    <Resource Include="Images\Backgrounds\background (4).jpg" />
+    <Resource Include="Images\Backgrounds\background (5).jpg" />
+    <Resource Include="Images\Backgrounds\background (6).jpg" />
+    <Resource Include="Images\Backgrounds\background (7).jpg" />
+    <Resource Include="Images\Backgrounds\background (8).jpg" />
+    <Resource Include="Images\Backgrounds\background (9).jpg" />
+    <Resource Include="Images\dal-icon-256.png" />
+    <Resource Include="Images\dal-icon-white.png" />
+    <Resource Include="Images\dcs-world-logo.png" />
+    <Resource Include="Images\discord.png" />
+    <Resource Include="Images\GitHub-logo-header.png" />
+    <Resource Include="Images\jabbers-logo.png" />
+    <Resource Include="Images\lauch-background-mask-2.png" />
+    <Resource Include="Images\lauch-background-mask.png" />
+    <Resource Include="Images\lauch-background.jpg" />
+    <Resource Include="Images\MultiMonitor0.jpg" />
+    <Resource Include="Images\MultiMonitor1.png" />
+    <Resource Include="Images\Overlay.png" />
+    <Resource Include="Images\patreon-button.png" />
+    <Resource Include="Images\paypal-dontation.png" />
+    <Resource Include="Images\SplashBackground.png" />
+    <Resource Include="Images\vanilla-screenshot.jpg" />
+    <Resource Include="Images\viewports-screenshot.jpg" />
+    <Resource Include="Images\vr.png" />
+    <Resource Include="Resources\Fonts\orbitron-black.otf" />
+    <Resource Include="Resources\Fonts\orbitron-bold.otf" />
+    <Resource Include="Resources\Fonts\orbitron-light.otf" />
+    <Resource Include="Resources\Fonts\orbitron-medium.otf" />
+    <Resource Include="Resources\Fonts\Prototype.ttf" />
+    <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
+    <Resource Include="Resources\Icons\external-link.png" />
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RWR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Images\Wizard\FirstUse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\Icons\external-link.png" />
-    <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <Content Include="Resources\Images\Wallpaper\2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="ControlzEx" Version="4.2.2" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.1" />
+    <PackageReference Include="FluentWPF" Version="0.8.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.20" />
+    <PackageReference Include="KeraLua" Version="1.0.26" />
+    <PackageReference Include="LoadingIndicators.WPF" Version="0.0.1" />
+    <PackageReference Include="Microsoft.Toolkit.Win32.UI.Controls" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLua" Version="1.4.29" />
+    <PackageReference Include="PropertyTools.Wpf" Version="3.0.0" />
+    <PackageReference Include="ReactiveProperty" Version="6.2.0" />
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="4.7.0" />
+    <PackageReference Include="WpfScreenHelper" Version="0.4.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="BeforeBuild">
-    <WriteLinesToFile File="Properties\VersionInfo.cs" Lines="$(AssemblyFileVersionAttribute)$(NewLine)$(AssemblyVersionAttribute)" Overwrite="true">
-    </WriteLinesToFile>
-  </Target>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets'))" />
-  </Target>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
-  <Import Project="..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.19\build\net45\KeraLua.targets')" />
+
+  <ItemGroup>
+    <None Update="Data\Lua\IO.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Lua\Serializer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Lua\Utils.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Options\AutoexecOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Options\GameOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Resources\AdditionalResources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\RWR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Options\AutoexecOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Options\GameOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Resources\AdditionalResources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
