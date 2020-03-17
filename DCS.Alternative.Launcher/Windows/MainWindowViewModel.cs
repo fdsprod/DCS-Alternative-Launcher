@@ -68,8 +68,6 @@ namespace DCS.Alternative.Launcher.Windows
             _autoUpdateCheckTimer.Interval = TimeSpan.FromMinutes(30);
             _autoUpdateCheckTimer.Tick += _autoUpdateCheckTimer_Tick;
             _autoUpdateCheckTimer.Start();
-
-            CheckForUpdate();
         }
 
         public ReactiveProperty<string> ImageUrl

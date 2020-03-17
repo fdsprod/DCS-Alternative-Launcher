@@ -104,38 +104,40 @@
                                                    FontSize="16"
                                                    Foreground="#FFFFFFFF"
                                                    Text="DOCUMENTATION" />
-                                        <ItemsControl Grid.Row="1"
+                                        <ScrollViewer Grid.Row="1"
                                                       Grid.Column="0"
                                                       Margin="10"
-                                                      ItemsSource="{Binding Documents}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Margin="0,5">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition />
-                                                        </Grid.ColumnDefinitions>
-                                                        <Image Height="24"
-                                                               HorizontalAlignment="Left"
-                                                               VerticalAlignment="Top"
-                                                               Source="/Resources/Icons/adobe-pdf-icon.png"
-                                                               Stretch="Uniform" />
-                                                        <Button Grid.Column="1"
-                                                                Margin="5,0"
-                                                                VerticalAlignment="Center"
-                                                                Command="{Binding DataContext.OpenDocumentCommand, RelativeSource={RelativeSource AncestorType={x:Type views1:ManualsView}}}"
-                                                                CommandParameter="{Binding}"
-                                                                Style="{StaticResource HyperlinkButton}">
-                                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}">
-                                                                <Underline>
-                                                                    <Run Text="{Binding Name}" />
-                                                                </Underline>
-                                                            </TextBlock>
-                                                        </Button>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl ItemsSource="{Binding Documents}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,5">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Image Height="24"
+                                                                   HorizontalAlignment="Left"
+                                                                   VerticalAlignment="Top"
+                                                                   Source="/Resources/Icons/adobe-pdf-icon.png"
+                                                                   Stretch="Uniform" />
+                                                            <Button Grid.Column="1"
+                                                                    Margin="5,0"
+                                                                    VerticalAlignment="Center"
+                                                                    Command="{Binding DataContext.OpenDocumentCommand, RelativeSource={RelativeSource AncestorType={x:Type views1:ManualsView}}}"
+                                                                    CommandParameter="{Binding}"
+                                                                    Style="{StaticResource HyperlinkButton}">
+                                                                <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}">
+                                                                    <Underline>
+                                                                        <Run Text="{Binding Name}" />
+                                                                    </Underline>
+                                                                </TextBlock>
+                                                            </Button>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
                                         <TextBlock Grid.Row="0"
                                                    Grid.Column="1"
                                                    Margin="10,0"

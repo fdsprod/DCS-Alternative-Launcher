@@ -15,12 +15,10 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
 {
     public class ManualsViewModel : NavigationAwareBase
     {
-        private readonly IContainer _container;
         private readonly ManualsController _controller;
 
         public ManualsViewModel(IContainer container)
         {
-            _container = container;
             _controller = container.Resolve<ManualsController>();
 
             OpenDocumentCommand.Subscribe(OnOpenDocument);
@@ -69,7 +67,12 @@ namespace DCS.Alternative.Launcher.Plugins.Manuals.Views
                 AdobeAcrobatHelper.ApplyProtectedModeFix();
             }
 
-            Process.Start(value.Path);
+            var ps = new ProcessStartInfo(value.Path)
+            {
+                UseShellExecute = true,
+            };
+
+            Process.Start(ps);
         }
 
         protected override async Task InitializeAsync()

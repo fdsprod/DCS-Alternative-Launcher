@@ -135,6 +135,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             }
                         });
 
+                        var fc3Added = false;
+
                         var makeFlyableAction = new Action<string, string, LuaTable, string>((a, b, c, d) =>
                         {
                             if (displayName.Contains("_hornet"))
@@ -157,9 +159,28 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 modules.Add(module);
                                 Tracer.Debug($"Found module {displayName}.");
                             }
+                            else if (moduleId == "FC3" && !fc3Added)
+                            {
+                                //fc3Added = true;
+
+                                var module = new Module
+                                {
+                                    ModuleId = moduleId,
+                                    DisplayName = displayName,
+                                    IsFC3 = true,
+                                    FC3ModuleId = b,
+                                    LoadingImagePath = Path.Combine(folder, skinsPath, "ME", "loading-window.png"),
+                                    MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
+                                    BaseFolderPath = folder,
+                                    IconPath = Path.Combine(folder, skinsPath, "icon.png"),
+                                    ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
+                                };
+                                modules.Add(module);
+                                Tracer.Debug($"Found module {displayName}.");
+                            }
                             else
                             {
-                                Tracer.Debug($"Not loading module '{displayName}' parameters ('{a}', '{b}', '{d}'.");
+                                Tracer.Debug($"Not loading module '{moduleId} - {displayName}' parameters ('{a}', '{b}', '{d}'.");
                             }
                         });
 

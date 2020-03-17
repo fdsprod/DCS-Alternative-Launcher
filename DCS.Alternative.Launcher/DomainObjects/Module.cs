@@ -64,5 +64,17 @@ namespace DCS.Alternative.Launcher.DomainObjects
             get;
             set;
         }
+
+        public bool IsFC3
+        {
+            get;
+            set;
+        }
+
+        public string FC3ModuleId
+        {
+            get;
+            set;
+        }
     }
 }
