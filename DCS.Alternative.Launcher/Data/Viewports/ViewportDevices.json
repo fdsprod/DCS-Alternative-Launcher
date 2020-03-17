@@ -1,45 +1,42 @@
 ﻿{
-	"FA-18C": [
-		{
-			"viewportName": "IFEI",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
-			"width": 528,
-			"height": 200
-		},
-		{
-			"viewportName": "UFC",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
-			"width": 451,
-			"height": 258
-		},
-		{
-			"viewportName": "CENTER_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
-			"width": 376,
-			"height": 358
-		},
-		{
-			"viewportName": "RWR",
-			"relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
-			"width": 178,
-			"height": 177
-		},
-		{
-			"viewportName": "RIGHT_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
-			"width": 387,
-			"height": 374
-		},
-		{
-			"viewportName": "LEFT_MFCD",
-			"relativeInitFilePath":
-				"Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
-			"width": 387,
-			"height": 374
-		}
-	], 
+  "FA-18C": [
+    {
+      "viewportName": "LEFT_MFCD",
+      "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_init.lua",
+      "width": 330,
+      "height": 311
+    },
+    {
+      "viewportName": "RIGHT_MFCD",
+      "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_init.lua",
+      "width": 330,
+      "height": 311
+    },
+    {
+      "viewportName": "RWR",
+      "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "viewportName": "CENTER_MFCD",
+      "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_init.lua",
+      "width": 315,
+      "height": 300
+    },
+    {
+      "viewportName": "IFEI",
+      "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
+      "width": 430,
+      "height": 167
+    },
+    {
+      "viewportName": "UFC",
+      "relativeInitFilePath": "/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
+      "width": 380,
+      "height": 216
+    }
+  ], 
 	"KA-50": [{
       "viewportName" : "SHIVAL",
       "relativeInitFilePath" : "Mods/aircraft/Ka-50/Cockpit/Scripts/SHKVAL/SHKVAL_init.lua",
