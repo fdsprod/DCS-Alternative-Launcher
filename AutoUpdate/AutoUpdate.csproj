@@ -6,6 +6,14 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <StartupObject>AutoUpdate.Program</StartupObject>
+    <Authors>Jeff Boulanger</Authors>
+    <Company>Jeff Boulanger</Company>
+    <Description>Auto Updater for DCS Alternative Launcher</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/jeffboulanger/DCS-Alternative-Launcher</PackageProjectUrl>
+    <PackageIconUrl>https://camo.githubusercontent.com/111ec62b0f040f9418d45862933837915d658ab1/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f3431353636343531323938313739343831382f3631313234323938333937383832373830322f64616c2d69636f6e2d3235362e706e67</PackageIconUrl>
+    <RepositoryUrl>https://github.com/jeffboulanger/DCS-Alternative-Launcher</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +21,10 @@
     <None Remove="Images\Background.png" />
     <None Remove="Images\dal-icon-256.png" />
     <None Remove="Images\dal-icon-white.png" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

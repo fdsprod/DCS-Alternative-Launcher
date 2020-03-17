@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Storage.Settings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reactive.Bindings;
@@ -147,12 +148,13 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
-                if (_isDirty.Value)
+                if (!_isDirty.Value)
                 {
-                    _isDirty.Value = false;
-                    
-                    File.WriteAllText("settings.json", JsonConvert.SerializeObject(_settings, Formatting.Indented));
+                    return;
                 }
+
+                _isDirty.Value = false;
+                SettingsStorageAdapter.PersistAsync(_settings).Wait();
             }
         }
 
@@ -160,19 +162,8 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             lock (_syncRoot)
             {
-                if (File.Exists("settings.json"))
-                {
-                    Tracer.Info("Loading settings.json");
-
-                    var json = File.ReadAllText("settings.json");
-                    _settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
-                }
-                else
-                {
-                    Tracer.Info("settings.json was not found.");
-
-                    _settings = new Dictionary<string, Dictionary<string, object>>();
-                }
+                Tracer.Info("Loading settings.json");
+                _settings = SettingsStorageAdapter.GetAll();
             }
         }
 

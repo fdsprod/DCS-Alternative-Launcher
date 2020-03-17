@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reactive.Linq;
+using DCS.Alternative.Launcher.Storage.Profiles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reactive.Bindings;
@@ -34,7 +34,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
 
                 _isDirty.Value = false;
 
-                File.WriteAllText(Path, JsonConvert.SerializeObject(this, Formatting.Indented));
+                SettingsProfileStorageAdapter.PersistAsync(this).Wait();
             }
         }
 

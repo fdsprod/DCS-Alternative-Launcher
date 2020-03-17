@@ -16,15 +16,20 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
     public class AutoUpdateService : IAutoUpdateService
     {
         private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-
-        public Task<bool> CheckAsync()
+        
+        public Task<AutoUpdateCheckResult> CheckAsync()
         {
+            var assembly = Assembly.GetExecutingAssembly();
+            var version = assembly.GetName().Version;
+            
             return Task.Run(async () =>
             {
                 if (!await _semaphore.WaitAsync(1))
                 {
-                    return false;
+                    return new AutoUpdateCheckResult();
                 }
+
+                var releaseSemaphore = true;
 
                 try
                 {
@@ -39,8 +44,19 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                         var c = File.ReadAllText(versionPath);
                         var v = JsonConvert.DeserializeObject<AutoUpdateVersionInfo>(c);
 
+                        if (version >= Version.Parse(v.Version))
+                        {
+                            Directory.Delete(extractionPath, true);
+                            return new AutoUpdateCheckResult();
+                        }
+
                         Tracer.Info($"Update {v.Version} is currently waiting to be installed.");
-                        return true;
+
+                        return new AutoUpdateCheckResult()
+                        {
+                            IsUpdateAvailable = true,
+                            UpdateVersion = Version.Parse(v.Version)
+                        };
                     }
 
                     if (Directory.Exists(downloadDirectory))
@@ -59,79 +75,96 @@ namespace DCS.Alternative.Launcher.Services.AutoUpdate
                     if (!(file?.Exists ?? false))
                     {
                         Tracer.Warn("Unable to download version info.  File was not found.");
-                        return false;
+                        return new AutoUpdateCheckResult();
                     }
 
                     var contents = File.ReadAllText(file.FullName);
                     var versionInfo = JsonConvert.DeserializeObject<AutoUpdateVersionInfo>(contents);
-                    var assembly = Assembly.GetExecutingAssembly();
-                    var version = assembly.GetName().Version;
-
+                    
                     if (version >= versionInfo.ConcreteVersion)
                     {
                         Tracer.Info("Application is up to date.");
-                        return false;
+                        return new AutoUpdateCheckResult();
                     }
 
-                    var zipPath = Path.Combine(downloadDirectory, "update.zip");
+                    releaseSemaphore = false;
 
-                    Tracer.Info("Downloading update.");
-
-                    file = await SafeAsync.RunAsync(
-                        () => DownloadFileAsync(versionInfo.Url, zipPath),
-                        e => { Tracer.Error("An error occured while trying to download the the update.", e); });
-
-                    if (!(file?.Exists ?? false))
+                    var updateTask = Task.Run<bool>(async () =>
                     {
-                        Tracer.Warn("Unable to download update archive.");
-                        return false;
-                    }
-
-                    if (Directory.Exists(extractionPath))
-                    {
-                        Directory.Delete(extractionPath, true);
-                    }
-
-                    Directory.CreateDirectory(extractionPath);
-
-                    try
-                    {
-                        Tracer.Info("Extracting update.");
-
-                        ExtractZipFile(zipPath, extractionPath);
-
                         try
                         {
-                            Tracer.Info("Removing downloaded archive file.");
+                            var zipPath = Path.Combine(downloadDirectory, "update.zip");
 
-                            File.Delete(zipPath);
+                            Tracer.Info("Downloading update.");
 
-                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe");
-                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe.config");
-                            MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.pdb");
+                            file = await SafeAsync.RunAsync(
+                                () => DownloadFileAsync(versionInfo.Url, zipPath),
+                                e => { Tracer.Error("An error occured while trying to download the the update.", e); });
+
+                            if (!(file?.Exists ?? false))
+                            {
+                                Tracer.Warn("Unable to download update archive.");
+                            }
+
+                            if (Directory.Exists(extractionPath))
+                            {
+                                Directory.Delete(extractionPath, true);
+                            }
+
+                            Directory.CreateDirectory(extractionPath);
+
+                            Tracer.Info("Extracting update.");
+
+                            ExtractZipFile(zipPath, extractionPath);
+
+                            try
+                            {
+                                Tracer.Info("Removing downloaded archive file.");
+
+                                File.Delete(zipPath);
+
+                                MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe");
+                                MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.exe.config");
+                                MoveFile(extractionPath, ApplicationPaths.ApplicationPath, "AutoUpdate.pdb");
+                            }
+                            catch (Exception e)
+                            {
+                                Tracer.Error("Unable to update AutoUpdate.exe", e);
+                            }
                         }
                         catch (Exception e)
                         {
-                            Tracer.Error("Unable to update AutoUpdate.exe", e);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Tracer.Error(e);
-                        Directory.Delete(extractionPath, true);
-                        return false;
-                    }
+                            Tracer.Error(e);
+                            Directory.Delete(extractionPath, true);
 
-                    return true;
+                            return false;
+                        }
+                        finally
+                        {
+                            _semaphore.Release(1);
+                        }
+
+                        return true;
+                    });
+
+                    return new AutoUpdateCheckResult
+                    {
+                        IsUpdateAvailable = true,
+                        UpdateVersion = versionInfo.ConcreteVersion,
+                        UpdatingTask = updateTask
+                    };
                 }
                 catch (Exception e)
                 {
                     Tracer.Error(e);
-                    return false;
+                    return new AutoUpdateCheckResult();
                 }
                 finally
                 {
-                    _semaphore.Release(1);
+                    if (releaseSemaphore)
+                    {
+                        _semaphore.Release(1);
+                    }
                 }
             });
         }

@@ -191,10 +191,10 @@ namespace DCS.Alternative.Launcher
             _container = new Container();
             _mainWindow = new MainWindow();
 
+            await Task.WhenAll(RegisterServicesAsync());
+            await Task.WhenAll(CheckForUpdatesAsync());
             await Task.WhenAll(UpdateDefinitionFilesAsync());
-
-            await Task.WhenAll(RegisterServicesAsync(), Task.Delay(250));
-            await Task.WhenAll(CheckSettingsExistAsync(), Task.Delay(250));
+            await Task.WhenAll(CheckSettingsExistAsync());
 
             CheckFirstUse();
 
@@ -220,12 +220,35 @@ namespace DCS.Alternative.Launcher
             Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
 
         }
+
+        private async Task CheckForUpdatesAsync()
+        {
+            _splashScreen.Status = "Checking for updates...";
+
+            var autoUpdateService = _container.Resolve<IAutoUpdateService>();
+            var result = await autoUpdateService.CheckAsync();
+
+            if (result.IsUpdateAvailable)
+            {
+                if (MessageBoxEx.Show($"Update version {result.UpdateVersion} is available.{Environment.NewLine}{Environment.NewLine}Click YES to install immediately{Environment.NewLine}Click NO to install next time you start the launcher.", "UPDATE AVAILABLE", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    _splashScreen.Status = "Installing update...";
+
+                    await result.UpdatingTask;
+
+                    Process.Start(ResourceAssembly.Location);
+                    Current.Shutdown();
+                }
+            }
+        }
+
         private void CheckFirstUse()
         {
             var settingsService = _container.Resolve<ISettingsService>();
             var profileSettingsService = _container.Resolve<IProfileSettingsService>();
 
-            if (profileSettingsService.SelectedProfile == null)
+            if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")) || 
+                profileSettingsService.SelectedProfile == null)
             {
                 using (var container = _container.GetChildContainer())
                 {
@@ -260,7 +283,7 @@ namespace DCS.Alternative.Launcher
         {
             _splashScreen.Status = "Checking Settings...";
 
-            if (!File.Exists("settings.json"))
+            if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")))
             {
                 var settingsService = _container.Resolve<ISettingsService>();
                 var installs = InstallationLocator.Locate().ToArray();
@@ -400,7 +423,7 @@ namespace DCS.Alternative.Launcher
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
             _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
-            _container.Register<IProfileSettingsService, ProfileSettingsService>().AsSingleton().UsingConstructor(() => new ProfileSettingsService(_container));
+            _container.Register<IProfileSettingsService, SettingsProfileService>().AsSingleton().UsingConstructor(() => new SettingsProfileService(_container));
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
             _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
 

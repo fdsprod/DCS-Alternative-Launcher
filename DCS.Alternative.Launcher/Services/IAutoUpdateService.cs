@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using DCS.Alternative.Launcher.DomainObjects;
 
 namespace DCS.Alternative.Launcher.Services
 {
     public interface IAutoUpdateService
     {
-        Task<bool> CheckAsync();
+        Task<AutoUpdateCheckResult> CheckAsync();
     }
 }

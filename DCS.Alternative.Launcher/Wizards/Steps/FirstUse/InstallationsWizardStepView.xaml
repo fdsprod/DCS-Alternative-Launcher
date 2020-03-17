@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="1"
@@ -74,7 +74,7 @@
                     <TextBlock Grid.Column="9"
                                HorizontalAlignment="Center"
                                FontSize="16"
-                               Text="STATUS" />
+                               Text="VALID INSTALL" />
                 </Grid>
                 <ListView Grid.Row="1"
                           Background="Transparent"
@@ -113,7 +113,7 @@
                                     <ColumnDefinition Width="20" SharedSizeGroup="Spacer3" />
                                     <ColumnDefinition Width="*" SharedSizeGroup="Location" />
                                     <ColumnDefinition Width="20" SharedSizeGroup="Spacer4" />
-                                    <ColumnDefinition Width="75" SharedSizeGroup="Valid" />
+                                    <ColumnDefinition Width="120" SharedSizeGroup="Valid" />
                                     <ColumnDefinition Width="20" SharedSizeGroup="Spacer5" />
                                 </Grid.ColumnDefinitions>
                                 <RadioButton Grid.Column="1"

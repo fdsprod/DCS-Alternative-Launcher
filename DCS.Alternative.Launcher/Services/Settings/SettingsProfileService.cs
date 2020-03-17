@@ -6,12 +6,13 @@ using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.ServiceModel;
+using DCS.Alternative.Launcher.Storage.Profiles;
 using Newtonsoft.Json;
 using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
-    public class ProfileSettingsService : IProfileSettingsService
+    public class SettingsProfileService : IProfileSettingsService
     {
         private readonly ISettingsService _settingsService;
         private readonly List<SettingsProfile> _profiles = new List<SettingsProfile>();
@@ -20,17 +21,16 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private Dictionary<string, Option[]> _defaultAdvancedOptionCache;
 
         private DcsOptionsCategory[] _dcsOptions;
-
         private SettingsProfile _selectedProfile;
 
-        public ProfileSettingsService(IContainer container)
+        public SettingsProfileService(IContainer container)
         {
             _settingsService = container.Resolve<ISettingsService>();
 
             Load();
 
             var lastProfileName = _settingsService.GetValue<string>(SettingsCategories.Launcher, SettingsKeys.LastProfileName);
-             var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName) ?? _profiles.FirstOrDefault();
+            var profile = _profiles.FirstOrDefault(p => p.Name == lastProfileName) ?? _profiles.FirstOrDefault();
 
             _selectedProfile = profile;
         }
@@ -52,21 +52,14 @@ namespace DCS.Alternative.Launcher.Services.Settings
         {
             Tracer.Info("Loading profiles");
 
-            foreach (var profileJson in Directory.GetFiles(ApplicationPaths.ProfilesPath, "*.json"))
+            try
             {
-                try
-                {
-                    var contents = File.ReadAllText(profileJson);
-                    var profile = JsonConvert.DeserializeObject<SettingsProfile>(contents);
-
-                    profile.Path = profileJson;
-
-                    _profiles.Add(profile);
-                }
-                catch (Exception e)
-                {
-                    GeneralExceptionHandler.Instance.OnError(e);
-                }
+                var profiles = SettingsProfileStorageAdapter.GetAll();
+                _profiles.AddRange(profiles);
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
             }
         }
 

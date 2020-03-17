@@ -42,9 +42,8 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
             var assembly = Assembly.GetAssembly(typeof(AboutViewModel));
             var name = assembly.GetName();
             var version = name.Version;
-            var buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
 
-            var displayableVersion = $"{version.Major} ({buildDate.ToShortDateString()})";
+            var displayableVersion = $"{version.Major}";
 
             Version.Value = displayableVersion;
 
@@ -53,7 +52,12 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 
         public override Task ActivateAsync()
         {
-            Task.Run(async () => { IsUpdateAvailable.Value = await _autoUpdateService.CheckAsync(); });
+            Task.Run(async () =>
+            {
+                var result = await _autoUpdateService.CheckAsync();
+                await result.UpdatingTask;
+                IsUpdateAvailable.Value = result.IsUpdateAvailable;
+            });
 
             return base.ActivateAsync();
         }
