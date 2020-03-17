@@ -153,6 +153,11 @@
   ],
   "DEKA_JF-17": [
     {
+      "Name": "Chuck's Guide",
+      "IconPath": "/Resources/Icons/adobe-pdf-icon.png",
+      "Url": "https://www.mudspike.com/wp-content/uploads/guides/DCS%20JF-17%20Thunder%20Guide.pdf"
+    },
+    {
       "Name": "Single Player Missions",
       "IconPath": "/Resources/Icons/external-link.png",
       "Url": "https://www.digitalcombatsimulator.com/en/files/?set_filter=Y&arrFilter_pf%5Bfiletype%5D=1&arrFilter_pf%5Bgameversion%5D=&arrFilter_pf%5Bfilelang%5D=&arrFilter_pf%5Baircraft%5D=562&arrFilter_DATE_CREATE_1_DAYS_TO_BACK=&CREATED_BY=&sort_by_order=TIMESTAMP_X_DESC&set_filter=Filter"
