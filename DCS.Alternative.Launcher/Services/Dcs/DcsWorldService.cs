@@ -79,6 +79,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 function dofile() end
                                 function plugin_done() end
                                 function make_flyable() end
+                                function MAC_flyable() end
                                 function turn_on_waypoint_panel() end
                                 AV8BFM = {}
                                 F86FM = {}
@@ -91,6 +92,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 Mig15FM = {}
                                 MIG19PFM = {}
                                 SA342FM = {}
+                                JF17_FM = {}
                                 function add_plugin_systems() end
                                 " + $"__DCS_VERSION__ = \"{install.Version}\"");
 
@@ -133,7 +135,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             }
                         });
 
-                        lua["make_flyable"] = new Action<string, string, LuaTable, string>((a, b, c, d) =>
+                        var makeFlyableAction = new Action<string, string, LuaTable, string>((a, b, c, d) =>
                         {
                             if (displayName.Contains("_hornet"))
                             {
@@ -153,17 +155,24 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
                                 modules.Add(module);
-                                Tracer.Info($"Found module {displayName}.");
+                                Tracer.Debug($"Found module {displayName}.");
+                            }
+                            else
+                            {
+                                Tracer.Debug($"Not loading module '{displayName}' parameters ('{a}', '{b}', '{d}'.");
                             }
                         });
 
+                        lua["make_flyable"] = makeFlyableAction;
+                        lua["MAC_flyable"] = makeFlyableAction;
+                        
                         try
                         {
                             lua.DoFile(entryPath);
                         }
                         catch (Exception e)
                         {
-                            Tracer.Error(e);
+                            Tracer.Error(e.Message);
                         }
                     }
                 }
@@ -211,7 +220,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public AdditionalResource[] GetAdditionalResourcesByModule(string moduleId)
         {
-            var path = Path.Combine(ApplicationPaths.ApplicationPath, "Resources/Resources/AdditionalResources.json");
+            var path = "Data\\Resources\\AdditionalResources.json";
             var contents = File.ReadAllText(path);
             var resourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
 
@@ -219,34 +228,19 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             contents = File.ReadAllText(path);
 
             var customResourceLookup = JsonConvert.DeserializeObject<Dictionary<string, AdditionalResource[]>>(contents);
+            var resources = new Dictionary<string, AdditionalResource>();
 
-            foreach (var kvp in customResourceLookup)
+            if (resourceLookup.TryGetValue(moduleId, out var a))
             {
-                var options = new List<AdditionalResource>();
-
-                if (resourceLookup.ContainsKey(kvp.Key))
-                {
-                    options.AddRange(resourceLookup[kvp.Key]);
-                }
-
-                foreach (var option in kvp.Value)
-                {
-                    var existingOption = options.FirstOrDefault(o => o.Name == option.Name);
-
-                    if (existingOption == null)
-                    {
-                        options.Add(option);
-                    }
-                    else
-                    {
-                        options[options.IndexOf(existingOption)] = option;
-                    }
-                }
-
-                resourceLookup[kvp.Key] = options.ToArray();
+                Array.ForEach(a, v => resources[v.Name] = v);
             }
 
-            return resourceLookup.TryGetValue(moduleId, out var resources) ? resources : new AdditionalResource[0];
+            if (customResourceLookup.TryGetValue(moduleId, out var b))
+            {
+                Array.ForEach(b, v => resources[v.Name] = v);
+            }
+
+            return resources.Values.ToArray();
         }
 
         public Task<NewsArticleModel[]> GetLatestNewsArticlesAsync(int count = 10)
