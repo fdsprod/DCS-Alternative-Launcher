@@ -477,7 +477,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                         }
                         else
                         {
-                            Tracer.Warn($"Unable to find option value for {category.DisplayName} {option.Id}.  Using default value");
+                            Tracer.Warn($"Unable to find option value for {category.DisplayName} {option.Id}.  Using default value {option.Value}");
                         }
                     }
                 }

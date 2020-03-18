@@ -50,8 +50,6 @@ namespace DCS.Alternative.Launcher.ServiceModel
 
         public Container GetChildContainer()
         {
-            Tracer.Info("Creating child container.");
-
             return new Container(this);
         }
 
@@ -1594,8 +1592,6 @@ namespace DCS.Alternative.Launcher.ServiceModel
         private RegisterOptions RegisterInternal(Type registerType, string name, ObjectFactoryBase factory)
         {
             var typeRegistration = new TypeRegistration(registerType, name);
-
-            Tracer.Info($"Container Registration [{registerType.FullName}{(!string.IsNullOrWhiteSpace(name) ? ", name" : string.Empty)}].");
 
             return AddUpdateRegistration(typeRegistration, factory);
         }

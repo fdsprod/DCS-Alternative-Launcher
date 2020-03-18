@@ -28,8 +28,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         private readonly IContainer _container;
         private readonly ISettingsService _settingsService;
         private readonly IProfileSettingsService _profileSettingsService;
-        private readonly AutoexecLuaContext _autoexecContext;
-        private readonly OptionLuaContext _optionsContext;
+        private readonly List<Module> _modules = new List<Module>();
 
         public DcsWorldService(IContainer container)
         {
@@ -40,22 +39,29 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         public Task<Module[]> GetInstalledAircraftModulesAsync()
         {
+            if (_modules.Count > 0)
+            {
+                return Task.FromResult(_modules.ToArray());
+            }
+
             Tracer.Info("Searching DCS for installed modules.");
+
+            var settingsService = _container.Resolve<ISettingsService>();
+            var install = settingsService.SelectedInstall;
+            
+            if (!install.IsValidInstall)
+            {
+                Tracer.Info("Current install is invalid, aborting...");
+                return Task.FromResult(_modules.ToArray());
+            }
 
             return Task.Run(() =>
             {
-                var settingsService = _container.Resolve<ISettingsService>();
-                var modules = new List<Module>();
-                var install = settingsService.SelectedInstall;
-                var autoUpdateModules = new List<string>(install.Modules);
-
-                autoUpdateModules.Add("Su-25T");
-                autoUpdateModules.Add("TF-51D");
-
-                if (!install.IsValidInstall)
+                var autoUpdateModules = new List<string>(install.Modules)
                 {
-                    return modules.ToArray();
-                }
+                    "Su-25T",
+                    "TF-51D"
+                };
 
                 var aircraftFolders = Directory.GetDirectories(Path.Combine(install.Directory, "Mods//aircraft"));
 
@@ -111,14 +117,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 return;
                             }
 
-                            if (description.Keys.OfType<string>().All(k => k != "update_id"))
-                            {
-                                moduleId = description["fileMenuName"]?.ToString();
-                            }
-                            else
-                            {
-                                moduleId = description["update_id"]?.ToString();
-                            }
+                            moduleId = 
+                                description.Keys.OfType<string>().All(k => k != "update_id") 
+                                    ? description["fileMenuName"]?.ToString()
+                                    : description["update_id"]?.ToString();
 
                             var skinsTable = description["Skins"] as LuaTable;
 
@@ -134,8 +136,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 displayName = ((LuaTable) missionsTable[1])["name"].ToString();
                             }
                         });
-
-                        var fc3Added = false;
 
                         var makeFlyableAction = new Action<string, string, LuaTable, string>((a, b, c, d) =>
                         {
@@ -156,10 +156,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
-                                modules.Add(module);
+                                _modules.Add(module);
                                 Tracer.Debug($"Found module {displayName}.");
                             }
-                            else if (moduleId == "FC3" && !fc3Added)
+                            else if (moduleId == "FC3")
                             {
                                 //fc3Added = true;
 
@@ -168,14 +168,14 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     ModuleId = moduleId,
                                     DisplayName = displayName,
                                     IsFC3 = true,
-                                    FC3ModuleId = b,
+                                    FC3ModuleId = a,
                                     LoadingImagePath = Path.Combine(folder, skinsPath, "ME", "loading-window.png"),
                                     MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
                                     BaseFolderPath = folder,
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
-                                    ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
+                                    ViewportPrefix = moduleId.Replace(" ", "_").Replace("-", "_")
                                 };
-                                modules.Add(module);
+                                _modules.Add(module);
                                 Tracer.Debug($"Found module {displayName} {a}.");
                             }
                             else
@@ -198,7 +198,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     }
                 }
 
-                return modules.ToArray();
+                return _modules.ToArray();
             });
         }
 
