@@ -559,7 +559,8 @@
                                         <TextBlock Grid.Row="1"
                                                    Grid.Column="1"
                                                    FontFamily="{StaticResource Prototype}"
-                                                   Foreground="#FFCFCFCF">
+                                                   Foreground="#FFCFCFCF"
+                                                   Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}">
                                             <Run Text="{Binding SelectedInstall.Value.Variant, Mode=OneWay}" />
                                             <Run Text="( " />
                                             <Run Text="{Binding SelectedInstall.Value.DirectoryName, Mode=OneWay}" />

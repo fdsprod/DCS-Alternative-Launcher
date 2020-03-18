@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Services.Settings;
 using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services
 {
     public interface IProfileSettingsService
     {
-        SettingsProfile SelectedProfile { get; set; }
+        string SelectedProfileName { get; set; }
+
+        event EventHandler<SelectedProfileChangedEventArgs> SelectedProfileChanged;
 
         object GetAdvancedOptionDefaultValue(string category, string optionId);
 

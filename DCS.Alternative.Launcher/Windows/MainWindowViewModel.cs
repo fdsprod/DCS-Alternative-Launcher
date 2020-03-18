@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
+using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Navigation;
+using DCS.Alternative.Launcher.Storage.Profiles;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Windows
@@ -17,7 +19,10 @@ namespace DCS.Alternative.Launcher.Windows
         private readonly IContainer _container;
         private readonly List<string> _images = new List<string>();
         private readonly INavigationService _navigationService;
+        private readonly IProfileSettingsService _profileSettingsService;
+        private readonly ISettingsService _settingsService;
         private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
+        private readonly ApplicationEventRegistry _eventRegistry;
         private int _nextIndex;
 
         private string _supportedExtensions = "*.jpg,*.png";
@@ -25,13 +30,18 @@ namespace DCS.Alternative.Launcher.Windows
         public MainWindowViewModel(IContainer container)
         {
             _container = container;
+            _eventRegistry = container.Resolve<ApplicationEventRegistry>();
             _navigationService = container.Resolve<INavigationService>();
             _autoUpdateService = container.Resolve<IAutoUpdateService>();
+            _profileSettingsService = container.Resolve<IProfileSettingsService>();
+            _settingsService = container.Resolve<ISettingsService>();
+
+            _profileSettingsService.SelectedProfileChanged += OnSelectedProfileChanged;
 
             var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
             ShowPluginCommand.Subscribe(OnShowPlugin);
 
-            pluginNavigationSite.PluginRegistered += PluginNavigationSite_PluginRegistered;
+            pluginNavigationSite.PluginRegistered += OnPluginRegistered;
 
             var files = 
                 new List<string>(
@@ -65,9 +75,13 @@ namespace DCS.Alternative.Launcher.Windows
                 NextImage();
             }
 
+            SelectProfileCommand.Subscribe(OnSelectProfile);
+
             _autoUpdateCheckTimer.Interval = TimeSpan.FromMinutes(30);
             _autoUpdateCheckTimer.Tick += _autoUpdateCheckTimer_Tick;
             _autoUpdateCheckTimer.Start();
+
+            UpdateProfiles();
         }
 
         public ReactiveProperty<string> ImageUrl
@@ -84,6 +98,21 @@ namespace DCS.Alternative.Launcher.Windows
         {
             get;
         } = new ReactiveCommand<PluginNavigationButton>();
+
+        public ReactiveCollection<SettingsProfileModel> Profiles
+        {
+            get;
+        } = new ReactiveCollection<SettingsProfileModel>();
+
+        public ReactiveProperty<SettingsProfileModel> SelectedProfile
+        {
+            get;
+        } = new ReactiveProperty<SettingsProfileModel>();
+
+        public ReactiveCommand<SettingsProfileModel> SelectProfileCommand
+        {
+            get;
+        } = new ReactiveCommand<SettingsProfileModel>();
 
         private void _timer_Tick(object sender, EventArgs e)
         {
@@ -110,8 +139,24 @@ namespace DCS.Alternative.Launcher.Windows
                 _nextIndex = 0;
             }
         }
+        private void UpdateProfiles()
+        {
+            var profiles = SettingsProfileStorageAdapter.GetAll();
 
-        private void PluginNavigationSite_PluginRegistered(object sender, PluginRegisteredEventArgs e)
+            Profiles.Clear();
+
+            foreach (var profile in profiles)
+            {
+                var model = new SettingsProfileModel(profile.Name);
+                Profiles.Add(model);
+            }
+
+            var selectedProfileName = _profileSettingsService.SelectedProfileName;
+
+            SelectedProfile.Value = Profiles.FirstOrDefault(p => p.Name.Value == selectedProfileName) ?? Profiles.FirstOrDefault();
+        }
+        
+        private void OnPluginRegistered(object sender, PluginRegisteredEventArgs e)
         {
             PluginsButtons.Add(new PluginNavigationButton(e.Name, e.ViewType, e.ViewModelType));
         }
@@ -129,35 +174,30 @@ namespace DCS.Alternative.Launcher.Windows
 
             await _navigationService.NavigateAsync(plugin.ViewType, viewModel);
         }
-    }
 
-    public class PluginNavigationButton
-    {
-        public PluginNavigationButton(string name, Type viewType, Type viewModelType)
+        private void OnSelectedProfileChanged(object sender, Services.Settings.SelectedProfileChangedEventArgs e)
         {
-            Name = name;
-            ViewType = viewType;
-            ViewModelType = viewModelType;
+            if (SelectedProfile.Value?.Name.Value == e.ProfileName)
+            {
+                return;
+            }
+
+            var profile = Profiles.FirstOrDefault(p => p.Name.Value == e.ProfileName);
+
+            if (profile == null)
+            {
+                UpdateProfiles();
+            }
+            else
+            {
+                SelectedProfile.Value = profile;
+            }
         }
 
-        public string Name
+        private void OnSelectProfile(SettingsProfileModel value)
         {
-            get;
-        }
-
-        public ReactiveProperty<bool> IsSelected
-        {
-            get;
-        } = new ReactiveProperty<bool>();
-
-        public Type ViewType
-        {
-            get;
-        }
-
-        public Type ViewModelType
-        {
-            get;
+            SelectedProfile.Value = value;
+            _profileSettingsService.SelectedProfileName = value.Name.Value;
         }
     }
 }

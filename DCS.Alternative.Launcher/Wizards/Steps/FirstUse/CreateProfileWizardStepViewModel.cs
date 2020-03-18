@@ -97,7 +97,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 
             var profile = new SettingsProfile { Name = ProfileName.Value, ProfileType = profileType, Path = Path.Combine(ApplicationPaths.ProfilesPath, $"{ProfileName.Value}.json") };
 
-            _profileSettingsService.SelectedProfile = profile;
+            _profileSettingsService.SelectedProfileName = profile.Name;
             _profileSettingsService.SetValue(ProfileSettingsCategories.GameOptions, "options.VR.enabled", IsVirtualRealitySetup.Value);
 
             var primaryScreen = Screen.PrimaryScreen;

@@ -47,6 +47,7 @@ namespace DCS.Alternative.Launcher
         private IContainer _container;
         private MainWindow _mainWindow;
         private SplashScreen _splashScreen;
+        private ApplicationEventRegistry _eventRegistry;
 
         public App()
         {
@@ -173,7 +174,7 @@ namespace DCS.Alternative.Launcher
         {
             GeneralExceptionHandler.Instance.OnError(e.Exception);
         }
-
+        
         private async void App_Startup(object sender, StartupEventArgs e)
         {
             _splashScreen = new SplashScreen();
@@ -188,6 +189,7 @@ namespace DCS.Alternative.Launcher
 #endif
             Tracer.RegisterListener(new FileLogEventListener(Path.Combine(ApplicationPaths.StoragePath, "debug.log")));
 
+            _eventRegistry = new ApplicationEventRegistry();
             _container = new Container();
             _mainWindow = new MainWindow();
 
@@ -248,7 +250,7 @@ namespace DCS.Alternative.Launcher
             var profileSettingsService = _container.Resolve<IProfileSettingsService>();
 
             if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")) || 
-                profileSettingsService.SelectedProfile == null)
+                string.IsNullOrEmpty(profileSettingsService.SelectedProfileName))
             {
                 using (var container = _container.GetChildContainer())
                 {
@@ -420,10 +422,11 @@ namespace DCS.Alternative.Launcher
 
             Tracer.Info("Registering Services.");
 
+            _container.Register(_eventRegistry);
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
             _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
-            _container.Register<IProfileSettingsService, SettingsProfileService>().AsSingleton().UsingConstructor(() => new SettingsProfileService(_container));
+            _container.Register<IProfileSettingsService, ProfileSettingsService>().AsSingleton().UsingConstructor(() => new ProfileSettingsService(_container));
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
             _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
 

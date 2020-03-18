@@ -9,6 +9,7 @@ using DCS.Alternative.Launcher.Drawing;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
+using DCS.Alternative.Launcher.Storage.Profiles;
 using Reactive.Bindings;
 using WpfScreenHelper;
 
@@ -142,11 +143,6 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
             return base.InitializeAsync();
         }
 
-        public override bool Validate()
-        {
-            return base.Validate();
-        }
-
         public override bool Commit()
         {
             var screens = Screens.Where(s => s.IsSelected.Value).Select(s => s.Id).ToArray();
@@ -154,7 +150,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 
             _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, screens);
 
-            switch (_profileSettingsService.SelectedProfile.ProfileType)
+            var profiles = SettingsProfileStorageAdapter.GetAll();
+            var selectedProfile = profiles.FirstOrDefault(p => p.Name == _profileSettingsService.SelectedProfileName);
+
+            Guard.RequireIsNotNull(selectedProfile, nameof(selectedProfile));
+
+            switch (selectedProfile.ProfileType)
             {
                 case SettingsProfileType.SingleMonitor:
                     break;

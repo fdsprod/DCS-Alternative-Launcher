@@ -12,7 +12,7 @@ using WpfScreenHelper;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
-    public class SettingsProfileService : IProfileSettingsService
+    public class ProfileSettingsService : IProfileSettingsService
     {
         private readonly ISettingsService _settingsService;
         private readonly List<SettingsProfile> _profiles = new List<SettingsProfile>();
@@ -23,7 +23,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private DcsOptionsCategory[] _dcsOptions;
         private SettingsProfile _selectedProfile;
 
-        public SettingsProfileService(IContainer container)
+        public ProfileSettingsService(IContainer container)
         {
             _settingsService = container.Resolve<ISettingsService>();
 
@@ -35,18 +35,24 @@ namespace DCS.Alternative.Launcher.Services.Settings
             _selectedProfile = profile;
         }
 
-        public SettingsProfile SelectedProfile
+        public string SelectedProfileName
         {
-            get { return _selectedProfile; }
+            get { return _selectedProfile?.Name; }
             set
             {
-                if (_selectedProfile != value)
+                if (_selectedProfile.Name != value)
                 {
-                    _selectedProfile = value;
-                    _settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.LastProfileName, value.Name);
+                    var profile = _profiles.FirstOrDefault(p => p.Name == value) ?? _profiles.FirstOrDefault();
+
+                    _selectedProfile = profile;
+                    _settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.LastProfileName, profile.Name);
+
+                    OnSelectedProfileChanged();
                 }
             }
         }
+
+        public event EventHandler<SelectedProfileChangedEventArgs> SelectedProfileChanged;
 
         private void Load()
         {
@@ -386,6 +392,13 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private static string GetCategory(string id)
         {
             return OptionCategory.All.First(id.Contains);
+        }
+
+        private void OnSelectedProfileChanged()
+        {
+            var handler = SelectedProfileChanged;
+
+            handler?.Invoke(this, new SelectedProfileChangedEventArgs(SelectedProfileName));
         }
     }
 }

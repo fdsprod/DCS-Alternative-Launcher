@@ -5,8 +5,11 @@
         xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
         xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
+        xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
         Title="DCS Alternative Launcher"
         Width="1200"
         Height="760"
@@ -14,6 +17,7 @@
         MinHeight="760"
         MaxWidth="1200"
         MaxHeight="760"
+        d:DataContext="{d:DesignInstance windows:MainWindowViewModel}"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -153,12 +157,109 @@
                                                         <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                                                     </TextBlock.Effect>
                                                 </TextBlock>
-                                            </Button>           
+                                            </Button>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
 
-                                <Grid HorizontalAlignment="Right" />
+                                <Grid Margin="0,0,20,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Margin="0,11,10,0"
+                                               HorizontalAlignment="Right"
+                                               FontFamily="{StaticResource Prototype}"
+                                               FontSize="11"
+                                               Foreground="#FFFFFFFF"
+                                               Text="PROFILE:"
+                                               Visibility="{Binding Profiles, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}" />
+                                    <TextBlock Grid.Column="1"
+                                               Margin="0,10,0,0"
+                                               FontFamily="{StaticResource Prototype}"
+                                               Foreground="#FFCFCFCF"
+                                               Text="{Binding SelectedProfile.Value.Name.Value, Mode=OneWay}"
+                                               Visibility="{Binding Profiles, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}" />
+                                    <Menu Grid.Column="1"
+                                          Width="100"
+                                          Height="Auto"
+                                          MinWidth="75"
+                                          MaxWidth="75"
+                                          Margin="0,0,0,3"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Top"
+                                          Background="Transparent"
+                                          Visibility="{Binding Profiles, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}}">
+                                        <MenuItem Padding="0"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  Cursor="Hand"
+                                                  Foreground="#FFFFFFFF"
+                                                  Header="PROFILE:"
+                                                  ItemsSource="{Binding Profiles}"
+                                                  WindowChrome.IsHitTestVisibleInChrome="True">
+                                            <MenuItem.ItemContainerStyle>
+                                                <Style TargetType="MenuItem">
+                                                    <Setter Property="Command" Value="{Binding DataContext.SelectProfileCommand, RelativeSource={RelativeSource AncestorType={x:Type windows:MainWindow}}}" />
+                                                    <Setter Property="CommandParameter" Value="{Binding}" />
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                                    <Setter Property="Background" Value="#FF11171D" />
+                                                    <Setter Property="BorderBrush" Value="#FF11171D" />
+                                                    <Setter Property="Padding" Value="0" />
+                                                </Style>
+                                            </MenuItem.ItemContainerStyle>
+                                            <MenuItem.ItemTemplate>
+                                                <DataTemplate DataType="models:SettingsProfileModel">
+                                                    <Border>
+                                                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                                                   FontSize="11"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Name, Mode=OneWay}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </MenuItem.ItemTemplate>
+                                            <MenuItem.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock FontFamily="{StaticResource Prototype}"
+                                                                   FontSize="11"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <Path Grid.Column="1"
+                                                              Margin="5,2,0,0"
+                                                              Data="M 0 0 L 6 6 L 12 0 Z"
+                                                              Fill="#FFFFFFFF">
+                                                            <Path.Effect>
+                                                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                                            </Path.Effect>
+                                                        </Path>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </MenuItem.HeaderTemplate>
+                                        </MenuItem>
+                                    </Menu>
+                                </Grid>
 
                                 <Button x:Name="CloseButton"
                                         Width="16"
