@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+#if DEBUG
 using JetBrains.Annotations;
+#endif
 
 namespace DCS.Alternative.Launcher
 {

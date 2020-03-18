@@ -30,18 +30,8 @@
                             <Border Name="Border"
                                     Width="{TemplateBinding Width}"
                                     Height="{TemplateBinding Height}"
+                                    Background="#2F2F2F"
                                     BorderThickness="1">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <LinearGradientBrush.GradientStops>
-                                            <GradientStopCollection>
-                                                <GradientStop Offset="0.0" Color="{DynamicResource ControlLightColor}" />
-                                                <GradientStop Offset="1.0" Color="{DynamicResource ControlMediumColor}" />
-                                            </GradientStopCollection>
-                                        </LinearGradientBrush.GradientStops>
-                                    </LinearGradientBrush>
-
-                                </Border.Background>
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
                                 </Border.BorderBrush>
