@@ -176,7 +176,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
                                 modules.Add(module);
-                                Tracer.Debug($"Found module {displayName}.");
+                                Tracer.Debug($"Found module {displayName} {a}.");
                             }
                             else
                             {
