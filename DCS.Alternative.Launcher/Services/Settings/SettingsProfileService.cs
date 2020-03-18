@@ -53,6 +53,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         }
 
         public event EventHandler<SelectedProfileChangedEventArgs> SelectedProfileChanged;
+        public event EventHandler ProfilesChanged;
 
         private void Load()
         {
@@ -121,6 +122,34 @@ namespace DCS.Alternative.Launcher.Services.Settings
             mv?.Viewports.Clear();
 
             SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.ModuleViewportTemplates, moduleViewports.ToArray());
+        }
+
+        public void RemoveProfile(string profileName)
+        {
+            var profile = _profiles.FirstOrDefault(p => p.Name == profileName);
+
+            if (profile == null)
+            {
+                return;
+            }
+
+            _profiles.Remove(profile);
+
+            File.Delete(profile.Path);
+
+            OnProfilesChanged();
+
+            if (SelectedProfileName == profile.Name)
+            {
+                SelectedProfileName = _profiles.First().Name;
+            }
+        }
+
+        public void AddProfile(SettingsProfile profile)
+        {
+            _profiles.Add(profile);
+            SettingsProfileStorageAdapter.PersistAsync(profile).Wait();
+            OnProfilesChanged();
         }
 
         public void UpsertViewport(string name, string moduleId, Screen screen, Viewport viewport)
@@ -392,6 +421,12 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private static string GetCategory(string id)
         {
             return OptionCategory.All.First(id.Contains);
+        }
+
+        private void OnProfilesChanged()
+        {
+            var handler = ProfilesChanged;
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnSelectedProfileChanged()

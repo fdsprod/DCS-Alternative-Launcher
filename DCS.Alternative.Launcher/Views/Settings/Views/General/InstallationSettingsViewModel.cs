@@ -14,7 +14,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
     public class InstallationSettingsViewModel : SettingsCategoryViewModelBase
     {
         public InstallationSettingsViewModel(SettingsController controller)
-            : base("INSTALLATION", controller)
+            : base("DCS WORLD INSTALLATION", controller)
         {
             RemoveInstallationCommand = new ReactiveCommand(SelectedInstall.Select(i => i != null), false);
 

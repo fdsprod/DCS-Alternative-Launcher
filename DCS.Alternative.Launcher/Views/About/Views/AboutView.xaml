@@ -96,7 +96,7 @@
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Command="{Binding OpenUrlCommand}"
-                                    CommandParameter="https://discord.gg/fsd2Bxa"
+                                    CommandParameter="https://discord.gg/fbffJVj"
                                     Cursor="Hand">
                                 <Image RenderOptions.BitmapScalingMode="HighQuality"
                                        Source="/Images/discord.png"

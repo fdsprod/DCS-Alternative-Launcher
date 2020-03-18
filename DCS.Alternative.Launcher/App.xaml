@@ -21,6 +21,44 @@
                 <ResourceDictionary Source="/Themes/TextBox.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="HasDropShadow" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToolTip">
+                            <Border Name="Border"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    BorderThickness="1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0.0" Color="{DynamicResource ControlLightColor}" />
+                                                <GradientStop Offset="1.0" Color="{DynamicResource ControlMediumColor}" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
+                                </Border.BorderBrush>
+                                <ContentPresenter Margin="4"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Top" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasDropShadow" Value="true">
+                                    <Setter TargetName="Border" Property="CornerRadius" Value="4" />
+                                    <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <SolidColorBrush x:Key="BorderAccentBrush" Color="#FF5F5F5F" />
             <Color x:Key="MaterialDesignShadow">#AA000000</Color>
             <Style TargetType="{x:Type TextBlock}">

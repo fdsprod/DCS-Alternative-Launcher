@@ -10,7 +10,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
         private readonly Module _module;
 
         public ViewportOptionsViewModel(Module module, ViewportOption[] options, SettingsController controller)
-            : base($"{module.DisplayName} VIEWPORT OPTIONS", controller)
+            : base($"    {module.DisplayName} VIEWPORT OPTIONS", controller)
         {
             _module = module;
 

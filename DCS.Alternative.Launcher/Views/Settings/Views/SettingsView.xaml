@@ -8,6 +8,7 @@
              xmlns:dcs="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Dcs"
              xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
+             xmlns:general1="clr-namespace:DCS.Alternative.Launcher.Views.Settings.Views.General"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
@@ -46,20 +47,23 @@
 
                         <DataTemplate x:Key="TabItemHeaderTemplate">
                             <Border Background="#01000000">
-                                <TextBlock
-                                    Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontFamily="{StaticResource Prototype}"
-                                    FontSize="14"
-                                    Foreground="#FFFFFFFF"
-                                    Text="{Binding Name}"
-                                    TextAlignment="Right" />
+                                <TextBlock Margin="{Binding IsHitTestVisible, Converter={StaticResource BooleanToThicknessConverter}}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource Prototype}"
+                                           FontSize="14"
+                                           Foreground="#FFFFFFFF"
+                                           Text="{Binding Name}"
+                                           TextAlignment="Right" />
                             </Border>
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type general:InstallationSettingsViewModel}">
                             <controls:InstallationControl Margin="30" />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type general1:ProfileSettingsViewModel}">
+                            <controls:ProfilesControl Margin="30" />
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type viewports:ViewportSettingsViewModel}">

@@ -601,5 +601,10 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 return controller.SelectedTemplate;
             }
         }
+
+        public void RemoveProfile(string profileName)
+        {
+            _profileSettingsService.RemoveProfile(profileName);
+        }
     }
 }

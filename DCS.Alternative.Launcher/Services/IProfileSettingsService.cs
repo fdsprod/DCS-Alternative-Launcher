@@ -12,6 +12,8 @@ namespace DCS.Alternative.Launcher.Services
 
         event EventHandler<SelectedProfileChangedEventArgs> SelectedProfileChanged;
 
+        event EventHandler ProfilesChanged;
+
         object GetAdvancedOptionDefaultValue(string category, string optionId);
 
         Option[] GetAdvancedOptions(string category);
@@ -45,5 +47,9 @@ namespace DCS.Alternative.Launcher.Services
         Dictionary<string, ViewportOption[]> GetAllViewportOptions();
 
         void ClearViewports(string name, string moduleId);
+
+        void RemoveProfile(string profileName);
+
+        void AddProfile(SettingsProfile profile);
     }
 }

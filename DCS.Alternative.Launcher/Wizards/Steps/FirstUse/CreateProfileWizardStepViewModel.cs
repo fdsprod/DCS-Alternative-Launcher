@@ -46,8 +46,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
         {
             get;
         } = new ReactiveProperty<bool>();
-
-
+        
         public override bool Validate()
         {
             if (string.IsNullOrEmpty(ProfileName.Value))
@@ -97,6 +96,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 
             var profile = new SettingsProfile { Name = ProfileName.Value, ProfileType = profileType, Path = Path.Combine(ApplicationPaths.ProfilesPath, $"{ProfileName.Value}.json") };
 
+            _profileSettingsService.AddProfile(profile);
             _profileSettingsService.SelectedProfileName = profile.Name;
             _profileSettingsService.SetValue(ProfileSettingsCategories.GameOptions, "options.VR.enabled", IsVirtualRealitySetup.Value);
 

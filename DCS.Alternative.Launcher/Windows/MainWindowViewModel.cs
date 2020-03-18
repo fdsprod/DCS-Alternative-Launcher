@@ -37,6 +37,7 @@ namespace DCS.Alternative.Launcher.Windows
             _settingsService = container.Resolve<ISettingsService>();
 
             _profileSettingsService.SelectedProfileChanged += OnSelectedProfileChanged;
+            _profileSettingsService.ProfilesChanged += OnProfilesChanged;
 
             var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
             ShowPluginCommand.Subscribe(OnShowPlugin);
@@ -83,7 +84,7 @@ namespace DCS.Alternative.Launcher.Windows
 
             UpdateProfiles();
         }
-
+        
         public ReactiveProperty<string> ImageUrl
         {
             get;
@@ -139,6 +140,7 @@ namespace DCS.Alternative.Launcher.Windows
                 _nextIndex = 0;
             }
         }
+
         private void UpdateProfiles()
         {
             var profiles = SettingsProfileStorageAdapter.GetAll();
@@ -192,6 +194,10 @@ namespace DCS.Alternative.Launcher.Windows
             {
                 SelectedProfile.Value = profile;
             }
+        }
+        private void OnProfilesChanged(object sender, EventArgs e)
+        {
+            UpdateProfiles();
         }
 
         private void OnSelectProfile(SettingsProfileModel value)

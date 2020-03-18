@@ -22,7 +22,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports
     public class ViewportSettingsViewModel : SettingsCategoryViewModelBase
     {
         public ViewportSettingsViewModel(SettingsController controller)
-            : base("VIEWPORTS", controller)
+            : base("    VIEWPORTS", controller)
         {
             RemoveModuleViewportCommand = new ReactiveCommand(SelectedModuleViewport.Select(i => i != null), false);
             RemoveModuleViewportCommand.Subscribe(OnRemoveModuleViewport);
