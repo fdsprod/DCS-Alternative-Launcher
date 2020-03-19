@@ -81,9 +81,26 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                Directory.Delete(Path.Combine(install.SavedGamesPath, "fxo"), true);
-                Directory.Delete(Path.Combine(install.SavedGamesPath, "metashaders"), true);
-                Directory.Delete(Path.Combine(install.SavedGamesPath, "metashaders2"), true);
+                var path = Path.Combine(install.SavedGamesPath, "fxo");
+
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+
+                path = Path.Combine(install.SavedGamesPath, "metashaders");
+
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+                
+                path = Path.Combine(install.SavedGamesPath, "metashaders2");
+
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
             }
             catch (Exception e)
             {
