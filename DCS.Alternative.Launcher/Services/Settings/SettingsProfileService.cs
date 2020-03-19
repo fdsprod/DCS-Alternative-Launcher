@@ -40,7 +40,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
             get { return _selectedProfile?.Name; }
             set
             {
-                if (_selectedProfile.Name != value)
+                if (_selectedProfile?.Name != value)
                 {
                     var profile = _profiles.FirstOrDefault(p => p.Name == value) ?? _profiles.FirstOrDefault();
 

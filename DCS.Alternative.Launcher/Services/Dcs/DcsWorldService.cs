@@ -28,22 +28,24 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         private readonly IContainer _container;
         private readonly ISettingsService _settingsService;
         private readonly IProfileSettingsService _profileSettingsService;
-        private readonly List<Module> _modules = new List<Module>();
+        private readonly Dictionary<string, Module> _modules = new Dictionary<string, Module>();
 
         public DcsWorldService(IContainer container)
         {
             _container = container;
             _settingsService = container.Resolve<ISettingsService>();
             _profileSettingsService = container.Resolve<IProfileSettingsService>();
+            _profileSettingsService.SelectedProfileChanged += _profileSettingsService_SelectedProfileChanged;
+        }
+
+        private void _profileSettingsService_SelectedProfileChanged(object sender, Settings.SelectedProfileChangedEventArgs e)
+        {
+            Tracer.Info("Profile was changed, clearing module cache.");
+            _modules.Clear();
         }
 
         public Task<Module[]> GetInstalledAircraftModulesAsync()
         {
-            if (_modules.Count > 0)
-            {
-                return Task.FromResult(_modules.ToArray());
-            }
-
             Tracer.Info("Searching DCS for installed modules.");
 
             var settingsService = _container.Resolve<ISettingsService>();
@@ -52,7 +54,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             if (!install.IsValidInstall)
             {
                 Tracer.Info("Current install is invalid, aborting...");
-                return Task.FromResult(_modules.ToArray());
+                return Task.FromResult(_modules.Values.ToArray());
             }
 
             return Task.Run(() =>
@@ -144,6 +146,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                 displayName = displayName.Split('_')[0];
                             }
 
+                            if (_modules.ContainsKey($"{moduleId}_{a}"))
+                            {
+                                return;
+                            }
+
                             if (!string.IsNullOrEmpty(moduleId) && autoUpdateModules.Contains(moduleId) && moduleId != "FC3")
                             {
                                 var module = new Module
@@ -156,7 +163,9 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
                                     ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
-                                _modules.Add(module);
+
+                                _modules.Add($"{moduleId}_{a}", module);
+
                                 Tracer.Debug($"Found module {displayName}.");
                             }
                             else if (moduleId == "FC3")
@@ -175,7 +184,9 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
                                     ViewportPrefix = moduleId.Replace(" ", "_").Replace("-", "_")
                                 };
-                                _modules.Add(module);
+
+                                _modules.Add($"{moduleId}_{a}", module);
+
                                 Tracer.Debug($"Found module {displayName} {a}.");
                             }
                             else
@@ -198,7 +209,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     }
                 }
 
-                return _modules.ToArray();
+                return _modules.Values.ToArray();
             });
         }
 

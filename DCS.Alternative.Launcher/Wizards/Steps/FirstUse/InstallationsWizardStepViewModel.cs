@@ -174,7 +174,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 
                 foreach (var installation in installations)
                 {
-                    if (Installations.All(i => i.ToString() != installation.ToString()))
+                    if (Installations.All(i => i.ConcreteInstall.ToString() != installation.ToString()))
                     {
                         Installations.Add(new InstallLocationModel(installation));
                         addedInstallations.Add(installation.Directory);

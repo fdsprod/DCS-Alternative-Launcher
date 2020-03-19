@@ -124,6 +124,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public override async Task ActivateAsync()
         {
+            await base.ActivateAsync();
+
             try
             {
                 if (SelectedCategory.Value != null)
@@ -136,7 +138,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 Tracer.Error(e);
             }
 
-            await base.ActivateAsync();
         }
     }
 }
