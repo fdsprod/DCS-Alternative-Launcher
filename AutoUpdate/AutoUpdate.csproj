@@ -16,6 +16,10 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Fonts\Prototype.ttf" />
     <None Remove="Images\Background.png" />

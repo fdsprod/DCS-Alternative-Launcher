@@ -234,11 +234,11 @@ namespace DCS.Alternative.Launcher
             {
                 if (MessageBoxEx.Show($"Update version {result.UpdateVersion} is available.{Environment.NewLine}{Environment.NewLine}Click YES to install immediately{Environment.NewLine}Click NO to install next time you start the launcher.", "UPDATE AVAILABLE", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _splashScreen.Status = "Installing update...";
+                    _splashScreen.Status = "Downloading update...";
 
                     await result.UpdatingTask;
 
-                    Process.Start(ResourceAssembly.Location);
+                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
                     Current.Shutdown();
                 }
             }

@@ -21,7 +21,10 @@ namespace AutoUpdate
                 Directory.Delete(updateDirectory, true);
             }
 
-            Process.Start(exePath);
+            Process.Start(new ProcessStartInfo(exePath)
+            {
+                UseShellExecute = true
+            });
         }
         
         private static void RecursiveUpdate(string sourceDirectory, string destDirectory)

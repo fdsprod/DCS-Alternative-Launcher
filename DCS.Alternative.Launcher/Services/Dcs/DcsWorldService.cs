@@ -444,7 +444,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                         var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
 
-                        var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\")";
+                        var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\", \"{viewport.ViewportName}\")";
 
                         if (!contents.Contains(code))
                         {
