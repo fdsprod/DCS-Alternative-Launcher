@@ -177,7 +177,7 @@
                                                Foreground="#FFFFFFFF"
                                                Text="PROFILE" />
                                     <TextBlock Grid.Column="1"
-                                               Margin="0,10,0,0"
+                                               Margin="0,0,0,0"
                                                FontFamily="{StaticResource Prototype}"
                                                Foreground="#FFCFCFCF"
                                                Text="{Binding SelectedProfile.Value.Name.Value, Mode=OneWay}"

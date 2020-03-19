@@ -78,6 +78,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
                 if(install == null)
                 {
+                    MessageBoxEx.Show("Could not find a valid DCS World installation.");
                     return;
                 }
 
@@ -106,6 +107,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             {
                 GeneralExceptionHandler.Instance.OnError(e);
             }
+
+            MessageBoxEx.Show("Shader cache has been cleaned.");
         }
 
         private void OnDcsProcessExited(object sender, EventArgs e)

@@ -67,16 +67,23 @@
     </Window.Resources>
     <Grid Margin="20">
         <Border Effect="{StaticResource MaterialDesignShadowDepth3}">
-            <Border.Background>
-                <RadialGradientBrush GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                    <GradientStop Offset="0" Color="#FF353C53" />
-                    <GradientStop Offset="0.7" Color="#FF030606" />
-                </RadialGradientBrush>
-            </Border.Background>
+            <Border x:Name="PART_Background"
+                    Background="#FF282B30"
+                    BorderBrush="{StaticResource BorderAccentBrush}"
+                    BorderThickness="1"
+                    Effect="{StaticResource MaterialDesignShadowDepth3}">
+                <Border Opacity="0.5">
+                    <Border.Background>
+                        <ImageBrush AlignmentX="Right"
+                                    ImageSource="/Images/SplashBackground.png"
+                                    Stretch="UniformToFill" />
+                    </Border.Background>
+                </Border>
+            </Border>
         </Border>
 
         <fluentWpf:AcrylicPanel NoiseOpacity="0"
-                                Target="{x:Static windows:MainWindow.AcrylicSource}"
+                                Target="{Binding ElementName=PART_Background}"
                                 TintColor="#33000000"
                                 TintOpacity="1">
             <Grid>

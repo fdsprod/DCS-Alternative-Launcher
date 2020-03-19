@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:data="clr-namespace:DCS.Alternative.Launcher.Data"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Select Module"
         Width="500"
@@ -120,8 +121,7 @@
                                           MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                           SnapsToDevicePixels="True">
                                         <ScrollViewer SnapsToDevicePixels="True">
-                                            <StackPanel IsItemsHost="True"
-                                                        KeyboardNavigation.DirectionalNavigation="Contained" />
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                         </ScrollViewer>
                                     </Grid>
                                 </Border>
@@ -132,10 +132,8 @@
                                     <VisualState x:Name="MouseOver" />
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox"
-                                                                          Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)">
-                                                <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{StaticResource DisabledForegroundColor}" />
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource DisabledForegroundColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -143,15 +141,11 @@
                                 <VisualStateGroup x:Name="EditStates">
                                     <VisualState x:Name="Editable">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox"
-                                                                           Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="0"
-                                                                        Value="{x:Static Visibility.Visible}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentSite"
-                                                                           Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="0"
-                                                                        Value="{x:Static Visibility.Hidden}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentSite" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -196,108 +190,122 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.Background>
-            <RadialGradientBrush GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                <GradientStop Offset="0" Color="#FF353C53" />
-                <GradientStop Offset="0.7" Color="#FF030606" />
-            </RadialGradientBrush>
-        </Grid.Background>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Margin="20,20,20,15"
-                       VerticalAlignment="Center"
-                       FontFamily="{StaticResource Prototype}"
-                       FontSize="20"
-                       Foreground="#FFFFFFFF"
-                       Text="SELECT VIEWPORT" />
-            <ComboBox Grid.Row="1"
-                      Margin="20"
-                      Background="Transparent"
-                      Foreground="#FFFFFFFF"
-                      ItemsSource="{Binding Viewports, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                      MaxDropDownHeight="400"
-                      SelectedItem="{Binding SelectedViewport, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="62" Cursor="Hand">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="75" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+        <Border Effect="{StaticResource MaterialDesignShadowDepth3}">
+            <Border x:Name="PART_Background"
+                    Background="#FF282B30"
+                    BorderBrush="{StaticResource BorderAccentBrush}"
+                    BorderThickness="1"
+                    Effect="{StaticResource MaterialDesignShadowDepth3}">
+                <Border Opacity="0.5">
+                    <Border.Background>
+                        <ImageBrush AlignmentX="Right"
+                                    ImageSource="/Images/SplashBackground.png"
+                                    Stretch="UniformToFill" />
+                    </Border.Background>
+                </Border>
+            </Border>
+        </Border>
+        <fluentWpf:AcrylicPanel NoiseOpacity="0"
+                                Target="{Binding ElementName=PART_Background}"
+                                TintColor="#33000000"
+                                TintOpacity="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Margin="20,20,20,15"
+                           VerticalAlignment="Center"
+                           FontFamily="{StaticResource Prototype}"
+                           FontSize="20"
+                           Foreground="#FFFFFFFF"
+                           Text="SELECT VIEWPORT" />
+                <ComboBox Grid.Row="1"
+                          Margin="20"
+                          Background="Transparent"
+                          Foreground="#FFFFFFFF"
+                          ItemsSource="{Binding Viewports, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                          MaxDropDownHeight="400"
+                          SelectedItem="{Binding SelectedViewport, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="62" Cursor="Hand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                            <Image Grid.RowSpan="3"
-                                   VerticalAlignment="Center"
-                                   Source="{Binding ImageUrl.Value, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=400}"
-                                   Stretch="UniformToFill" />
+                                <Image Grid.RowSpan="3"
+                                       VerticalAlignment="Center"
+                                       Source="{Binding ImageUrl.Value, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=400}"
+                                       Stretch="UniformToFill" />
 
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="1"
-                                       Margin="10,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Bottom"
-                                       FontSize="20"
-                                       Text="{Binding Name.Value}">
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           Margin="10,5"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Bottom"
+                                           FontSize="20"
+                                           Text="{Binding Name.Value}">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="2" ShadowDepth="1" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Border Grid.Row="2"
+                        BorderBrush="#FF2F2F2F"
+                        BorderThickness="0,1,0,0">
+                    <StackPanel Margin="20"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal">
+                        <Button x:Name="btnOK"
+                                Width="75"
+                                Height="30"
+                                Margin="0,0,20,0"
+                                Padding="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Background="#FF11AF11"
+                                Click="BtnOK_Click"
+                                IsEnabled="{Binding IsValid.Value}">
+                            <TextBlock FontFamily="{StaticResource Prototype}"
+                                       FontSize="16"
+                                       Foreground="#FFFFFFFF"
+                                       Text="OK">
                                 <TextBlock.Effect>
-                                    <DropShadowEffect BlurRadius="2" ShadowDepth="1" />
+                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                                 </TextBlock.Effect>
                             </TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Border Grid.Row="2"
-                    BorderBrush="#FF2F2F2F"
-                    BorderThickness="0,1,0,0">
-                <StackPanel Margin="20"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Orientation="Horizontal">
-                    <Button x:Name="btnOK"
-                            Width="75"
-                            Height="30"
-                            Margin="0,0,20,0"
-                            Padding="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Background="#FF11AF11"
-                            Click="BtnOK_Click"
-                            IsEnabled="{Binding IsValid.Value}">
-                        <TextBlock FontFamily="{StaticResource Prototype}"
-                                   FontSize="16"
-                                   Foreground="#FFFFFFFF"
-                                   Text="OK">
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                            </TextBlock.Effect>
-                        </TextBlock>
-                    </Button>
-                    <Button x:Name="btnCancel"
-                            Width="75"
-                            Height="30"
-                            Padding="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Background="#6F1C00C6"
-                            Click="BtnCancel_Click">
-                        <TextBlock FontFamily="{StaticResource Prototype}"
-                                   FontSize="16"
-                                   Foreground="#FFFFFFFF"
-                                   Text="Cancel">
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                            </TextBlock.Effect>
-                        </TextBlock>
-                    </Button>
-                </StackPanel>
-            </Border>
-        </Grid>
+                        </Button>
+                        <Button x:Name="btnCancel"
+                                Width="75"
+                                Height="30"
+                                Padding="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Background="#6F1C00C6"
+                                Click="BtnCancel_Click">
+                            <TextBlock FontFamily="{StaticResource Prototype}"
+                                       FontSize="16"
+                                       Foreground="#FFFFFFFF"
+                                       Text="Cancel">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </fluentWpf:AcrylicPanel>
     </Grid>
 </Window>
