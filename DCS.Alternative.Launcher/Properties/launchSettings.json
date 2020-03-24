@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DCS.Alternative.Launcher": {
+      "commandName": "Project",
+      "commandLineArgs": "--no-analytics"
+    }
+  }
+}
