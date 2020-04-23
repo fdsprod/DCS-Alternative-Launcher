@@ -96,6 +96,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             _Minor = v.Minor;
             _Build = v.Build;
             _Revision = v.Revision;
+            _Oops = v.Oops;
         }
 
         public DcsVersion()
@@ -112,6 +113,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             _Minor = version._Minor;
             _Build = version._Build;
             _Revision = version._Revision;
+            _Oops = version._Oops;
         }
 
         public object Clone()
@@ -138,6 +140,11 @@ namespace DCS.Alternative.Launcher.DomainObjects
         public int Revision
         {
             get { return _Revision; }
+        }
+
+        public int Oops
+        {
+            get { return _Oops; }
         }
 
         public short MajorRevision
@@ -174,6 +181,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
                 _Minor != value._Minor ? (_Minor > value._Minor ? 1 : -1) :
                 _Build != value._Build ? (_Build > value._Build ? 1 : -1) :
                 _Revision != value._Revision ? (_Revision > value._Revision ? 1 : -1) :
+                _Oops != value._Oops ? (_Oops > value._Oops ? 1 : -1) :
                 0;
         }
 
@@ -189,7 +197,8 @@ namespace DCS.Alternative.Launcher.DomainObjects
                     _Major == obj._Major &&
                     _Minor == obj._Minor &&
                     _Build == obj._Build &&
-                    _Revision == obj._Revision);
+                    _Revision == obj._Revision &&
+                    _Oops == obj._Oops);
         }
 
         public override int GetHashCode()
@@ -200,9 +209,10 @@ namespace DCS.Alternative.Launcher.DomainObjects
             int accumulator = 0;
 
             accumulator |= (_Major & 0x0000000F) << 28;
-            accumulator |= (_Minor & 0x000000FF) << 20;
-            accumulator |= (_Build & 0x000000FF) << 12;
-            accumulator |= (_Revision & 0x00000FFF);
+            accumulator |= (_Minor & 0x000000FF) << 24;
+            accumulator |= (_Build & 0x000000FF) << 16;
+            accumulator |= (_Revision & 0x00000FFF) << 8;
+            accumulator |= (_Oops & 0x0000FFFF);
 
             return accumulator;
         }
@@ -247,7 +257,8 @@ namespace DCS.Alternative.Launcher.DomainObjects
         private int DefaultFormatFieldCount =>
             _Build == -1 ? 2 :
             _Revision == -1 ? 3 :
-            4;
+            _Oops == -1 ? 4 :
+            5;
 
         private StringBuilder ToCachedStringBuilder(int fieldCount)
         {
@@ -295,6 +306,26 @@ namespace DCS.Alternative.Launcher.DomainObjects
                     sb.Append(_Build);
                     sb.Append('.');
                     sb.Append(_Revision);
+                    return sb;
+                }
+
+                if (_Oops == -1)
+                {
+                    throw new ArgumentException(nameof(fieldCount));
+                }
+
+                if (fieldCount == 5)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(_Major);
+                    sb.Append('.');
+                    sb.Append(_Minor);
+                    sb.Append('.');
+                    sb.Append(_Build);
+                    sb.Append('.');
+                    sb.Append(_Revision);
+                    sb.Append('.');
+                    sb.Append(_Oops);
                     return sb;
                 }
 
