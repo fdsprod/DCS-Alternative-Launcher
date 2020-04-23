@@ -23,7 +23,25 @@ namespace DCS.Alternative.Launcher
     }
     public static class NativeMethods
     {
+
         private const int MONITOR_DEFAULTTONEAREST = 2;
+
+        public static string GetKnownFolderPath(Guid guid)
+        {
+            IntPtr ptr;
+
+            if (SHGetKnownFolderPath(guid, 0, IntPtr.Zero, out ptr) == 0)
+            {
+                var s = Marshal.PtrToStringUni(ptr);
+                Marshal.FreeCoTaskMem(ptr);
+                return s;
+            }
+
+            return "";
+        }
+
+        [DllImport("shell32.dll")]
+        private static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out IntPtr pszPath);
 
         [DllImport("user32.dll")]
         internal static extern IntPtr MonitorFromWindow(IntPtr hwnd, MonitorOpts dwFlags);

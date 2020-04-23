@@ -53,12 +53,14 @@ namespace DCS.Alternative.Launcher
             get { return Path.Combine(SavedGamesPath, "Config", "autoexec.cfg"); }
         }
 
+        private static readonly Guid SavedGamesGuid = Guid.Parse("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4");
+
         public string SavedGamesPath
         {
             get
             {
                 var variantFilePath = GetPath("dcs_variant.txt");
-                var userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var savedGamesPath = NativeMethods.GetKnownFolderPath(SavedGamesGuid);
                 var variant = string.Empty;
 
                 if (File.Exists(variantFilePath))
@@ -67,9 +69,10 @@ namespace DCS.Alternative.Launcher
                     variant = $".{contents}";
                 }
 
-                return Path.Combine(userProfilePath, "Saved Games", "DCS" + variant);
+                return Path.Combine(savedGamesPath, "DCS" + variant);
             }
         }
+
         public string UpdaterConfigPath
         {
             get { return GetPath(_updaterConfigPath); }
