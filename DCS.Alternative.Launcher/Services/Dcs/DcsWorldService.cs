@@ -161,7 +161,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
                                     BaseFolderPath = folder,
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
-                                    ViewportPrefix = moduleId.ToString().Replace(" ", "_").Replace("-", "_")
                                 };
 
                                 _modules.Add($"{moduleId}_{a}", module);
@@ -182,7 +181,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                                     MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
                                     BaseFolderPath = folder,
                                     IconPath = Path.Combine(folder, skinsPath, "icon.png"),
-                                    ViewportPrefix = moduleId.Replace(" ", "_").Replace("-", "_")
                                 };
 
                                 _modules.Add($"{moduleId}_{a}", module);
@@ -213,7 +211,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-        public Task<ReadOnlyDictionary<string, Version>> GetLatestVersionsAsync()
+        public Task<ReadOnlyDictionary<string, DcsVersion>> GetLatestVersionsAsync()
         {
             return Task.Run(async () =>
             {
@@ -229,7 +227,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     var nodes = doc.DocumentNode.SelectNodes("//*[contains(@class,'well')]").ToArray();
                     var node = nodes.FirstOrDefault();
 
-                    var versions = new Dictionary<string, Version>();
+                    var versions = new Dictionary<string, DcsVersion>();
 
                     if (node != null)
                     {
@@ -237,7 +235,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             var innerText = h2.InnerText;
                             var split = innerText.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                            var version = Version.Parse(split.LastOrDefault() ?? string.Empty);
+                            var version = DcsVersion.Parse(split.LastOrDefault() ?? string.Empty);
                             var branch = innerText.ToLower().Contains("stable") ? "stable" : "openbeta";
 
                             Tracer.Info($"Found {branch} {version}");
@@ -245,7 +243,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         }
                     }
 
-                    return new ReadOnlyDictionary<string, Version>(versions);
+                    return new ReadOnlyDictionary<string, DcsVersion>(versions);
                 }
             });
         }
@@ -303,9 +301,9 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         var article = new NewsArticleModel();
                         var dayMonth = divs[0].SelectSingleNode("div[1]/div[1]").InnerText.Trim();
                         var year = divs[0].SelectSingleNode("div[1]/div[2]").InnerText.Trim();
-                        var title = divs[0].SelectSingleNode("div[2]/div[1]/h3[1]/a[1]").InnerText.Trim();
+                        var title = (divs[0].SelectSingleNode("div[2]/div[1]/h3[1]/a[1]"))?.InnerText?.Trim() ?? string.Empty;
                         var summary = divs[0].SelectSingleNode("div[2]/div[2]/div[1]").InnerText.Trim();
-                        var url = "https://www.digitalcombatsimulator.com" + divs[0].SelectSingleNode("div[2]/a[1]").Attributes["href"].Value.Trim();
+                        var url = "https://www.digitalcombatsimulator.com" + ((divs[0].SelectSingleNode("div[2]/a[1]"))?.Attributes["href"]?.Value ?? string.Empty).Trim();
 
                         article.Title.Value = title;
                         article.Summary.Value = summary;
@@ -443,12 +441,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         }
 
                         var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
-
-                        var code = $"try_find_assigned_viewport(\"{module.ViewportPrefix}_{viewport.ViewportName}\", \"{viewport.ViewportName}\")";
+                        var code = $"try_find_assigned_viewport(\"{template.ViewportPrefix}_{viewport.ViewportName}\", \"{viewport.ViewportName}\")";
 
                         if (!contents.Contains(code))
                         {
-                            Tracer.Info($"Adding viewport name assignment code to {viewport.RelativeInitFilePath}");
+                            Tracer.Info($"Adding viewport name assignment code \"{code}\" to {viewport.RelativeInitFilePath}");
 
                             if (contents.Contains(originalCode))
                             {
@@ -460,6 +457,10 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                             }
 
                             isChanged = true;
+                        }
+                        else
+                        {
+                            Tracer.Warn($"Unable to write to {viewport.RelativeInitFilePath}, Original code \"{originalCode}\" not found.  Viewport {viewport.ViewportName} may not work.");
                         }
 
                         if (isChanged)

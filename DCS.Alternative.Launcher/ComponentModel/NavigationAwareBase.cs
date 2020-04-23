@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reactive.Concurrency;
+using System.Threading;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Services.Navigation;
 
@@ -6,14 +8,25 @@ namespace DCS.Alternative.Launcher.ComponentModel
 {
     public abstract class NavigationAwareBase : INavigationAware, IActivate, IDeactivate
     {
+        private readonly SemaphoreSlim _asyncLock = new SemaphoreSlim(1);
+
         private bool _isInitialized;
 
         public virtual async Task ActivateAsync()
         {
-            if (!_isInitialized)
+            try
             {
-                await InitializeAsync();
-                _isInitialized = true;
+                await _asyncLock.WaitAsync();
+
+                if (!_isInitialized)
+                {
+                    await InitializeAsync();
+                    _isInitialized = true;
+                }
+            }
+            finally
+            {
+                _asyncLock.Release();
             }
 
             IsActivated = true;

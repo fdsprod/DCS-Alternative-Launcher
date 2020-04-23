@@ -321,7 +321,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                     realBounds.Union(screen.Bounds);
 
                     sb.AppendLine($"--{viewport.RelativeInitFilePath}");
-                    sb.AppendLine($"{module.ViewportPrefix}_{viewport.ViewportName} =");
+                    sb.AppendLine($"{template.ViewportPrefix}_{viewport.ViewportName} =");
                     sb.AppendLine("{");
                     sb.AppendLine($"    x = displays[{displayIndex}].x + {x},");
                     sb.AppendLine($"    y = displays[{displayIndex}].y + {y},");

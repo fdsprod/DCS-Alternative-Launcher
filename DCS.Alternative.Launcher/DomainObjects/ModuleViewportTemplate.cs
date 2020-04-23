@@ -22,6 +22,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             set;
         }
 
+        public string ViewportPrefix
+        {
+            get;
+            set;
+        }
+
         public bool IsHeliosTemplate
         {
             get;

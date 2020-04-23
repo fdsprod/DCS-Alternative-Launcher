@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
+using DCS.Alternative.Launcher.DomainObjects;
 using Newtonsoft.Json;
 
 namespace DCS.Alternative.Launcher
@@ -81,16 +82,16 @@ namespace DCS.Alternative.Launcher
         {
             get { return new DirectoryInfo(Directory).Name; }
         }
-        public Version Version
+        public DcsVersion Version
         {
             get
             {
                 if (_config == null)
                 {
-                    return new Version(0, 0, 0, 0);
+                    return new DcsVersion(0, 0, 0, 0, 0);
                 }
 
-                return Version.TryParse(_config.Version, out var result) ? result : new Version(0, 0, 0, 0);
+                return DcsVersion.TryParse(_config.Version, out var result) ? result : new DcsVersion(0, 0, 0, 0, 0);
             }
         }
 

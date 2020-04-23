@@ -4,12 +4,6 @@ namespace DCS.Alternative.Launcher.DomainObjects
 {
     public class Module
     {
-        public string ViewportPrefix
-        {
-            get;
-            set;
-        }
-
         public string BaseFolderPath
         {
             get;

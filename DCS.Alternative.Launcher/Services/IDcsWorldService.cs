@@ -14,7 +14,7 @@ namespace DCS.Alternative.Launcher.Services
 
         Task<NewsArticleModel[]> GetLatestNewsArticlesAsync(int count = 10);
 
-        Task<ReadOnlyDictionary<string, Version>> GetLatestVersionsAsync();
+        Task<ReadOnlyDictionary<string, DcsVersion>> GetLatestVersionsAsync();
 
         Task PatchViewportsAsync();
 
