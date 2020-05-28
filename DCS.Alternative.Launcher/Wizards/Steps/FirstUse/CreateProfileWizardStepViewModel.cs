@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using DCS.Alternative.Launcher.Analytics;
+using System.Reactive.Linq;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.DomainObjects;
@@ -14,23 +14,23 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 {
     public class CreateProfileWizardStepViewModel : WizardStepBase
     {
-        private readonly IProfileSettingsService _profileSettingsService;
+        private readonly IProfileService _profileSettingsService;
 
         public CreateProfileWizardStepViewModel(IContainer container)
             : base(container)
         {
-            _profileSettingsService = container.Resolve<IProfileSettingsService>();
+            _profileSettingsService = container.Resolve<IProfileService>();
         }
 
         public ReactiveProperty<string> ProfileName
         {
             get;
-        } = new ReactiveProperty<string>("");
+        } = new ReactiveProperty<string>("Default");
 
         public ReactiveProperty<bool> IsSingleDisplaySetup
         {
             get;
-        } = new ReactiveProperty<bool>();
+        } = new ReactiveProperty<bool>(true);
 
         public ReactiveProperty<bool> IsHeliosSetup
         {
@@ -94,34 +94,31 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
                 profileType = SettingsProfileType.Helios;
             }
 
-            var profile = new SettingsProfile { Name = ProfileName.Value, ProfileType = profileType, Path = Path.Combine(ApplicationPaths.ProfilesPath, $"{ProfileName.Value}.json") };
+            var profile = new Profile { Name = ProfileName.Value, ProfileType = profileType };
 
             _profileSettingsService.AddProfile(profile);
             _profileSettingsService.SelectedProfileName = profile.Name;
-            _profileSettingsService.SetValue(ProfileSettingsCategories.GameOptions, "options.VR.enabled", IsVirtualRealitySetup.Value);
+            _profileSettingsService.SetValue(ProfileCategories.GameOptions, "options.VR.enabled", IsVirtualRealitySetup.Value);
 
             var primaryScreen = Screen.PrimaryScreen;
             
-            switch (profileType)
-            {
-                case SettingsProfileType.SingleMonitor:
-                    Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.ViewportSetup, "single");
-                    _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new []{primaryScreen.DeviceName});
-                    break;
-                case SettingsProfileType.Helios:
-                case SettingsProfileType.SimPit:
-                    Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.ViewportSetup, profileType == SettingsProfileType.SimPit ? "simpit" : "helios");
-                    Controller.Steps.Add(new SelectGameViewportScreensStepViewModel(Container));
-                    Controller.Steps.Add(new SelectUIViewportScreensStepViewModel(Container));
-                    Controller.Steps.Add(new SelectDeviceViewportScreensStepViewModel(Container));
-                    break;
-                case SettingsProfileType.VirtualReality:
-                    Tracker.Instance.SendEvent(AnalyticsCategories.Configuration, AnalyticsEvents.ViewportSetup, "vr");
-                    _profileSettingsService.SetValue(ProfileSettingsCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new[] { primaryScreen.DeviceName });
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            //switch (profileType)
+            //{
+            //    case SettingsProfileType.SingleMonitor:
+            //        _profileSettingsService.SetValue(Viewport.Viewports, SettingsKeys.DeviceViewportsDisplays, new []{primaryScreen.DeviceName});
+            //        break;
+            //    case SettingsProfileType.Helios:
+            //    case SettingsProfileType.SimPit:
+            //        Controller.Steps.Add(new SelectGameViewportScreensStepViewModel(Container));
+            //        Controller.Steps.Add(new SelectUIViewportScreensStepViewModel(Container));
+            //        Controller.Steps.Add(new SelectDeviceViewportScreensStepViewModel(Container));
+            //        break;
+            //    case SettingsProfileType.VirtualReality:
+            //        _profileSettingsService.SetValue(ProfileCategories.Viewports, SettingsKeys.DeviceViewportsDisplays, new[] { primaryScreen.DeviceName });
+            //        break;
+            //    default:
+            //        throw new ArgumentOutOfRangeException();
+            //}
 
             return base.Commit();
         }

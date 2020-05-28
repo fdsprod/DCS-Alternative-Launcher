@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-             xmlns:local="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:firstUse="clr-namespace:DCS.Alternative.Launcher.Wizards.Steps.FirstUse"
+             xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DataContext="{d:DesignInstance firstUse:CreateProfileWizardStepViewModel}"
              d:DesignHeight="768"
              d:DesignWidth="1024"
@@ -105,11 +104,11 @@
                         <TextBlock Margin="25,0,25,10"
                                    FontFamily="{StaticResource Prototype}"
                                    FontSize="24"
-                                   Text="Let's create your default settings profile." />
+                                   Text="Let's create your first settings profile." />
                         <TextBlock Grid.Row="1"
                                    Margin="25,0"
                                    FontFamily="{StaticResource Prototype}"
-                                   Text="Settings profiles are used to define a set of options you want to use when launch DCS World.   For example, you could have a profile for playing on your Monitor, another for VR and another for using Helios.  You will be able to define more settings profiles later, for now let's name the default profile. Ex: Default, VR, Desktop, Helios, etc."
+                                   Text="Settings profiles are used to define a set of options you want to use when launch DCS World.   For example, you could have a profile for playing on your Monitor, another for VR and another for using Helios, one to launch open beta, one for stable, etc.  You will be able to define more settings profiles later, for now let's name the default profile. Ex: Default, VR, Simpit, Helios, etc."
                                    TextWrapping="Wrap" />
 
                         <Grid Grid.Row="2" Margin="25,10,0,10">

@@ -7,9 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.ServiceModel.Syndication;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Lua;
@@ -26,19 +24,20 @@ namespace DCS.Alternative.Launcher.Services.Dcs
     public class DcsWorldService : IDcsWorldService
     {
         private readonly IContainer _container;
-        private readonly ISettingsService _settingsService;
-        private readonly IProfileSettingsService _profileSettingsService;
+        private readonly IProfileService _profileService;
         private readonly Dictionary<string, Module> _modules = new Dictionary<string, Module>();
 
         public DcsWorldService(IContainer container)
         {
             _container = container;
-            _settingsService = container.Resolve<ISettingsService>();
-            _profileSettingsService = container.Resolve<IProfileSettingsService>();
-            _profileSettingsService.SelectedProfileChanged += _profileSettingsService_SelectedProfileChanged;
+            _profileService = container.Resolve<IProfileService>();
+
+            var eventRegistry = container.Resolve<ApplicationEventRegistry>();
+
+            eventRegistry.CurrentProfileChanged += OnSelectedProfileChanged;
         }
 
-        private void _profileSettingsService_SelectedProfileChanged(object sender, Settings.SelectedProfileChangedEventArgs e)
+        private void OnSelectedProfileChanged(object sender, Settings.SelectedProfileChangedEventArgs e)
         {
             Tracer.Info("Profile was changed, clearing module cache.");
             _modules.Clear();
@@ -48,9 +47,8 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         {
             Tracer.Info("Searching DCS for installed modules.");
 
-            var settingsService = _container.Resolve<ISettingsService>();
-            var install = settingsService.SelectedInstall;
-            
+            var install = _profileService.GetSelectedInstall();
+
             if (!install.IsValidInstall)
             {
                 Tracer.Info("Current install is invalid, aborting...");
@@ -77,7 +75,6 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                         lua.DoString(
                             @"function _(s) return s end
-                                function _(s) return s end
                                 function mount_vfs_liveries_path() end
                                 function mount_vfs_texture_path() end
                                 function mount_vfs_sound_path() end
@@ -329,12 +326,12 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 "https://www.youtube.com/feeds/videos.xml?channel_id=UCHa9LMylydkT0T3qSzAVrlw");
         }
 
-        public Task WriteOptionsAsync(bool isVr)
+        public Task WriteOptionsAsync()
         {
             return Task.Run(() =>
             {
-                var install = _settingsService.SelectedInstall;
-                var categories = _profileSettingsService.GetDcsOptions();
+                var install = _profileService.GetSelectedInstall();
+                var categories = _profileService.GetDcsOptions();
                 var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 
                 if (!File.Exists(optionsFile))
@@ -363,20 +360,12 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                         {
                             foreach (var option in category.Options)
                             {
-                                if (!_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.GameOptions, option.Id, out var value))
+                                if (!_profileService.TryGetValue<object>(ProfileCategories.GameOptions, option.Id, out var value))
                                 {
                                     continue;
                                 }
 
-                                if (option.Id == "options.VR.enabled")
-                                {
-                                    context.SetValue(category.Id, option.Id, isVr);
-                                }
-                                else
-                                {
-                                    //Tracker.Instance.SendEvent(AnalyticsCategories.DcsOptions, $"{category.Id}_{option.Id}", value.ToString());
-                                    context.SetValue(category.Id, option.Id, value);
-                                }
+                                context.SetValue(category.Id, option.Id, value);
                             }
                         }
 
@@ -397,87 +386,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-        public Task PatchViewportsAsync()
-        {
-            return Task.Run(async () =>
-            {
-                var install = _settingsService.SelectedInstall;
-                var viewportTemplates = _profileSettingsService.GetViewportTemplates();
-                var modules = await GetInstalledAircraftModulesAsync();
-
-                foreach (var template in viewportTemplates)
-                {
-                    var module = modules.FirstOrDefault(m => m.ModuleId == template.ModuleId);
-
-                    if (module == null)
-                    {
-                        Tracer.Warn($"Could not patch viewport for module {template.ModuleId} because the module is not installed.");
-                        return;
-                    }
-
-                    Tracker.Instance.SendEvent(AnalyticsCategories.Viewports, "patching_viewports", module.ModuleId);
-
-                    foreach (var viewport in template.Viewports)
-                    {
-                        if (string.IsNullOrEmpty(viewport.RelativeInitFilePath))
-                        {
-                            continue;
-                        }
-
-                        if (!install.FileExists(viewport.RelativeInitFilePath))
-                        {
-                            Tracer.Warn($"Module {template.ModuleId}: Unable to patch viewport(s) [{viewport.ViewportName} in file {viewport.RelativeInitFilePath}.");
-                            continue;
-                        }
-
-                        var contents = install.ReadAllText(viewport.RelativeInitFilePath);
-                        var isChanged = false;
-
-                        if (!contents.Contains("dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")"))
-                        {
-                            Tracer.Info($"Adding ViewportHandling code to {viewport.RelativeInitFilePath}");
-                            contents += Environment.NewLine + "dofile(LockOn_Options.common_script_path..\"ViewportHandling.lua\")" + Environment.NewLine;
-                            isChanged = true;
-                        }
-
-                        var originalCode = $"try_find_assigned_viewport(\"{viewport.ViewportName}\")";
-                        var code = $"try_find_assigned_viewport(\"{template.ViewportPrefix}_{viewport.ViewportName}\", \"{viewport.ViewportName}\")";
-
-                        if (!contents.Contains(code))
-                        {
-                            Tracer.Info($"Adding viewport name assignment code \"{code}\" to {viewport.RelativeInitFilePath}");
-
-                            if (contents.Contains(originalCode))
-                            {
-                                contents = contents.Replace(originalCode, code);
-                            }
-                            else
-                            {
-                                contents += Environment.NewLine + code + Environment.NewLine;
-                            }
-
-                            isChanged = true;
-                        }
-                        else
-                        {
-                            Tracer.Warn($"Unable to write to {viewport.RelativeInitFilePath}, Original code \"{originalCode}\" not found.  Viewport {viewport.ViewportName} may not work.");
-                        }
-
-                        if (isChanged)
-                        {
-                            Tracer.Info($"Saving {viewport.RelativeInitFilePath}");
-                            install.WriteAllText(viewport.RelativeInitFilePath, contents);
-                        }
-                    }
-                }
-            });
-        }
-
         public Task UpdateAdvancedOptionsAsync()
         {
             return Task.Run(() =>
             {
-                var install = _settingsService.SelectedInstall;
+                var install = _profileService.GetSelectedInstall();
 
                 File.WriteAllText(install.AutoexecCfg, "");
 
@@ -536,55 +449,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             });
         }
 
-        public async Task WriteViewportOptionsAsync()
-        {
-            var install = _settingsService.SelectedInstall;
-            var modules = await GetInstalledAircraftModulesAsync();
-
-            foreach (var module in modules)
-            {
-                var options = _profileSettingsService.GetViewportOptionsByModuleId(module.ModuleId);
-
-                foreach (var option in options)
-                {
-                    if (!_profileSettingsService.TryGetValue<object>(string.Format(ProfileSettingsCategories.ViewportOptionsFormat, module.ModuleId), option.Id, out var value))
-                    {
-                        continue;
-                    }
-
-                    var filePath = Path.Combine(install.Directory, option.FilePath);
-
-                    if (!File.Exists(filePath))
-                    {
-                        Tracer.Warn($"Unable to find file \"{filePath}\", skipping output of option {option.Id} for module {module.ModuleId}.");
-                        continue;
-                    }
-
-                    var fileContents = File.ReadAllText(filePath);
-                    var regex = new Regex(option.Regex);
-                    var match = regex.Match(fileContents);
-
-                    if (!match.Success)
-                    {
-                        Tracer.Warn($"Unable to make a match on regex {option.Regex} for file \"{filePath}\", skipping output of option {option.Id} for module {module.ModuleId}.");
-                        continue;
-                    }
-
-                    fileContents = fileContents.Remove(match.Index, match.Length);
-                    fileContents = fileContents.Insert(match.Index, value is bool ? value.ToString().ToLower() : value.ToString());
-
-                    File.WriteAllText(filePath, fileContents);
-                }
-            }
-        }
-
         private void WriteOptions(string category, AutoexecLuaContext context)
         {
-            var options = _profileSettingsService.GetAdvancedOptions(category);
+            var options = _profileService.GetAdvancedOptions(category);
 
             foreach (var option in options)
             {
-                if (_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.AdvancedOptions, option.Id, out var value))
+                if (_profileService.TryGetValue<object>(ProfileCategories.AdvancedOptions, option.Id, out var value))
                 {
                     context.SetValue(option.Id, value);
                     context.Save(option.Id);
@@ -594,13 +465,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
         private void WriteRangedOptions(string category, AutoexecLuaContext context)
         {
-            var options = _profileSettingsService.GetAdvancedOptions(category);
+            var options = _profileService.GetAdvancedOptions(category);
 
             foreach (var range in CameraRangeSettings.All)
             {
                 foreach (var option in options)
                 {
-                    if (!_profileSettingsService.TryGetValue<object>(ProfileSettingsCategories.AdvancedOptions, option.Id, out var value))
+                    if (!_profileService.TryGetValue<object>(ProfileCategories.AdvancedOptions, option.Id, out var value))
                     {
                         continue;
                     }
@@ -624,18 +495,11 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                     .Select(Convert.ToDouble)
                     .ToArray();
 
-                for (var i = 0; i < values.Length; i++)
-                {
-                    var v = values[i];
-                    Tracker.Instance.SendEvent(AnalyticsCategories.DcsAdvancedOptions, $"{id}_{i}", v.ToString());
-                }
-
                 sb.AppendLine($"{id} = {{ {string.Join(",", values.Select(i => i.ToString()).ToArray())} }}");
             }
             else
             {
                 var valueStr = value is bool ? value.ToString().ToLower() : value.ToString();
-                Tracker.Instance.SendEvent(AnalyticsCategories.DcsAdvancedOptions, $"{id}", valueStr);
                 sb.AppendLine($"{id} = {valueStr}");
             }
         }

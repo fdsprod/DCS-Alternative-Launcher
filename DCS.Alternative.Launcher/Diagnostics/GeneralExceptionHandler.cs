@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 
 namespace DCS.Alternative.Launcher.Diagnostics
@@ -16,7 +15,6 @@ namespace DCS.Alternative.Launcher.Diagnostics
 
         public async void OnError(Exception e)
         {
-            Tracker.Instance.SendException(e.ToString(), false);
             Tracer.Error(e);
 
             await OnErrorOverrideAsync(e);
@@ -24,8 +22,6 @@ namespace DCS.Alternative.Launcher.Diagnostics
 
         public Task OnErrorAsync(Exception e)
         {
-            Tracker.Instance.SendEvent(AnalyticsCategories.Exceptions, e.GetType().Name, e.Message);
-            Tracker.Instance.SendException(e.ToString(), false);
             Tracer.Error(e);
 
             return OnErrorOverrideAsync(e);

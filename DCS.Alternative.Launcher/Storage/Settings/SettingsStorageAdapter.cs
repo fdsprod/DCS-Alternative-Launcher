@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Storage.Settings.Strategies;
 
 namespace DCS.Alternative.Launcher.Storage.Settings
 {
@@ -10,12 +11,12 @@ namespace DCS.Alternative.Launcher.Storage.Settings
     {
         public static Dictionary<string, Dictionary<string, object>> GetAll()
         {
-            return OfflineSettingsStorageProxy.GetAll();
+            return OfflineSettingsStorageStrategy.GetAll();
         }
 
         public static Task PersistAsync(Dictionary<string, Dictionary<string, object>> settings)
         {
-            return OfflineSettingsStorageProxy.PersistAsync(settings);
+            return OfflineSettingsStorageStrategy.PersistAsync(settings);
         }
     }
 }

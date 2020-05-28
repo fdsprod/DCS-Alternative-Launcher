@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced;
 using DCS.Alternative.Launcher.Plugins.Settings.Views.General;
-using DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
+using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Views.Settings.Views.General;
 using Reactive.Bindings;
 
@@ -17,18 +19,22 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
     public class SettingsViewModel : NavigationAwareBase
     {
         private readonly IContainer _container;
+        private readonly ApplicationEventRegistry _eventRegistry;
         private readonly SettingsController _controller;
-        private readonly ISettingsService _settingsService;
-        private readonly IProfileSettingsService _profileSettingsService;
+        private readonly ILauncherSettingsService _settingsService;
+        private readonly IProfileService _profileSettingsService;
 
         public SettingsViewModel(IContainer container)
         {
             _container = container;
+            _eventRegistry = container.Resolve<ApplicationEventRegistry>();
             _controller = container.Resolve<SettingsController>();
-            _settingsService = container.Resolve<ISettingsService>();
-            _profileSettingsService = container.Resolve<IProfileSettingsService>();
+            _settingsService = container.Resolve<ILauncherSettingsService>();
+            _profileSettingsService = container.Resolve<IProfileService>();
 
-            _profileSettingsService.SelectedProfileChanged += OnSelectedProfileChanged;
+            var eventRegistry = container.Resolve<ApplicationEventRegistry>();
+
+            eventRegistry.CurrentProfileChanged += OnSelectedProfileChanged;
         }
 
         public ReactiveCollection<SettingsCategoryViewModelBase> Categories
@@ -45,12 +51,15 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             try
             {
-                for (var i = Categories.Count - 1; i >= 3; i--)
+                using (e.GetDeferral())
                 {
-                    Categories.RemoveAt(i);
-                }
+                    for (var i = Categories.Count - 1; i >= 3; i--)
+                    {
+                        Categories.RemoveAt(i);
+                    }
 
-                await PopulateProfileSettingsAsync();
+                    await PopulateProfileSettingsAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -61,7 +70,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         protected override async Task InitializeAsync()
         {
             Categories.Add(new CategoryHeaderSettingsViewModel("APPLICATION SETTINGS"));
-            Categories.Add(new InstallationSettingsViewModel(_controller));
             Categories.Add(new ProfileSettingsViewModel(_controller));
 
             await PopulateProfileSettingsAsync();
@@ -75,6 +83,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             var optionsCategories = _controller.GetDcsOptionCategories();
 
             Categories.Add(new CategoryHeaderSettingsViewModel($"PROFILE SETTINGS ({profileName})"));
+            Categories.Add(new InstallationSettingsViewModel(_controller));
 
             if (optionsCategories.Length > 0)
             {
@@ -86,18 +95,17 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
                 Categories.Add(new DcsOptionCategoryViewModel("    " + category.DisplayName.ToUpper(), category.Id, _controller));
             }
 
-            Categories.Add(new CategoryHeaderSettingsViewModel($"    VIEWPORTS"));
-            Categories.Add(new ViewportSettingsViewModel(_controller));
+            var eventArgs = new PopulateSettingsEventArgs(_controller);
 
-            var modules = await _controller.GetInstalledAircraftModulesAsync();
+            await _eventRegistry.InvokePopulateSettingsAsync(this, eventArgs);
 
-            foreach (var module in modules)
+            foreach (var (category, models) in eventArgs.Settings)
             {
-                var options = _controller.GetViewportOptions(module.ModuleId);
+                Categories.Add(new CategoryHeaderSettingsViewModel($"    {category}"));
 
-                if (options.Length > 0)
+                foreach(var model in models)
                 {
-                    Categories.Add(new ViewportOptionsViewModel(module, options, _controller));
+                    Categories.Add(model);
                 }
             }
 
@@ -140,4 +148,31 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         }
     }
+
+    public class PopulateSettingsEventArgs : DeferredEventArgs
+    {
+        internal readonly Dictionary<string, List<SettingsCategoryViewModelBase>> Settings = new Dictionary<string, List<SettingsCategoryViewModelBase>>();
+
+        public PopulateSettingsEventArgs(SettingsController controller)
+        {
+            Controller = controller;
+        }
+
+        public SettingsController Controller
+        {
+            get;
+        }
+
+        public void AddCategory(string parentCategory, SettingsCategoryViewModelBase categoryModel)
+        {
+            if (!Settings.TryGetValue(parentCategory, out var categories))
+            {
+                categories = new List<SettingsCategoryViewModelBase>();
+                Settings[parentCategory] = categories;
+            }
+
+            categories.Add(categoryModel);
+        }
+    }
+
 }

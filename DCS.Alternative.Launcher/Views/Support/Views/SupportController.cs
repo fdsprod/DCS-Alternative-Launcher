@@ -6,11 +6,11 @@ namespace DCS.Alternative.Launcher.Plugins.Support.Views
     public class SupportController
     {
         private readonly IDcsWorldService _dcsWorldService;
-        private readonly ISettingsService _settingsService;
+        private readonly ILauncherSettingsService _settingsService;
 
         public SupportController(IContainer container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _settingsService = container.Resolve<ILauncherSettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
         }
     }

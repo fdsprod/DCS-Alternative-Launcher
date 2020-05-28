@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using DCS.Alternative.Launcher.Analytics;
 
 namespace DCS.Alternative.Launcher.Lua
 {

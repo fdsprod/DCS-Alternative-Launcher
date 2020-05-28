@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.Plugins.Settings.Views;
-using DCS.Alternative.Launcher.Plugins.Settings.Views.General;
 using DCS.Alternative.Launcher.Storage.Profiles;
 using DCS.Alternative.Launcher.Windows.FirstUse;
 using DCS.Alternative.Launcher.Wizards;
@@ -68,7 +64,7 @@ namespace DCS.Alternative.Launcher.Views.Settings.Views.General
             {
                 Profiles.Clear();
 
-                var profiles = SettingsProfileStorageAdapter.GetAll();
+                var profiles = ProfileStorageAdapter.GetAll();
 
                 foreach (var profile in profiles)
                 {
@@ -86,7 +82,7 @@ namespace DCS.Alternative.Launcher.Views.Settings.Views.General
         {
             try
             {
-                using (var container = Controller.GetChildContainer())
+                using (var container = SettingsController.GetChildContainer())
                 {
                     container.Register<WizardController>().AsSingleton();
 
@@ -115,7 +111,7 @@ namespace DCS.Alternative.Launcher.Views.Settings.Views.General
         {
             try
             {
-                var profiles = SettingsProfileStorageAdapter.GetAll();
+                var profiles = ProfileStorageAdapter.GetAll();
 
                 if (profiles.Count() == 1)
                 {
@@ -133,7 +129,7 @@ namespace DCS.Alternative.Launcher.Views.Settings.Views.General
                 if (MessageBoxEx.Show($"Are you sure you want to remove the {profile.Name.Value} profile?", "Remove Profile", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
                 {
                     Profiles.Remove(profile);
-                    Controller.RemoveProfile(profile.Name.Value);
+                    SettingsController.RemoveProfile(profile.Name.Value);
 
                     UpdateProfiles();
                 }

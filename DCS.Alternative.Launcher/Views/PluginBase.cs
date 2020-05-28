@@ -1,4 +1,6 @@
-﻿using DCS.Alternative.Launcher.ServiceModel;
+﻿using System.Threading.Tasks;
+using System.Windows;
+using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
 namespace DCS.Alternative.Launcher.Plugins
@@ -25,24 +27,32 @@ namespace DCS.Alternative.Launcher.Plugins
             get;
         }
 
-        public virtual void OnLoad(IContainer container)
+        public virtual ResourceDictionary ApplicationResources
+        {
+            get;
+        } 
+
+        public virtual async Task LoadAsync(IContainer container)
         {
             var site = container.Resolve<IPluginNavigationSite>();
 
-            RegisterContainerItems(container);
-            RegisterUISiteItems(site);
+            await RegisterContainerItemsAsync(container);
+            await RegisterUISiteItemsAsync(site);
         }
 
-        public virtual void OnUnload(IContainer container)
+        public virtual Task UnloadAsync(IContainer container)
         {
+            return Task.CompletedTask;
         }
 
-        protected virtual void RegisterContainerItems(IContainer container)
+        protected virtual Task RegisterContainerItemsAsync(IContainer container)
         {
+            return Task.CompletedTask;
         }
 
-        protected virtual void RegisterUISiteItems(IPluginNavigationSite site)
+        protected virtual Task RegisterUISiteItemsAsync(IPluginNavigationSite site)
         {
+            return Task.CompletedTask;
         }
     }
 }

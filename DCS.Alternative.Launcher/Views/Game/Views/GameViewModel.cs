@@ -25,7 +25,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         private readonly IContainer _container;
         private readonly GameController _controller;
         private readonly IDcsWorldService _dcsWorldService;
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileService _profileService;
 
         private DispatcherTimer _checkPlayingTimer;
 
@@ -36,7 +36,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             _container = container;
             _controller = container.Resolve<GameController>();
 
-            _settingsService = _container.Resolve<ISettingsService>();
+            _profileService = _container.Resolve<IProfileService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
 
             IsUpdateAvailable =
@@ -61,8 +61,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             CheckForUpdatesCommand.Subscribe(OnCheckForUpdates);
             ShowNewsArticleCommand.Subscribe(OnShowNewsArticle);
             CleanShadersCommand.Subscribe(OnCleanShaders);
-
-            IsVREnabled.Subscribe(OnIsVREnabledChanged);
 
             _checkPlayingTimer = new DispatcherTimer();
             _checkPlayingTimer.Interval = TimeSpan.FromSeconds(1);
@@ -144,17 +142,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             get;
         } = new ReactiveProperty<bool>();
-
-        public ReactiveProperty<bool> IsVREnabled
-        {
-            get;
-        } = new ReactiveProperty<bool>();
-
-        public ReactiveCollection<InstallLocation> Installations
-        {
-            get;
-        } = new ReactiveCollection<InstallLocation>();
-
+        
         public ReactiveProperty<InstallLocation> SelectedInstall
         {
             get;
@@ -279,7 +267,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private async Task CheckForUpdatesAsync()
         {
-            var install = _settingsService.SelectedInstall;
+            var install = _profileService.GetSelectedInstall();
 
             if (install?.IsValidInstall ?? false)
             {
@@ -334,14 +322,9 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         public override Task ActivateAsync()
         {
-            Installations.Clear();
+            var install = _profileService.GetSelectedInstall();
 
-            foreach (var install in _settingsService.GetInstallations())
-            {
-                Installations.Add(install);
-            }
-
-            SelectedInstall.Value = _settingsService.SelectedInstall;
+            SelectedInstall.Value = install;
 
             CheckDcsStatus();
 
@@ -350,8 +333,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         protected override async Task InitializeAsync()
         {
-            IsVREnabled.Value = _settingsService.GetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, false);
-
             SafeAsync.Run(() => Task.Run(async () =>
             {
                 IsLoading.Value = true;
@@ -401,7 +382,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                 }
 
                 window.WindowState = WindowState.Minimized;
-                await _controller.LaunchDcsAsync(IsVREnabled.Value);
+                await _controller.LaunchDcsAsync();
             }
             catch (Exception e)
             {
@@ -445,11 +426,6 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             {
                 window.WindowState = WindowState.Normal;
             }
-        }
-
-        private void OnIsVREnabledChanged(bool value)
-        {
-            _settingsService.SetValue(SettingsCategories.LaunchOptions, SettingsKeys.IsVREnabled, value);
         }
     }
 }

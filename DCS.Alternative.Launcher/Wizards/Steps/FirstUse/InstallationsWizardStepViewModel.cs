@@ -18,12 +18,12 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 {
     public class InstallationsWizardStepViewModel : WizardStepBase
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileService _profileService;
 
         public InstallationsWizardStepViewModel(IContainer container)
             : base(container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _profileService = container.Resolve<IProfileService>();
 
             AddInstallationCommand.Subscribe(OnAddInstallation);
             DetectInstallationsCommand.Subscribe(OnDetectInstallations);
@@ -68,7 +68,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
             {
                 Installations.Clear();
 
-                foreach (var install in _settingsService.GetInstallations())
+                foreach (var install in _profileService.GetInstallations())
                 {
                     Installations.Add(new InstallLocationModel(install));
                 }
@@ -112,8 +112,8 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
         {
             var defaultInstallation = Installations.First(i => i.IsDefault.Value);
 
-            _settingsService.AddInstalls(Installations.Select(i => i.ConcreteInstall.Directory).ToArray());
-            _settingsService.SelectedInstall = defaultInstallation.ConcreteInstall;
+            _profileService.AddInstalls(Installations.Select(i => i.ConcreteInstall.Directory).ToArray());
+            _profileService.SetSelectedInstall(defaultInstallation.ConcreteInstall);
 
             return base.Commit();
         }
@@ -136,7 +136,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
 
                     Installations.Add(new InstallLocationModel(installation));
 
-                    _settingsService.AddInstalls(installation.Directory);
+                    _profileService.AddInstalls(installation.Directory);
                 }
             }
             catch (Exception e)
@@ -157,7 +157,8 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
                 }
 
                 Installations.Remove(installation);
-                _settingsService.RemoveInstalls(installation.ConcreteInstall.Directory);
+
+                _profileService.RemoveInstalls(installation.ConcreteInstall.Directory);
             }
             catch (Exception e)
             {
@@ -181,10 +182,7 @@ namespace DCS.Alternative.Launcher.Wizards.Steps.FirstUse
                     }
                 }
 
-                foreach (var directory in addedInstallations)
-                {
-                    _settingsService.AddInstalls(directory);
-                }
+                _profileService.AddInstalls(addedInstallations.ToArray());
             }
             catch (Exception e)
             {

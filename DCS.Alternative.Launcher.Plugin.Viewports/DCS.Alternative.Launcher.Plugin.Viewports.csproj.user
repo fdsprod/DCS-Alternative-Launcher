@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Page Update="Controls\ViewportsSettingsControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewportResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\ViewportOptionsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\SnipViewportWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Wizards\FirstUse\SelectDeviceViewportScreensStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Wizards\FirstUse\SelectGameViewportScreensStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Wizards\FirstUse\SelectInitialViewportsWizardStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Wizards\FirstUse\SelectUIViewportScreensStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Wizards\Settings\SelectViewportsWizardStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

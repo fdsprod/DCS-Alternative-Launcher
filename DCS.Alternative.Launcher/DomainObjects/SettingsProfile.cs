@@ -1,48 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reactive.Linq;
-using DCS.Alternative.Launcher.Storage.Profiles;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public class SettingsProfile
+    public class Profile
     {
         private readonly object _syncRoot = new object();
-        private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
-
-        public SettingsProfile()
-        {
-            _isDirty.Throttle(TimeSpan.FromMilliseconds(300)).Subscribe(x => { Save(); });
-        }
-
-        private void Save()
-        {
-            lock (_syncRoot)
-            {
-                if (string.IsNullOrEmpty(Path))
-                {
-                    return;
-                }
-
-                if (!_isDirty.Value)
-                {
-                    return;
-                }
-
-                _isDirty.Value = false;
-
-                SettingsProfileStorageAdapter.PersistAsync(this).Wait();
-            }
-        }
 
         public string Name
         {
             get;
             set;
         }
+
+        [JsonIgnore]
+        internal ReactiveProperty<bool> IsDirty
+        {
+            get;
+        } = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
 
         public SettingsProfileType ProfileType
         {
@@ -56,13 +33,6 @@ namespace DCS.Alternative.Launcher.DomainObjects
             set;
         } = new Dictionary<string, Dictionary<string, object>>();
 
-        [JsonIgnore]
-        public string Path
-        {
-            get;
-            set;
-        }
-        
         public bool TryGetValue<T>(string category, string key, out T value)
         {
             lock (_syncRoot)
@@ -125,7 +95,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
                 }
 
                 keyLookup[key] = value;
-                _isDirty.Value = true;
+                SetDirty();
             }
         }
 
@@ -136,16 +106,16 @@ namespace DCS.Alternative.Launcher.DomainObjects
                 if (Settings.TryGetValue(category, out var keyLookup))
                 {
                     Settings[category].Remove(key);
-                    _isDirty.Value = true;
+                    SetDirty();
                 }
             }
         }
 
-        public void SetDirty()
+        internal void SetDirty()
         {
             lock (_syncRoot)
             {
-                _isDirty.Value = true;
+                IsDirty.Value = true;
             }
         }
     }

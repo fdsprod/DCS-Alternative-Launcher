@@ -16,13 +16,9 @@ namespace DCS.Alternative.Launcher.Services
 
         Task<ReadOnlyDictionary<string, DcsVersion>> GetLatestVersionsAsync();
 
-        Task PatchViewportsAsync();
-
         Task UpdateAdvancedOptionsAsync();
 
-        Task WriteOptionsAsync(bool isVREnabled);
-
-        Task WriteViewportOptionsAsync();
+        Task WriteOptionsAsync();
         
         AdditionalResource[] GetAdditionalResourcesByModule(string moduleId);
 

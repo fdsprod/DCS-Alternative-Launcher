@@ -1,0 +1,32 @@
+﻿<Window x:Class="DCS.Alternative.Launcher.Plugin.Viewports.Dialogs.MonitorOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors;assembly=DCS.Alternative.Launcher"
+        xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls;assembly=DCS.Alternative.Launcher"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Viewport Editor"
+        Width="10"
+        Height="10"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"
+                      ResizeBorderThickness="0"
+                      UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+    <interactions:Interaction.Behaviors>
+        <behaviors:WindowDisableContextMenulBehavior />
+    </interactions:Interaction.Behaviors>
+    <controls:DpiDecorator>
+        <Grid>
+            <Border Background="#AF000000" />
+        </Grid>
+    </controls:DpiDecorator>
+</Window>

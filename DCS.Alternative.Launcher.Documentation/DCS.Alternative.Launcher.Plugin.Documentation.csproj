@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DCS.Alternative.Launcher\DCS.Alternative.Launcher.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="C:\Users\fdspr\.nuget\packages\system.reactive\4.2.0\buildTransitive\netcoreapp3.0\..\..\build\netcoreapp3.0\System.Reactive.dll">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(OutDir)$(TargetFileName)&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Plugins\&quot;&#xD;&#xA;xcopy /E /Y &quot;$(OutDir)Data&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Data\&quot;&#xD;&#xA;xcopy /E /Y &quot;$(OutDir)Resources&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Resources\&quot;" />
+  </Target>
+
+</Project>

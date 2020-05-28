@@ -8,7 +8,6 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:DCS.Alternative.Launcher.Plugins.Game.Views"
-             xmlns:views1="clr-namespace:DCS.Alternative.Launcher.Plugins.Manuals.Views"
              xmlns:views2="clr-namespace:DCS.Alternative.Launcher.Plugins.Support.Views"
              xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
              xmlns:wpf="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"

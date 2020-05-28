@@ -3,25 +3,31 @@ using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
+using DCS.Alternative.Launcher.Services.Settings;
 
 namespace DCS.Alternative.Launcher.Plugins.Game.Views
 {
     public class GameController
     {
         public readonly IDcsWorldService _dcsWorldService;
-        public readonly ISettingsService _settingsService;
+        public readonly IProfileService _profileService;
+        public readonly ILauncherSettingsService _settingsService;
+        public readonly ApplicationEventRegistry _eventRegistry;
 
         public GameController(IContainer container)
         {
-            _settingsService = container.Resolve<ISettingsService>();
+            _settingsService = container.Resolve<ILauncherSettingsService>();
             _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _eventRegistry = container.Resolve<ApplicationEventRegistry>();
+            _profileService = container.Resolve<IProfileService>();
+
         }
 
         public Task UpdateAsync()
         {
             return Task.Run(() =>
             {
-                var install = _settingsService.SelectedInstall;
+                var install = _profileService.GetSelectedInstall();
 
                 if (!install.IsValidInstall)
                 {
@@ -29,7 +35,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "update");
+                var processInfo = new ProcessStartInfo(install.UpdaterPath, "update");
                 var process = Process.Start(processInfo);
 
                 process?.WaitForExit();
@@ -40,7 +46,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             return Task.Run(() =>
             {
-                var install = _settingsService.SelectedInstall;
+                var install = _profileService.GetSelectedInstall();
 
                 if (!install.IsValidInstall)
                 {
@@ -48,18 +54,18 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.UpdaterPath, "repair");
+                var processInfo = new ProcessStartInfo(install.UpdaterPath, "repair");
                 var process = Process.Start(processInfo);
 
                 process?.WaitForExit();
             });
         }
 
-        public async Task LaunchDcsAsync(bool isVREnabled)
+        public async Task LaunchDcsAsync()
         {
             await Task.Run(async () =>
             {
-                var install = _settingsService.SelectedInstall;
+                var install = _profileService.GetSelectedInstall();
 
                 Guard.RequireIsNotNull(install, nameof(install));
 
@@ -69,14 +75,22 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                await _dcsWorldService.WriteOptionsAsync(isVREnabled);
-                await _dcsWorldService.PatchViewportsAsync();
+                await _dcsWorldService.WriteOptionsAsync();
                 await _dcsWorldService.UpdateAdvancedOptionsAsync();
-                await _dcsWorldService.WriteViewportOptionsAsync();
 
-                var processInfo = new ProcessStartInfo(_settingsService.SelectedInstall.ExePath);
-                processInfo.Arguments = isVREnabled ? "--force_enable_VR" : "--force_disable_VR";
+                await _eventRegistry.InvokeBeforeDcsLaunchedAsync(this, DeferredEventArgs.CreateEmpty());
+
+                //await _dcsWorldService.PatchViewportsAsync();
+                //await _dcsWorldService.WriteViewportOptionsAsync();
+
+                var processInfo = new ProcessStartInfo(install.ExePath)
+                {
+                    UseShellExecute = true
+                };
+
                 Process.Start(processInfo);
+
+                await _eventRegistry.InvokeAfterDcsLaunchedAsync(this, DeferredEventArgs.CreateEmpty());
             });
         }
     }

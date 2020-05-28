@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="DCS.Alternative.Launcher.Plugins.Game.Views.GameView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Advanced="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced"
              xmlns:animations="clr-namespace:SourceChord.FluentWPF.Animations;assembly=FluentWPF"
              xmlns:behaviors1="clr-namespace:DCS.Alternative.Launcher.Interaction.Behaviors"
              xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Controls"
@@ -17,7 +18,7 @@
              VerticalAlignment="Stretch"
              HorizontalContentAlignment="Stretch"
              VerticalContentAlignment="Stretch"
-             d:DataContext="{d:DesignInstance views:GameViewModel}"
+             d:DataContext="{d:DesignInstance {x:Type views:GameViewModel}}"
              d:DesignHeight="720"
              d:DesignWidth="1224"
              mc:Ignorable="d">
@@ -66,10 +67,6 @@
                             Background="#FF141819"
                             BorderBrush="#FF2F2F2F"
                             BorderThickness="1">
-                        <WebBrowser x:Name="Browser"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    behaviors1:WebBrowserUtility.BindableSource="{Binding LatestYouTubeUrl.Value}" />
                         <!--<cef:ChromiumWebBrowser x:Name="Browser"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
@@ -78,6 +75,10 @@
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
                         </Border.Effect>
+                        <WebBrowser x:Name="Browser"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    behaviors1:WebBrowserUtility.BindableSource="{Binding LatestYouTubeUrl.Value}" />
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -164,7 +165,7 @@
                         </Border.Effect>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel.Resources>
-                                <Style BasedOn="{StaticResource ButtonRevealStyle}" TargetType="Button">
+                                <Style BasedOn="{StaticResource ButtonRevealStyle}" TargetType="{x:Type Button}">
                                     <Setter Property="Margin" Value="0,0,25,0" />
                                     <Setter Property="Padding" Value="20" />
                                     <Setter Property="MinWidth" Value="110" />
@@ -195,7 +196,7 @@
                                                             CornerRadius="4"
                                                             Opacity="0">
                                                         <Grid ClipToBounds="True">
-                                                            <Border x:Name="hoverLight" Background="{fluentWpf:RevealBrush Color=White, Size=200, Opacity=0.6}" />
+                                                            <Border x:Name="hoverLight" Background="{fluentWpf:RevealBrush Color=White, Opacity=0.6, Size=200}" />
                                                             <Rectangle x:Name="pressLight" Opacity="0">
                                                                 <Rectangle.Fill>
                                                                     <RadialGradientBrush x:Name="brush" MappingMode="Absolute" RadiusX="5" RadiusY="5">
@@ -241,8 +242,8 @@
                                                     <!--  MouseOver border  -->
                                                     <Border x:Name="border"
                                                             BorderBrush="{fluentWpf:RevealBrush Color=White,
-                                                                                                Size=120,
-                                                                                                Opacity=0.3}"
+                                                                                                Opacity=0.3,
+                                                                                                Size=120}"
                                                             BorderThickness="{TemplateBinding BorderThickness}" />
                                                     <VisualStateManager.VisualStateGroups>
                                                         <VisualStateGroup x:Name="CommonStates">
@@ -257,7 +258,7 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
                                                                                      To="1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
@@ -265,7 +266,7 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                                                      To="1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
@@ -285,7 +286,7 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
                                                                                      To="1.1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
@@ -293,7 +294,7 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                                                      To="1.1"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
@@ -313,7 +314,7 @@
                                                                         </DoubleAnimation.EasingFunction>
                                                                     </DoubleAnimation>
                                                                     <DoubleAnimation Storyboard.TargetName="contentPresenter"
-                                                                                     Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.X)"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                                                                                      To="60"
                                                                                      Duration="0:0:0.2">
                                                                         <DoubleAnimation.EasingFunction>
@@ -392,10 +393,8 @@
                                                                     <animations:BrushAnimation AutoReverse="False"
                                                                                                Storyboard.TargetName="contentPresenter"
                                                                                                Storyboard.TargetProperty="(TextElement.Foreground)"
+                                                                                               To="#FF838383"
                                                                                                Duration="0:0:0.100">
-                                                                        <animations:BrushAnimation.To>
-                                                                            <SolidColorBrush Color="#FF838383" />
-                                                                        </animations:BrushAnimation.To>
                                                                         <animations:BrushAnimation.EasingFunction>
                                                                             <SineEase EasingMode="EaseInOut" />
                                                                         </animations:BrushAnimation.EasingFunction>
@@ -476,96 +475,11 @@
                                                    Foreground="#FFFFFFFF"
                                                    Text="INSTALL"
                                                    Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}" />
-                                        <Menu Grid.Row="1"
-                                              Grid.Column="0"
-                                              Width="100"
-                                              Height="Auto"
-                                              MinWidth="75"
-                                              MaxWidth="75"
-                                              Margin="0,0,0,3"
-                                              HorizontalAlignment="Right"
-                                              VerticalAlignment="Top"
-                                              Background="Transparent"
-                                              Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}}">
-                                            <MenuItem Padding="0"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch"
-                                                      HorizontalContentAlignment="Stretch"
-                                                      VerticalContentAlignment="Stretch"
-                                                      Background="Transparent"
-                                                      BorderThickness="0"
-                                                      Cursor="Hand"
-                                                      Foreground="#FFFFFFFF"
-                                                      Header="INSTALL"
-                                                      ItemsSource="{Binding Installations}"
-                                                      WindowChrome.IsHitTestVisibleInChrome="True">
-                                                <MenuItem.ItemContainerStyle>
-                                                    <Style TargetType="MenuItem">
-                                                        <Setter Property="Command" Value="{Binding DataContext.SelectInstallCommand, RelativeSource={RelativeSource AncestorType={x:Type views:GameView}}}" />
-                                                        <Setter Property="CommandParameter" Value="{Binding}" />
-                                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                                        <Setter Property="VerticalAlignment" Value="Stretch" />
-                                                        <Setter Property="Background" Value="#FF11171D" />
-                                                        <Setter Property="BorderBrush" Value="#FF11171D" />
-                                                        <Setter Property="Padding" Value="0" />
-                                                    </Style>
-                                                </MenuItem.ItemContainerStyle>
-                                                <MenuItem.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Border>
-                                                            <TextBlock FontFamily="{StaticResource Prototype}"
-                                                                       FontSize="11"
-                                                                       FontWeight="Light">
-                                                                <Run Text="{Binding Variant, Mode=OneWay}" />
-                                                                <Run Text="( " />
-                                                                <Run Text="{Binding DirectoryName, Mode=OneWay}" />
-                                                                <Run Text=" )" />
-                                                                <TextBlock.Effect>
-                                                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                                                                </TextBlock.Effect>
-                                                            </TextBlock>
-                                                        </Border>
-                                                    </DataTemplate>
-                                                </MenuItem.ItemTemplate>
-                                                <MenuItem.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock FontFamily="{StaticResource Prototype}"
-                                                                       FontSize="11"
-                                                                       FontWeight="Light"
-                                                                       Text="{Binding}">
-                                                                <TextBlock.Effect>
-                                                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                                                                </TextBlock.Effect>
-                                                            </TextBlock>
-                                                            <Path Grid.Column="1"
-                                                                  Margin="5,2,0,0"
-                                                                  Data="M 0 0 L 6 6 L 12 0 Z"
-                                                                  Fill="#FFFFFFFF">
-                                                                <Path.Effect>
-                                                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                                                                </Path.Effect>
-                                                            </Path>
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </MenuItem.HeaderTemplate>
-                                            </MenuItem>
-                                        </Menu>
                                         <TextBlock Grid.Row="1"
                                                    Grid.Column="1"
                                                    FontFamily="{StaticResource Prototype}"
                                                    Foreground="#FFCFCFCF"
-                                                   Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}">
-                                            <Run Text="{Binding SelectedInstall.Value.Variant, Mode=OneWay}" />
-                                            <Run Text="( " />
-                                            <Run Text="{Binding SelectedInstall.Value.DirectoryName, Mode=OneWay}" />
-                                            <Run Text=" )" />
-                                        </TextBlock>
+                                                   Visibility="{Binding Installations, Converter={x:Static data:EnumerableCountGreaterThanOneVisibilityConverter.Instance}, ConverterParameter=reverse}"><Run Text="{Binding SelectedInstall.Value.Variant, Mode=OneWay}" /><Run Text=" " /><Run Text="( " /><Run Text=" " /><Run Text="{Binding SelectedInstall.Value.DirectoryName, Mode=OneWay}" /><Run Text=" " /><Run Text=" )" /></TextBlock>
                                         <TextBlock Grid.Row="2"
                                                    Grid.Column="0"
                                                    Margin="0,0,15,3"
@@ -580,26 +494,6 @@
                                                    FontSize="11"
                                                    Foreground="#FFCFCFCF"
                                                    Text="{Binding SelectedInstall.Value.Version}" />
-                                        <TextBlock Grid.Row="3"
-                                                   Grid.Column="0"
-                                                   Margin="0,0,15,3"
-                                                   HorizontalAlignment="Right"
-                                                   VerticalAlignment="Center"
-                                                   FontFamily="{StaticResource Prototype}"
-                                                   FontSize="11"
-                                                   Foreground="#FFFFFFFF"
-                                                   Text="VR" />
-                                        <ToggleButton Grid.Row="3"
-                                                      Grid.Column="1"
-                                                      HorizontalAlignment="Left"
-                                                      VerticalAlignment="Top"
-                                                      FontFamily="{StaticResource Prototype}"
-                                                      FontSize="11"
-                                                      IsChecked="{Binding IsVREnabled.Value, Mode=TwoWay}"
-                                                      Style="{StaticResource ToggleSwitchStyle}">
-                                            <TextBlock Text="{Binding IsVREnabled.Value, Converter={StaticResource BooleanToStringConverter}}" />
-                                        </ToggleButton>
-
                                     </Grid>
                                 </fluentWpf:AcrylicPanel>
                             </Border>
@@ -638,21 +532,6 @@
                                    Visibility="{Binding FailedVersionCheck.Value, Converter={x:Static data:VisibilityConverter.Instance}}" />
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Image Width="250"
-                       Height="150"
-                       Margin="50"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"
-                       RenderOptions.BitmapScalingMode="HighQuality"
-                       RenderOptions.EdgeMode="Aliased"
-                       Source="/Images/dcs-world-logo.png"
-                       Stretch="Uniform">
-                    <Image.Effect>
-                        <DropShadowEffect BlurRadius="3" ShadowDepth="0" />
-                    </Image.Effect>
-                </Image>
             </Grid>
         </Grid>
         <wpf:LoadingIndicator IsActive="{Binding IsLoading.Value}" Style="{DynamicResource LoadingIndicatorArcsStyle}" />

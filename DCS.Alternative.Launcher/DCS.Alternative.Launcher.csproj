@@ -18,7 +18,7 @@
     <RepositoryType>git</RepositoryType>
     <Product>DCS Alternative Launcher</Product>
     <PackageId>DCS Alternative Launcher</PackageId>
-    <AssemblyName>DCS Alternative Launcher</AssemblyName>
+    <AssemblyName>DCS.Alternative.Launcher</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -108,21 +108,6 @@
     <None Remove="Resources\Images\Wallpaper\7.jpg" />
     <None Remove="Resources\Images\Wallpaper\8.jpg" />
     <None Remove="Resources\Images\Wallpaper\9.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg" />
-    <None Remove="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\IFEI.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\RWR.jpg" />
-    <None Remove="Resources\Viewports\Images\FA-18C\UFC.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -206,14 +191,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Viewports\Images\HEATBLUR_F14\" />
-    <Folder Include="Data\Viewports\Images\KA-50\" />
-    <Folder Include="Resources\Viewports\Images\HEATBLUR_F14\" />
-    <Folder Include="Resources\Viewports\Images\KA-50\" />
-    <Folder Include="Views\Manuals\Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\Backgrounds\background (1).jpg" />
     <Resource Include="Images\Backgrounds\background (10).jpg" />
     <Resource Include="Images\Backgrounds\background (11).jpg" />
@@ -260,51 +237,6 @@
     <Resource Include="Resources\Fonts\Prototype.ttf" />
     <Resource Include="Resources\Icons\adobe-pdf-icon.png" />
     <Resource Include="Resources\Icons\external-link.png" />
-    <Resource Include="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\IFEI.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\RWR.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Viewports\Images\FA-18C\UFC.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Images\Wizard\FirstUse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -348,60 +280,6 @@
     <None Update="Data\Resources\AdditionalResources.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\RWR_SCREEN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\A-10C\UHF_REPEATER.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\IFEI.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\RWR.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\Images\FA-18C\UFC.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\ViewportDevices.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\ViewportOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Viewports\ViewportTemplates.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Options\AutoexecOptions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -411,15 +289,12 @@
     <None Update="Resources\Resources\AdditionalResources.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Viewports\ViewportDevices.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Viewports\ViewportOptions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Viewports\ViewportTemplates.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

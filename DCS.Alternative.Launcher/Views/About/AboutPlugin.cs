@@ -1,5 +1,5 @@
-﻿using DCS.Alternative.Launcher.Plugins.About.Views;
-using DCS.Alternative.Launcher.Plugins.Manuals.Views;
+﻿using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Plugins.About.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
@@ -13,7 +13,7 @@ namespace DCS.Alternative.Launcher.Plugins.About
         }
         public override int LoadOrder
         {
-            get { return 4; }
+            get { return 40; }
         }
         public override string Author
         {
@@ -24,18 +24,17 @@ namespace DCS.Alternative.Launcher.Plugins.About
             get { return "https://github.com/jeffboulanger/DCS-Alternative-Launcher"; }
         }
 
-        protected override void RegisterContainerItems(IContainer container)
+        protected override Task RegisterContainerItemsAsync(IContainer container)
         {
-            container.Register(new ManualsController(container));
+            container.Register(new AboutController(container));
 
-            base.RegisterContainerItems(container);
+            return base.RegisterContainerItemsAsync(container);
         }
 
-        protected override void RegisterUISiteItems(IPluginNavigationSite site)
+        protected override async Task RegisterUISiteItemsAsync(IPluginNavigationSite site)
         {
-            site.RegisterPluginNavigation<AboutView, AboutViewModel>("ABOUT", this);
-
-            base.RegisterUISiteItems(site);
+            await site.RegisterPluginNavigationAsync<AboutView, AboutViewModel>("ABOUT", this);
+            await base.RegisterUISiteItemsAsync(site);
         }
     }
 }

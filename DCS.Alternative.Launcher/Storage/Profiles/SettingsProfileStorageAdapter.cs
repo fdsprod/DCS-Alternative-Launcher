@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.Storage.Profiles.Strategies;
 
 namespace DCS.Alternative.Launcher.Storage.Profiles
 {
-    public static class SettingsProfileStorageAdapter
+    public static class ProfileStorageAdapter
     {
-        public static IEnumerable<SettingsProfile> GetAll()
+        public static IEnumerable<Profile> GetAll()
         {
-            return OfflineSettingsProfileStorageStrategy.GetAll();
+            return OfflineProfileStorageStrategy.GetAll();
         }
 
-        public static Task PersistAsync(SettingsProfile profile)
+        public static Task PersistAsync(Profile profile)
         {
-            return OfflineSettingsProfileStorageStrategy.PersistAsync(profile);
+            return OfflineProfileStorageStrategy.PersistAsync(profile);
         }
     }
 }

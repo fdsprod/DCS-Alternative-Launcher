@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Collections;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Extensions;
@@ -1422,7 +1423,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
             }
         }
 
-        public void RegisterPlugin<TPlugin>()
+        public async Task RegisterPluginAsync<TPlugin>()
             where TPlugin : class, IPlugin
         {
             if (_plugins.ContainsKey(typeof(TPlugin)))
@@ -1434,7 +1435,7 @@ namespace DCS.Alternative.Launcher.ServiceModel
             Register<TPlugin>();
             var module = Resolve<TPlugin>();
 
-            module.OnLoad(this);
+            await module.LoadAsync(this);
 
             _plugins.Add(typeof(TPlugin), module);
         }

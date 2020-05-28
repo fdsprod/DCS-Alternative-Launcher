@@ -9,11 +9,8 @@
              xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:general="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.General"
              xmlns:general1="clr-namespace:DCS.Alternative.Launcher.Views.Settings.Views.General"
-             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:DCS.Alternative.Launcher.Models"
              xmlns:settingsControls="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Controls"
-             xmlns:viewports="clr-namespace:DCS.Alternative.Launcher.Plugins.Settings.Views.Viewports"
              xmlns:windows="clr-namespace:DCS.Alternative.Launcher.Windows"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -78,54 +75,6 @@
                                            Text="{Binding Name}"
                                            TextAlignment="Right" />
                             </Border>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type general:InstallationSettingsViewModel}">
-                            <controls:InstallationControl Margin="30" />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type general1:ProfileSettingsViewModel}">
-                            <controls:ProfilesControl Margin="30" />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type viewports:ViewportSettingsViewModel}">
-                            <settingsControls:ViewportsSettingsControl Margin="30" />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:GraphicsSettingsViewModel}">
-                            <advanced:GraphicsSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:CameraSettingsViewModel}">
-                            <advanced:CameraSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:CameraMirrorsSettingsViewModel}">
-                            <advanced:CameraMirrorsSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:TerrainSettingsViewModel}">
-                            <advanced:TerrainSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:TerrainMirrorSettingsViewModel}">
-                            <advanced:TerrainMirrorSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:TerrainReflectionSettingsViewModel}">
-                            <advanced:TerrainReflectionSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:SoundSettingsViewModel}">
-                            <advanced:SoundSettingsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type viewports:ViewportOptionsViewModel}">
-                            <viewports:ViewportOptionsView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type advanced:DcsOptionCategoryViewModel}">
-                            <dcs:DcsOptionCategoryView />
                         </DataTemplate>
 
                         <Style TargetType="TabItem">

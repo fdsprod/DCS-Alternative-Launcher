@@ -1,0 +1,155 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg" />
+    <None Remove="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\IFEI.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\RWR.jpg" />
+    <None Remove="Resources\Viewports\Images\FA-18C\UFC.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DCS.Alternative.Launcher\DCS.Alternative.Launcher.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Data\Viewports\Images\KA-50\" />
+    <Folder Include="Resources\Viewports\Images\HEATBLUR_F14\" />
+    <Folder Include="Resources\Viewports\Images\KA-50\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\RWR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Viewports\Images\A-10C\CMSC_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\CMSP_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\DIGIT_CLOCK.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\RWR_SCREEN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_FREQUENCY_STATUS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_PRESET_CHANNEL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\A-10C\UHF_REPEATER.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\CENTER_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\IFEI.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\LEFT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\RIGHT_MFCD.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\RWR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\Images\FA-18C\UFC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Viewports\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportDevices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Viewports\ViewportTemplates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(OutDir)$(TargetFileName)&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Plugins\&quot;&#xD;&#xA;xcopy /E /Y &quot;$(OutDir)Data&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Data\&quot;&#xD;&#xA;xcopy /E /Y &quot;$(OutDir)Resources&quot; &quot;$(SolutionDir)$(SolutionName)\$(OutDir)Resources\&quot;" />
+  </Target>
+
+</Project>

@@ -109,7 +109,8 @@
                         <controls:TransitionControl x:Name="PART_CurrentStep"
                                                     Grid.Row="0"
                                                     Panel.ZIndex="0"
-                                                    Content="{TemplateBinding CurrentStep}" />
+                                                    Content="{TemplateBinding CurrentStep}"
+                                                    ContentTemplateSelector="{TemplateBinding CurrentStepTemplateSelector}" />
                         <Border Grid.Row="1" Margin="30,0,30,30">
                             <Grid>
                                 <Grid.ColumnDefinitions>

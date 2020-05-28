@@ -1,4 +1,6 @@
-﻿using DCS.Alternative.Launcher.ServiceModel;
+﻿using System.Threading.Tasks;
+using System.Windows;
+using DCS.Alternative.Launcher.ServiceModel;
 
 namespace DCS.Alternative.Launcher.Plugins
 {
@@ -14,8 +16,13 @@ namespace DCS.Alternative.Launcher.Plugins
             get;
         }
 
-        void OnLoad(IContainer container);
+        ResourceDictionary ApplicationResources
+        {
+            get;
+        }
 
-        void OnUnload(IContainer container);
+        Task LoadAsync(IContainer container);
+
+        Task UnloadAsync(IContainer container);
     }
 }

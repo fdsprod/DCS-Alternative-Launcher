@@ -42,7 +42,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             {
                 try
                 {
-                    var options = Controller.GetAdvancedOptions(_advancedOptionsCategory);
+                    var options = SettingsController.GetAdvancedOptions(_advancedOptionsCategory);
                     var models = OptionModelFactory.CreateAll(options);
 
                     foreach (var model in models)
@@ -62,12 +62,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
         private void OnValueChanged(OptionModelBase model, object value)
         {
-            Controller.UpsertAdvancedOption(model.Id, value);
+            SettingsController.UpsertAdvancedOption(model.Id, value);
         }
 
         private void OnReset(OptionModelBase model)
         {
-            var value = Controller.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
+            var value = SettingsController.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
             model.ResetValue(value);
         }
 
@@ -80,7 +80,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
             foreach (var model in Options)
             {
-                var value = Controller.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
+                var value = SettingsController.ResetAdvancedOptionValue(_advancedOptionsCategory, model.Id);
                 model.ResetValue(value);
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Documents;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Wizards.Steps;

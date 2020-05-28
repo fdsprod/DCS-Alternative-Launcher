@@ -1,8 +1,9 @@
 ﻿using System;
+using DCS.Alternative.Launcher.Services.Settings;
 
 namespace DCS.Alternative.Launcher.Services
 {
-    public class PluginRegisteredEventArgs
+    public class PluginRegisteredEventArgs : DeferredEventArgs
     {
         public PluginRegisteredEventArgs(string name, Type viewType, Type viewModelType)
         {

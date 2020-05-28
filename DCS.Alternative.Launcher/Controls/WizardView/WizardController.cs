@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using DCS.Alternative.Launcher.ComponentModel;
 using Reactive.Bindings;
 
@@ -13,11 +14,13 @@ namespace DCS.Alternative.Launcher.Controls
     public class WizardController : IDisposable, INotifyPropertyChanged
     {
         private readonly List<IDisposable> _disposables = new List<IDisposable>();
+
         private Guid _id = Guid.NewGuid();
 
         public WizardController()
         {
             CurrentStep.Subscribe(OnCurrentStepChanged);
+            
         }
 
         public IWizardStep PreviousStep

@@ -63,10 +63,10 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
             if (selectedInstall == null)
             {
-                selectedInstall = Controller.GetCurrentInstall();
+                selectedInstall = SettingsController.GetCurrentInstall();
             }
 
-            foreach (var install in Controller.GetInstallations())
+            foreach (var install in SettingsController.GetInstallations())
             {
                 Installations.Add(install);
             }
@@ -87,7 +87,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
             {
                 try
                 {
-                    var categories = Controller.GetDcsCategoryOptionForInstall(install, false);
+                    var categories = SettingsController.GetDcsCategoryOptionForInstall(install, false);
                     var category = categories.FirstOrDefault(c => c.Id == _categoryId);
 
                     if (category == null)
@@ -112,12 +112,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
         private void OnValueChanged(OptionModelBase model, object value)
         {
-            Controller.UpsertDcsOption(_categoryId, model.Id, value, false);
+            SettingsController.UpsertDcsOption(_categoryId, model.Id, value, false);
         }
 
         private void OnReset(OptionModelBase model)
         {
-            var value = Controller.ResetDcsOption(_categoryId, model.Id);
+            var value = SettingsController.ResetDcsOption(_categoryId, model.Id);
             model.ResetValue(value);
         }
 
@@ -130,7 +130,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced
 
             foreach (var model in Options)
             {
-                var value = Controller.ResetDcsOption(_categoryId, model.Id);
+                var value = SettingsController.ResetDcsOption(_categoryId, model.Id);
                 model.ResetValue(value);
             }
         }

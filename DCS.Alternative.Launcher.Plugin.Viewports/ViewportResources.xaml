@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="clr-namespace:DCS.Alternative.Launcher.Plugin.Viewports.Controls"
+                    xmlns:firstUse="clr-namespace:DCS.Alternative.Launcher.Plugin.Viewports.Wizards.FirstUse"
+                    xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:settings="clr-namespace:DCS.Alternative.Launcher.Plugin.Viewports.Wizards.Settings"
+                    xmlns:settings1="clr-namespace:DCS.Alternative.Launcher.Plugin.Viewports.Views.Settings">
+
+    <DataTemplate DataType="{markup:Type firstUse:SelectGameViewportScreensStepViewModel}">
+        <firstUse:SelectGameViewportScreensStepView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type firstUse:SelectUIViewportScreensStepViewModel}">
+        <firstUse:SelectUIViewportScreensStepView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type firstUse:SelectDeviceViewportScreensStepViewModel}">
+        <firstUse:SelectDeviceViewportScreensStepView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type firstUse:SelectInitialViewportsWizardStepViewModel}">
+        <firstUse:SelectInitialViewportsWizardStepView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type settings:SelectViewportsWizardStepViewModel}">
+        <settings:SelectViewportsWizardStepView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type settings1:ViewportOptionsViewModel}">
+        <settings1:ViewportOptionsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{markup:Type settings1:ViewportSettingsViewModel}">
+        <controls:ViewportsSettingsControl Margin="30" />
+    </DataTemplate>
+
+</ResourceDictionary>

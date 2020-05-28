@@ -14,7 +14,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
     public class InstallationSettingsViewModel : SettingsCategoryViewModelBase
     {
         public InstallationSettingsViewModel(SettingsController controller)
-            : base("DCS WORLD INSTALLATION", controller)
+            : base("INSTALLATION", controller)
         {
             RemoveInstallationCommand = new ReactiveCommand(SelectedInstall.Select(i => i != null), false);
 
@@ -60,7 +60,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
             {
                 Installations.Clear();
 
-                foreach (var install in Controller.GetInstallations())
+                foreach (var install in SettingsController.GetInstallations())
                 {
                     Installations.Add(new InstallLocationModel(install));
                 }
@@ -91,7 +91,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
 
                     Installations.Add(new InstallLocationModel(installation));
 
-                    Controller.AddInstalls(installation.Directory);
+                    SettingsController.AddInstalls(installation.Directory);
                 }
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
                 if (MessageBoxEx.Show($"Are you sure you want to remove the {installation.ConcreteInstall.Name} install", "Remove Install", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
                 {
                     Installations.Remove(installation);
-                    Controller.RemoveInstalls(installation.ConcreteInstall.Directory);
+                    SettingsController.RemoveInstalls(installation.ConcreteInstall.Directory);
                 }
             }
             catch (Exception e)
@@ -151,7 +151,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views.General
 
                 foreach (var directory in addedInstallations)
                 {
-                    Controller.AddInstalls(directory);
+                    SettingsController.AddInstalls(directory);
                 }
             }
             catch (Exception e)

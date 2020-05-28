@@ -1,4 +1,5 @@
-﻿using DCS.Alternative.Launcher.Plugins.Game.Views;
+﻿using System.Threading.Tasks;
+using DCS.Alternative.Launcher.Plugins.Game.Views;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
 
@@ -23,18 +24,17 @@ namespace DCS.Alternative.Launcher.Plugins.Game
             get { return "https://github.com/jeffboulanger/DCS-Alternative-Launcher"; }
         }
 
-        protected override void RegisterContainerItems(IContainer container)
+        protected override Task RegisterContainerItemsAsync(IContainer container)
         {
             container.Register(new GameController(container));
 
-            base.RegisterContainerItems(container);
+            return base.RegisterContainerItemsAsync(container);
         }
 
-        protected override void RegisterUISiteItems(IPluginNavigationSite site)
+        protected override async Task RegisterUISiteItemsAsync(IPluginNavigationSite site)
         {
-            site.RegisterPluginNavigation<GameView, GameViewModel>("GAME", this);
-
-            base.RegisterUISiteItems(site);
+            await site.RegisterPluginNavigationAsync<GameView, GameViewModel>("GAME", this);
+            await base.RegisterUISiteItemsAsync(site);
         }
     }
 }

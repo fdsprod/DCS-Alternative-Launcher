@@ -5,12 +5,12 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
     public abstract class SettingsCategoryViewModelBase : IActivate
     {
-        protected SettingsController Controller;
+        protected SettingsController SettingsController;
 
         protected SettingsCategoryViewModelBase(string name, SettingsController controller, bool isHitTestVisible = true)
         {
             Name = name;
-            Controller = controller;
+            SettingsController = controller;
             IsHitTestVisible = isHitTestVisible;
         }
 

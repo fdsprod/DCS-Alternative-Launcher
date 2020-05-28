@@ -19,8 +19,8 @@ namespace DCS.Alternative.Launcher.Windows
         private readonly IContainer _container;
         private readonly List<string> _images = new List<string>();
         private readonly INavigationService _navigationService;
-        private readonly IProfileSettingsService _profileSettingsService;
-        private readonly ISettingsService _settingsService;
+        private readonly IProfileService _profileSettingsService;
+        private readonly ILauncherSettingsService _settingsService;
         private readonly DispatcherTimer _slideShowTimer = new DispatcherTimer();
         private readonly ApplicationEventRegistry _eventRegistry;
         private int _nextIndex;
@@ -33,16 +33,15 @@ namespace DCS.Alternative.Launcher.Windows
             _eventRegistry = container.Resolve<ApplicationEventRegistry>();
             _navigationService = container.Resolve<INavigationService>();
             _autoUpdateService = container.Resolve<IAutoUpdateService>();
-            _profileSettingsService = container.Resolve<IProfileSettingsService>();
-            _settingsService = container.Resolve<ISettingsService>();
+            _profileSettingsService = container.Resolve<IProfileService>();
+            _settingsService = container.Resolve<ILauncherSettingsService>();
 
-            _profileSettingsService.SelectedProfileChanged += OnSelectedProfileChanged;
-            _profileSettingsService.ProfilesChanged += OnProfilesChanged;
+            _eventRegistry.CurrentProfileChanged += OnSelectedProfileChanged;
+            _eventRegistry.ProfilesChanged += OnProfilesChanged;
 
-            var pluginNavigationSite = container.Resolve<IPluginNavigationSite>();
             ShowPluginCommand.Subscribe(OnShowPlugin);
 
-            pluginNavigationSite.PluginRegistered += OnPluginRegistered;
+            _eventRegistry.PluginRegistered += OnPluginRegistered;
 
             var files = 
                 new List<string>(
@@ -143,7 +142,7 @@ namespace DCS.Alternative.Launcher.Windows
 
         private void UpdateProfiles()
         {
-            var profiles = SettingsProfileStorageAdapter.GetAll();
+            var profiles = ProfileStorageAdapter.GetAll();
 
             Profiles.Clear();
 

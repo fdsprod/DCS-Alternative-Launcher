@@ -12,58 +12,20 @@ using Reactive.Bindings;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
-    internal class SettingsService : ISettingsService
+    internal class LauncherSettingsService : ILauncherSettingsService
     {
         private static readonly object _syncRoot = new object();
 
         private readonly ReactiveProperty<bool> _isDirty = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
-
-        private List<InstallLocation> _installationCache;
-        private InstallLocation _selectedInstall;
-
+        
         private Dictionary<string, Dictionary<string, object>> _settings =
             new Dictionary<string, Dictionary<string, object>>();
 
-        public SettingsService()
+        public LauncherSettingsService()
         {
             _isDirty.Throttle(TimeSpan.FromMilliseconds(300)).Subscribe(x => { Save(); });
 
             Load();
-
-            var directory = GetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, string.Empty);
-
-            GetInstallations();
-
-            SelectedInstall = _installationCache.FirstOrDefault(i => i.Directory == directory);
-
-            if (SelectedInstall == null && _installationCache.Count > 0)
-            {
-                Tracer.Warn($"Unable to set selected install to {directory}.  Installation no longer exists in settings. ");
-                SelectedInstall =  _installationCache.FirstOrDefault();
-            }
-        }
-
-        public InstallLocation SelectedInstall
-        {
-            get { return _selectedInstall; }
-            set
-            {
-                if (_selectedInstall != value)
-                {
-                    _selectedInstall = value;
-
-                    if (value != null)
-                    {
-                        Tracer.Info($"Selected Install set to {value.Directory}");
-                    }
-                    else
-                    {
-                        Tracer.Warn("Selected Install set to (null)");
-                    }
-
-                    SetValue(SettingsCategories.Installations, SettingsKeys.SelectedInstall, value.Directory);
-                }
-            }
         }
 
         public bool TryGetValue<T>(string category, string key, out T value)
@@ -165,51 +127,6 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 Tracer.Info("Loading settings.json");
                 _settings = SettingsStorageAdapter.GetAll();
             }
-        }
-
-        public void RemoveInstalls(params string[] directories)
-        {
-            _installationCache.RemoveAll(i => directories.Contains(i.Directory));
-
-            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i => i.Directory).ToArray());
-        }
-
-        public void AddInstalls(params string[] directories)
-        {
-            foreach (var dir in directories)
-            {
-                if (_installationCache.All(i => i.Directory != dir))
-                {
-                    var install = new InstallLocation(dir);
-
-                    _installationCache.Add(install);
-
-                    if (SelectedInstall == null)
-                    {
-                        SelectedInstall = install;
-                    }
-                }
-            }
-
-            SetValue(SettingsCategories.Installations, SettingsKeys.Installs, _installationCache.Select(i => i.Directory).ToArray());
-        }
-
-        public InstallLocation[] GetInstallations()
-        {
-            if (_installationCache == null)
-            {
-                var directories = new List<string>(GetValue<IEnumerable<string>>(SettingsCategories.Installations, SettingsKeys.Installs, new string[0]));
-                var results = new List<InstallLocation>();
-
-                foreach (var directory in directories)
-                {
-                    results.Add(new InstallLocation(directory));
-                }
-
-                _installationCache = new List<InstallLocation>(results.ToArray());
-            }
-
-            return _installationCache.ToArray();
         }
     }
 }

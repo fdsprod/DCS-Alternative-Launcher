@@ -16,6 +16,8 @@ namespace DCS.Alternative.Launcher
         private const string _updaterConfigPath = "autoupdate.cfg";
         private AutoUpdaterConfig _config;
 
+        private static readonly Guid SavedGamesGuid = Guid.Parse("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4");
+
         public InstallLocation(string directory)
         {
             Directory = directory;
@@ -53,8 +55,6 @@ namespace DCS.Alternative.Launcher
             get { return Path.Combine(SavedGamesPath, "Config", "autoexec.cfg"); }
         }
 
-        private static readonly Guid SavedGamesGuid = Guid.Parse("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4");
-
         public string SavedGamesPath
         {
             get
@@ -77,6 +77,7 @@ namespace DCS.Alternative.Launcher
         {
             get { return GetPath(_updaterConfigPath); }
         }
+
         public string Variant
         {
             get { return _config?.Branch ?? "stable"; }
@@ -187,51 +188,6 @@ namespace DCS.Alternative.Launcher
         public override string ToString()
         {
             return $"{Version}-{Variant} ({Directory})";
-        }
-    }
-
-    public class AutoUpdaterConfig
-    {
-        public string Branch
-        {
-            get;
-            set;
-        }
-
-        public string Version
-        {
-            get;
-            set;
-        }
-
-        public string Timestamp
-        {
-            get;
-            set;
-        }
-
-        public string Arch
-        {
-            get;
-            set;
-        }
-
-        public string Lang
-        {
-            get;
-            set;
-        }
-
-        public string Launch
-        {
-            get;
-            set;
-        }
-
-        public string[] Modules
-        {
-            get;
-            set;
         }
     }
 }

@@ -52,6 +52,9 @@ namespace DCS.Alternative.Launcher.Controls
         public static readonly DependencyProperty CurrentStepProperty =
             DependencyProperty.Register("CurrentStep", typeof(object), typeof(WizardView), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty CurrentStepTemplateSelectorProperty =
+            DependencyProperty.Register("CurrentStepTemplateSelector", typeof(DataTemplateSelector), typeof(WizardView), new PropertyMetadata(null));
+
         private TransitionControl _currentStepControl;
 
         static WizardView()
@@ -93,6 +96,11 @@ namespace DCS.Alternative.Launcher.Controls
         {
             get { return GetValue(CurrentStepProperty); }
             set { SetValue(CurrentStepProperty, value); }
+        }
+        public DataTemplateSelector CurrentStepTemplateSelector
+        {
+            get { return (DataTemplateSelector)GetValue(CurrentStepTemplateSelectorProperty); }
+            set { SetValue(CurrentStepTemplateSelectorProperty, value); }
         }
         public WizardController Controller
         {
@@ -157,6 +165,7 @@ namespace DCS.Alternative.Launcher.Controls
             newValue.BeforeNext += OnBeforeNext;
 
             BindingHelper.BindProperty(newValue, this, CurrentStepProperty, "CurrentStep.Value");
+            BindingHelper.BindProperty(newValue, this, CurrentStepTemplateSelectorProperty, "DataTemplateSelector");
             BindingHelper.BindProperty(newValue, this, BackButtonVisibilityProperty, "IsBackVisible.Value", converter: VisibilityConverter.Instance);
             BindingHelper.BindProperty(newValue, this, NextButtonVisibilityProperty, "IsNextVisible.Value", converter: VisibilityConverter.Instance);
             BindingHelper.BindProperty(newValue, this, IsNextEnabledProperty, "CanGoNext.Value");

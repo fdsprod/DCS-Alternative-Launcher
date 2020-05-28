@@ -12,11 +12,11 @@ namespace DCS.Alternative.Launcher.Diagnostics
         private const uint PathBufferSize = 512;
         private readonly StringBuilder _pathBuffer = new StringBuilder((int) PathBufferSize);
         private int _dcsProcessCountLastCheck;
-        //private Timer _processMonitorTimer;
+        private Timer _processMonitorTimer;
 
         private DcsProcessMonitor()
         {
-            // _processMonitorTimer = new Timer(OnTick, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+             _processMonitorTimer = new Timer(OnTick, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
         }
 
         public static DcsProcessMonitor Instance

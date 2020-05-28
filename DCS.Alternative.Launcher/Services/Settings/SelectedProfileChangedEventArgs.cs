@@ -1,8 +1,9 @@
 ﻿using System;
+using DCS.Alternative.Launcher.DomainObjects;
 
 namespace DCS.Alternative.Launcher.Services.Settings
 {
-    public class SelectedProfileChangedEventArgs : EventArgs
+    public class SelectedProfileChangedEventArgs : DeferredEventArgs
     {
         public SelectedProfileChangedEventArgs(string profileName)
         {

@@ -117,7 +117,13 @@
                                          TintColor="#33000000"
                                          TintOpacity="1">
                             <Grid>
-                                <Image Width="75"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0"
+                                       Width="75"
                                        Height="75"
                                        Margin="30,0,0,0"
                                        HorizontalAlignment="Left"
@@ -130,39 +136,47 @@
                                         <DropShadowEffect BlurRadius="4" ShadowDepth="0" />
                                     </Image.Effect>
                                 </Image>
-                                <ItemsControl HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              ItemsSource="{Binding PluginsButtons}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Margin="0,10,0,0"
-                                                    Padding="20,5"
-                                                    Background="Transparent"
-                                                    Command="{Binding DataContext.ShowPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                                    CommandParameter="{Binding}"
-                                                    Cursor="Hand"
-                                                    Foreground="White"
-                                                    Style="{StaticResource ButtonRevealStyle}"
-                                                    WindowChrome.IsHitTestVisibleInChrome="True">
-                                                <TextBlock FontFamily="{StaticResource Prototype}"
-                                                           FontSize="24"
-                                                           FontWeight="Normal"
-                                                           Text="{Binding Name}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                            </Button>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
 
-                                <Grid Margin="0,10,20,0"
+                                <Viewbox Grid.Column="1"
+                                         Margin="50,0"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Center"
+                                         Stretch="Uniform">
+                                    <ItemsControl HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  ItemsSource="{Binding PluginsButtons}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Margin="0,10,0,0"
+                                                        Padding="20,5"
+                                                        Background="Transparent"
+                                                        Command="{Binding DataContext.ShowPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                        CommandParameter="{Binding}"
+                                                        Cursor="Hand"
+                                                        Foreground="White"
+                                                        Style="{StaticResource ButtonRevealStyle}"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                                    <TextBlock FontFamily="{StaticResource Prototype}"
+                                                               FontSize="24"
+                                                               FontWeight="Normal"
+                                                               Text="{Binding Name}">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect BlurRadius="8" ShadowDepth="0" />
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Viewbox>
+
+                                <Grid Grid.Column="2"
+                                      Margin="0,10,20,0"
                                       HorizontalAlignment="Right"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -258,6 +272,7 @@
                                 </Grid>
 
                                 <Button x:Name="CloseButton"
+                                        Grid.Column="2"
                                         Width="16"
                                         Height="16"
                                         Margin="5"

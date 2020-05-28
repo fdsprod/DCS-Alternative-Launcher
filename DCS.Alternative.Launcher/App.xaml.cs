@@ -5,13 +5,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using CommandLine;
-using DCS.Alternative.Launcher.Analytics;
 using DCS.Alternative.Launcher.Controls;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
@@ -71,7 +71,6 @@ namespace DCS.Alternative.Launcher
                 return;
             }
 
-            InitAnalytics(options);
             InitBrowserEmulation();
 
             new App().Run();
@@ -111,34 +110,11 @@ namespace DCS.Alternative.Launcher
                 }
                 catch
                 {
-                    // If this doesnt work, whatever...
+                    // If this doesn't work, whatever...
                 }
             }
 
             return false;
-        }
-
-        private static void InitAnalytics(CommandLineOptions options)
-        {
-            var anonymousUserId = GetUserId();
-
-            if (!options.NoAnalytics && anonymousUserId != Guid.Empty)
-            {
-                Tracker.Instance = new Tracker(
-                    new TrackerConfig
-                    {
-                        TrackerUrl = "https://ssl.google-analytics.com/collect",
-                        TrackerVersion = "1",
-                        TrackingId = "UA-146413649-1",
-                        AppName = "DCS Alternative Launcher",
-                        AppVersion = Version.ToString(),
-                        ClientId = anonymousUserId.ToString()
-                    });
-            }
-            else
-            {
-                Tracker.Instance = new NullTracker();
-            }
         }
 
         private static Guid GetUserId()
@@ -177,8 +153,8 @@ namespace DCS.Alternative.Launcher
         
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            _splashScreen = new SplashScreen();
-            MainWindow = _splashScreen;
+            MainWindow = _splashScreen = new SplashScreen();
+
             _splashScreen.Show();
 
             UiDispatcher.Initialize();
@@ -191,36 +167,43 @@ namespace DCS.Alternative.Launcher
 
             _eventRegistry = new ApplicationEventRegistry();
             _container = new Container();
+
             _mainWindow = new MainWindow();
+            _mainWindow.Loaded += OnMainWindowLoaded;
 
             await Task.WhenAll(RegisterServicesAsync());
             await Task.WhenAll(CheckForUpdatesAsync());
             await Task.WhenAll(UpdateDefinitionFilesAsync());
-            await Task.WhenAll(CheckSettingsExistAsync());
 
-            CheckFirstUse();
+            _mainWindow.DataContext = _container.Resolve<MainWindowViewModel>();
+            
+            await Task.WhenAll(InitializePluginsAsync());
+            await Task.WhenAll(FinalizeAppStartupAsync());
 
-            _mainWindow.DataContext = new MainWindowViewModel(_container);
-            _mainWindow.Loaded += _mainWindow_Loaded;
-
-            await Task.WhenAll(InitializePluginsAsync(), Task.Delay(250));
-
-            var settingsService = _container.Resolve<ISettingsService>();
+            await CheckFirstUseAsync();
 
             _splashScreen.Close();
 
-            if (!settingsService.GetValue(SettingsCategories.Launcher, SettingsKeys.AcknowledgedDisclaimer, false))
+            var settingsService = _container.Resolve<ILauncherSettingsService>();
+
+            if (!settingsService.GetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, false))
             {
                 MessageBoxEx.Show("DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder. Please make sure you have backed up your data before using this software. You've been warned.", "DISCLAIMER");
-                settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.AcknowledgedDisclaimer, true);
+                settingsService.SetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, true);
             }
 
-            MainWindow = _mainWindow;
-            _mainWindow.Show();
+            (MainWindow = _mainWindow).Show();
+
+            await _eventRegistry.InvokeApplicationStartupCompleteAsync(this, DeferredEventArgs.CreateEmpty());
 
             Tracer.Info("Startup Complete.");
-            Tracker.Instance.SendEvent(AnalyticsCategories.AppLifecycle, AnalyticsEvents.StartupComplete, Version.ToString());
+        }
 
+        private Task FinalizeAppStartupAsync()
+        {
+            _splashScreen.Status = "Almost there...";
+
+            return _eventRegistry.InvokeApplicationStartupAsync(this, DeferredEventArgs.CreateEmpty());
         }
 
         private async Task CheckForUpdatesAsync()
@@ -244,10 +227,11 @@ namespace DCS.Alternative.Launcher
             }
         }
 
-        private void CheckFirstUse()
+        private async Task CheckFirstUseAsync()
         {
-            var settingsService = _container.Resolve<ISettingsService>();
-            var profileSettingsService = _container.Resolve<IProfileSettingsService>();
+            var settingsService = _container.Resolve<ILauncherSettingsService>();
+            var profileSettingsService = _container.Resolve<IProfileService>();
+            var eventRegistry = _container.Resolve<ApplicationEventRegistry>();
 
             if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")) || 
                 string.IsNullOrEmpty(profileSettingsService.SelectedProfileName))
@@ -257,15 +241,20 @@ namespace DCS.Alternative.Launcher
                     container.Register<WizardController>().AsSingleton();
 
                     var wizard = new Wizard();
-
-                    var steps = new WizardStepBase[]
+                    var steps = new List<WizardStepBase>
                     {
                         new FirstUseWelcomeStepViewModel(container),
-                        new InstallationsWizardStepViewModel(container),
                         new CreateProfileWizardStepViewModel(container),
+                        new InstallationsWizardStepViewModel(container),
                     };
 
-                    var viewModel = new WizardViewModel(container, steps);
+                    var eventArgs = new AppendFirstUseWizardStepsEventArgs();
+
+                    await eventRegistry.InvokeAppendFirstUseWizardStepsAsync(this, eventArgs);
+
+                    steps.AddRange(eventArgs.Steps);
+
+                    var viewModel = new WizardViewModel(container, steps.ToArray());
 
                     Current.MainWindow = wizard;
 
@@ -277,42 +266,43 @@ namespace DCS.Alternative.Launcher
                     _splashScreen.Show();
                 }
                 
-                settingsService.SetValue(SettingsCategories.Launcher, SettingsKeys.IsFirstUseComplete, true);
+                settingsService.SetValue(LauncherCategories.Launcher, LauncherSettingKeys.IsFirstUseComplete, true);
             }
         }
 
-        private Task CheckSettingsExistAsync()
-        {
-            _splashScreen.Status = "Checking Settings...";
+        //private Task CheckSettingsExistAsync()
+        //{
+        //    _splashScreen.Status = "Checking Settings...";
 
-            if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")))
-            {
-                var settingsService = _container.Resolve<ISettingsService>();
-                var installs = InstallationLocator.Locate().ToArray();
+        //    if (!File.Exists(Path.Combine(ApplicationPaths.StoragePath, "settings.json")))
+        //    {
+        //        var settingsService = _container.Resolve<ILauncherSettingsService>();
+        //        var installs = InstallationLocator.Locate().ToArray();
 
-                settingsService.AddInstalls(installs.Select(i => i.Directory).ToArray());
-                settingsService.SelectedInstall = installs.FirstOrDefault();
-            }
+        //        settingsService.AddInstalls(installs.Select(i => i.Directory).ToArray());
+        //        settingsService.SelectedInstall = installs.FirstOrDefault();
+        //    }
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
-        private Task InitializePluginsAsync()
+        private async Task InitializePluginsAsync()
         {
             _splashScreen.Status = "Initializing Plugins...";
 
             Tracer.Info("Initializing Plugins.");
 
             var assembly = Assembly.GetEntryAssembly();
+            var plugins = new List<IPlugin>();
 
-            LoadPlugins(assembly);
+            plugins.AddRange(await GetPluginsAsync(assembly));
 
             foreach (var pluginPath in Directory.GetFiles(ApplicationPaths.PluginsPath, "*.dll"))
             {
                 try
                 {
                     var pluginAssembly = Assembly.LoadFrom(pluginPath);
-                    LoadPlugins(pluginAssembly);
+                    plugins.AddRange(await GetPluginsAsync(pluginAssembly));
                 }
                 catch (Exception e)
                 {
@@ -320,12 +310,22 @@ namespace DCS.Alternative.Launcher
                 }
             }
 
-            Tracer.Info("Plugins Complete.");
+            foreach (var plugin in plugins.OrderBy(plugin => plugin.LoadOrder))
+            {
+                await plugin.LoadAsync(_container);
 
-            return Task.FromResult(true);
+                var resources = plugin.ApplicationResources;
+
+                if(resources != null)
+                {
+                    Resources.MergedDictionaries.Add(resources);
+                }
+            }
+
+            Tracer.Info("Plugins Complete.");
         }
 
-        private void LoadPlugins(Assembly assembly)
+        private async Task<IEnumerable<IPlugin>> GetPluginsAsync(Assembly assembly)
         {
             var plugins = new List<IPlugin>();
 
@@ -334,16 +334,14 @@ namespace DCS.Alternative.Launcher
                 Tracer.Info($"Loading Plugin {type.FullName}.");
 
                 var plugin = (IPlugin) Activator.CreateInstance(type);
+
                 plugins.Add(plugin);
             }
 
-            foreach (var plugin in plugins.OrderBy(plugin => plugin.LoadOrder))
-            {
-                plugin.OnLoad(_container.GetChildContainer());
-            }
+            return plugins;
         }
 
-        private async void _mainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
             var navigationService = _container.Resolve<INavigationService>();
             var viewModel = _container.Resolve<GameViewModel>();
@@ -425,10 +423,10 @@ namespace DCS.Alternative.Launcher
             _container.Register(_eventRegistry);
             _container.Register<IAutoUpdateService, AutoUpdateService>(new AutoUpdateService());
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
-            _container.Register<ISettingsService, SettingsService>().AsSingleton().UsingConstructor(() => new SettingsService());
-            _container.Register<IProfileSettingsService, ProfileSettingsService>().AsSingleton().UsingConstructor(() => new ProfileSettingsService(_container));
+            _container.Register<ILauncherSettingsService, LauncherSettingsService>(new LauncherSettingsService());
+            _container.Register<IProfileService, ProfileService>(new ProfileService(_container));
             _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
-            _container.Register<IPluginNavigationSite, PluginNavigationSite>().AsSingleton().UsingConstructor(() => new PluginNavigationSite(_container));
+            _container.Register<IPluginNavigationSite, PluginNavigationSite>(new PluginNavigationSite(_container));
 
             return Task.FromResult(true);
         }
