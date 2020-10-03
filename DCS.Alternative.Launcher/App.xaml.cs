@@ -188,7 +188,7 @@ namespace DCS.Alternative.Launcher
 
             if (!settingsService.GetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, false))
             {
-                MessageBoxEx.Show("DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder. Please make sure you have backed up your data before using this software. You've been warned.", "DISCLAIMER");
+                MessageBoxEx.Show("DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder. Please make sure you have backed up your data before using this software. You've been warned :).", "DISCLAIMER");
                 settingsService.SetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, true);
             }
 
