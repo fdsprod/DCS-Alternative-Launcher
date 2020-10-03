@@ -163,7 +163,7 @@ namespace DCS.Alternative.Launcher.Diagnostics
         {
             var paths = GetPathsByProcessName("DCS");
 
-            return paths.Any(path => path == install.ExePath);
+            return paths.Any(path => string.Compare(path, install.ExePath, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
     }
 }

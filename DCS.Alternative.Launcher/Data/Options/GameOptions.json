@@ -7,6 +7,7 @@
 			{
 				"id": "enable",
 				"displayName": "Enable VR",
+				"description": "Launches DCS in VR mode.",
 				"value": false,
 				"Params": {},
 				"minMax": [],
@@ -14,6 +15,7 @@
 			{
 				"id": "pixel_density",
 				"displayName": "Pixel Density",
+				"description": "Pixel density is the number of pixels in a certain amount of space and it describes the sharpness and clarity for different types of displays.",
 				"value": 1,
 				"Params": {
 					"TickFrequency": "0.1",
@@ -24,55 +26,61 @@
 						"min": 0.5,
 						"max": 2.5
 					}
-				],
+				]
 
 			},
 			{
 				"id": "use_mouse",
 				"displayName": "Use Mouse",
+        "description": "If enabled the mouse will work much like it does outside of VR, allowing you to move it freely inside the cockpit environment.  When disabled it will be locked to the center of the viewport and you will need to move your head in order to place it on interactive controls within the cockpit.",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
 				"id": "box_mouse_cursor",
 				"displayName": "Confine Mouse Cursor to Game Window",
+        "description": "Limits the mouse movement to the game window.",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 			},
 			{
 				"id": "hand_controllers",
 				"displayName": "Use Hand Controllers",
+        "description": "Turns on the use of VR hand controllers.",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 			},
 			{
 				"id": "custom_IPD_enable",
 				"displayName": "Enable Custom Ipd",
+				"description": "Allows you to define a custom IPD (Interpupillary distance).",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 			},
 			{
 				"id": "custom_IPD",
 				"displayName": "Custom IPD",
+				"description": "When 'Enable Custom Ipd' is enabled, this value will be used as your IPD by the rendering engine.",
 				"value": "63.5",
 				"minMax": [
 					{
 						"min": 1,
 						"max": 5
 					}
-				],
+				]
 			},
 			{
 				"id": "prefer_built_in_audio",
 				"displayName": "Prefer Built In Audio",
+				"Ipd": null,
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 		]

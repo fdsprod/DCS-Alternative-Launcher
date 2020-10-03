@@ -66,6 +66,25 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             _checkPlayingTimer.Interval = TimeSpan.FromSeconds(1);
             _checkPlayingTimer.Tick += OnCheckPlayingTimerTick;
             _checkPlayingTimer.Start();
+
+            IsUpdatingDcs.Subscribe(OnIsUpdatingDcsChanged);
+        }
+
+        private async void OnIsUpdatingDcsChanged(bool value)
+        {
+            if (value)
+            {
+                return;
+            }
+
+            try
+            {
+                await CheckForUpdatesAsync();
+            }
+            catch(Exception e)
+            {
+                Tracer.Error(e);
+            }
         }
 
         private void OnCleanShaders()

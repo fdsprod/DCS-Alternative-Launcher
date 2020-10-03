@@ -18,7 +18,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
     public class SettingsViewModel : NavigationAwareBase
     {
-        private readonly IContainer _container;
         private readonly ApplicationEventRegistry _eventRegistry;
         private readonly SettingsController _controller;
         private readonly ILauncherSettingsService _settingsService;
@@ -26,7 +25,6 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public SettingsViewModel(IContainer container)
         {
-            _container = container;
             _eventRegistry = container.Resolve<ApplicationEventRegistry>();
             _controller = container.Resolve<SettingsController>();
             _settingsService = container.Resolve<ILauncherSettingsService>();

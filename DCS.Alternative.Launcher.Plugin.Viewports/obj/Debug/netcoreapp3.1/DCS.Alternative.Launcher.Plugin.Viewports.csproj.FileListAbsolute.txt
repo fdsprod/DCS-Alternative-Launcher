@@ -96,3 +96,4 @@ C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher.Pl
 C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher.Plugin.Viewports\obj\Debug\netcoreapp3.1\DCS.Alternative.Launcher.Plugin.Viewports.dll
 C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher.Plugin.Viewports\obj\Debug\netcoreapp3.1\DCS.Alternative.Launcher.Plugin.Viewports.pdb
 C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher.Plugin.Viewports\bin\Debug\netcoreapp3.1\Data\KnownModules.json
+C:\Users\fdspr\source\repos\DCS-Alternative-Launcher\DCS.Alternative.Launcher.Plugin.Viewports\bin\Debug\netcoreapp3.1\Data\Lua\entry_definitions.lua
