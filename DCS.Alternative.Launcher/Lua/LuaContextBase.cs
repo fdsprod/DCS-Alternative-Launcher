@@ -14,6 +14,7 @@ namespace DCS.Alternative.Launcher.Lua
         protected LuaContextBase()
         {
             _lua.State.Encoding = Encoding.UTF8;
+            _lua.DebugHook += Debug;
 
             RegisterFunction("print", this, typeof(LuaContextBase).GetMethod("Print", BindingFlags.Instance | BindingFlags.NonPublic));
 
@@ -21,6 +22,16 @@ namespace DCS.Alternative.Launcher.Lua
             DoFile(Path.Combine("Data", "Lua", "IO.lua"));
         }
 
+        public object this[string key]
+        {
+            get { return _lua[key]; }
+            set { _lua[key] = value; }
+        }
+
+        protected virtual void Debug(object sender, NLua.Event.DebugHookEventArgs e)
+        {
+        }
+        
         public void Dispose()
         {
             _lua?.Dispose();

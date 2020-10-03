@@ -1,5 +1,5 @@
 ﻿DCS.Alternative.Launcher.Plugin.Documentation
-
+1.0.0.0
 
 library
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 
 1-1527231872
 
-61827412871
-223585864766
+71148268283
+2231971588306
 Views\ManualsView.xaml;
 
-False
+True
 

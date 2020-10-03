@@ -43,7 +43,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         {
             return _container.GetChildContainer();
         }
-        public Task<Module[]> GetInstalledAircraftModulesAsync()
+        public Task<ModuleBase[]> GetInstalledAircraftModulesAsync()
         {
             return _dcsWorldService.GetInstalledAircraftModulesAsync();
         }
@@ -62,14 +62,14 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             return options;
         }
 
-        public DcsOptionsCategory[] GetDcsOptionCategories()
+        public GameOptionsCategory[] GetDcsOptionCategories()
         {
-            return _profileService.GetDcsOptions();
+            return _profileService.GetGameOptions();
         }
 
-        public DcsOptionsCategory[] GetDcsCategoryOptionForInstall(InstallLocation install, bool isVr)
+        public GameOptionsCategory[] GetDcsCategoryOptionForInstall(InstallLocation install, bool isVr)
         {
-            var categories = _profileService.GetDcsOptions();
+            var categories = _profileService.GetGameOptions();
 
             using (var context = new OptionLuaContext(install))
             {
@@ -134,7 +134,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public object ResetDcsOption(string categoryId, string optionId)
         {
-            var categories = _profileService.GetDcsOptions();
+            var categories = _profileService.GetGameOptions();
             var category = categories.FirstOrDefault(c => c.Id == categoryId);
             var option = category.Options.FirstOrDefault(o => o.Id == optionId);
 

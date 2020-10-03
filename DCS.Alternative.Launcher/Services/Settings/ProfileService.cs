@@ -22,7 +22,7 @@ namespace DCS.Alternative.Launcher.Services.Settings
         private Dictionary<string, Option[]> _advancedOptionCache;
         private Dictionary<string, Option[]> _defaultAdvancedOptionCache;
 
-        private DcsOptionsCategory[] _dcsOptions;
+        private GameOptionsCategory[] _gameOptions;
         private Profile _selectedProfile;
 
         public ProfileService(IContainer container)
@@ -174,21 +174,21 @@ namespace DCS.Alternative.Launcher.Services.Settings
             _selectedProfile.DeleteValue(category, key);
         }
 
-        public DcsOptionsCategory[] GetDcsOptions()
+        public GameOptionsCategory[] GetGameOptions()
         {
             if (_advancedOptionCache == null)
             {
-                var options = new List<DcsOptionsCategory>();
+                var options = new List<GameOptionsCategory>();
                 var path = "Data/Options/GameOptions.json";
                 var contents = File.ReadAllText(path);
-                var allOptions = JsonConvert.DeserializeObject<DcsOptionsCategory[]>(contents);
+                var allOptions = JsonConvert.DeserializeObject<GameOptionsCategory[]>(contents);
 
                 options.AddRange(allOptions);
 
                 path = Path.Combine(ApplicationPaths.OptionsPath, "GameOptions.json");
                 contents = File.ReadAllText(path);
 
-                var customOptions = JsonConvert.DeserializeObject<DcsOptionsCategory[]>(contents);
+                var customOptions = JsonConvert.DeserializeObject<GameOptionsCategory[]>(contents);
 
                 foreach (var option in customOptions)
                 {
@@ -205,10 +205,10 @@ namespace DCS.Alternative.Launcher.Services.Settings
                 }
 
 
-                _dcsOptions = options.ToArray();
+                _gameOptions = options.ToArray();
             }
 
-            return _dcsOptions;
+            return _gameOptions;
         }
 
         private Dictionary<string, Option[]> GetAdvancedOptions()

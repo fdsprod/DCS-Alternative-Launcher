@@ -2,9 +2,25 @@
 
 namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public class Module
+    public abstract class ModuleBase
     {
+        protected ModuleBase(string baseFolderPath, ModuleClassification classification)
+        {
+            BaseFolderPath = baseFolderPath;
+            Classification = classification;
+        }
+
+        public ModuleClassification Classification
+        {
+            get;
+        }
+
         public string BaseFolderPath
+        {
+            get;
+        }
+
+        public bool IsActive
         {
             get;
             set;
@@ -23,10 +39,6 @@ namespace DCS.Alternative.Launcher.DomainObjects
 
                 return path;
             }
-        }
-        public string CockpitScriptsFolderPath
-        {
-            get { return Path.Combine(BaseFolderPath, "Cockpit\\Scripts"); }
         }
 
         public string IconPath

@@ -1,6 +1,6 @@
 ﻿namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public class DcsOptionsCategory
+    public class GameOptionsCategory
     {
         public string Id
         {

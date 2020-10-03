@@ -18,10 +18,10 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Dialogs
     public class ViewportEditorWindowViewModel
     {
         private readonly ViewportDevice[] _devices;
-        private readonly Module _module;
+        private readonly ModuleBase _module;
         public readonly string MonitorId;
 
-        public ViewportEditorWindowViewModel(IContainer container, bool isPreview, string monitorId, Module module, ViewportDevice[] devices, ViewportModel[] viewports)
+        public ViewportEditorWindowViewModel(IContainer container, bool isPreview, string monitorId, ModuleBase module, ViewportDevice[] devices, ViewportModel[] viewports)
         {
             MonitorId = monitorId;
 

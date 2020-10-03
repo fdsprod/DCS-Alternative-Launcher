@@ -16,7 +16,7 @@ namespace DCS.Alternative.Launcher.Services
 
         Option[] GetAdvancedOptions(string category);
 
-        DcsOptionsCategory[] GetDcsOptions();
+        GameOptionsCategory[] GetGameOptions();
 
         T GetValue<T>(string category, string key, T defaultValue = default(T));
 

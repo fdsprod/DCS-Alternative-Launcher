@@ -13,8 +13,8 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 121596080746
 
 35-565486423
-223585864766
+2231971588306
 Controls\ViewportsSettingsControl.xaml;Dialogs\MonitorOverlay.xaml;Dialogs\SelectViewportDialog.xaml;Dialogs\ViewportEditorWindow.xaml;ViewportResources.xaml;Views\Settings\ViewportOptionsView.xaml;Windows\SnipViewportWindow.xaml;Wizards\FirstUse\SelectDeviceViewportScreensStepView.xaml;Wizards\FirstUse\SelectGameViewportScreensStepView.xaml;Wizards\FirstUse\SelectInitialViewportsWizardStepView.xaml;Wizards\FirstUse\SelectUIViewportScreensStepView.xaml;Wizards\Settings\SelectViewportsWizardStepView.xaml;
 
-False
+True
 

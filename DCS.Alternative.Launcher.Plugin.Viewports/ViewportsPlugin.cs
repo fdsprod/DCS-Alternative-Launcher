@@ -56,7 +56,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports
 
             var eventRegistry = container.Resolve<ApplicationEventRegistry>();
 
-            eventRegistry.PopulateSettings += PopulateSettings;
+            //eventRegistry.PopulateSettings += PopulateSettings;
 
             _dcsWorldService = container.Resolve<IDcsWorldService>();
             _viewportService = container.Resolve<IViewportService>();

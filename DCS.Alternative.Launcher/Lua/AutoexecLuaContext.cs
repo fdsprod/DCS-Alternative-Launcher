@@ -32,6 +32,7 @@ namespace DCS.Alternative.Launcher.Lua
 
             Reload();
         }
+
         public void Reload()
         {
             if (File.Exists(_autoexecPath))

@@ -5,15 +5,19 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.ServiceModel.Syndication;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
+using DCS.Alternative.Launcher.DomainObjects.Dcs;
 using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.ServiceModel.Syndication;
+using DCS.Alternative.Launcher.Storage.Modules;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,7 +29,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
     {
         private readonly IContainer _container;
         private readonly IProfileService _profileService;
-        private readonly Dictionary<string, Module> _modules = new Dictionary<string, Module>();
+        private readonly Dictionary<string, ModuleBase> _modules = new Dictionary<string, ModuleBase>();
 
         public DcsWorldService(IContainer container)
         {
@@ -43,10 +47,15 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             _modules.Clear();
         }
 
-        public Task<Module[]> GetInstalledAircraftModulesAsync()
+        public Task<KnownModuleDefinition[]> GetKnownModuleDefinitionsAsync(ModuleClassification? classification = null)
         {
-            Tracer.Info("Searching DCS for installed modules.");
+            var knownModules = KnownModuleDefinitionStorageAdapter.GetAll();
 
+            return Task.FromResult(knownModules.Where(k=>k.Classification == (classification ?? k.Classification)).ToArray());
+        }
+
+        public Task<ModuleBase[]> GetAllModulesAsync()
+        {
             var install = _profileService.GetSelectedInstall();
 
             if (!install.IsValidInstall)
@@ -55,156 +64,34 @@ namespace DCS.Alternative.Launcher.Services.Dcs
                 return Task.FromResult(_modules.Values.ToArray());
             }
 
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
-                var autoUpdateModules = new List<string>(install.Modules)
+                var modules = new List<ModuleBase>();
+
+                modules.AddRange(await GetInstalledAircraftModulesAsync());
+
+                return modules.ToArray();
+            });
+        }
+
+        public Task<ModuleBase[]> GetInstalledAircraftModulesAsync()
+        {
+            Tracer.Info("Searching DCS for installed modules.");
+
+            var install = _profileService.GetSelectedInstall();
+
+            if (!install.IsValidInstall)
+            {
+                Tracer.Info("Current install is invalid, aborting...");
+                return Task.FromResult(new ModuleBase[0]);
+            }
+
+            return Task.Run( () =>
+            {
+                using (var context = new AircraftModuleLuaContext(install))
                 {
-                    "Su-25T",
-                    "TF-51D"
-                };
-
-                var aircraftFolders = Directory.GetDirectories(Path.Combine(install.Directory, "Mods//aircraft"));
-
-                foreach (var folder in aircraftFolders)
-                {
-                    using (var lua = new NLua.Lua())
-                    {
-                        lua.State.Encoding = Encoding.UTF8;
-
-                        var entryPath = Path.Combine(folder, "entry.lua");
-
-                        lua.DoString(
-                            @"function _(s) return s end
-                                function mount_vfs_liveries_path() end
-                                function mount_vfs_texture_path() end
-                                function mount_vfs_sound_path() end
-                                function mount_vfs_model_path() end
-                                function make_view_settings() end
-                                function set_manual_path() end
-                                function dofile() end
-                                function plugin_done() end
-                                function make_flyable() end
-                                function MAC_flyable() end
-                                function turn_on_waypoint_panel() end
-                                AV8BFM = {}
-                                F86FM = {}
-                                F5E = {}
-                                FA18C = {}
-                                F15FM = {}
-                                F16C = {}
-                                FM = {}
-                                M2KFM = {}
-                                Mig15FM = {}
-                                MIG19PFM = {}
-                                SA342FM = {}
-                                JF17_FM = {}
-                                function add_plugin_systems() end
-                                " + $"__DCS_VERSION__ = \"{install.Version}\"");
-
-                        var directoryName = Path.GetDirectoryName(folder);
-
-                        lua.DoString($"current_mod_path = \"{folder.Replace("\\", "\\\\")}\"");
-
-                        var moduleId = string.Empty;
-                        var skinsPath = string.Empty;
-                        var displayName = string.Empty;
-
-                        lua["declare_plugin"] = new Action<string, LuaTable>((id, description) =>
-                        {
-                            if (description.Keys.OfType<string>().All(k => k != "installed" && k != "update_id"))
-                            {
-                                return;
-                            }
-
-                            moduleId = 
-                                description.Keys.OfType<string>().All(k => k != "update_id") 
-                                    ? description["fileMenuName"]?.ToString()
-                                    : description["update_id"]?.ToString();
-
-                            var skinsTable = description["Skins"] as LuaTable;
-
-                            if (skinsTable != null)
-                            {
-                                skinsPath = ((LuaTable)skinsTable[1])["dir"].ToString();
-                            }
-
-                            var missionsTable = description["Missions"] as LuaTable;
-
-                            if (missionsTable != null)
-                            {
-                                displayName = ((LuaTable) missionsTable[1])["name"].ToString();
-                            }
-                        });
-
-                        var makeFlyableAction = new Action<string, string, LuaTable, string>((a, b, c, d) =>
-                        {
-                            if (displayName.Contains("_hornet"))
-                            {
-                                displayName = displayName.Split('_')[0];
-                            }
-
-                            if (_modules.ContainsKey($"{moduleId}_{a}"))
-                            {
-                                return;
-                            }
-
-                            if (!string.IsNullOrEmpty(moduleId) && autoUpdateModules.Contains(moduleId) && moduleId != "FC3")
-                            {
-                                var module = new Module
-                                {
-                                    ModuleId = moduleId,
-                                    DisplayName = displayName,
-                                    LoadingImagePath = Path.Combine(folder, skinsPath, "ME", "loading-window.png"),
-                                    MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
-                                    BaseFolderPath = folder,
-                                    IconPath = Path.Combine(folder, skinsPath, "icon.png"),
-                                };
-
-                                _modules.Add($"{moduleId}_{a}", module);
-
-                                Tracer.Debug($"Found module {displayName}.");
-                            }
-                            else if (moduleId == "FC3")
-                            {
-                                //fc3Added = true;
-
-                                var module = new Module
-                                {
-                                    ModuleId = moduleId,
-                                    DisplayName = displayName,
-                                    IsFC3 = true,
-                                    FC3ModuleId = a,
-                                    LoadingImagePath = Path.Combine(folder, skinsPath, "ME", "loading-window.png"),
-                                    MainMenuLogoPath = Path.Combine(folder, skinsPath, "ME", "MainMenulogo.png"),
-                                    BaseFolderPath = folder,
-                                    IconPath = Path.Combine(folder, skinsPath, "icon.png"),
-                                };
-
-                                _modules.Add($"{moduleId}_{a}", module);
-
-                                Tracer.Debug($"Found module {displayName} {a}.");
-                            }
-                            else
-                            {
-                                Tracer.Debug($"Not loading module '{moduleId} - {displayName}' parameters ('{a}', '{b}', '{d}'.");
-                            }
-                        });
-
-                        lua["make_flyable"] = makeFlyableAction;
-                        lua["MAC_flyable"] = makeFlyableAction;
-                        
-                        try
-                        {
-                            lua.DoFile(entryPath);
-                        }
-                        catch (Exception e)
-                        {
-                            Tracer.Error(e.Message);
-                        }
-                    }
+                    return context.GetModules();
                 }
-
-                return _modules.Values.ToArray();
             });
         }
 
@@ -331,7 +218,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
             return Task.Run(() =>
             {
                 var install = _profileService.GetSelectedInstall();
-                var categories = _profileService.GetDcsOptions();
+                var categories = _profileService.GetGameOptions();
                 var optionsFile = Path.Combine(install.SavedGamesPath, "Config", "options.lua");
 
                 if (!File.Exists(optionsFile))

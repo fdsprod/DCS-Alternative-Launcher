@@ -14,7 +14,7 @@ namespace DCS.Alternative.Launcher.Plugin.Documentation.Views
             _dcsWorldService = container.Resolve<IDcsWorldService>();
         }
 
-        public Task<Module[]> GetModulesAsync()
+        public Task<ModuleBase[]> GetModulesAsync()
         {
             return _dcsWorldService.GetInstalledAircraftModulesAsync();
         }

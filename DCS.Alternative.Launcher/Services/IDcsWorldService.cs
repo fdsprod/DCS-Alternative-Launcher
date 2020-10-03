@@ -8,7 +8,9 @@ namespace DCS.Alternative.Launcher.Services
 {
     public interface IDcsWorldService
     {
-        Task<Module[]> GetInstalledAircraftModulesAsync();
+        Task<ModuleBase[]> GetAllModulesAsync();
+
+        Task<ModuleBase[]> GetInstalledAircraftModulesAsync();
 
         Task<string> GetLatestYoutubeVideoUrlAsync();
 

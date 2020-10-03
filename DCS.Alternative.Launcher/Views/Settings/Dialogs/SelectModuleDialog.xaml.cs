@@ -7,26 +7,26 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Dialogs
     public partial class SelectModuleDialog : Window
     {
         public static readonly DependencyProperty SelectedModuleProperty =
-            DependencyProperty.Register("SelectedModule", typeof(Module), typeof(SelectModuleDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("SelectedModule", typeof(ModuleBase), typeof(SelectModuleDialog), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ModulesProperty =
-            DependencyProperty.Register("ModulesProperty", typeof(ReactiveCollection<Module>), typeof(SelectModuleDialog), new PropertyMetadata(new ReactiveCollection<Module>()));
+            DependencyProperty.Register("ModulesProperty", typeof(ReactiveCollection<ModuleBase>), typeof(SelectModuleDialog), new PropertyMetadata(new ReactiveCollection<ModuleBase>()));
 
         public SelectModuleDialog()
         {
             InitializeComponent();
 
-            Modules = new ReactiveCollection<Module>();
+            Modules = new ReactiveCollection<ModuleBase>();
         }
 
-        public Module SelectedModule
+        public ModuleBase SelectedModule
         {
-            get { return (Module) GetValue(SelectedModuleProperty); }
+            get { return (ModuleBase) GetValue(SelectedModuleProperty); }
             set { SetValue(SelectedModuleProperty, value); }
         }
-        public ReactiveCollection<Module> Modules
+        public ReactiveCollection<ModuleBase> Modules
         {
-            get { return (ReactiveCollection<Module>) GetValue(ModulesProperty); }
+            get { return (ReactiveCollection<ModuleBase>) GetValue(ModulesProperty); }
             set { SetValue(ModulesProperty, value); }
         }
 

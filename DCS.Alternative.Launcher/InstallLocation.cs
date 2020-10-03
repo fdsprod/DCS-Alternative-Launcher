@@ -25,7 +25,7 @@ namespace DCS.Alternative.Launcher
             RefreshInfo();
         }
 
-        public string[] Modules
+        public string[] AutoUpdateConfigModules
         {
             get { return _config?.Modules ?? new string[0]; }
         }

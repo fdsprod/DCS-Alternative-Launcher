@@ -121,7 +121,7 @@ namespace DCS.Alternative.Launcher.Plugin.Documentation.Views
 
     public class ModuleDocumentModel
     {
-        public Module Module
+        public ModuleBase Module
         {
             get;
             set;

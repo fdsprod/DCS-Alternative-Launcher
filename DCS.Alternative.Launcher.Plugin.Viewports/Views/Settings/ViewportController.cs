@@ -45,7 +45,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Views.Settings
             return _profileService.GetValue(ViewportProfileCategories.Viewports, ViewportSettingKeys.DeviceViewportsDisplays, new string[0]);
         }
 
-        public async Task<Viewport[]> EditViewportsAsync(string templateName, string exampleImageUrl, Module module, Viewport[] viewports)
+        public async Task<Viewport[]> EditViewportsAsync(string templateName, string exampleImageUrl, ModuleBase module, Viewport[] viewports)
         {
             var deviceViewportMonitorIds = GetDeviceViewportMonitorIds();
             var screens = Screen.AllScreens.Where(s => deviceViewportMonitorIds.Contains(s.DeviceName)).ToArray();

@@ -9,7 +9,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Models
     {
         public readonly ModuleViewportTemplate Template;
 
-        public ModuleViewportModel(string name, string imageUrl, Module module, IEnumerable<Viewport> viewports, ModuleViewportTemplate template = null)
+        public ModuleViewportModel(string name, string imageUrl, ModuleBase module, IEnumerable<Viewport> viewports, ModuleViewportTemplate template = null)
         {
             Name.Value = name;
             ImageUrl.Value = imageUrl;
@@ -40,10 +40,10 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Models
             get;
         } = new ReactiveProperty<string>();
 
-        public ReactiveProperty<Module> Module
+        public ReactiveProperty<ModuleBase> Module
         {
             get;
-        } = new ReactiveProperty<Module>();
+        } = new ReactiveProperty<ModuleBase>();
 
         public ReactiveProperty<bool> IsValidSetup
         {
