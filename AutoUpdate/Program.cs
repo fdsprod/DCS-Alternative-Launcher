@@ -43,7 +43,7 @@ namespace AutoUpdate
 
                     File.Move(file, destFile);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     if (File.Exists(updatingPath))
                     {
@@ -61,7 +61,7 @@ namespace AutoUpdate
 
                         File.Delete(file);
                     }
-                    catch (Exception e)
+                    catch 
                     {
 
                     }

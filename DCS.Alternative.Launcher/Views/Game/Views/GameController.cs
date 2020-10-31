@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.ServiceModel;
@@ -9,7 +10,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 {
     public class GameController
     {
-        public readonly IDcsWorldService _dcsWorldService;
+        public readonly IDcsWorldManager _dcsWorldManager;
         public readonly IProfileService _profileService;
         public readonly ILauncherSettingsService _settingsService;
         public readonly ApplicationEventRegistry _eventRegistry;
@@ -17,7 +18,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         public GameController(IContainer container)
         {
             _settingsService = container.Resolve<ILauncherSettingsService>();
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
             _eventRegistry = container.Resolve<ApplicationEventRegistry>();
             _profileService = container.Resolve<IProfileService>();
 
@@ -75,13 +76,13 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                await _dcsWorldService.WriteOptionsAsync();
-                await _dcsWorldService.UpdateAdvancedOptionsAsync();
+                await _dcsWorldManager.WriteOptionsAsync();
+                await _dcsWorldManager.UpdateAdvancedOptionsAsync();
 
                 await _eventRegistry.InvokeBeforeDcsLaunchedAsync(this, DeferredEventArgs.CreateEmpty());
 
-                //await _dcsWorldService.PatchViewportsAsync();
-                //await _dcsWorldService.WriteViewportOptionsAsync();
+                //await _dcsWorldManager.PatchViewportsAsync();
+                //await _dcsWorldManager.WriteViewportOptionsAsync();
 
                 var processInfo = new ProcessStartInfo(install.ExePath)
                 {
@@ -92,6 +93,40 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
                 await _eventRegistry.InvokeAfterDcsLaunchedAsync(this, DeferredEventArgs.CreateEmpty());
             });
+        }
+
+        public void CleanupShaders(InstallLocation install)
+        {
+            var path = Path.Combine(install.SavedGamesPath, "fxo");
+
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+
+            path = Path.Combine(install.SavedGamesPath, "metashaders");
+
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+
+            path = Path.Combine(install.SavedGamesPath, "metashaders2");
+
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+        }
+
+        public void ShowUrl(string url)
+        {
+            var ps = new ProcessStartInfo(url)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
     }
 }

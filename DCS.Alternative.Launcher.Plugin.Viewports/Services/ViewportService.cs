@@ -16,12 +16,12 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Services
 {
     internal class ViewportService : IViewportService
     {
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly IProfileService _profileService;
 
         public ViewportService(IContainer container)
         {
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
             _profileService = container.Resolve<IProfileService>();
         }
 
@@ -115,7 +115,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Services
         public async Task WriteViewportOptionsAsync()
         {
             var install = _profileService.GetSelectedInstall();
-            var modules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+            var modules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
 
             foreach (var module in modules)
             {
@@ -264,7 +264,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Services
             {
                 var install = _profileService.GetSelectedInstall();
                 var viewportTemplates = GetViewportTemplates();
-                var modules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+                var modules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
 
                 foreach (var template in viewportTemplates)
                 {

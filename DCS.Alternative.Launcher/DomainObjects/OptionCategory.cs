@@ -10,7 +10,8 @@
             CameraMirrors,
             Camera,
             Graphics,
-            Sound
+            Sound,
+            General,
         };
 
         public const string TerrainReflection = "options.graphics.terrainreflection";
@@ -20,5 +21,6 @@
         public const string Camera = "options.graphics.Camera";
         public const string Graphics = "options.graphics";
         public const string Sound = "options.sound";
+        public const string General = "";
     }
 }

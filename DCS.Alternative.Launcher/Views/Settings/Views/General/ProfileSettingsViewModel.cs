@@ -91,6 +91,7 @@ namespace DCS.Alternative.Launcher.Views.Settings.Views.General
                     var steps = new WizardStepBase[]
                     {
                         new CreateProfileWizardStepViewModel(container),
+                        new InstallationsWizardStepViewModel(container),
                     };
 
                     var viewModel = new WizardViewModel(container, steps);

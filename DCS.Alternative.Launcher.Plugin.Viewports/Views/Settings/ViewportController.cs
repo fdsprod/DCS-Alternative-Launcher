@@ -30,14 +30,14 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Views.Settings
         private readonly IContainer _container;
         private readonly IProfileService _profileService;
         private readonly IViewportService _viewportService;
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
 
         public ViewportController(IContainer container)
         {
             _container = container;
             _profileService = container.Resolve<IProfileService>();
             _viewportService = container.Resolve<IViewportService>();
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
         }
 
         public string[] GetDeviceViewportMonitorIds()
@@ -265,7 +265,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Views.Settings
             usedScreens.Add(Screen.PrimaryScreen);
 
             var viewportTemplates = _viewportService.GetViewportTemplates();
-            var installedModules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+            var installedModules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
 
             realBounds = Screen.PrimaryScreen.Bounds;
 

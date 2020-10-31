@@ -12,7 +12,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports
 {
     public class ViewportsPlugin : PluginBase
     {
-        private IDcsWorldService _dcsWorldService;
+        private IDcsWorldManager _dcsWorldManager;
         private IViewportService _viewportService;
 
         public ViewportsPlugin()
@@ -58,7 +58,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports
 
             //eventRegistry.PopulateSettings += PopulateSettings;
 
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
             _viewportService = container.Resolve<IViewportService>();
 
             return base.RegisterContainerItemsAsync(container);
@@ -70,7 +70,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports
             {
                 try
                 {
-                    var modules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+                    var modules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
                     var container = e.Controller.GetChildContainer();
                     var viewportController = container.Resolve<ViewportController>();
 

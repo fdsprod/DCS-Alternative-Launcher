@@ -13,7 +13,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Wizards.FirstUse
 {
     public class SelectInitialViewportsWizardStepViewModel : WizardStepBase
     {
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly IProfileService _profileService;
         private readonly IViewportService _viewportService;
 
@@ -21,7 +21,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Wizards.FirstUse
             : base(container)
         {
             _viewportService = container.Resolve<IViewportService>();
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
             _profileService = container.Resolve<IProfileService>();
         }
 
@@ -33,7 +33,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Wizards.FirstUse
         public override async Task ActivateAsync()
         {
             var defaultViewportTemplates = _viewportService.GetDefaultViewportTemplates();
-            var installedModules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+            var installedModules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
             var templates = defaultViewportTemplates.Where(vp => installedModules.Any(m => m.ModuleId == vp.ModuleId)).ToArray();
 
             if (templates.Length == 0)

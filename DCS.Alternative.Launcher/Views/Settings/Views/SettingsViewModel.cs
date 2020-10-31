@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Cache;
-using System.Threading.Tasks;
-using DCS.Alternative.Launcher.ComponentModel;
+﻿using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.Plugins.Settings.Views.Advanced;
@@ -13,6 +8,10 @@ using DCS.Alternative.Launcher.Services;
 using DCS.Alternative.Launcher.Services.Settings;
 using DCS.Alternative.Launcher.Views.Settings.Views.General;
 using Reactive.Bindings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 {
@@ -51,7 +50,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             {
                 using (e.GetDeferral())
                 {
-                    for (var i = Categories.Count - 1; i >= 3; i--)
+                    for (var i = Categories.Count - 1; i >= 2; i--)
                     {
                         Categories.RemoveAt(i);
                     }
@@ -108,7 +107,8 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
             }
 
             Categories.Add(new CategoryHeaderSettingsViewModel($"    ADVANCED"));
-            Categories.Add(new GraphicsSettingsViewModel(_controller));
+            Categories.Add(new GeneralSettingsViewModel(_controller)); 
+            Categories.Add(new GraphicsSettingsViewModel(_controller)); 
             //Categories.Add(new CameraSettingsViewModel(_controller));
             //Categories.Add(new CameraMirrorsSettingsViewModel(_controller));
             //Categories.Add(new TerrainSettingsViewModel(_controller));

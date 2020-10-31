@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -11,7 +9,6 @@ using DCS.Alternative.Launcher.ComponentModel;
 using DCS.Alternative.Launcher.Controls.MessageBoxEx;
 using DCS.Alternative.Launcher.Diagnostics;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
-using DCS.Alternative.Launcher.DomainObjects;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
 using DCS.Alternative.Launcher.Services;
@@ -24,10 +21,10 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
     {
         private readonly IContainer _container;
         private readonly GameController _controller;
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly IProfileService _profileService;
 
-        private DispatcherTimer _checkPlayingTimer;
+        private readonly DispatcherTimer _checkPlayingTimer;
 
         public GameViewModel(IContainer container)
         {
@@ -37,7 +34,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
             _controller = container.Resolve<GameController>();
 
             _profileService = _container.Resolve<IProfileService>();
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
 
             IsUpdateAvailable =
                 IsDcsOutOfDate.AsObservable().Merge(
@@ -45,6 +42,8 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                             IsLoading.AsObservable().Merge(
                                 FailedVersionCheck.AsObservable()))).Select(_ => IsDcsOutOfDate.Value && !IsLoading.Value && !IsCheckingLatestVersion.Value && !FailedVersionCheck.Value)
                     .ToReactiveProperty();
+
+            IsUpdateAvailable.Subscribe(OnIsUpdateAvailableChange);
 
             var canPlayObservable =
                 SelectedInstall
@@ -99,26 +98,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
                     return;
                 }
 
-                var path = Path.Combine(install.SavedGamesPath, "fxo");
-
-                if (Directory.Exists(path))
-                {
-                    Directory.Delete(path, true);
-                }
-
-                path = Path.Combine(install.SavedGamesPath, "metashaders");
-
-                if (Directory.Exists(path))
-                {
-                    Directory.Delete(path, true);
-                }
-                
-                path = Path.Combine(install.SavedGamesPath, "metashaders2");
-
-                if (Directory.Exists(path))
-                {
-                    Directory.Delete(path, true);
-                }
+                _controller.CleanupShaders(install);
             }
             catch (Exception e)
             {
@@ -130,8 +110,29 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private void OnDcsProcessExited(object sender, EventArgs e)
         {
-            Application.Current.MainWindow?.Show();
-            Application.Current.MainWindow?.BringIntoView();
+            Dispatcher.CurrentDispatcher.Invoke(
+                () =>
+                {
+                    Application.Current.MainWindow?.Show();
+                    Application.Current.MainWindow?.BringIntoView();
+                });
+        }
+
+        private async void OnIsUpdateAvailableChange(bool value)
+        {
+            if (value)
+            {
+                return;
+            }
+
+            try
+            {
+                await CheckForUpdatesAsync();
+            }
+            catch (Exception e)
+            {
+                GeneralExceptionHandler.Instance.OnError(e);
+            }
         }
 
         private void OnCheckPlayingTimerTick(object sender, EventArgs e)
@@ -141,10 +142,14 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private void CheckDcsStatus()
         {
-            IsPlayingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallRunning(SelectedInstall.Value);
-            IsUpdatingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallUpdating(SelectedInstall.Value);
+            Dispatcher.CurrentDispatcher.Invoke(
+                () =>
+                {
+                    IsPlayingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallRunning(SelectedInstall.Value);
+                    IsUpdatingDcs.Value = SelectedInstall.Value != null && DcsProcessMonitor.Instance.IsDcsInstallUpdating(SelectedInstall.Value);
 
-            UpdatePlayButtonText();
+                    UpdatePlayButtonText();
+                });
         }
 
         private bool CanLaunchDcs()
@@ -185,7 +190,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         public ReactiveProperty<bool> IsUpdateAvailable
         {
             get;
-        } = new ReactiveProperty<bool>();
+        }
 
         public ReactiveProperty<bool> IsCheckingLatestVersion
         {
@@ -264,12 +269,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private void OnShowNewsArticle(NewsArticleModel model)
         {
-            var ps = new ProcessStartInfo(model.Url.Value)
-            {
-                UseShellExecute = true,
-                Verb = "open"
-            };
-            Process.Start(ps);
+            _controller.ShowUrl(model.Url.Value);
         }
 
         private async void OnCheckForUpdates()
@@ -297,7 +297,7 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
                 try
                 {
-                    var latestVersions = await _dcsWorldService.GetLatestVersionsAsync();
+                    var latestVersions = await _dcsWorldManager.GetLatestVersionsAsync();
                     var variant = install.Variant;
 
                     install.RefreshInfo();
@@ -370,12 +370,12 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
 
         private async Task FetchLatestYouTubeAsync()
         {
-            LatestYouTubeUrl.Value = await _dcsWorldService.GetLatestYoutubeVideoUrlAsync();
+            LatestYouTubeUrl.Value = await _dcsWorldManager.GetLatestYoutubeVideoUrlAsync();
         }
 
         private async Task FetchNewsAsync()
         {
-            var articles = await _dcsWorldService.GetLatestNewsArticlesAsync(2);
+            var articles = await _dcsWorldManager.GetLatestNewsArticlesAsync(2);
 
             LatestNewsArticle.Value = articles.FirstOrDefault();
             PreviousNewsArticle.Value = articles.Skip(1).FirstOrDefault();
@@ -391,6 +391,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         private async void OnLaunchDcs()
         {
             var window = Application.Current.MainWindow;
+
+            if (window == null)
+            {
+                return;
+            }
 
             try
             {
@@ -413,6 +418,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         {
             var window = Application.Current.MainWindow;
 
+            if (window == null)
+            {
+                return;
+            }
+
             try
             {
                 window.WindowState = WindowState.Minimized;
@@ -431,6 +441,11 @@ namespace DCS.Alternative.Launcher.Plugins.Game.Views
         private async void OnRepairDcs()
         {
             var window = Application.Current.MainWindow;
+
+            if (window == null)
+            {
+                return;
+            }
 
             try
             {

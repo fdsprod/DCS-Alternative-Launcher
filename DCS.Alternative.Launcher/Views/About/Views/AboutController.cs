@@ -5,13 +5,13 @@ namespace DCS.Alternative.Launcher.Plugins.About.Views
 {
     public class AboutController
     {
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly ILauncherSettingsService _settingsService;
 
         public AboutController(IContainer container)
         {
             _settingsService = container.Resolve<ILauncherSettingsService>();
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
         }
     }
 }

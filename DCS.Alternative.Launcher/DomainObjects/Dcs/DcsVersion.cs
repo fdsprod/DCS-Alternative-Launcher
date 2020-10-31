@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DCS.Alternative.Launcher.DomainObjects
 {
-    public sealed class DcsVersion : ICloneable, IComparable, IComparable<DcsVersion?>, IEquatable<DcsVersion>
+    public sealed class DcsVersion : ICloneable, IComparable, IComparable<DcsVersion>, IEquatable<DcsVersion>
     {
         // AssemblyName depends on the order staying the same
         private readonly int _Major; // Do not rename (binary serialization)
@@ -157,7 +157,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             get { return (short)(_Revision & 0xFFFF); }
         }
 
-        public int CompareTo(object? version)
+        public int CompareTo(object version)
         {
             if (version == null)
             {
@@ -172,7 +172,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             throw new ArgumentException("Not a DcsVersion");
         }
 
-        public int CompareTo(DcsVersion? value)
+        public int CompareTo(DcsVersion value)
         {
             return
                 object.ReferenceEquals(value, this) ? 0 :
@@ -185,12 +185,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
                 0;
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             return Equals(obj as DcsVersion);
         }
 
-        public bool Equals(DcsVersion? obj)
+        public bool Equals(DcsVersion obj)
         {
             return object.ReferenceEquals(obj, this) ||
                    (!(obj is null) &&
@@ -346,7 +346,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
         public static DcsVersion Parse(ReadOnlySpan<char> input) =>
             ParseVersion(input, throwOnFailure: true)!;
 
-        public static bool TryParse(string? input, [NotNullWhen(true)] out DcsVersion? result)
+        public static bool TryParse(string input, [NotNullWhen(true)] out DcsVersion result)
         {
             if (input == null)
             {
@@ -357,10 +357,10 @@ namespace DCS.Alternative.Launcher.DomainObjects
             return (result = ParseVersion(input.AsSpan(), throwOnFailure: false)) != null;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> input, [NotNullWhen(true)] out DcsVersion? result) =>
+        public static bool TryParse(ReadOnlySpan<char> input, [NotNullWhen(true)] out DcsVersion result) =>
             (result = ParseVersion(input, throwOnFailure: false)) != null;
 
-        private static DcsVersion? ParseVersion(ReadOnlySpan<char> input, bool throwOnFailure)
+        private static DcsVersion ParseVersion(ReadOnlySpan<char> input, bool throwOnFailure)
         {
             // Find the separator between major and minor.  It must exist.
             var majorEnd = input.IndexOf('.');
@@ -463,7 +463,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
 
         // Force inline as the true/false ternary takes it above ALWAYS_INLINE size even though the asm ends up smaller
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator ==(DcsVersion v1, DcsVersion v2)
         {
             // Test "right" first to allow branch elimination when inlined for null checks (== null)
             // so it can become a simple test
@@ -477,12 +477,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             return ReferenceEquals(v2, v1) || v2.Equals(v1);
         }
 
-        public static bool operator !=(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator !=(DcsVersion v1, DcsVersion v2)
         {
             return !(v1 == v2);
         }
 
-        public static bool operator <(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator <(DcsVersion v1, DcsVersion v2)
         {
             if (v1 is null)
             {
@@ -492,7 +492,7 @@ namespace DCS.Alternative.Launcher.DomainObjects
             return (v1.CompareTo(v2) < 0);
         }
 
-        public static bool operator <=(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator <=(DcsVersion v1, DcsVersion v2)
         {
             if (v1 is null)
             {
@@ -502,12 +502,12 @@ namespace DCS.Alternative.Launcher.DomainObjects
             return (v1.CompareTo(v2) <= 0);
         }
 
-        public static bool operator >(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator >(DcsVersion v1, DcsVersion v2)
         {
             return (v2 < v1);
         }
 
-        public static bool operator >=(DcsVersion? v1, DcsVersion? v2)
+        public static bool operator >=(DcsVersion v1, DcsVersion v2)
         {
             return (v2 <= v1);
         }

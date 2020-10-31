@@ -5,14 +5,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.ServiceModel.Syndication;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DCS.Alternative.Launcher.Diagnostics.Trace;
 using DCS.Alternative.Launcher.DomainObjects;
-using DCS.Alternative.Launcher.DomainObjects.Dcs;
 using DCS.Alternative.Launcher.Lua;
 using DCS.Alternative.Launcher.Models;
 using DCS.Alternative.Launcher.ServiceModel;
@@ -25,13 +22,13 @@ using NLua;
 
 namespace DCS.Alternative.Launcher.Services.Dcs
 {
-    public class DcsWorldService : IDcsWorldService
+    public class DcsWorldManager : IDcsWorldManager
     {
         private readonly IContainer _container;
         private readonly IProfileService _profileService;
         private readonly Dictionary<string, ModuleBase> _modules = new Dictionary<string, ModuleBase>();
 
-        public DcsWorldService(IContainer container)
+        public DcsWorldManager(IContainer container)
         {
             _container = container;
             _profileService = container.Resolve<IProfileService>();
@@ -44,6 +41,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
         private void OnSelectedProfileChanged(object sender, Settings.SelectedProfileChangedEventArgs e)
         {
             Tracer.Info("Profile was changed, clearing module cache.");
+
             _modules.Clear();
         }
 
@@ -283,6 +281,7 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
                 using (var context = new AutoexecLuaContext(install))
                 {
+                    WriteOptions(OptionCategory.General, context);
                     WriteOptions(OptionCategory.Graphics, context);
                     WriteRangedOptions(OptionCategory.Camera, context);
                     WriteRangedOptions(OptionCategory.CameraMirrors, context);
@@ -342,11 +341,13 @@ namespace DCS.Alternative.Launcher.Services.Dcs
 
             foreach (var option in options)
             {
-                if (_profileService.TryGetValue<object>(ProfileCategories.AdvancedOptions, option.Id, out var value))
+                if (!_profileService.TryGetValue<object>(ProfileCategories.AdvancedOptions, option.Id, out var value))
                 {
-                    context.SetValue(option.Id, value);
-                    context.Save(option.Id);
+                    continue;
                 }
+
+                context.SetValue(option.Id, value);
+                context.Save(option.Id);
             }
         }
 

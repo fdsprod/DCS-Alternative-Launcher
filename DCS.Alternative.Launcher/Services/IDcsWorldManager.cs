@@ -6,7 +6,7 @@ using DCS.Alternative.Launcher.Models;
 
 namespace DCS.Alternative.Launcher.Services
 {
-    public interface IDcsWorldService
+    public interface IDcsWorldManager
     {
         Task<ModuleBase[]> GetAllModulesAsync();
 

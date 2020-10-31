@@ -14,13 +14,13 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
     public class SettingsController
     {
         private readonly IContainer _container;
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly IProfileService _profileService;
 
         public SettingsController(IContainer container)
         {
             _container = container;
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
             _profileService = container.Resolve<IProfileService>();
         }
 
@@ -45,7 +45,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
         }
         public Task<ModuleBase[]> GetInstalledAircraftModulesAsync()
         {
-            return _dcsWorldService.GetInstalledAircraftModulesAsync();
+            return _dcsWorldManager.GetInstalledAircraftModulesAsync();
         }
         public Option[] GetAdvancedOptions(string optionsCategory)
         {
@@ -145,7 +145,7 @@ namespace DCS.Alternative.Launcher.Plugins.Settings.Views
 
         public void SaveDcsOptions()
         {
-            _dcsWorldService.WriteOptionsAsync();
+            _dcsWorldManager.WriteOptionsAsync();
         }
         
         public void RemoveProfile(string profileName)

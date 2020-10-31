@@ -5,6 +5,9 @@
     <Page Update="Controls\ProfilesControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Settings\Views\Advanced\GeneralSettingsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Wizards\Steps\FirstUse\CreateProfileWizardStepView.xaml">
       <SubType>Designer</SubType>
     </Page>

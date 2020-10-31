@@ -11,14 +11,14 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Wizards.Settings
 {
     public class SelectViewportsWizardStepViewModel : WizardStepBase<SelectViewportWizardController>
     {
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
         private readonly ModuleViewportTemplate[] _templates;
 
         public SelectViewportsWizardStepViewModel(IContainer container, ModuleViewportTemplate[] templates)
             : base(container)
         {
             _templates = templates;
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
         }
 
         public ReactiveCollection<ModuleViewportModel> ModuleViewports
@@ -34,7 +34,7 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports.Wizards.Settings
                 return;
             }
 
-            var installedModules = await _dcsWorldService.GetInstalledAircraftModulesAsync();
+            var installedModules = await _dcsWorldManager.GetInstalledAircraftModulesAsync();
 
             foreach (var template in _templates)
             {

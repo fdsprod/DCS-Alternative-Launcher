@@ -117,35 +117,6 @@ namespace DCS.Alternative.Launcher
             return false;
         }
 
-        private static Guid GetUserId()
-        {
-            var id = Guid.NewGuid();
-
-            try
-            {
-                var path = Path.Combine(ApplicationPaths.StoragePath, "ga.id");
-
-                if (File.Exists(path))
-                {
-                    var content = File.ReadAllText(path);
-
-                    if (Guid.TryParse(content, out id))
-                    {
-                        return id;
-                    }
-                }
-
-                id = Guid.NewGuid();
-                File.WriteAllText(path, id.ToString());
-            }
-            catch (Exception e)
-            {
-                Tracer.Error(e);
-            }
-
-            return id;
-        }
-
         private void onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             GeneralExceptionHandler.Instance.OnError(e.Exception);
@@ -188,7 +159,7 @@ namespace DCS.Alternative.Launcher
 
             if (!settingsService.GetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, false))
             {
-                MessageBoxEx.Show("DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder. Please make sure you have backed up your data before using this software. You've been warned :).", "DISCLAIMER");
+                MessageBoxEx.Show($"DCS Alternative Launcher modifies files that exist in the DCS World game installation folder as well as your Saved Games folder.{Environment.NewLine}Please make sure you have backed up your data before using this software.{Environment.NewLine}{Environment.NewLine}You've been warned :).", "DISCLAIMER");
                 settingsService.SetValue(LauncherCategories.Launcher, LauncherSettingKeys.AcknowledgedDisclaimer, true);
             }
 
@@ -325,7 +296,7 @@ namespace DCS.Alternative.Launcher
             Tracer.Info("Plugins Complete.");
         }
 
-        private async Task<IEnumerable<IPlugin>> GetPluginsAsync(Assembly assembly)
+        private Task<IEnumerable<IPlugin>> GetPluginsAsync(Assembly assembly)
         {
             var plugins = new List<IPlugin>();
 
@@ -338,7 +309,7 @@ namespace DCS.Alternative.Launcher
                 plugins.Add(plugin);
             }
 
-            return plugins;
+            return Task.FromResult(plugins.Cast<IPlugin>());
         }
 
         private async void OnMainWindowLoaded(object sender, RoutedEventArgs e)
@@ -425,7 +396,7 @@ namespace DCS.Alternative.Launcher
             _container.Register<INavigationService, NavigationService>(new NavigationService(_container, _mainWindow.NavigationFrame));
             _container.Register<ILauncherSettingsService, LauncherSettingsService>(new LauncherSettingsService());
             _container.Register<IProfileService, ProfileService>(new ProfileService(_container));
-            _container.Register<IDcsWorldService, DcsWorldService>(new DcsWorldService(_container));
+            _container.Register<IDcsWorldManager, DcsWorldManager>(new DcsWorldManager(_container));
             _container.Register<IPluginNavigationSite, PluginNavigationSite>(new PluginNavigationSite(_container));
 
             return Task.FromResult(true);

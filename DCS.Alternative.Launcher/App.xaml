@@ -402,6 +402,11 @@
             <DataTemplate DataType="{x:Type general1:ProfileSettingsViewModel}">
                 <controls:ProfilesControl Margin="30" />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type advanced:GeneralSettingsViewModel}">
+                <advanced:GeneralSettingsView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type advanced:GraphicsSettingsViewModel}">
                 <advanced:GraphicsSettingsView />
             </DataTemplate>

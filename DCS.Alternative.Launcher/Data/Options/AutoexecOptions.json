@@ -50,6 +50,12 @@
 	    ]
 	},*/
 	{
+		"Id": "no_device_hotplug",
+		"DisplayName": "Enable/Disable Device Hot Plugging",
+		"Description": "Turns off the ability for DCS to refresh devices while running.",
+		"Value": false
+	},
+	{
 		"Id": "options.graphics.maxfps",
 		"DisplayName": "Max FPS",
 		"Description": "The max number of frames per second DCS will render.",
@@ -105,8 +111,7 @@
 	{
 		"Id": "options.graphics.statsColor",
 		"DisplayName": "Stats Color",
-		"Description":
-			"The color of the frame info shown in the top left corner of the screen when turned on with Ctrl+Pause",
+		"Description": "The color of the frame info shown in the top left corner of the screen when turned on with Ctrl+Pause",
 		"Value": [
 			255,
 			255,
@@ -116,14 +121,14 @@
 		"Params": {
 			"IsNormalized": false
 		}
-	} /*,
+	} ,
     {
         "Id": "options.graphics.stereo_mode_use_shared_parser",
-        "DisplayName": "Stereo Mode Use Shared Parser",
+        "DisplayName": "[Experimental] Enable/Disable Culling",
         "Description": "",
         "Value": false,
         "MinMax": []
-    },
+    }/*,
     {
         "Id": "options.graphics.MFD_render_params.dist_multiplier_fov_base",
         "DisplayName": "MFD Render Params Dist Multiplier Fov Base",

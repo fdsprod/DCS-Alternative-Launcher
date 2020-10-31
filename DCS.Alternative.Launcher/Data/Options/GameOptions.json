@@ -95,7 +95,7 @@
 				"displayName": "Enable Battle Damage Assessment",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			/*  //I believe these are MAC options
@@ -131,7 +131,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -147,7 +147,7 @@
 						"min": 0,
 						"max": 1000
 					}
-				],
+				]
 
 			},
 			{
@@ -155,7 +155,7 @@
 				"displayName": "Cockpit Status Bar Allowed",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -163,7 +163,7 @@
 				"displayName": "Cockpit Visual Recon Mode",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			/*  //I believe these are MAC options
@@ -188,7 +188,7 @@
 				"displayName": "Easy Communications",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -196,10 +196,10 @@
 				"displayName": "Game Flight Mode",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
-			/*
+			/*  //I believe these are MAC options
 			{
 				"id": "easyRadar",
 				"displayName": "Easyradar",
@@ -221,7 +221,7 @@
 				"displayName": "Unlimited Fuel",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -243,7 +243,7 @@
 							"Value": "reduced"
 						}
 					]
-				},
+				}
 
 			},
 			{
@@ -251,7 +251,7 @@
 				"displayName": "Hide Control Stick",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -270,7 +270,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -278,7 +278,7 @@
 				"displayName": "Immortal",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -305,7 +305,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			}, /* // Unknown
 			{
@@ -321,7 +321,7 @@
 				"displayName": "Show Mini HUD",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -352,7 +352,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -360,7 +360,7 @@
 				"displayName": "Allow Padlock",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -368,7 +368,7 @@
 				"displayName": "Permit Crash RCVR",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -376,7 +376,7 @@
 				"displayName": "Radio Assist",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -384,7 +384,7 @@
 				"displayName": "Allied Flight Reports",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -392,7 +392,7 @@
 				"displayName": "Apply Options to All Missions",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			}, /*
 			{
@@ -408,7 +408,7 @@
 				"displayName": "Show Tooltips",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -427,7 +427,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -435,7 +435,7 @@
 				"displayName": "Allow F10 Map User Marks",
 				"value": true,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -443,7 +443,7 @@
 				"displayName": "Allow Snapviews",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -451,7 +451,7 @@
 				"displayName": "Enable Wake Turbulance (WIP)",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -459,7 +459,7 @@
 				"displayName": "Unlimited Weapons",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			}
 		]
@@ -489,7 +489,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -508,7 +508,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -535,7 +535,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -558,7 +558,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -589,7 +589,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -612,7 +612,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -643,7 +643,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -674,12 +674,12 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
 				"id": "MSAA",
-				"displayName": "MSAA",
+				"displayName": "Multi-sampled Anti Aliasing",
 				"value": 0,
 				"Params": {
 					"Items": [
@@ -697,7 +697,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -720,7 +720,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -747,7 +747,25 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
+			},
+			{
+				"id": "motionBlur",
+				"displayName": "Motion Blur",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Off",
+							"Value": 0
+						},
+						{
+							"DisplayName": "On",
+							"Value": 1
+						}
+					]
+				},
+				"minMax": []
 			},
 			{
 				"id": "SSAA",
@@ -769,12 +787,12 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
-				"id": "motionBlur",
-				"displayName": "Motion blur",
+				"id": "SSLR",
+				"displayName": "Screen Space Local Reflections",
 				"value": 0,
 				"Params": {
 					"Items": [
@@ -788,8 +806,25 @@
 						}
 					]
 				},
-				"minMax": [],
-
+				"minMax": []
+			},
+			{
+				"id": "SSAO",
+				"displayName": "Screen Space Ambient Occlusion",
+				"value": 0,
+				"Params": {
+					"Items": [
+						{
+							"DisplayName": "Off",
+							"Value": 0
+						},
+						{
+							"DisplayName": "On",
+							"Value": 1
+						}
+					]
+				},
+				"minMax": []
 			},
 			{
 				"id": "clutterMaxDistance",
@@ -804,7 +839,7 @@
 						"Min": 0,
 						"Max": 1500
 					}
-				],
+				]
 			},
 			{
 				"id": "forestDistanceFactor",
@@ -819,7 +854,7 @@
 						"Min": 0.3,
 						"Max": 1
 					}
-				],
+				]
 
 			},
 			{
@@ -835,7 +870,7 @@
 						"Min": 100,
 						"Max": 150000
 					}
-				],
+				]
 
 			},
 			{
@@ -851,7 +886,7 @@
 						"Min": 0,
 						"Max": 10
 					}
-				],
+				]
 
 			},
 			{
@@ -867,52 +902,9 @@
 						"Min": 1.0,
 						"Max": 3.5
 					}
-				],
+				]
 
 			},
-			{
-				"id": "messagesFontScale",
-				"displayName": "Message Font Scale",
-				"value": 1.0,
-				"Params": {
-					"TickFrequency": "0.25",
-					"FormatString": "N2"
-				},
-				"minMax": [
-					{
-						"Min": 1,
-						"Max": 2
-					}
-				],
-
-			}, /*
-			{
-				"id": "SSAO",
-				"displayName": "Ssao",
-				"value": 0,
-				"Params": {
-					"Items": [
-						{
-							"DisplayName": "None",
-							"Value": 0
-						},
-						{
-							"DisplayName": "Dirt",
-							"Value": 1
-						},
-						{
-							"DisplayName": "Flare",
-							"Value": 2
-						},
-						{
-							"DisplayName": "Dirt + Flare",
-							"Value": 3
-						}
-					]
-				},
-				"minMax": [],
-				
-			},*/
 			{
 				"id": "anisotropy",
 				"displayName": "Anisotropic Filtering",
@@ -941,7 +933,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -964,7 +956,7 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -983,94 +975,39 @@
 						}
 					]
 				},
-				"minMax": [],
+				"minMax": []
 
-			}, /*
-			{
-				"id": "aspect",
-				"displayName": "Aspect Ratio",
-				"value": 1.7777777777778,
-				"Params": {
-					"Items": [
-						{
-							"DisplayName": "4:3",
-							"Value": 1.33333333333
-						},
-						{
-							"DisplayName": "3:2",
-							"Value": 1.5
-						},
-						{
-							"DisplayName": "5:4",
-							"Value": 1.25
-						},
-						{
-							"DisplayName": "16:9",
-							"Value": 1.77777777778
-						},
-						{
-							"DisplayName": "16:10",
-							"Value": 1.6
-						}
-					]
-				},
-				"minMax": [],
-				
-			},*/ /*
-			{
-				"id": "clouds",
-				"displayName": "Clouds",
-				"value": 1,
-				"Params": {},
-				"minMax": [],
-				
 			},
-			{
-				"id": "effects",
-				"displayName": "Effects (Not in DCS Options GUI)",
-				"value": 3,
-				"Params": {
-					"TickFrequency": "1",
-					"FormatString": "N0"
-				},
-				"minMax": [
-					{
-						"Min": 0,
-						"Max": 5
-					}
-				],
-				
-			},*/ /*
-			{
-				"id": "height",
-				"displayName": "Height",
-				"value": 2160,
-				"Params": {},
-				"minMax": [],
-				
-			},
-			{
-				"id": "lights",
-				"displayName": "Lights",
-				"value": 2,
-				"Params": {},
-				"minMax": [],
-				
-			},
-			{
-				"id": "multiMonitorSetup",
-				"displayName": "Multimonitorsetup",
-				"value": "1camera",
-				"Params": {},
-				"minMax": [],
-				
-			},*/
+      {
+        "id": "messagesFontScale",
+        "displayName": "Message Font Scale",
+        "value": 1.0,
+        "Params": {
+          "TickFrequency": "0.25",
+          "FormatString": "N2"
+        },
+        "minMax": [
+          {
+            "Min": 1,
+            "Max": 2
+          }
+        ]
+
+      },
+      {
+        "id": "scaleGui",
+        "displayName": "Scale GUI",
+        "value": false,
+        "Params": {},
+        "minMax": []
+
+      },
 			{
 				"id": "rainDroplets",
 				"displayName": "Show Rain Droplets",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -1078,7 +1015,7 @@
 				"displayName": "Enable V-Sync",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
 			},
 			{
@@ -1086,49 +1023,9 @@
 				"displayName": "Fullscreen",
 				"value": false,
 				"Params": {},
-				"minMax": [],
+				"minMax": []
 
-			},
-			{
-				"id": "scaleGui",
-				"displayName": "Scale GUI",
-				"value": false,
-				"Params": {},
-				"minMax": [],
-
-			}, /*
-			{
-				"id": "shadowTree",
-				"displayName": "Tree Self-Shadow?",
-				"value": false,
-				"Params": {},
-				"minMax": [],
-				
-			},
-			{
-				"id": "treesVisibility",
-				"displayName": "Treesvisibility",
-				"value": 10000,
-				"Params": {},
-				"minMax": [],
-				
-			},
-			{
-				"id": "useDeferredShading",
-				"displayName": "Usedeferredshading",
-				"value": 1,
-				"Params": {},
-				"minMax": [],
-				
-			},
-			{
-				"id": "width",
-				"displayName": "Width",
-				"value": 3840,
-				"Params": {},
-				"minMax": [],
-				
-			}*/
+			}
 		]
 	},
 	{

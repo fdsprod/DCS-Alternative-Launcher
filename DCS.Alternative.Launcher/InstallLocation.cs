@@ -20,6 +20,8 @@ namespace DCS.Alternative.Launcher
 
         public InstallLocation(string directory)
         {
+            Guard.RequireIsNotNull(directory, nameof(directory));
+
             Directory = directory;
 
             RefreshInfo();

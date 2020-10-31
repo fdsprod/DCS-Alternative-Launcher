@@ -7,21 +7,21 @@ namespace DCS.Alternative.Launcher.Plugin.Documentation.Views
 {
     public class ManualsController
     {
-        private readonly IDcsWorldService _dcsWorldService;
+        private readonly IDcsWorldManager _dcsWorldManager;
 
         public ManualsController(IContainer container)
         {
-            _dcsWorldService = container.Resolve<IDcsWorldService>();
+            _dcsWorldManager = container.Resolve<IDcsWorldManager>();
         }
 
         public Task<ModuleBase[]> GetModulesAsync()
         {
-            return _dcsWorldService.GetInstalledAircraftModulesAsync();
+            return _dcsWorldManager.GetInstalledAircraftModulesAsync();
         }
 
         public AdditionalResource[] GetAdditionResources(string moduleId)
         {
-            return _dcsWorldService.GetAdditionalResourcesByModule(moduleId);
+            return _dcsWorldManager.GetAdditionalResourcesByModule(moduleId);
         }
     }
 }

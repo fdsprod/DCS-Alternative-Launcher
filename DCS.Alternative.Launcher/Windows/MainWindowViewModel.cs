@@ -183,16 +183,7 @@ namespace DCS.Alternative.Launcher.Windows
                 return;
             }
 
-            var profile = Profiles.FirstOrDefault(p => p.Name.Value == e.ProfileName);
-
-            if (profile == null)
-            {
-                UpdateProfiles();
-            }
-            else
-            {
-                SelectedProfile.Value = profile;
-            }
+            UpdateProfiles();
         }
         private void OnProfilesChanged(object sender, EventArgs e)
         {
