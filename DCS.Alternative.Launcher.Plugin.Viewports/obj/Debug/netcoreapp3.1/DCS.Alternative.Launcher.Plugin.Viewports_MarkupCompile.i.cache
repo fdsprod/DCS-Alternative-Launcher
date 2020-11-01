@@ -1,5 +1,5 @@
 ﻿DCS.Alternative.Launcher.Plugin.Viewports
-1.0.0.0
+
 
 library
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 
 121596080746
 
-371879228404
-2231971588306
+36-1658431501
+222-22110826
 Controls\ViewportsSettingsControl.xaml;Dialogs\MonitorOverlay.xaml;Dialogs\SelectViewportDialog.xaml;Dialogs\ViewportEditorWindow.xaml;ViewportResources.xaml;Views\Settings\ViewportOptionsView.xaml;Windows\SnipViewportWindow.xaml;Wizards\FirstUse\SelectDeviceViewportScreensStepView.xaml;Wizards\FirstUse\SelectGameViewportScreensStepView.xaml;Wizards\FirstUse\SelectInitialViewportsWizardStepView.xaml;Wizards\FirstUse\SelectUIViewportScreensStepView.xaml;Wizards\Settings\SelectViewportsWizardStepView.xaml;
 
-True
+False
 

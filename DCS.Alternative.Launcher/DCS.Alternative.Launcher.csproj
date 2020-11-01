@@ -7,7 +7,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <StartupObject>DCS.Alternative.Launcher.Program</StartupObject>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>21.0.0.0</Version>
+    <Version>22.0.0.0</Version>
     <Authors>Jeff Boulanger</Authors>
     <Company />
     <Description>The DCS Alternative Launcher was initially created to get around the setup process of viewports in DCS in conjunction with application called Helios. The primary focus was to have the launcher make edits to stock DCS files to allow the name change of the standard viewport names (LEFT_MFCD, RIGHT_MFCD, etc) that are shared across modules so that viewports were uniquely named per module (F_18_LEFT_MFCD, A_10C_LEFT_MFCD) and no longer shared. The issue here is that the edits go away each time DCS World updates, requiring external solutions like OVGME to re-apply the edits. The process of using OVGME inherently has issues as well, for instance, if the files that were replaced are edited by Eagle Dynamics, you would wipe out those edits by using old versions of the files stored in OVGME. DCS Alternative Launcher gets around this by verifying the proper edits (single, or multiple lines of code) exist or are made to each of the files when launching DCS World from this application.</Description>

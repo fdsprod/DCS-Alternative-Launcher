@@ -351,6 +351,12 @@ namespace DCS.Alternative.Launcher
             var sourceDir = new DirectoryInfo(source);
             var destDir = new DirectoryInfo(dest);
 
+            if (!sourceDir.Exists)
+            {
+                Tracer.Warn($"Unable to find directory to copy {sourceDir}");
+                return;
+            }
+
             var files = sourceDir.GetFiles("*.*").Where(s => string.IsNullOrEmpty(supportedExtensions) || supportedExtensions.Contains(s.Extension)).ToArray();
             var destFiles = destDir.GetFiles("*.*").Where(s => string.IsNullOrEmpty(supportedExtensions) || supportedExtensions.Contains(s.Extension)).ToArray();
 

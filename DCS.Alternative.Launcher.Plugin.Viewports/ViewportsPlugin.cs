@@ -92,10 +92,5 @@ namespace DCS.Alternative.Launcher.Plugin.Viewports
                 }
             }
         }
-
-        protected override async Task RegisterUISiteItemsAsync(IPluginNavigationSite site)
-        {
-            await base.RegisterUISiteItemsAsync(site);
-        }
     }
 }

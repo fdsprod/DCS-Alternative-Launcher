@@ -13,9 +13,6 @@
         "packagesPath": "C:\\Users\\fdspr\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\fdspr\\source\\repos\\DCS-Alternative-Launcher\\DCS.Alternative.Launcher.Documentation\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\fdspr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -25,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://cccone.pkgs.visualstudio.com/_packaging/DevOpsPackages/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -65,12 +63,12 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.109\\RuntimeIdentifierGraph.json"
         }
       }
     },
     "C:\\Users\\fdspr\\source\\repos\\DCS-Alternative-Launcher\\DCS.Alternative.Launcher\\DCS.Alternative.Launcher.csproj": {
-      "version": "20.0.0",
+      "version": "22.0.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\fdspr\\source\\repos\\DCS-Alternative-Launcher\\DCS.Alternative.Launcher\\DCS.Alternative.Launcher.csproj",
         "projectName": "DCS Alternative Launcher",
@@ -78,9 +76,6 @@
         "packagesPath": "C:\\Users\\fdspr\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\fdspr\\source\\repos\\DCS-Alternative-Launcher\\DCS.Alternative.Launcher\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\fdspr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -90,7 +85,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://cccone.pkgs.visualstudio.com/_packaging/DevOpsPackages/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -108,15 +104,15 @@
           "dependencies": {
             "CommandLineParser": {
               "target": "Package",
-              "version": "[2.7.82, )"
+              "version": "[2.8.0, )"
             },
             "ControlzEx": {
               "target": "Package",
-              "version": "[4.2.2, )"
+              "version": "[4.3.2, )"
             },
             "Extended.Wpf.Toolkit": {
               "target": "Package",
-              "version": "[3.8.1, )"
+              "version": "[4.0.1, )"
             },
             "FluentWPF": {
               "target": "Package",
@@ -128,11 +124,11 @@
             },
             "HtmlAgilityPack": {
               "target": "Package",
-              "version": "[1.11.20, )"
+              "version": "[1.11.24, )"
             },
             "KeraLua": {
               "target": "Package",
-              "version": "[1.0.26, )"
+              "version": "[1.2.8, )"
             },
             "LoadingIndicators.WPF": {
               "target": "Package",
@@ -144,7 +140,7 @@
             },
             "NLua": {
               "target": "Package",
-              "version": "[1.4.29, )"
+              "version": "[1.5.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -156,11 +152,11 @@
             },
             "ReactiveProperty": {
               "target": "Package",
-              "version": "[6.2.0, )"
+              "version": "[7.4.1, )"
             },
             "SharpZipLib": {
               "target": "Package",
-              "version": "[1.2.0, )"
+              "version": "[1.3.0, )"
             },
             "System.ServiceModel.Syndication": {
               "target": "Package",
@@ -168,7 +164,7 @@
             },
             "WpfScreenHelper": {
               "target": "Package",
-              "version": "[0.4.0, )"
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -192,7 +188,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.109\\RuntimeIdentifierGraph.json"
         }
       }
     }
