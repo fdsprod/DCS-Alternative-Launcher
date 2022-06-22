@@ -252,7 +252,7 @@
     <PackageReference Include="KeraLua" Version="1.2.8" />
     <PackageReference Include="LoadingIndicators.WPF" Version="0.0.1" />
     <PackageReference Include="Microsoft.Toolkit.Win32.UI.Controls" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLua" Version="1.5.2" />
     <PackageReference Include="PropertyTools.Wpf" Version="3.0.0" />
     <PackageReference Include="ReactiveProperty" Version="7.4.1" />
